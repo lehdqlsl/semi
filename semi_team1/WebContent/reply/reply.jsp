@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"  %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,7 +15,7 @@ function listAll(){
 	// 댓글전체 목록을 ajax로 받아와서 commList에 출력하기
 	xhr=new XMLHttpRequest();
 	xhr.onreadystatechange=getList;
-	xhr.open("get","reply.list",true);
+	xhr.open("get","/semi_team1/reply.list",true);
 	xhr.send();
 }
 function getList(){
@@ -26,12 +26,12 @@ function getList(){
 		var list=document.getElementById("commlist");
 		for(var i=0;i<list.length;i++){
 			var comm=json[i];
-			var num=comm.num;
-			var id=comm.id;
-			var comments=comm.comments;
+			var r_num=comm.r_num;
+			var nick=comm.nick;
+			var content=comm.content;
 			var div=document.createElement("div");
 			console.log(num + id + comments);
-			var html="아이디:" +id +"<br>" + "댓글:" +comments + "<br>" + 
+			var html="아이디:" +nick +"<br>" + "댓글:" + content + "<br>" + 
 						  "<a href='javascript:remove(" + num + ")'>삭제</a>";
 		
 			div.innerHTML=html;
@@ -71,6 +71,7 @@ function getList(){
 			<td><a href="jsp12_myusers/myusers.do?cmd=insert&id=${vo.nick }">답글</a></td>
 		</tr>
 	</c:forEach>
+	</table>
 	</div>
 </div>
 
