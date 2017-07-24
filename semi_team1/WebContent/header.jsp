@@ -17,7 +17,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Project name</a>
+			<a class="navbar-brand" href="index.jsp?page=content.jsp">Project name</a>
 		</div>
 
 		<div id="navbar" class="collapse navbar-collapse">
@@ -29,7 +29,7 @@
 			<!-- 로그인 및 회원가입 버튼 -->
 			<div class="navbar-form navbar-right">
 				<Button type="button" class="btn btn-success" onclick = "location.href = 'index.jsp?page=join/signin.jsp';" >로그인</Button>
-				<Button type="button" class="btn btn-success">회원가입</Button>
+				<Button type="button" class="btn btn-success" onclick = "location.href = 'index.jsp?page=join/joinForm.jsp';">회원가입</Button>
 			</div>
 		</div>
 
