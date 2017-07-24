@@ -7,73 +7,76 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	.comm{width:400px;height:100px;border:1px solid #aaa};
+	#reply{width:100%;display:inline-block;border:1px solid pink}
+	#tot{float:left;}
+	#writeComm{float:right;margin:5px}
 </style>
-<script type="text/javascript">
-var xhr=null;
-function listAll(){
-	// 댓글전체 목록을 ajax로 받아와서 commList에 출력하기
-	xhr=new XMLHttpRequest();
-	xhr.onreadystatechange=getList;
-	xhr.open("get","/semi_team1/reply.list",true);
-	xhr.send();
-}
-function getList(){
-	if(xhr.readyState==4 && xhr.status==200){
-		delComm(); // 기존의 전체댓글목록 지우기
-		var data=xhr.responseText;
-		var json=JSON.parse(data);
-		var list=document.getElementById("commlist");
-		for(var i=0;i<list.length;i++){
-			var comm=json[i];
-			var r_num=comm.r_num;
-			var nick=comm.nick;
-			var content=comm.content;
-			var div=document.createElement("div");
-			console.log(num + id + comments);
-			var html="아이디:" +nick +"<br>" + "댓글:" + content + "<br>" + 
-						  "<a href='javascript:remove(" + num + ")'>삭제</a>";
-		
-			div.innerHTML=html;
-			div.className="comm";
-			list.appendChild(div);
-			
-		}
-	}
-}
-</script>
+<link href="/semi_team1/rs/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/semi_team1/rs/assets/css/ie10-viewport-bug-workaround.css"
+	rel="stylesheet">
+<link href="offcanvas.css" rel="stylesheet">
+<script src="/semi_team1/rs/assets/js/ie-emulation-modes-warning.js"></script>
 </head>
-<body onload="listAll()">
-<div id="reply">
-	댓글 | 총 [ ]개 <!-- 총 댓글수 dao에 cntTot생성 -->
-	1 2 3 4 5<!--  가운데 페이징 목록 -->
-	<input type="button" value="댓글쓰기">
+<body>
+<form method="post" action="/semi_team1/reply.insert">
+<div id="input" style="margin:auto;width:500px;height:100px;">
+	<input type="hidden" name="b_num" value=${vo.b_num }>
+	<textarea rows="3" cols="50" border="1" name="content"></textarea>
 </div>
-
-<div>
-	<!--  댓글목록이 보여질 div -->
-	<div id="commlist">
-		<table border="1" width="500">
-	<tr>
-		<th>답글번호</th><th>작성자</th><th>내용</th><th>추천수</th><th>등록일</th><th>게시글번호</th><th>신고유무</th><th>답글</th>
-	</tr>
-	<c:forEach var="vo" items="${requestScope.list }"> <!--  items에는 배열이나 collection 객체를 담는다 -->
-		<tr>
-			<td>${vo.r_num }</td>
-			<td>${vo.nick }</td>
-			<td>${vo.content}</td>
-			<td>${vo.up }</td>
-			<td>${vo.reg_date }</td>
-			<td>${vo.num }</td>
-			<td>${vo.report }</td>
-			
-			<!--  삭제성공이면 목록이 보이도록, 실패하면 result.jsp에서 결과 출력 -->
-			<td><a href="jsp12_myusers/myusers.do?cmd=insert&id=${vo.nick }">답글</a></td>
-		</tr>
-	</c:forEach>
-	</table>
+<div id="reply">
+	<div id="tot">
+		댓글 | 총 [ ${requestScope.cntTot} ]개
+	</div>
+	<div id="writeComm" align="right">
+		<button type="submit" class="btn btn-success">댓글쓰기</button>
 	</div>
 </div>
+</form>
+<table class="table table-striped">
 
+	<c:forEach var="vo" items="${requestScope.list }"> 
+		<tr>
+			<!--  <td>${vo.r_num }</td>-->
+			<td id="user">
+				<div><a href="회원정보조회페이지">${vo.nick }</a></div></td>
+			<td>${vo.content }</td>
+			<td>${vo.up }</td>
+			<td>${vo.reg_date }</td>
+			<td>${vo.b_num }</td>
+			<td>${vo.report }</td>
+		</tr>
+	</c:forEach>	
+</table>
+<!-- 페이징 -->
+<div>
+<!--  이전 -->
+<c:choose>
+	<c:when test="${startPage>10 }">
+		<a href="/semi_team1/reply.list?pageNum=${startPage -1 }"></a>
+	</c:when>
+	<c:otherwise>
+		[◁]	
+	</c:otherwise>
+</c:choose>
+	<c:forEach var="i" begin="${startPage }" end="${endPage }">
+	<c:choose>
+		<c:when test="${i==pageNum }">
+			<a href="/semi_team1/reply.list?pageNum=${i }"><span style="color:green">[${i }]</span></a>
+		</c:when>
+		<c:otherwise>
+			<a href="/semi_team1/reply.list?pageNum=${i }"><span style="color:#aaa">[${i }]</span></a>
+		</c:otherwise>
+	</c:choose>
+</c:forEach>
+<!-- 다음 -->
+<c:choose>
+	<c:when test="${endPage<pageCount }">
+		<a href="/semi_team1/reply.list?pageNum=${endPage+1 }">다음</a>
+	</c:when>
+	<c:otherwise>
+		[▷]
+	</c:otherwise>
+</c:choose>
+</div>
 </body>
 </html>
