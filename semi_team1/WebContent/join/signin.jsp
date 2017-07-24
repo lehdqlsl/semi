@@ -22,21 +22,22 @@
 
 	<div class="container" style="width: 330px; height: 236px">
 
-		<form class="form-signin">
-			<h2 class="form-signin-heading">Please sign in</h2>
-			<label for="inputEmail" class="sr-only">Email address</label> <input
-				type="email" id="inputEmail" class="form-control"
-				placeholder="Email address" required autofocus> <label
-				for="inputPassword" class="sr-only">Password</label> <input
-				type="password" id="inputPassword" class="form-control"
-				placeholder="Password" required>
+		<form method="post" action="/semi_team1/login.do?cmd=login"  class="form-signin">
+			<h2 class="form-signin-heading">로그인</h2>
+			<label for="id" class="sr-only">아이디</label> 
+			<input
+				type="text" id="id" name="id" value="${param.id }" class="form-control"
+				placeholder="아이디" required autofocus> <br><label
+				for="inputPassword" class="sr-only">비밀번호</label> 
+			<input
+				type="password" id="u_pw" name="u_pw" value="${param.u_pw }" class="form-control"
+				placeholder="비밀번호" required autofocus>
 			<div class="checkbox">
 				<label> <input type="checkbox" value="remember-me">
-					Remember me
+					자동 로그인
 				</label>
 			</div>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
-				in</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
 		</form>
 
 	</div>
