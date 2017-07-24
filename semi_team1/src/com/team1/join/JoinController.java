@@ -41,7 +41,7 @@ public class JoinController extends HttpServlet {
 			request.setAttribute("result", "fail");
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher("/semi_team1/join/result.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("join/result.jsp");
 		rd.forward(request, response);
 	}
 }

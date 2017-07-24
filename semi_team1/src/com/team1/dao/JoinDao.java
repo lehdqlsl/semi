@@ -14,7 +14,7 @@ public class JoinDao {
 		PreparedStatement pstmt=null;
 		try{
 			con=DBCPBean.getConn();
-			String sql="insert into members values(SEQ_members_num.nextval,?,?,?,?,'test.jpg','test.jpg','1',0,sysdate,0,sysdate+7))";
+			String sql="insert into members values(SEQ_members_num.nextval,?,?,?,?,'test.jpg','test.jpg','1',0,sysdate,0,sysdate+7)";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, vo.getId());
 			pstmt.setString(2, vo.getU_pw());
@@ -30,3 +30,4 @@ public class JoinDao {
 		}
 	}
 }
+
