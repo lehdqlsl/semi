@@ -36,12 +36,11 @@ public class JoinController extends HttpServlet {
 		int n = dao.insert(vo);
 
 		if (n > 0) {
-			request.setAttribute("result", "success");
+			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?page=join/signin.jsp");
+			rd.forward(request, response);
 		} else {
-			request.setAttribute("result", "fail");
+			RequestDispatcher rd = request.getRequestDispatcher("join/result.jsp");
+			rd.forward(request, response);
 		}
-
-		RequestDispatcher rd = request.getRequestDispatcher("join/result.jsp");
-		rd.forward(request, response);
 	}
 }
