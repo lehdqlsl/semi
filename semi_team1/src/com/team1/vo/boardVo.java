@@ -17,6 +17,10 @@ public class boardVo {
 	private int blind;
 	private int report;
 	private int top;
+	
+	public boardVo(){}
+	
+	
 	public int getNum() {
 		return num;
 	}
@@ -103,7 +107,7 @@ public class boardVo {
 	}
 	public boardVo(int num, String title_name, int up, int hits, String orgfilename, String savefilename,
 			String content, Date regdate, String writer, int f_num, int s_num, int blind, int report, int top) {
-		super();
+		
 		this.num = num;
 		this.title_name = title_name;
 		this.up = up;

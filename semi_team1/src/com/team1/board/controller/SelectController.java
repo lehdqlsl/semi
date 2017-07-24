@@ -2,6 +2,7 @@ package com.team1.board.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +13,7 @@ import com.team1.dao.BoardDao;
 import com.team1.vo.boardVo;
 
 
-@WebServlet("/getInfo")
+@WebServlet("/select")
 public class SelectController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,9 +22,11 @@ public class SelectController extends HttpServlet{
 		boardVo vo = dao.select(num);
 		if(vo!=null){
 			request.setAttribute("vo", vo);
-			request.getRequestDispatcher("/info.jsp").forward(request, response);
+			request.getRequestDispatcher("/board/select.jsp").forward(request, response);
 		}else{
-			response.sendRedirect("/fail.jsp");
+			request.setAttribute("result", "fail");
+			RequestDispatcher rd=request.getRequestDispatcher("/join/result.jsp");
+			rd.forward(request, response);
 		}
 	}
 }

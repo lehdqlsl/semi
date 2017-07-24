@@ -14,7 +14,7 @@ import com.team1.vo.boardVo;
 
 public class BoardDao {
 
-	public ArrayList<boardVo> list(int startRow, int endRow,String search, String keyword) {
+	public ArrayList<boardVo> list(int startRow, int endRow, String search, String keyword) {
 		ArrayList<boardVo> list = new ArrayList<>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -66,7 +66,7 @@ public class BoardDao {
 				int s_num= rs.getInt("s_num");
 				int blind= rs.getInt("blind");
 				int report= rs.getInt("report");
-				int top= rs.getInt("");
+				int top= rs.getInt("top");
 				list.add(new boardVo(num, title_name, up, hits, orgfilename, savefilename, content, regdate, writer, f_num, s_num, blind, report, top));
 			}
 			return list;
@@ -79,9 +79,10 @@ public class BoardDao {
 	}
 
 	public int insert(boardVo vo) {
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String sql = "insert into board values(board_seq.nextval,?,0,0,?,?,?,sysdate,?,?,?,0,0,0)";
+		String sql = "insert into board values(SEQ_board_num.nextval,?,0,0,?,?,?,sysdate,?,?,?,0,0,0)";
 		try {
 			con = DBCPBean.getConn();
 			pstmt = con.prepareStatement(sql);
