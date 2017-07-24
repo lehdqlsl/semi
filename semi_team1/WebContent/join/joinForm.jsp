@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +8,7 @@
 </head>
 <body>
 <h1>회원 가입 하기</h1>
-<form action="join.jsp" method="post">
+<form action="/semi_team1/join.do?cmd=insert" method="post">
 	<label>아이디</label><br><input type="text" value="아이디" name="id" id="id"><input type="button" value="중복확인"><br>
 	<label>닉네임</label><br><input type="text" value="닉네임" name="m_nick" id="m_nick"><input type="button" value="중복확인"><br>
 	<label>비밀번호</label><br><input type="text" value="비밀번호" name="u_pw" id="u_pw"><br>
