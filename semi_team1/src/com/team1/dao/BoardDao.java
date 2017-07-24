@@ -13,7 +13,8 @@ import com.team1.vo.boardVo;
 
 
 public class BoardDao {
-
+	
+	
 	public ArrayList<boardVo> list(int startRow, int endRow, String search, String keyword) {
 		ArrayList<boardVo> list = new ArrayList<>();
 		Connection con = null;
@@ -21,7 +22,6 @@ public class BoardDao {
 		ResultSet rs = null;
 		try{
 			con = DBCPBean.getConn();
-			
 			if(search.equals("")){
 				String sql = "select * from ( "
 						+ "select a.*, rownum rnum from( "
@@ -51,7 +51,6 @@ public class BoardDao {
 				pstmt.setInt(3, endRow);
 				rs = pstmt.executeQuery();
 			}
-			
 			while(rs.next()){
 				int num = rs.getInt("num");
 				String title_name = rs.getString("title_name");
@@ -78,8 +77,8 @@ public class BoardDao {
 		}
 	}
 
+	
 	public int insert(boardVo vo) {
-		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = "insert into board values(SEQ_board_num.nextval,?,0,0,?,?,?,sysdate,?,?,?,0,0,0)";
@@ -101,6 +100,8 @@ public class BoardDao {
 			DBCPBean.close(con, pstmt, null);
 		}
 	}
+	
+	
 	public int delete(int num){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -118,6 +119,7 @@ public class BoardDao {
 			DBCPBean.close(con, pstmt, null);
 		}
 	}
+	
 	
 	public boardVo select(int num){
 		Connection con=null;
@@ -162,7 +164,6 @@ public class BoardDao {
 	public int update(boardVo vo){
 		Connection con=null;
 		PreparedStatement pstmt=null;
-		
 		try{
 			con=DBCPBean.getConn();
 			String sql="update board set title_name=?, content=?, orgfilename=?, savefilename=? where num=?";
@@ -181,11 +182,11 @@ public class BoardDao {
 		}
 	}
 	
+	
 	public int getCount(String search, String keyword){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
 		try{
 			conn = DBCPBean.getConn();
 			
@@ -216,11 +217,11 @@ public class BoardDao {
 		}
 	}
 	
+	
 	public int getMaxNum(){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
 		try{
 			conn = DBCPBean.getConn();
 			String sql = "select NVL(max(num),0) from board";

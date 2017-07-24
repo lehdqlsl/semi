@@ -69,7 +69,7 @@ public class ListController extends HttpServlet {
 
 			request.setAttribute("list", list);
 
-			request.getRequestDispatcher("/board/list.jsp").forward(request, response);
+			request.getRequestDispatcher("/index.jsp?page=/board/list.jsp").forward(request, response);
 		} else {
 			response.sendRedirect("/fail.jsp");
 		}

@@ -14,7 +14,7 @@
 
 </head>
 <body>
-   <div class="col-md-6">
+   <div style="margin: auto; width: 1000px">
           <table class="table table-bordered">
           	<thead>
           		<tr>
@@ -28,6 +28,17 @@
           		<td>${requestScope.vo.content }</td>
           		</tr>
           </table>
-    </div>      
+          <table align="right">
+          	<tr>
+          		<td>
+          		<input class="btn btn-success" type="button" value="수정" onclick = "location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
+          		<input class="btn btn-success" type="button" value="삭제" onclick = "location.href = 'index.jsp?page=board/insert.jsp';">
+          		<input class="btn btn-success" type="button" value="글쓰기" onclick = "location.href = 'index.jsp?page=board/insert.jsp';">
+          		</td>
+          	</tr>
+          </table>
+    </div>
+    
+          
 </body>
 </html>

@@ -33,11 +33,11 @@
 	}
 
 %>
-
+<div style="margin: auto; width: 1000px">
 <form action="/semi_team1/insert" method="post">
 	<input type="hidden" name="f_num" value="1"> 
 	<input type="hidden" name="s_num" value="1">
-	<table	border="1">
+	<table	class="table table-bordered">
 		<tr>
 			<td>작성자</td>
 			<td><input type="text" name="writer"></td>	
@@ -60,11 +60,12 @@
 	</tr>
 		<tr>
 		<td colspan="2" align="center">
-		<input type="submit" value="확인" >
+		<input class="btn btn-success" type="submit" value="확인" >
 		</td>
 		</tr>
 </table>
 </form>
+</div>
 <!--
 <form method="post" action="/semi_team1/insert" enctype="multipart/form-data">
 	<input type="hidden" name="writer" value="<%=writer %>"> <%-- --%>
