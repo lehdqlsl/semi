@@ -21,14 +21,15 @@
                 <th>날짜</th>
               </tr>
 	            </thead>
-	            	<c:forEach var="dto" items="${requestScope.list }">
+	            	<c:forEach var="vo" items="${requestScope.list }">
 				<tr>
-					<td>${dto.num }</td>
-					<td>${dto.writer }</td>
-					<td><a href="board?cmd=getInfo&num=${dto.num }">${dto.title }</a></td>
-					<td>
-						<a href="board?cmd=delete&num=${dto.num }">삭제</a>
-					</td>
+					<td>${vo.num }</td>
+					<td>${vo.f_num }</td>
+					<td>${vo.title_name }</td>
+					<td>${vo.writer }</td>
+					<td>${vo.up }</td>
+					<td>${vo.hit }</td>
+					<td>${vo.regdate }</td>
 				</tr>		
 			</c:forEach>
 		</table>
