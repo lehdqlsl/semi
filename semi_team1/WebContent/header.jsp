@@ -34,30 +34,15 @@
 					href="/semi_team1/index.jsp?page=music/mainForm.jsp">음악</a></li>
 			</ul>
 			<!-- 로그인 및 회원가입 버튼 -->
+			<div class="navbar-form navbar-right">
 
-			<c:choose>
-				<c:when test="${empty sessionScope.m_nick }">
-					<div class="navbar-form navbar-right">
-						<Button type="button" class="btn btn-success"
-							onclick="location.href = 'index.jsp?page=login/signin.jsp';">로그인</Button>
-						<Button type="button" class="btn btn-success"
-							onclick="location.href = 'index.jsp?page=join/joinForm.jsp';">회원가입</Button>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="navbar-form navbar-right" style="margin-top: 0px;">
-						<ul class="nav navbar-nav">
-							<li><a>${sessionScope.m_nick } 님</a></li>
-							<li><a>회원정보</a></li>
-						</ul>
-						<Button type="button" class="btn btn-success"
-							onclick="location.href = '/semi_team1/login.do?cmd=logout';"
-							style="margin: 8px">로그아웃</Button>
-					</div>
-				</c:otherwise>
-			</c:choose>
+				<Button type="button" class="btn btn-success"
+					onclick="location.href = 'index.jsp?page=login/signin.jsp';">로그인</Button>
+				<Button type="button" class="btn btn-success"
+					onclick="location.href = 'index.jsp?page=join/joinForm.jsp';">회원가입</Button>
 
 
+			</div>
 		</div>
 	</div>
 	</nav>

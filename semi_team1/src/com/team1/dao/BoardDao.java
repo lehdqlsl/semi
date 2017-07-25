@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.team1.db.DBCPBean;
+import com.team1.vo.ReplyVo;
 import com.team1.vo.boardVo;
 
 public class BoardDao {
@@ -21,7 +22,7 @@ public class BoardDao {
 			con = DBCPBean.getConn();
 			if (search.equals("")) {
 				String sql = "select * from ( " + "select a.*, rownum rnum from( "
-						+ "select * from board where s_num=? order by num desc " + ")a "
+						+ "select * from board where s_num=? order by num desc "+ ")a "
 						+ ") where rnum>=? and rnum <=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, s_num);
@@ -71,7 +72,7 @@ public class BoardDao {
 	}
 
 	public int insert(boardVo vo) {
-
+	
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = "insert into board values(SEQ_board_num.nextval,?,0,0,?,?,?,sysdate,?,?,?,0,0,0)";
@@ -218,4 +219,65 @@ public class BoardDao {
 		}
 	}
 
+	////////////// 신고 글 조회/////////////////////////
+	// 신고 댓글 리스트
+	public ArrayList<boardVo> boardReport(int startRow, int endRow) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM (SELECT * FROM BOARD WHERE REPORT=1 ORDER BY REGDATE desc) AA)WHERE RNUM>=? AND RNUM<=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs = pstmt.executeQuery();
+			ArrayList<boardVo> list = new ArrayList<>();
+			while (rs.next()) {
+				int num = rs.getInt("num");
+				String title_name = rs.getString("title_name");
+				int up = rs.getInt("up");
+				int hits = rs.getInt("hits");
+				String orgfilename = rs.getString("orgfilename");
+				String savefilename = rs.getString("savefilename");
+				String content=rs.getString("content");
+				Date regdate = rs.getDate("regdate");
+				String writer=rs.getString("writer");
+				int f_num=rs.getInt("f_num");
+				int s_num=rs.getInt("s_num");
+				int blind=rs.getInt("blind");
+				int report=rs.getInt("report");
+				int top=rs.getInt("top");	
+				boardVo vo=new boardVo(num, title_name, up, hits, orgfilename, savefilename, content, regdate, writer, f_num, s_num, blind, report, top);
+				list.add(vo);
+			}
+			return list;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+
+	// 신고 글 개수
+	public int getCnt() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select count(*) from board where report=1";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int cntTot = rs.getInt(1);
+			return cntTot;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
 }
