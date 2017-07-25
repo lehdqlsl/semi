@@ -160,7 +160,7 @@ public class BoardDao {
 		}
 	}
 
-	public int getCount(String search, String keyword) {
+	public int getCount(int s_num, String search, String keyword) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -168,8 +168,9 @@ public class BoardDao {
 			conn = DBCPBean.getConn();
 
 			if (keyword.equals("")) {
-				String sql = "select NVL(count(num),0) from board";
+				String sql = "select NVL(count(num),0) from board where s_num=?";
 				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, s_num);
 				rs = pstmt.executeQuery();
 			} else {
 				String searchCase = "";
@@ -178,9 +179,10 @@ public class BoardDao {
 				} else {
 					searchCase = " like '%'||?||'%' ";
 				}
-				String sql = "select NVL(count(num),0) from board where " + search + searchCase;
+				String sql = "select NVL(count(num),0) from board where s_num=? and " + search + searchCase;
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, keyword);
+				pstmt.setInt(1, s_num);
+				pstmt.setString(2, keyword);
 				rs = pstmt.executeQuery();
 			}
 			rs.next();

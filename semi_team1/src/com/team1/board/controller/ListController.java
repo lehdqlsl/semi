@@ -49,15 +49,21 @@ public class ListController extends HttpServlet {
 		if (list != null) {
 
 			// 페이지 갯수 구하기 (전체글의 갯수/한 페이지 행의 총 갯수) Math.ceil로 소수 무조건 올림처리
-			int pageCount = (int) (Math.ceil(dao.getCount(search, keyword) / 20.0));
+			int pageCount = (int) (Math.ceil(dao.getCount(s_num, search, keyword) / 20.0));
 
 			// 시작페이지번호 구하기
-			int startPageNum = (int)(Math.ceil(pageNum/10.0)*10-9); // 1페이지일 경우 1, 2페이지일
-															// 경우 2, ... ,11페이지일
-															// 경우 11
+			int startPageNum = (int) (Math.ceil(pageNum / 10.0) * 10 - 9); // 1페이지일
+																			// 경우
+																			// 1,
+																			// 2페이지일
+			// 경우 2, ... ,11페이지일
+			// 경우 11
 
 			// 끝페이지 번호 구하기
-			int endPageNum = (int)(Math.ceil(pageNum/10.0)*10); // 1페이지일 경우 10, 11페이지일 경우 20
+			int endPageNum = (int) (Math.ceil(pageNum / 10.0) * 10); // 1페이지일 경우
+																		// 10,
+																		// 11페이지일
+																		// 경우 20
 			if (endPageNum > pageCount) {// ex)(마지막 페이지가) > (전체 페이지 갯수) 보다 크다면
 				endPageNum = pageCount;// 전체 페이지의 갯수를 넣어주면됨.
 			}
@@ -71,10 +77,6 @@ public class ListController extends HttpServlet {
 			request.setAttribute("s_num", s_num);
 			request.getRequestDispatcher("/index.jsp?page=/game/gameIndex.jsp&s_page=/board/list.jsp").forward(request,
 					response);
-			
-			System.out.println("시작페이지:"+startPageNum);
-			System.out.println("끝페이지:"+endPageNum);
-			System.out.println("페이지카운트:"+pageCount);
 
 		} else {
 			response.sendRedirect("/fail.jsp");

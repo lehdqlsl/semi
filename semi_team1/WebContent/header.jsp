@@ -16,7 +16,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/semi_team1/index.jsp?page=content.jsp">우리웹(임시)</a>
+			<a class="navbar-brand" href="/semi_team1/index.jsp?page=content.jsp">유리웹</a>
 		</div>
 
 		<div id="navbar" class="collapse navbar-collapse">
