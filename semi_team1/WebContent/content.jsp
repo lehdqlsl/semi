@@ -26,7 +26,7 @@
 						sizes to see it in action.</p>
 				</div>
 				<div class="row">
-					<div class="col-xs-6 col-lg-3">
+					<div class="col-xs-6 col-lg-4">
 						<h2>Heading</h2>
 						<p>Donec id elit non mi porta gravida at eget metus. Fusce
 							dapibus, tellus ac cursus commodo, tortor mauris condimentum
@@ -38,7 +38,7 @@
 						</p>
 					</div>
 					<!--/.col-xs-6.col-lg-4-->
-					<div class="col-xs-7 col-lg-5">
+					<div class="col-xs-6 col-lg-4">
 						<h2>Heading</h2>
 						<p>Donec id elit non mi porta gravida at eget metus. Fusce
 							dapibus, tellus ac cursus commodo, tortor mauris condimentum
@@ -100,22 +100,6 @@
 					<!--/.col-xs-6.col-lg-4-->
 				</div>
 				<!--/row-->
-			</div>
-			<!--/.col-xs-12.col-sm-9-->
-
-			<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-				<div class="list-group">
-					<a href="#" class="list-group-item active">Link</a> <a href="#"
-						class="list-group-item">Link</a> <a href="#"
-						class="list-group-item">Link</a> <a href="#"
-						class="list-group-item">Link</a> <a href="#"
-						class="list-group-item">Link</a> <a href="#"
-						class="list-group-item">Link</a> <a href="#"
-						class="list-group-item">Link</a> <a href="#"
-						class="list-group-item">Link</a> <a href="#"
-						class="list-group-item">Link</a> <a href="#"
-						class="list-group-item">Link</a>
-				</div>
 			</div>
 			<!--/.sidebar-offcanvas-->
 		</div>

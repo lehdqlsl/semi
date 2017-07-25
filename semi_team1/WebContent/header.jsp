@@ -4,8 +4,6 @@
 <html>
 <head>
 </head>
-
-<body>
 <body>
 	<nav class="navbar navbar-fixed-top navbar-inverse">
 	<div class="container">
@@ -17,28 +15,34 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.jsp?page=content.jsp">Project name</a>
+			<a class="navbar-brand" href="/semi_team1/index.jsp?page=content.jsp">우리웹(임시)</a>
 		</div>
 
 		<div id="navbar" class="collapse navbar-collapse">
+
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#about">About</a></li>
-				<li><a href="#contact">Contact</a></li>
+				<li id="c1"><a
+					href="/semi_team1/index.jsp?page=game/mainForm.jsp">게임</a></li>
+				<li id="c2"><a
+					href="/semi_team1/index.jsp?page=movie/mainForm.jsp">영화</a></li>
+				<li id="c3"><a
+					href="/semi_team1/index.jsp?page=sport/mainForm.jsp">스포츠</a></li>
+				<li id="c4"><a
+					href="/semi_team1/index.jsp?page=tasty/mainForm.jsp">맛집</a></li>
+				<li id="c5"><a
+					href="/semi_team1/index.jsp?page=music/mainForm.jsp">음악</a></li>
 			</ul>
 			<!-- 로그인 및 회원가입 버튼 -->
 			<div class="navbar-form navbar-right">
-				<Button type="button" class="btn btn-success" onclick = "location.href = 'index.jsp?page=join/signin.jsp';" >로그인</Button>
-				<Button type="button" class="btn btn-success" onclick = "location.href = 'index.jsp?page=join/joinForm.jsp';">회원가입</Button>
+				<Button type="button" class="btn btn-success"
+					onclick="location.href = 'index.jsp?page=login/signin.jsp';">로그인</Button>
+				<Button type="button" class="btn btn-success"
+					onclick="location.href = 'index.jsp?page=join/joinForm.jsp';">회원가입</Button>
+
 			</div>
 		</div>
-
-
-
-
-
 	</div>
-	<!-- /.container --> </nav>
-	<!-- /.navbar -->
+	</nav>
+
 </body>
 </html>

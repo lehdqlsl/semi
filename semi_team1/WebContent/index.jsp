@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,6 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link href="/semi_team1/rs/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="dashboard.css" rel="stylesheet">
 <link href="/semi_team1/rs/assets/css/ie10-viewport-bug-workaround.css"
 	rel="stylesheet">
 <link href="offcanvas.css" rel="stylesheet">
@@ -28,5 +29,16 @@
 		<jsp:include page="<%=spage%>"></jsp:include>
 		<jsp:include page="footer.jsp"></jsp:include>
 	</div>
+	
+<ul>
+		<c:choose>
+			<c:when test="${empty sessionScope.m_nick }">
+				<li><a href="/semi_team1/login/signin.jsp">로그인</a></li>
+			</c:when>
+			<c:otherwise>
+				<li>${sessionScope.m_nick }님 반갑습니다 <a href="/semi_team1/login.do?cmd=logout">로그아웃</a></li>
+			</c:otherwise>
+	</c:choose>
+</ul>
 </body>
 </html>
