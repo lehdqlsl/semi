@@ -17,7 +17,6 @@
 <div id="wrap">
 	<h1 id="title">관리자페이지</h1>
 	<br>
-	</div>
 	<table id="memList" border="1" width="500">
 		<tr>
 			<td>회원번호</td><td>아이디</td><td>닉네임</td><td>이메일</td><td>회원등급</td><td>회원경험치</td><td>가입날짜</td><td>상태</td>
