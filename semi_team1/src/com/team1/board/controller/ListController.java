@@ -26,10 +26,8 @@ public class ListController extends HttpServlet {
 		}
 
 		String spageNum = request.getParameter("pageNum");
-		int f_num = Integer.parseInt(request.getParameter("f_num"));
 		int s_num = Integer.parseInt(request.getParameter("s_num"));
-		System.out.println(f_num);
-		System.out.println(s_num);
+
 		int pageNum = 1;// 1페이지가 기본값
 		// pageNum이 들어올때가 있고 안들어올 때가 있으므로 if문 처리(익셉션)
 		if (spageNum != null) {
@@ -46,8 +44,8 @@ public class ListController extends HttpServlet {
 		int endRow = (pageNum * 5);// 끝행 번호
 
 		BoardDao dao = new BoardDao();
-		ArrayList<boardVo> list = dao.list(f_num, s_num, startRow, endRow, search, keyword);
-		System.out.print(list.size());
+		ArrayList<boardVo> list = dao.list(s_num, startRow, endRow, search, keyword);
+
 		if (list != null) {
 
 			// 페이지 갯수 구하기 (전체글의 갯수/한 페이지 행의 총 갯수) Math.ceil로 소수 무조건 올림처리
@@ -69,10 +67,15 @@ public class ListController extends HttpServlet {
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("search", search);
 			request.setAttribute("keyword", keyword);
-
 			request.setAttribute("list", list);
+			request.setAttribute("s_num", s_num);
+			request.getRequestDispatcher("/index.jsp?page=/game/gameIndex.jsp&s_page=/board/list.jsp").forward(request,
+					response);
+			
+			System.out.println("시작페이지:"+startPageNum);
+			System.out.println("끝페이지:"+endPageNum);
+			System.out.println("페이지카운트:"+pageCount);
 
-			request.getRequestDispatcher("/index.jsp?page=/game/gameIndex.jsp&s_page=/board/list.jsp").forward(request, response);
 		} else {
 			response.sendRedirect("/fail.jsp");
 		}

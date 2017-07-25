@@ -16,6 +16,8 @@
 			String title_name = request.getParameter("title_name");
 			String content = request.getParameter("content");
 
+			//카테고리 번호
+			String s_num = request.getParameter("s_num");
 			int cnt = 0;
 			if (scnt != null) {
 				cnt = Integer.parseInt(scnt);
@@ -28,12 +30,12 @@
 		%>
 		<div style="margin: auto; width: 1000px">
 			<form action="/semi_team1/insert" method="post">
-				<input type="hidden" name="f_num" value="1"> <input
-					type="hidden" name="s_num" value="1">
+				<input type="hidden" value="<%=s_num%>" name="s_num">
 				<table class="table table-bordered">
 					<tr>
 						<td>작성자</td>
-						<td><input type="text" name="writer"></td>
+						<td><input type="text" name="writer"
+							value="${sessionScope.m_nick }" readonly="readonly"></td>
 					</tr>
 					<tr>
 						<td>제목</td>

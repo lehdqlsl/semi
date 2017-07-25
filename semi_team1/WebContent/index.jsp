@@ -11,7 +11,7 @@
 <link href="/semi_team1/rs/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="dashboard.css" rel="stylesheet">
 <link href="/semi_team1/rs/assets/css/ie10-viewport-bug-workaround.css"
-	rel="stylesheet">
+	rel="stylesheet">   
 <link href="offcanvas.css" rel="stylesheet">
 <script src="/semi_team1/rs/assets/js/ie-emulation-modes-warning.js"></script>
 <title>Insert title here</title>
