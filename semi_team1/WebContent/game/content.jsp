@@ -7,11 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+
 
 	<!-- 메인페이지 -->
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-		<h1>영화페이지</h1>
+		<h1>게임페이지</h1>
 
 		<!-- 예시 -->
 		<div class="col-xs-6 col-lg-4">
