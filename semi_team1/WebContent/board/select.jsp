@@ -16,9 +16,9 @@
 	}
 
 </script>
-
 </head>
 <body>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
    <div style="margin: auto; width: 1000px">
           <table class="table table-bordered">
           	<thead>
@@ -44,7 +44,7 @@
           	</tr>
           </table>
     </div>
-    
+</div>  
           
 </body>
 </html>
