@@ -40,8 +40,8 @@ public class ListController extends HttpServlet {
 		 * 1페이지 1~5 2페이지 6~10 3페이지 11~15
 		 */
 		// --------------- 선택한 페이지에 출력할 게시글 행의 개수-------------------
-		int startRow = (pageNum * 5) - 4;// 시작행 번호
-		int endRow = (pageNum * 5);// 끝행 번호
+		int startRow = (pageNum * 20) - 19;// 시작행 번호
+		int endRow = (pageNum * 20);// 끝행 번호
 
 		BoardDao dao = new BoardDao();
 		ArrayList<boardVo> list = dao.list(s_num, startRow, endRow, search, keyword);
@@ -49,15 +49,15 @@ public class ListController extends HttpServlet {
 		if (list != null) {
 
 			// 페이지 갯수 구하기 (전체글의 갯수/한 페이지 행의 총 갯수) Math.ceil로 소수 무조건 올림처리
-			int pageCount = (int) (Math.ceil(dao.getCount(search, keyword) / 5.0));
+			int pageCount = (int) (Math.ceil(dao.getCount(search, keyword) / 20.0));
 
 			// 시작페이지번호 구하기
-			int startPageNum = ((pageNum - 1) / 4 * 4) + 1; // 1페이지일 경우 1, 2페이지일
+			int startPageNum = (int)(Math.ceil(pageNum/10.0)*10-9); // 1페이지일 경우 1, 2페이지일
 															// 경우 2, ... ,11페이지일
 															// 경우 11
 
 			// 끝페이지 번호 구하기
-			int endPageNum = startPageNum + 3; // 1페이지일 경우 10, 11페이지일 경우 20
+			int endPageNum = (int)(Math.ceil(pageNum/10.0)*10); // 1페이지일 경우 10, 11페이지일 경우 20
 			if (endPageNum > pageCount) {// ex)(마지막 페이지가) > (전체 페이지 갯수) 보다 크다면
 				endPageNum = pageCount;// 전체 페이지의 갯수를 넣어주면됨.
 			}

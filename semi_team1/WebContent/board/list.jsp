@@ -71,7 +71,7 @@
 
 			<div>
 				<c:choose>
-					<c:when test="${startPageNum>4 }">
+					<c:when test="${startPageNum>20 }">
 						<a
 							href="/semi_team1/list&pageNum=${startPageNum-1 }&search=${param.search}&keyword=${param.keyword}">[이전]</a>
 					</c:when>
