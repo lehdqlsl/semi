@@ -15,7 +15,7 @@ import com.team1.vo.boardVo;
 public class BoardDao {
 	
 	
-	public ArrayList<boardVo> list(int startRow, int endRow, String search, String keyword) {
+	public ArrayList<boardVo> list(int f_num, int s_num, int startRow, int endRow, String search, String keyword) {
 		ArrayList<boardVo> list = new ArrayList<>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -25,12 +25,14 @@ public class BoardDao {
 			if(search.equals("")){
 				String sql = "select * from ( "
 						+ "select a.*, rownum rnum from( "
-							+ "select * from board order by num desc "
+							+ "select * from board where f_num=? and s_num=? order by num desc "
 						+ ")a "
 					+ ") where rnum>=? and rnum <=?";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, endRow);
+				pstmt.setInt(1, f_num);
+				pstmt.setInt(2, s_num);
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, endRow);
 				rs = pstmt.executeQuery();
 			}else{
 				String searchCase = "";
@@ -61,8 +63,8 @@ public class BoardDao {
 				String content= rs.getString("content");
 				Date regdate= rs.getDate("regdate");
 				String writer= rs.getString("writer");
-				int f_num= rs.getInt("f_num");
-				int s_num= rs.getInt("s_num");
+				f_num= rs.getInt("f_num");
+				s_num= rs.getInt("s_num");
 				int blind= rs.getInt("blind");
 				int report= rs.getInt("report");
 				int top= rs.getInt("top");

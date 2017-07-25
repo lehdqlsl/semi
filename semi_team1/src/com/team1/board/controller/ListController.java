@@ -26,7 +26,10 @@ public class ListController extends HttpServlet {
 		}
 
 		String spageNum = request.getParameter("pageNum");
-
+		int f_num = Integer.parseInt(request.getParameter("f_num"));
+		int s_num = Integer.parseInt(request.getParameter("s_num"));
+		System.out.println(f_num);
+		System.out.println(s_num);
 		int pageNum = 1;// 1페이지가 기본값
 		// pageNum이 들어올때가 있고 안들어올 때가 있으므로 if문 처리(익셉션)
 		if (spageNum != null) {
@@ -43,7 +46,7 @@ public class ListController extends HttpServlet {
 		int endRow = (pageNum * 5);// 끝행 번호
 
 		BoardDao dao = new BoardDao();
-		ArrayList<boardVo> list = dao.list(startRow, endRow, search, keyword);
+		ArrayList<boardVo> list = dao.list(f_num, s_num, startRow, endRow, search, keyword);
 		System.out.print(list.size());
 		if (list != null) {
 

@@ -10,7 +10,12 @@
 <link href="/semi_team1/rs/assets/css/ie10-viewport-bug-workaround.css"
 	rel="stylesheet">
 <link href="signin.css" rel="stylesheet">
-<script src="/semi_team1/rs/assets/js/ie-emulation-modes-warning.js"></script>
+<script type="text/javascript" src="/semi_team1/rs/assets/js/ie-emulation-modes-warning.js">
+	function delete() {
+		
+	}
+
+</script>
 
 </head>
 <body>
@@ -32,7 +37,7 @@
           	<tr>
           		<td>
           		<input class="btn btn-success" type="button" value="수정" onclick = "location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
-          		<input class="btn btn-success" type="button" value="삭제" onclick = "location.href = 'index.jsp?page=board/insert.jsp';">
+          		<input class="btn btn-success" type="button" value="삭제" onclick = delete()>
           		<input class="btn btn-success" type="button" value="글쓰기" onclick = "location.href = 'index.jsp?page=board/insert.jsp';">
           		<input class="btn btn-success" type="button" value="목록" onclick = "location.href = '/semi_team1/list';">
           		</td>
