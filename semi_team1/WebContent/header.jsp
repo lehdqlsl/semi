@@ -40,10 +40,6 @@
 				<Button type="button" class="btn btn-success"
 					onclick="location.href = 'index.jsp?page=join/joinForm.jsp';">회원가입</Button>
 
-				<Button type="button" class="btn btn-success"
-					onclick="location.href = 'index.jsp?page=login/signin.jsp';">로그인</Button>
-				<Button type="button" class="btn btn-success"
-					onclick="location.href = 'index.jsp?page=join/joinForm.jsp';">회원가입</Button>
 
 			</div>
 		</div>
