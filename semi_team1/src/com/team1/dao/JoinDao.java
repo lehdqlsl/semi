@@ -5,135 +5,230 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.team1.db.DBCPBean;
 import com.team1.vo.JoinVo;
 
+
+
 public class JoinDao {
-	public int insert(JoinVo vo){
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		try{
-			con=DBCPBean.getConn();
-			String sql="insert into members values(SEQ_members_num.nextval,?,?,?,?,'test.jpg','test.jpg','1',0,sysdate,0,sysdate+7)";
-			pstmt=con.prepareStatement(sql);
+	//////////////////// 회원가입////////////////////
+	public int insert(JoinVo vo) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "insert into members values(SEQ_members_num.nextval,?,?,?,?,'test.jpg','test.jpg','1',0,sysdate,0,sysdate+7)";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getId());
 			pstmt.setString(2, vo.getU_pw());
 			pstmt.setString(3, vo.getM_nick());
 			pstmt.setString(4, vo.getM_mail());
-			int n=pstmt.executeUpdate();
+			int n = pstmt.executeUpdate();
 			return n;
-		}catch(SQLException se){
+		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
-		}finally{
-			DBCPBean.close(con,pstmt);
+		} finally {
+			DBCPBean.close(con, pstmt);
 		}
 	}
-	public boolean idcheck(String id){
-		JoinVo vo=null;
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		boolean using=false;
-		try{
-			con=DBCPBean.getConn();
-			String sql="select * from members where id=?";
-			pstmt=con.prepareStatement(sql);
+
+	/////////////////// 아이디 중복검사/////////////////////
+	public boolean idcheck(String id) {
+		JoinVo vo = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean using = false;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select * from members where id=?";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			rs=pstmt.executeQuery();
-			if(rs.next()){
-				//vo=new JoinVo(rs.getInt("num"), rs.getString("id"), rs.getString("u_pw"), rs.getString("m_nick"), rs.getString("m_mail"), rs.getString("m_orgfilename"), rs.getString("m_savefilename"), rs.getString("grade"), rs.getInt("exp"), rs.getDate("reg_date"), rs.getInt("stop"), rs.getDate("limit_date"));
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				// vo=new JoinVo(rs.getInt("num"), rs.getString("id"),
+				// rs.getString("u_pw"), rs.getString("m_nick"),
+				// rs.getString("m_mail"), rs.getString("m_orgfilename"),
+				// rs.getString("m_savefilename"), rs.getString("grade"),
+				// rs.getInt("exp"), rs.getDate("reg_date"), rs.getInt("stop"),
+				// rs.getDate("limit_date"));
 				using = true;
 				return using;
-			}else{
+			} else {
 				return using;
 			}
-		}catch(SQLException se){
+		} catch (SQLException se) {
 			System.out.println(se.getMessage());
-		}finally{
-			DBCPBean.close(con,pstmt,rs);
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
 		}
 		return using;
 	}
-	public boolean nickcheck(String m_nick){
-		JoinVo vo=null;
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		boolean using=false;
-		try{
-			con=DBCPBean.getConn();
-			String sql="select * from members where m_nick=?";
-			pstmt=con.prepareStatement(sql);
+
+	////////////////// 닉네입 중복검사////////////////////////////
+	public boolean nickcheck(String m_nick) {
+		JoinVo vo = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean using = false;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select * from members where m_nick=?";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m_nick);
-			rs=pstmt.executeQuery();
-			if(rs.next()){
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
 				using = true;
 				return using;
-			}else{
+			} else {
 				return using;
 			}
-		}catch(SQLException se){
+		} catch (SQLException se) {
 			System.out.println(se.getMessage());
-		}finally{
-			DBCPBean.close(con,pstmt,rs);
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
 		}
 		return using;
 	}
-	public boolean emailcheck(String m_mail){
-		JoinVo vo=null;
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		boolean using=false;
-		try{
-			con=DBCPBean.getConn();
-			String sql="select * from members where m_mail=?";
-			pstmt=con.prepareStatement(sql);
+
+	//////////////////// 이메일 중복검사///////////////////////
+	public boolean emailcheck(String m_mail) {
+		JoinVo vo = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean using = false;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select * from members where m_mail=?";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m_mail);
-			rs=pstmt.executeQuery();
-			if(rs.next()){
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
 				using = true;
 				return using;
-			}else{
+			} else {
 				return using;
 			}
-		}catch(SQLException se){
+		} catch (SQLException se) {
 			System.out.println(se.getMessage());
-		}finally{
-			DBCPBean.close(con,pstmt,rs);
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
 		}
 		return using;
 	}
-	public JoinVo isMember(HashMap<String, String> map){
-		JoinVo vo=null;
-		String id=map.get("id");
-		String u_pw=map.get("u_pw");
-		String m_nick=null;
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		try{
-			con=DBCPBean.getConn();
-			String sql="select * from members where id=? and u_pw=?";
-			pstmt=con.prepareStatement(sql);
+
+	//////////////////// 로그인////////////////////////////
+	public JoinVo isMember(HashMap<String, String> map) {
+		JoinVo vo = null;
+		String id = map.get("id");
+		String u_pw = map.get("u_pw");
+		String m_nick = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select * from members where id=? and u_pw=?";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, u_pw);
-			rs=pstmt.executeQuery();
-			if(rs.next()){
-				vo=new JoinVo(rs.getString("id"), rs.getString("u_pw"), rs.getString("m_nick"), rs.getString("m_mail"));
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				vo = new JoinVo(rs.getString("id"), rs.getString("u_pw"), rs.getString("m_nick"),
+						rs.getString("m_mail"));
 				return vo;
-			}else{
+			} else {
 				return null;
 			}
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+
+	///////////////////////// 전체 회원 출력////////////////////
+	public ArrayList<JoinVo> getList(JoinVo vo) {
+		ArrayList<JoinVo> list = new ArrayList<>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select * from members";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				JoinVo jv = new JoinVo(rs.getInt("num"), rs.getString("id"), rs.getString("u_pw"),
+						rs.getString("m_nick"), rs.getString("m_mail"), rs.getString("m_orgfilename"),
+						rs.getString("m_savefilename"), rs.getString("grade"), rs.getInt("exp"), rs.getDate("reg_date"),
+						rs.getInt("stop"), rs.getDate("limit_date"));
+				list.add(jv);
+			}
+			return list;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+
+	// 전체 회원의 수 구하기
+	public int getCount() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select NVL(count(num),0) cnt from members";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int cnt = rs.getInt(1);
+			return cnt;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+	//전체 회원 정보 출력-페이징
+	public ArrayList<JoinVo> list(int  startRow, int endRow){
+		String sql="SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM(SELECT * FROM MEMBERS ORDER BY NUM DESC) AA) WHERE RNUM>=? AND RNUM<=?";
+		
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try{
+			con=DBCPBean.getConn();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs=pstmt.executeQuery();
+			ArrayList<JoinVo> list=new ArrayList<>();
+			while(rs.next()){
+				JoinVo jv = new JoinVo(rs.getInt("num"), rs.getString("id"), rs.getString("u_pw"),
+						rs.getString("m_nick"), rs.getString("m_mail"), rs.getString("m_orgfilename"),
+						rs.getString("m_savefilename"), rs.getString("grade"), rs.getInt("exp"), rs.getDate("reg_date"),
+						rs.getInt("stop"), rs.getDate("limit_date"));
+				list.add(jv);
+			}
+			return list;
 		}catch(SQLException se){
 			System.out.println(se.getMessage());
 			return null;
 		}finally{
-			DBCPBean.close(con,pstmt,rs);
+			DBCPBean.close(con, pstmt, rs);
 		}
 	}
 }
-
