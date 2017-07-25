@@ -22,7 +22,7 @@ public class SelectController extends HttpServlet{
 		boardVo vo = dao.select(num);
 		if(vo!=null){
 			request.setAttribute("vo", vo);
-			request.getRequestDispatcher("/board/select.jsp").forward(request, response);
+			request.getRequestDispatcher("index.jsp?page=board/select.jsp").forward(request, response);
 		}else{
 			request.setAttribute("result", "fail");
 			RequestDispatcher rd=request.getRequestDispatcher("/join/result.jsp");
