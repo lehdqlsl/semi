@@ -38,13 +38,9 @@
 		<form method="post" action="/semi_team1/login.do?cmd=login"  class="form-signin">
 			<h2 class="form-signin-heading">로그인</h2>
 			<label for="id" class="sr-only">아이디</label> 
-			<input
-				type="text" id="id" name="id" value="<%=id%>" class="form-control"
-				placeholder="아이디" required autofocus> <br><label
-				for="inputPassword" class="sr-only">비밀번호</label> 
-			<input
-				type="password" id="u_pw" name="u_pw" value="<%=u_pw%>" class="form-control"
-				placeholder="비밀번호" required autofocus>
+			<input type="text" id="id" name="id" value="<%=id%>" class="form-control" placeholder="아이디" required autofocus> <br>
+			<label for="inputPassword" class="sr-only">비밀번호</label> 
+			<input type="password" id="u_pw" name="u_pw" value="<%=u_pw%>" class="form-control" placeholder="비밀번호" required autofocus>
 			<div class="checkbox">
 				<label> 
 				<%
