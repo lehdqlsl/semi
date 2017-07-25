@@ -8,7 +8,7 @@
 	<div class="container">
 		<hr>
 		<footer>
-		<p>&copy; 2016 Company, Inc.</p>
+		<p>&copy; 2017 중앙 HTA, Inc.</p>
 		</footer>
 	</div>
 </body>
