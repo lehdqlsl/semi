@@ -16,16 +16,17 @@ public class ReplyDao {
 	public static ReplyDao getInstance(){
 		return instance;
 	}
-	public ArrayList<ReplyVo> replyList(int startRow,int endRow){
+	public ArrayList<ReplyVo> replyList(int bnum,int startRow,int endRow){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try{
 			con=DBCPBean.getConn();
-			String sql="SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM (SELECT * FROM REPLY ORDER BY R_NUM desc) AA)WHERE RNUM>=? AND RNUM<=?";
+			String sql="SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM (SELECT * FROM REPLY WHERE B_NUM=? ORDER BY R_NUM desc) AA)WHERE RNUM>=? AND RNUM<=?";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setInt(1, bnum);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rs=pstmt.executeQuery();
 			ArrayList<ReplyVo> list=new ArrayList<>();
 			while(rs.next()){
@@ -48,14 +49,16 @@ public class ReplyDao {
 			DBCPBean.close(con,pstmt,rs);
 		}
 	}
-	public int getCount(){
+	public int getCount(int b_num){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try{
 			con=DBCPBean.getConn();
-			String sql="select NVL(max(r_num),0) cnt from reply";
+			String sql="select count(*) from reply where b_num=?";
+			//String sql="select NVL(max(r_num),0) cnt from reply";
 			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, b_num);
 			rs=pstmt.executeQuery();
 			rs.next();
 			int cnt=rs.getInt(1);
@@ -67,25 +70,25 @@ public class ReplyDao {
 			DBCPBean.close(con,pstmt,rs);
 		}
 	}
-	public int cntTot(){
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		try{
-			con=DBCPBean.getConn();
-			String sql="select count(*) from reply";
-			pstmt=con.prepareStatement(sql);
-			rs=pstmt.executeQuery();
-			rs.next();
-			int cntTot=rs.getInt(1);
-			return cntTot;
-		}catch(SQLException se){
-			System.out.println(se.getMessage());
-			return -1;
-		}finally{
-			DBCPBean.close(con,pstmt,rs);
-		}
-	}
+//	public int cntTot(){
+//		Connection con=null;
+//		PreparedStatement pstmt=null;
+//		ResultSet rs=null;
+//		try{
+//			con=DBCPBean.getConn();
+//			String sql="select count(*) from reply";
+//			pstmt=con.prepareStatement(sql);
+//			rs=pstmt.executeQuery();
+//			rs.next();
+//			int cntTot=rs.getInt(1);
+//			return cntTot;
+//		}catch(SQLException se){
+//			System.out.println(se.getMessage());
+//			return -1;
+//		}finally{
+//			DBCPBean.close(con,pstmt,rs);
+//		}
+//	}
 	public int insert(String content,int b_num){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -94,6 +97,23 @@ public class ReplyDao {
 			String sql="insert into reply values(SEQ_reply_r_num.nextval,'·ê·ç',?,0,sysdate,?,0)";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1,content);
+			pstmt.setInt(2, b_num);
+			return pstmt.executeUpdate();
+		}catch(SQLException se){
+			System.out.println(se.getMessage());
+			return -1;
+		}finally{
+			DBCPBean.close(con,pstmt,null);
+		}
+	}
+	public int delete(int r_num,int b_num){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try{
+			con=DBCPBean.getConn();
+			String sql="delete from reply where r_num=? and b_num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, r_num);
 			pstmt.setInt(2, b_num);
 			return pstmt.executeUpdate();
 		}catch(SQLException se){
