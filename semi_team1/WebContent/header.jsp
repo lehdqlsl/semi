@@ -23,11 +23,11 @@
 		<div id="navbar" class="collapse navbar-collapse">
 
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="index.jsp?page=game/mainForm.jsp"">게임</a></li>
-				<li><a href="index.jsp?page=movie/mainForm.jsp">영화</a></li>
-				<li><a href="index.jsp?page=sport/mainForm.jsp"">스포츠</a></li>
-				<li><a href="index.jsp?page=tasty/mainForm.jsp"">맛집</a></li>
-				<li><a href="index.jsp?page=music/mainForm.jsp"">음악</a></li>
+				<li class="active"><a href="index.jsp?page=game/mainForm.jsp&f_num=1">게임</a></li>
+				<li><a href="index.jsp?page=movie/mainForm.jsp&f_num=2">영화</a></li>
+				<li><a href="index.jsp?page=sport/mainForm.jsp&f_num=3">스포츠</a></li>
+				<li><a href="index.jsp?page=tasty/mainForm.jsp&f_num=4">맛집</a></li>
+				<li><a href="index.jsp?page=music/mainForm.jsp&f_num=5">음악</a></li>
 			</ul>
 			<!-- 로그인 및 회원가입 버튼 -->
 			<div class="navbar-form navbar-right">
