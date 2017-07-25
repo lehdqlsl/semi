@@ -24,6 +24,10 @@
 				</thead>
 				<c:forEach var="vo" items="${requestScope.list }">
 					<tr>
+				<!--  	
+						/semi_team1/index.jsp?page=/game/gameIndex.jsp&s_page=/board/insert.jsp 
+						/semi_team1/select?num=${vo.num }
+				-->
 						<td>${vo.num }</td>
 						<td>${vo.f_num }</td>
 						<td><a href="/semi_team1/select?num=${vo.num }">${vo.title_name }</a></td>
