@@ -29,16 +29,6 @@
 		<jsp:include page="<%=spage%>"></jsp:include>
 		<jsp:include page="footer.jsp"></jsp:include>
 	</div>
-	
-<ul>
-		<c:choose>
-			<c:when test="${empty sessionScope.m_nick }">
-				<li><a href="/semi_team1/login/signin.jsp">로그인</a></li>
-			</c:when>
-			<c:otherwise>
-				<li>${sessionScope.m_nick }님 반갑습니다 <a href="/semi_team1/login.do?cmd=logout">로그아웃</a></li>
-			</c:otherwise>
-	</c:choose>
-</ul>
+
 </body>
 </html>
