@@ -6,17 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<link href="/semi_team1/rs/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="/semi_team1/rs/assets/css/ie10-viewport-bug-workaround.css"
-	rel="stylesheet">
-<link href="signin.css" rel="stylesheet">
-<script src="/semi_team1/rs/assets/js/ie-emulation-modes-warning.js"></script>
-
-
 </head>
 <body>
-	<div class="row">
+	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<div style="margin: auto; width: 1000px">
 			<table class="table table-bordered">
 				<thead>
@@ -43,8 +35,8 @@
 				</c:forEach>
 			</table>
 			<input class="btn btn-sm btn-success" type="button" value="글쓰기"
-				onclick="location.href = 'index.jsp?page=board/insert.jsp';"> <br>
-			<br>
+				onclick="location.href = '/semi_team1/index.jsp?page=/game/gameIndex.jsp&s_page=/board/insert.jsp';">
+			<br> <br>
 			<%
 				String search = request.getParameter("search");
 				if (search == null) {

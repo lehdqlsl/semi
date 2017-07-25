@@ -7,8 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- 사이드바 -->
-	<jsp:include page="sideBar.jsp"></jsp:include>
+	
 
 	<!-- 메인페이지 -->
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
