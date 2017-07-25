@@ -24,7 +24,7 @@
 				</thead>
 				<c:forEach var="vo" items="${requestScope.list }">
 					<tr>
-				<!--  	
+						<!--  	
 						/semi_team1/index.jsp?page=/game/gameIndex.jsp&s_page=/board/insert.jsp 
 						/semi_team1/select?num=${vo.num }
 				-->
@@ -39,7 +39,7 @@
 				</c:forEach>
 			</table>
 			<input class="btn btn-sm btn-success" type="button" value="글쓰기"
-				onclick="location.href = '/semi_team1/index.jsp?page=/game/gameIndex.jsp&s_page=/board/insert.jsp';">
+				onclick="location.href = '/semi_team1/write?s_num=${s_num}';">
 			<br> <br>
 			<%
 				String search = request.getParameter("search");
@@ -71,7 +71,7 @@
 
 			<div>
 				<c:choose>
-					<c:when test="${startPageNum>4 }">
+					<c:when test="${startPageNum>20 }">
 						<a
 							href="/semi_team1/list&pageNum=${startPageNum-1 }&search=${param.search}&keyword=${param.keyword}">[이전]</a>
 					</c:when>
@@ -107,5 +107,6 @@
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

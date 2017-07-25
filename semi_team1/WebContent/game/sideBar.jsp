@@ -10,11 +10,11 @@
 	<!-- 사이드바 -->
 	<div class="col-sm-3 col-md-2 sidebar">
 		<ul class="nav nav-sidebar">
-			<li class="active"><a href="/semi_team1/list?f_num=${param.f_num }&s_num=1">Overview <span
+			<li><a href="/semi_team1/list?s_num=1">게시판1 <span
 					class="sr-only">(current)</span></a></li>
-			<li><a href="#">Reports</a></li>
-			<li><a href="#">Analytics</a></li>
-			<li><a href="#">Export</a></li>
+			<li><a href="/semi_team1/list?s_num=2">게시판2 </a></li>
+			<li><a href="/semi_team1/list?s_num=3">게시판3 </a></li>
+			<li><a href="/semi_team1/list?s_num=4">게시판4 </a></li>
 		</ul>
 		<ul class="nav nav-sidebar">
 			<li><a href="">Nav item</a></li>
