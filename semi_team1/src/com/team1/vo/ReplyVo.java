@@ -8,19 +8,16 @@ public class ReplyVo {
 	private String content;
 	private int up;
 	private Date reg_date;
-	private int num;
+	private int b_num;
 	private int report;
-	
-	private ReplyVo(){}
 
-	public ReplyVo(int r_num, String nick, String content, int up, Date reg_date, int num, int report) {
-		super();
+	public ReplyVo(int r_num, String nick, String content, int up, Date reg_date, int b_num, int report) {
 		this.r_num = r_num;
 		this.nick = nick;
 		this.content = content;
 		this.up = up;
 		this.reg_date = reg_date;
-		this.num = num;
+		this.b_num = b_num;
 		this.report = report;
 	}
 
@@ -64,12 +61,12 @@ public class ReplyVo {
 		this.reg_date = reg_date;
 	}
 
-	public int getNum() {
-		return num;
+	public int getB_num() {
+		return b_num;
 	}
 
-	public void setNum(int num) {
-		this.num = num;
+	public void setB_num(int b_num) {
+		this.b_num = b_num;
 	}
 
 	public int getReport() {
@@ -79,4 +76,5 @@ public class ReplyVo {
 	public void setReport(int report) {
 		this.report = report;
 	}
+
 }
