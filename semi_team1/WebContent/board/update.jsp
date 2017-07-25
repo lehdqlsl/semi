@@ -22,9 +22,12 @@
 </head>
 <body>
 <div style="margin: auto; width: 1000px">
-<form method="post" action="/semi_team1/update" enctype="multipart/form-data">
-	<input type="hidden" name="filenum" value="<%=num %>"> <%-- --%>
+<form method="post" action="/semi_team1/update" >
+<%-- enctype="multipart/form-data" --%>
+	<input type="hidden" name="Snum" value="<%=num %>"> <%-- --%>
 	<input type="hidden" name="savefilename" value="<%=vo.getSavefilename() %>">  <%-- --%>
+	<input type="hidden" name="f_num" value="1"> 
+	<input type="hidden" name="s_num" value="1">
 	<table class="table table-bordered">
 		<tr>
 			<td>작성자</td>
@@ -46,6 +49,7 @@
 			<td colspan="2" align="center">
 				<input class="btn btn-success" type="submit" value="전송">
 				<input class="btn btn-success" type="reset" value="취소">
+				<input class="btn btn-success" type="button" value="목록" onclick = "location.href = '/semi_team1/list';">
 			</td>
 		</tr>
 	</table>

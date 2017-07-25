@@ -34,6 +34,7 @@
           		<input class="btn btn-success" type="button" value="수정" onclick = "location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
           		<input class="btn btn-success" type="button" value="삭제" onclick = "location.href = 'index.jsp?page=board/insert.jsp';">
           		<input class="btn btn-success" type="button" value="글쓰기" onclick = "location.href = 'index.jsp?page=board/insert.jsp';">
+          		<input class="btn btn-success" type="button" value="목록" onclick = "location.href = '/semi_team1/list';">
           		</td>
           	</tr>
           </table>

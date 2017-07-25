@@ -61,6 +61,7 @@
 		<tr>
 		<td colspan="2" align="center">
 		<input class="btn btn-success" type="submit" value="확인" >
+		<input class="btn btn-success" type="button" value="목록" onclick = "location.href = '/semi_team1/list';">
 		</td>
 		</tr>
 </table>

@@ -166,7 +166,7 @@ public class BoardDao {
 		PreparedStatement pstmt=null;
 		try{
 			con=DBCPBean.getConn();
-			String sql="update board set title_name=?, content=?, orgfilename=?, savefilename=? where num=?";
+			String sql="update board set title_name=?, content=?, orgfilename=?, savefilename=?, s_num=1 where num=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1,vo.getTitle_name());
 			pstmt.setString(2,vo.getContent());

@@ -23,7 +23,6 @@ public class InsertOkController extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
-		
 		String writer=request.getParameter("writer");
 		String title_name=request.getParameter("title_name");
 		String content=request.getParameter("content");
@@ -34,6 +33,7 @@ public class InsertOkController extends HttpServlet{
 		boardVo vo=new boardVo(0, title_name, 0, 0, orgFileName, saveFileName, content, null, writer, f_num, s_num, 0, 0, 0);
 		BoardDao dao=new BoardDao();
 		int n=dao.insert(vo);
+		System.out.println("n°ª"+n);
 		if(n>0){
 			response.sendRedirect("/semi_team1/list");
 		}else{
