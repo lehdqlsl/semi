@@ -7,11 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<!-- 사이드바 -->
+	<jsp:include page="sideBar.jsp"></jsp:include>
+
+
 	<div class="col-sm-3 col-md-2 sidebar">
 		<ul class="nav nav-sidebar">
-			<li class="active"><a href="/semi_team1/list?f_num=${param.f_num }&s_num=1">Overview <span
+			<li class="active"><a
+				href="/semi_team1/list?f_num=${param.f_num }&s_num=1">Overview <span
 					class="sr-only">(current)</span></a></li>
 			<li><a href="#">Reports</a></li>
 			<li><a href="#">Analytics</a></li>
