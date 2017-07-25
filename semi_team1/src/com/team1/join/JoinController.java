@@ -36,7 +36,7 @@ public class JoinController extends HttpServlet {
 		int n = dao.insert(vo);
 
 		if (n > 0) {
-			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?page=join/signin.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?page=login/signin.jsp");
 			rd.forward(request, response);
 		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("join/result.jsp");

@@ -7,11 +7,14 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 import com.team1.db.DBCPBean;
+import com.team1.vo.JoinVo;
 
 public class LoginDao {
-	public boolean isMember(HashMap<String, String> map){
+	public JoinVo isMember(HashMap<String, String> map){
+		JoinVo vo=null;
 		String id=map.get("id");
 		String u_pw=map.get("u_pw");
+		String m_nick=null;
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -23,13 +26,14 @@ public class LoginDao {
 			pstmt.setString(2, u_pw);
 			rs=pstmt.executeQuery();
 			if(rs.next()){
-				return true;
+				vo=new JoinVo(rs.getString("id"), rs.getString("u_pw"), rs.getString("m_nick"), rs.getString("m_mail"));
+				return vo;
 			}else{
-				return false;
+				return null;
 			}
 		}catch(SQLException se){
 			System.out.println(se.getMessage());
-			return false;
+			return null;
 		}finally{
 			DBCPBean.close(con,pstmt,rs);
 		}
