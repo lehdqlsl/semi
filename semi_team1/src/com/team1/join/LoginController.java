@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.team1.dao.LoginDao;
+import com.team1.dao.JoinDao;
+
 import com.team1.vo.JoinVo;
 
 @WebServlet("/login.do")
@@ -43,7 +44,7 @@ public class LoginController extends HttpServlet{
 		HashMap<String, String> map=new HashMap<>();
 		map.put("id", id);
 		map.put("u_pw", u_pw);
-		LoginDao dao=new LoginDao();
+		JoinDao dao=new JoinDao();
 		JoinVo vo=dao.isMember(map);
 		
 		//boolean result=dao.isMember(map);
