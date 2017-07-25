@@ -129,7 +129,16 @@
 			alert("비밀번호를 확인하세요");
 			return false;
 		}
-
+		
+		////////////////////빈 칸이 입력되면////////////////////////////////////////
+		var m_mail=document.getElementById("m_mail").value;
+		var id=document.getElementById("id").value;
+		var m_nick=document.getElementById("m_nick").value;
+		
+		if((m_mail==null)||(id==null)||(m_nick==null)||(u_pw==null)||(checkpw==null)){
+			alert("미입력된 부분이 있습니다");
+			return false;
+		}
 		var idcheckbtn = document.getElementById("idcheckbtn");
 		var nickcheckbtn = document.getElementById("nickcheckbtn");
 		var emailcheckbtn = document.getElementById("emailcheckbtn");
