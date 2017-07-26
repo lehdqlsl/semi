@@ -43,7 +43,7 @@
 			<div id="input" style="margin: auto; width: 800px; height: 100px;">
 				<input type="hidden" name="b_num" value="${param.b_num }">
 				<textarea rows="4" cols="80" border="1" name="content"
-					placeholder="댓글 작성 시 타인에 대한 배려와 책임을 담아주세요.">댓글 작성 시 타인에 대한 배려와 책임을 담아주세요.</textarea>
+					placeholder="댓글 작성 시 타인에 대한 배려와 책임을 담아주세요."></textarea>
 			</div>
 			<div id="reply">
 				<div id="tot">댓글 | 총 [ ${requestScope.cntTot} ]개</div>
