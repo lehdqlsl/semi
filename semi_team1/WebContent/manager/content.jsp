@@ -8,7 +8,7 @@
 </head>
 <body>
 	<!-- 메인페이지 -->
-	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<h1>관리자페이지</h1>
 	</div>
 </body>

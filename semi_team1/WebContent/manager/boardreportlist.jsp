@@ -9,8 +9,8 @@
 </head>
 <body>
 
-	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-		<div style="margin: auto; width: 1000px">
+	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
+		<div style="margin: auto; width: 1000px; height: 1300px;">
 			<table class="table table-bordered">
 				<tr>
 					<td>글번호</td>
@@ -39,7 +39,7 @@
 				<!-- 이전 -->
 				<c:choose>
 					<c:when test="${startPage>10 }">
-						<a href="/semi_team1/boardreportlist.do?pageNum=${startPage-1 }">[이전]</a>
+						<a href="/semi_team1/report/list?pageNum=${startPage-1 }">[이전]</a>
 					</c:when>
 					<c:otherwise>
 			[ ◁ ]
@@ -49,11 +49,11 @@
 				<c:forEach var="i" begin="${startPage }" end="${endPage }">
 					<c:choose>
 						<c:when test="${i==pageNum }">
-							<a href="/semi_team1/boardreportlist.do?pageNum=${i }"><span
+							<a href="/semi_team1/report/list?pageNum=${i }"><span
 								style="color: blue">[${i }]</span></a>
 						</c:when>
 						<c:otherwise>
-							<a href="/semi_team1/boardreportlist.do?pageNum=${i }"><span
+							<a href="/semi_team1/report/list?pageNum=${i }"><span
 								style="color: #aaa">[${i }]</span></a>
 						</c:otherwise>
 					</c:choose>
@@ -61,7 +61,7 @@
 				<!--  다음 -->
 				<c:choose>
 					<c:when test="${endPage<pageCount }">
-						<a href="/semi_team1/boardreportlist.do?pageNum=${endPage+1 }">[다음]</a>
+						<a href="/semi_team1/report/list?pageNum=${endPage+1 }">[다음]</a>
 					</c:when>
 					<c:otherwise>
 			[ ▷ ]

@@ -8,8 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-		<div style="margin: auto; width: 1000px">
+	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
+		<div style="margin: auto; width: 1000px; height: 1300px;">
 			<table class="table table-bordered">
 				<thead>
 					<tr>
@@ -73,7 +73,7 @@
 				<c:choose>
 					<c:when test="${startPageNum>20 }">
 						<a
-							href="/semi_team1/list&pageNum=${startPageNum-1 }&search=${param.search}&keyword=${param.keyword}">[이전]</a>
+							href="/semi_team1/list?s_num=${s_num }&pageNum=${startPageNum-1 }&search=${param.search}&keyword=${param.keyword}">[이전]</a>
 					</c:when>
 					<c:otherwise>
 			[이전]
@@ -83,13 +83,13 @@
 					<c:choose>
 						<c:when test="${i==pageNum }">
 							<a
-								href="/semi_team1/list&pageNum=${i }&search=${param.search}&keyword=${param.keyword}">
+								href="/semi_team1/list?s_num=${s_num }&pageNum=${i }&search=${param.search}&keyword=${param.keyword}">
 								<span style="color: lime">[${i }]</span>
 							</a>
 						</c:when>
 						<c:otherwise>
 							<a
-								href="/semi_team1/list&pageNum=${i }&search=${param.search}&keyword=${param.keyword}">
+								href="/semi_team1/list?s_num=${s_num }&pageNum=${i }&search=${param.search}&keyword=${param.keyword}">
 								<span style="color: blue"> [${i }] </span>
 							</a>
 						</c:otherwise>
@@ -98,7 +98,7 @@
 				<c:choose>
 					<c:when test="${endPageNum<pageCount }">
 						<a
-							href="/semi_team1/list&pageNum=${endPageNum+1 }&search=${param.search}&keyword=${param.keyword}">[다음]</a>
+							href="/semi_team1/list?s_num=${s_num }&pageNum=${endPageNum+1 }&search=${param.search}&keyword=${param.keyword}">[다음]</a>
 					</c:when>
 					<c:otherwise>
 			[다음]
