@@ -123,7 +123,7 @@ public class JoinDao {
 			pstmt.setString(2, u_pw);
 			rs=pstmt.executeQuery();
 			if(rs.next()){
-				vo=new JoinVo(rs.getString("id"), rs.getString("u_pw"), rs.getString("m_nick"), rs.getString("m_mail"));
+				vo=new JoinVo(rs.getInt("num"),rs.getString("id"), rs.getString("u_pw"), rs.getString("m_nick"), rs.getString("m_mail"));
 				return vo;
 			}else{
 				return null;

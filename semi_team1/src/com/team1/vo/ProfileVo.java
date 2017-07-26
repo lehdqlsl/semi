@@ -31,11 +31,18 @@ public class ProfileVo {
 		this.limit_date = limit_date;
 	}
 	
-	public ProfileVo(int num, String u_pw, String m_nick, String m_mail) {
-		this.num = num;
-		this.u_pw = u_pw;
+	public ProfileVo(String m_savefilename, String m_nick, int num, int exp, Date reg_date) {
+		this.m_savefilename = m_savefilename;
 		this.m_nick = m_nick;
-		this.m_mail = m_mail;
+		this.num = num;
+		this.exp = exp;
+		this.reg_date = reg_date;
+	}
+	public ProfileVo(int num, String m_nick){
+		this.num=num;
+		this.m_nick=m_nick;
+		
+		
 	}
 	
 	

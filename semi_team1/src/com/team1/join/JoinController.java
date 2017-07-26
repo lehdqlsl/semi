@@ -24,7 +24,7 @@ public class JoinController extends HttpServlet {
 		String m_nick = request.getParameter("m_nick");
 		String m_mail = request.getParameter("m_mail");
 
-		JoinVo vo = new JoinVo(id, u_pw, m_nick, m_mail);
+		JoinVo vo = new JoinVo(0,id, u_pw, m_nick, m_mail);
 
 		JoinDao dao = new JoinDao();
 		int n = dao.insert(vo);

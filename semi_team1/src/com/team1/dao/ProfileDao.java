@@ -96,7 +96,7 @@ public class ProfileDao {
 		}
 		return using;
 	}
-	public int update(ProfileVo vo){
+	public int update11(ProfileVo vo){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		try{
