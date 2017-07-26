@@ -32,10 +32,14 @@
 					href="/semi_team1/index.jsp?page=tasty/mainForm.jsp">맛집</a></li>
 				<li id="c5"><a
 					href="/semi_team1/index.jsp?page=music/mainForm.jsp">음악</a></li>
+					
+									<c:if test="${sessionScope.m_nick == 'admin'}">
+					<li id="c5"><a
+						href="/semi_team1/index.jsp?page=manager/managerIndex.jsp">관리자페이지</a></li>
+				</c:if>
 			</ul>
 			<!-- 로그인 및 회원가입 버튼 -->
 			<div class="navbar-form navbar-right">
-
 			<c:choose>
 				<c:when test="${empty sessionScope.m_nick }">
 					<div class="navbar-form navbar-right">
