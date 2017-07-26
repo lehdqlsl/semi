@@ -109,16 +109,24 @@ function validate() {
 		</table>
 		<ul class="nav nav-sidebar">
 		<li><a href="">프로필 수정</a></li>
-		<li><a href="">개인정보 수정</a></li>
+		<li><a href="/semi_team1/index.jsp?page=profile/userupdate.jsp?num=<%=num %>">개인정보 수정</a></li>
 		<li><a href="">쪽지함</a></li>
 		</ul>
 	</div>
 	
 	<%-- 오른쪽 메인 --%>
+	
+	<%-- 이미지파트 --%>
+<form method="post" action="/semi_team1/imgupdate" enctype="multipart/form-data">
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+	<input type="hidden" name="num" value="<%=num %>">
+	<input type="hidden" name="savefilename" value="<%=vo.getM_savefilename() %>">
 	<table class="table table-bordered">
 	<tr>
-	<td rowspan="4" width="230px"> 이미지</td>
+	<td rowspan="4" width="150px">
+	<img src="/semi_team1/upload/<%=vo.getM_savefilename()%>"
+		style="height: 150px; width: 150px; margin: auto;">
+	</td>
 	<td width="400px" colspan="2">*삭제시 기본이미지 적용</td>
 	
 	</tr>
@@ -135,12 +143,14 @@ function validate() {
 	
 	<tr>
 	<td width="150px"><input type="file" name="file1" > </td>
-	<td><input type="button" name="imgupload" value="적용"> </td>
+	<td><input type="submit" name="imgupload" value="적용"> </td>
 	
 	</tr>
 	</table>
 	</div>
+</form>
 	
+	<%-- 닉네임파트 --%>
 	<div style="width:1000px;height:500px;padding-left: 350px;">
 	<form action="/semi_team1/nickupdate" method="post" class="navbar-form">
 		<input type="hidden" name="num" value="<%=num %>">

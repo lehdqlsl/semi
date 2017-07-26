@@ -89,7 +89,6 @@ function validate() {
 		return false;
 	}
 	var emailcheckbtn = document.getElementById("emailcheckbtn");
-	console.log(nickcheckbtn.disabled);
 	console.log(emailcheckbtn.disabled);
 	if (emailcheckbtn.disabled != true) {
 		alert("중복확인을 해주세요");
