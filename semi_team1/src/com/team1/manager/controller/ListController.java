@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.team1.dao.ReplyDao;
-import com.team1.vo.ReplyVo;
+import com.team1.dao.JoinDao;
+import com.team1.vo.JoinVo;
 
-@WebServlet("/report/reply")
-public class ReplyReportController extends HttpServlet {
+//managerlist
+@WebServlet("/member/list")
+public class ListController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -22,27 +23,29 @@ public class ReplyReportController extends HttpServlet {
 		if (spageNum != null) {
 			pageNum = Integer.parseInt(spageNum);
 		}
-		int startRow = (pageNum - 1) * 10 + 1;
-		int endRow = startRow + 9;
+		int startRow = (pageNum - 1) * 20 + 1;
+		int endRow = startRow + 19;
+		// endRow=pageNum*10;
+		// startRow=endRow-9;
 
-		ReplyDao dao = ReplyDao.getInstance();
-		ArrayList<ReplyVo> list = dao.replyReport(startRow, endRow);
+		JoinDao dao = new JoinDao();
+		ArrayList<JoinVo> list = dao.list(startRow, endRow);
 		// 전체 페이지 개수 구하기
-		int pageCount = (int) Math.ceil(dao.getCnt() / 10.0);
+		int pageCount = (int) Math.ceil(dao.getCount() / 20.0);
 		// 시작 페이지 구하기
-		int startPageNum = ((int) Math.ceil(pageNum / 10.0)) * 10 - 9;
+		int startPageNum = ((int) Math.ceil(pageNum / 5.0)) * 5 - 4;
 		// 끝페이지 구하기
-		int endPageNum = ((int) Math.ceil(pageNum / 10.0)) * 10;
+		int endPageNum = ((int) Math.ceil(pageNum / 5.0)) * 5;
 		if (endPageNum > pageCount) {
 			endPageNum = pageCount;
 		}
-
+		System.out.println(startPageNum);
 		request.setAttribute("list", list);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("startPage", startPageNum);
 		request.setAttribute("endPage", endPageNum);
 		request.setAttribute("pageNum", pageNum);
-		request.getRequestDispatcher("/index.jsp?page=/manager/managerIndex.jsp&s_page=/manager/reportlist.jsp")
+		request.getRequestDispatcher("/index.jsp?page=/manager/managerIndex.jsp&s_page=/manager/memlist.jsp")
 				.forward(request, response);
 	}
 }

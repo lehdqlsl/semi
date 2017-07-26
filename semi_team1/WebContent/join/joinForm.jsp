@@ -28,6 +28,7 @@
 	function callback() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var idcheckbtn = document.getElementById("idcheckbtn");
+			var id = document.getElementById("id");
 			var data = xhr.responseText;
 			var json = eval('(' + data + ')');
 
@@ -36,6 +37,7 @@
 			} else {
 				alert("사용할 수 있는 아이디입니다");
 				idcheckbtn.disabled = true;
+				f.id.readOnly = true;
 			}
 		}
 	}
@@ -62,6 +64,8 @@
 			} else {
 				alert("사용할 수 있는 닉네임입니다");
 				nickcheckbtn.disabled = true;
+				f.m_nick.readOnly = true;
+				
 			}
 		}
 	}
@@ -104,6 +108,7 @@
 				alert("이미 사용 중인 이메일입니다");
 			} else {
 				alert("사용할 수 있는 이메일입니다");
+				f.m_mail.readOnly = true;
 				emailcheckbtn.disabled = true;
 			}
 		}
@@ -158,7 +163,7 @@
 	<div class="container">
 		<div style="width:500px;height:500px;margin:auto;">
 		<h1>회원 가입 하기</h1>
-		<form action="/semi_team1/join/insert" method="post" class="navbar-form">
+		<form action="/semi_team1/join/insert" method="post" class="navbar-form" name="f">
 			<label>아이디</label><br> <input type="text" placeholder="아이디" name="id" id="id" class="form-control"> 
 			<input type="button" id="idcheckbtn" value="중복확인" onclick="idcheck()"><br> <label>닉네임</label><br>
 			<input type="text" placeholder="닉네임" name="m_nick" id="m_nick"	class="form-control"> 

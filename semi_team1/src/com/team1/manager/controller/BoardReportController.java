@@ -12,30 +12,31 @@ import javax.servlet.http.HttpServletResponse;
 import com.team1.dao.BoardDao;
 import com.team1.vo.boardVo;
 
-@WebServlet("/boardreportlist.do")
+@WebServlet("/report/list")
 public class BoardReportController extends HttpServlet {
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String spageNum=request.getParameter("pageNum");
-		
-		int pageNum=1;
-		if(spageNum!=null){
-			pageNum=Integer.parseInt(spageNum);
-		}
-		int startRow=(pageNum-1)*10+1;
-		int endRow=startRow+9;
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String spageNum = request.getParameter("pageNum");
 
-		BoardDao dao=new BoardDao();
-		ArrayList<boardVo> list=dao.boardReport(startRow, endRow);
-		//전체 페이지 개수 구하기
-		int pageCount=(int)Math.ceil(dao.getCnt()/10.0);
-		//시작 페이지 구하기
-		int startPageNum=((int)Math.ceil(pageNum/10.0))*10-9;
-		//끝페이지 구하기
-		int endPageNum=((int)Math.ceil(pageNum/10.0))*10;
-	
-		if(endPageNum>pageCount){
-			endPageNum=pageCount;
+		int pageNum = 1;
+		if (spageNum != null) {
+			pageNum = Integer.parseInt(spageNum);
+		}
+		int startRow = (pageNum - 1) * 10 + 1;
+		int endRow = startRow + 9;
+
+		BoardDao dao = new BoardDao();
+		ArrayList<boardVo> list = dao.boardReport(startRow, endRow);
+		// 전체 페이지 개수 구하기
+		int pageCount = (int) Math.ceil(dao.getCnt() / 10.0);
+		// 시작 페이지 구하기
+		int startPageNum = ((int) Math.ceil(pageNum / 10.0)) * 10 - 9;
+		// 끝페이지 구하기
+		int endPageNum = ((int) Math.ceil(pageNum / 10.0)) * 10;
+
+		if (endPageNum > pageCount) {
+			endPageNum = pageCount;
 		}
 
 		request.setAttribute("list", list);
@@ -43,7 +44,6 @@ public class BoardReportController extends HttpServlet {
 		request.setAttribute("startPage", startPageNum);
 		request.setAttribute("endPage", endPageNum);
 		request.setAttribute("pageNum", pageNum);
-		request.getRequestDispatcher("/manager/boardreportlist.jsp").forward(request, response);
+		request.getRequestDispatcher("/index.jsp?page=/manager/managerIndex.jsp&s_page=/manager/boardreportlist.jsp").forward(request, response);
 	}
 }
-

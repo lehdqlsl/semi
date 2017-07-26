@@ -16,33 +16,53 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/semi_team1/index.jsp?page=content.jsp">유리웹</a>
+			<a class="navbar-brand" href="/semi_team1/index.jsp?page=content.jsp">우리웹(임시)</a>
 		</div>
 
 		<div id="navbar" class="collapse navbar-collapse">
 
 			<ul class="nav navbar-nav">
 				<li id="c1"><a
-					href="/semi_team1/index.jsp?page=game/gameIndex.jsp&f_num=1">게임</a></li>
+					href="/semi_team1/index.jsp?page=game/gameIndex.jsp">게임</a></li>
 				<li id="c2"><a
-					href="/semi_team1/index.jsp?page=movie/movieIndex.jsp&f_num=2">영화</a></li>
+					href="/semi_team1/index.jsp?page=movie/movieIndex.jsp">영화</a></li>
 				<li id="c3"><a
-					href="/semi_team1/index.jsp?page=sport/mainForm.jsp">스포츠</a></li>
+					href="/semi_team1/index.jsp?page=sport/sportIndex.jsp">스포츠</a></li>
 				<li id="c4"><a
-					href="/semi_team1/index.jsp?page=tasty/mainForm.jsp">맛집</a></li>
+					href="/semi_team1/index.jsp?page=tasty/tastyIndex.jsp">맛집</a></li>
 				<li id="c5"><a
-					href="/semi_team1/index.jsp?page=music/mainForm.jsp">음악</a></li>
+					href="/semi_team1/index.jsp?page=music/musicIndex.jsp">음악</a></li>
+
+				<c:if test="${sessionScope.m_nick == 'admin'}">
+					<li id="c5"><a
+						href="/semi_team1/index.jsp?page=manager/managerIndex.jsp">관리자페이지</a></li>
+				</c:if>
 			</ul>
 			<!-- 로그인 및 회원가입 버튼 -->
-			<div class="navbar-form navbar-right">
 
-				<Button type="button" class="btn btn-success"
-					onclick="location.href = 'index.jsp?page=login/signin.jsp';">로그인</Button>
-				<Button type="button" class="btn btn-success"
-					onclick="location.href = 'index.jsp?page=join/joinForm.jsp';">회원가입</Button>
+			<c:choose>
+				<c:when test="${empty sessionScope.m_nick }">
+					<div class="navbar-form navbar-right">
+						<Button type="button" class="btn btn-success"
+							onclick="location.href = 'index.jsp?page=login/signin.jsp';">로그인</Button>
+						<Button type="button" class="btn btn-success"
+							onclick="location.href = 'index.jsp?page=join/joinForm.jsp';">회원가입</Button>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="navbar-form navbar-right" style="margin-top: 0px;">
+						<ul class="nav navbar-nav">
+							<li><a>${sessionScope.m_nick } 님</a></li>
+							<li><a>회원정보</a></li>
+						</ul>
+						<Button type="button" class="btn btn-success"
+							onclick="location.href = '/semi_team1/login.do?cmd=logout';"
+							style="margin: 8px">로그아웃</Button>
+					</div>
+				</c:otherwise>
+			</c:choose>
 
 
-			</div>
 		</div>
 	</div>
 	</nav>
