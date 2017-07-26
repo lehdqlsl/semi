@@ -8,9 +8,8 @@ import java.sql.SQLException;
 import com.team1.db.DBCPBean;
 import com.team1.vo.ProfileVo;
 
-
-public class UserInfoDao {
-	//userinfo.jsp select기능
+public class UserUpdateDao {
+	//userupdate.jsp select기능
 	public ProfileVo select(int num){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -47,16 +46,18 @@ public class UserInfoDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
-	//userinfo.jsp 닉네임 업데이트 기능
+	
+	//userupdate.jsp 이메일, 비밀번호 업데이트 기능
 	public int update(ProfileVo vo){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		try{
 			con=DBCPBean.getConn();
-			String sql="update members set m_nick=? where num=?";
+			String sql="update members set u_pw=?, m_mail=? where num=?";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1,vo.getM_nick());
-			pstmt.setInt(2,vo.getNum());
+			pstmt.setString(1,vo.getU_pw());
+			pstmt.setString(2,vo.getM_mail());
+			pstmt.setInt(3,vo.getNum());
 			return pstmt.executeUpdate();
 		}catch(SQLException se){
 			System.out.println(se.getMessage());
@@ -66,30 +67,31 @@ public class UserInfoDao {
 		}
 	}
 	
-	//nickcheck.jsp json (닉네임검사)
-		public boolean nickcheck(String m_nick){
-			ProfileVo vo=null;
-			Connection con=null;
-			PreparedStatement pstmt=null;
-			ResultSet rs=null;
-			boolean using=false;
-			try{
-				con=DBCPBean.getConn();
-				String sql="select * from members where m_nick=?";
-				pstmt=con.prepareStatement(sql);
-				pstmt.setString(1, m_nick);
-				rs=pstmt.executeQuery();
-				if(rs.next()){
-					using = true;
-					return using;
-				}else{
-					return using;
-				}
-			}catch(SQLException se){
-				System.out.println(se.getMessage());
-			}finally{
-				DBCPBean.close(con,pstmt,rs);
+	//emailcheck.jsp json (이메일검사)
+	public boolean emailcheck(String m_mail){
+		ProfileVo vo=null;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		boolean using=false;
+		try{
+			con=DBCPBean.getConn();
+			String sql="select * from members where m_mail=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, m_mail);
+			rs=pstmt.executeQuery();
+			if(rs.next()){
+				using = true;
+				return using;
+			}else{
+				return using;
 			}
-			return using;
+		}catch(SQLException se){
+			System.out.println(se.getMessage());
+		}finally{
+			DBCPBean.close(con,pstmt,rs);
 		}
+		return using;
+	}
+	
 }

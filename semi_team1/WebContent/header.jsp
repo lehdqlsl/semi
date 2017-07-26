@@ -34,7 +34,9 @@
 					href="/semi_team1/index.jsp?page=music/mainForm.jsp">음악</a></li>
 			</ul>
 			<!-- 로그인 및 회원가입 버튼 -->
+			<div class="navbar-form navbar-right">
 
+<<<<<<< HEAD
 			<c:choose>
 				<c:when test="${empty sessionScope.m_nick }">
 					<div class="navbar-form navbar-right">
@@ -56,8 +58,15 @@
 					</div>
 				</c:otherwise>
 			</c:choose>
+=======
+				<Button type="button" class="btn btn-success"
+					onclick="location.href = 'index.jsp?page=login/signin.jsp';">로그인</Button>
+				<Button type="button" class="btn btn-success"
+					onclick="location.href = 'index.jsp?page=join/joinForm.jsp';">회원가입</Button>
+>>>>>>> branch 'master' of https://github.com/lehdqlsl/semi
 
 
+			</div>
 		</div>
 	</div>
 	</nav>

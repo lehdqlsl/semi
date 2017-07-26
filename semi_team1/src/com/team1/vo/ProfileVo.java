@@ -41,8 +41,12 @@ public class ProfileVo {
 	public ProfileVo(int num, String m_nick){
 		this.num=num;
 		this.m_nick=m_nick;
-		
-		
+	}
+	
+	public ProfileVo(int num, String m_mail, String u_pw) {
+		this.num=num;
+		this.m_mail = m_mail;
+		this.u_pw = u_pw;
 	}
 	
 	

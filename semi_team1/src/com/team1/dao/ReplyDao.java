@@ -70,25 +70,7 @@ public class ReplyDao {
 			DBCPBean.close(con,pstmt,rs);
 		}
 	}
-//	public int cntTot(){
-//		Connection con=null;
-//		PreparedStatement pstmt=null;
-//		ResultSet rs=null;
-//		try{
-//			con=DBCPBean.getConn();
-//			String sql="select count(*) from reply";
-//			pstmt=con.prepareStatement(sql);
-//			rs=pstmt.executeQuery();
-//			rs.next();
-//			int cntTot=rs.getInt(1);
-//			return cntTot;
-//		}catch(SQLException se){
-//			System.out.println(se.getMessage());
-//			return -1;
-//		}finally{
-//			DBCPBean.close(con,pstmt,rs);
-//		}
-//	}
+	
 	public int insert(String content,int b_num){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -121,6 +103,59 @@ public class ReplyDao {
 			return -1;
 		}finally{
 			DBCPBean.close(con,pstmt,null);
+		}
+	}
+	// 신고 댓글 리스트
+	public ArrayList<ReplyVo> replyReport(int startRow,int endRow){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try{
+			con=DBCPBean.getConn();
+			String sql="SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM (SELECT * FROM REPLY WHERE REPORT=1 ORDER BY REG_DATE desc) AA)WHERE RNUM>=? AND RNUM<=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs=pstmt.executeQuery();
+			ArrayList<ReplyVo> list=new ArrayList<>();
+			while(rs.next()){
+				
+				int r_num=rs.getInt("r_num");
+				String nick=rs.getString("nick");
+				String content=rs.getString("content");
+				int up=rs.getInt("up");
+				Date reg_date=rs.getDate("reg_date");
+				int b_num=rs.getInt("b_num");
+				int report=rs.getInt("report");
+				ReplyVo vo=new ReplyVo(r_num, nick, content, up, reg_date, b_num, report);
+				list.add(vo);
+			}
+			return list;
+		}catch(SQLException se){
+			System.out.println(se.getMessage());
+			return null;
+		}finally{
+			DBCPBean.close(con,pstmt,rs);
+		}
+	}
+	//신고 댓글 개수
+	public int getCnt(){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try{
+			con=DBCPBean.getConn();
+			String sql="select count(*) from reply where report=1";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			rs.next();
+			int cntTot=rs.getInt(1);
+			return cntTot;
+		}catch(SQLException se){
+			System.out.println(se.getMessage());
+			return -1;
+		}finally{
+			DBCPBean.close(con,pstmt,rs);
 		}
 	}
 }

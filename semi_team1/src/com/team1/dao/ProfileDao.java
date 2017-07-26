@@ -10,6 +10,11 @@ import com.team1.vo.ProfileVo;
 import com.team1.vo.boardVo;
 
 public class ProfileDao {
+	
+	
+	///최종 체크후 삭제 예정
+	
+	//???
 	public ProfileVo select(int num){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -46,6 +51,8 @@ public class ProfileDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
+	
+	//nickcheck.jsp json (닉네임검사)
 	public boolean nickcheck(String m_nick){
 		ProfileVo vo=null;
 		Connection con=null;
@@ -71,6 +78,8 @@ public class ProfileDao {
 		}
 		return using;
 	}
+	
+	//emailcheck.jsp json (이메일검사)
 	public boolean emailcheck(String m_mail){
 		ProfileVo vo=null;
 		Connection con=null;
@@ -96,25 +105,5 @@ public class ProfileDao {
 		}
 		return using;
 	}
-	public int update11(ProfileVo vo){
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		try{
-			con=DBCPBean.getConn();
-			String sql="update members set u_pw=?, m_nick=?, m_mail=?, m_orgfilename=?, m_savefilename=? where num=?";
-			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1,vo.getU_pw());
-			pstmt.setString(2,vo.getM_nick());
-			pstmt.setString(3,vo.getM_mail());
-			pstmt.setString(4,vo.getM_orgfilename());
-			pstmt.setString(5,vo.getM_savefilename());
-			pstmt.setInt(6,vo.getNum());
-			return pstmt.executeUpdate();
-		}catch(SQLException se){
-			System.out.println(se.getMessage());
-			return -1;
-		}finally{
-			DBCPBean.close(con, pstmt, null);
-		}
-	}
+	
 }
