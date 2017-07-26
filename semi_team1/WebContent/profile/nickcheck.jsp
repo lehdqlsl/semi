@@ -1,3 +1,4 @@
+<%@page import="com.team1.dao.UserInfoDao"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="com.team1.dao.JoinDao"%>
@@ -6,7 +7,7 @@
 <%
 	String m_nick=request.getParameter("m_nick");
 	
-	JoinDao dao=new JoinDao();
+	UserInfoDao dao=new UserInfoDao();
 	boolean check=dao.nickcheck(m_nick);
 	
 	JSONObject json=new JSONObject();

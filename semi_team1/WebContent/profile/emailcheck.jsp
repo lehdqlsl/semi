@@ -1,3 +1,4 @@
+<%@page import="com.team1.dao.UserUpdateDao"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="com.team1.dao.JoinDao"%>
@@ -6,7 +7,7 @@
 <%
 	String m_mail=request.getParameter("m_mail");
 	
-	JoinDao dao=new JoinDao();
+	UserUpdateDao dao=new UserUpdateDao();
 	boolean check=dao.emailcheck(m_mail);
 	
 	JSONObject json=new JSONObject();

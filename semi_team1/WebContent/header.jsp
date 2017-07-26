@@ -16,7 +16,8 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/semi_team1/index.jsp?page=content.jsp">우리웹(임시)</a>
+			<a class="navbar-brand" href="/semi_team1/index.jsp?page=content.jsp">유리웹
+			</a>
 		</div>
 
 		<div id="navbar" class="collapse navbar-collapse">
@@ -53,7 +54,8 @@
 					<div class="navbar-form navbar-right" style="margin-top: 0px;">
 						<ul class="nav navbar-nav">
 							<li><a>${sessionScope.m_nick } 님</a></li>
-							<li><a>회원정보</a></li>
+							<li><a
+								href="/semi_team1/index.jsp?page=profile/userinfo.jsp?num=${sessionScope.num }">회원정보</a></li>
 						</ul>
 						<Button type="button" class="btn btn-success"
 							onclick="location.href = '/semi_team1/login.do?cmd=logout';"

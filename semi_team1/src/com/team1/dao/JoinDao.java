@@ -12,8 +12,6 @@ import com.team1.db.DBCPBean;
 import com.team1.vo.JoinVo;
 import com.team1.vo.ProfileVo;
 
-
-
 public class JoinDao {
 	//////////////////// 회원가입////////////////////
 	public int insert(JoinVo vo) {
@@ -139,10 +137,12 @@ public class JoinDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, u_pw);
+
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				vo = new JoinVo(rs.getString("id"), rs.getString("u_pw"), rs.getString("m_nick"),
+				vo = new JoinVo(rs.getInt("num"), rs.getString("id"), rs.getString("u_pw"), rs.getString("m_nick"),
 						rs.getString("m_mail"));
+
 				return vo;
 			} else {
 				return null;
@@ -203,21 +203,22 @@ public class JoinDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
-	//전체 회원 정보 출력-페이징
-	public ArrayList<JoinVo> list(int  startRow, int endRow){
-		String sql="SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM(SELECT * FROM MEMBERS ORDER BY NUM DESC) AA) WHERE RNUM>=? AND RNUM<=?";
-		
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		try{
-			con=DBCPBean.getConn();
-			pstmt=con.prepareStatement(sql);
+
+	// 전체 회원 정보 출력-페이징
+	public ArrayList<JoinVo> list(int startRow, int endRow) {
+		String sql = "SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM(SELECT * FROM MEMBERS ORDER BY NUM DESC) AA) WHERE RNUM>=? AND RNUM<=?";
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			rs=pstmt.executeQuery();
-			ArrayList<JoinVo> list=new ArrayList<>();
-			while(rs.next()){
+			rs = pstmt.executeQuery();
+			ArrayList<JoinVo> list = new ArrayList<>();
+			while (rs.next()) {
 				JoinVo jv = new JoinVo(rs.getInt("num"), rs.getString("id"), rs.getString("u_pw"),
 						rs.getString("m_nick"), rs.getString("m_mail"), rs.getString("m_orgfilename"),
 						rs.getString("m_savefilename"), rs.getString("grade"), rs.getInt("exp"), rs.getDate("reg_date"),
@@ -225,10 +226,10 @@ public class JoinDao {
 				list.add(jv);
 			}
 			return list;
-		}catch(SQLException se){
+		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return null;
-		}finally{
+		} finally {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
