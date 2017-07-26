@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 import com.team1.db.DBCPBean;
 import com.team1.vo.JoinVo;
+import com.team1.vo.ProfileVo;
 
 
 
@@ -229,6 +230,24 @@ public class JoinDao {
 			return null;
 		}finally{
 			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+	//limit-date update
+	public int limitDateUpdate(int days, String writer){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try{
+			con=DBCPBean.getConn();
+			String sql="update members set stop=1, limit_date=sysdate+? where m_nick=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, days);
+			pstmt.setString(2, writer);
+			return pstmt.executeUpdate();
+		}catch(SQLException se){
+			System.out.println(se.getMessage());
+			return -1;
+		}finally{
+			DBCPBean.close(con, pstmt, null);
 		}
 	}
 }
