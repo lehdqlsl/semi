@@ -16,7 +16,7 @@ import org.json.simple.JSONObject;
 import com.team1.dao.ReplyDao;
 import com.team1.vo.ReplyVo;
 
-@WebServlet("/reply.list")
+@WebServlet("/reply/list")
 public class ListController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)

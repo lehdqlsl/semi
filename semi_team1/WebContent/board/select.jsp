@@ -31,10 +31,94 @@
 						type="button" value="글쓰기"
 						onclick="location.href = 'index.jsp?page=board/insert.jsp';">
 						<input class="btn btn-success" type="button" value="목록"
-						onclick="location.href = '/semi_team1/list';"></td>
+						onclick="javascript:history.back()"></td>
 				</tr>
 			</table>
 		</div>
+	</div>
+
+	<!-- 댓글 -->
+	<form method="post" action="/semi_team1/reply.insert">
+		<div id="input" style="margin: auto; width: 800px; height: 100px;">
+			<input type="hidden" name="b_num" value="${param.b_num }">
+			<textarea rows="4" cols="80" border="1" name="content"
+				onclick="if(this.value=='댓글 작성 시 타인에 대한 배려와 책임을 담아주세요.'){this.value=''}">댓글 작성 시 타인에 대한 배려와 책임을 담아주세요.</textarea>
+		</div>
+		<div id="reply">
+			<div id="tot">댓글 | 총 [ ${requestScope.cntTot} ]개</div>
+			<div id="writeComm" align="right">
+				<input type="hidden" name="b_num" value="${param.b_num }">
+				<button type="submit" class="btn btn-success">댓글쓰기</button>
+			</div>
+		</div>
+	</form>
+	<table class="table table-striped">
+
+		<c:forEach var="vo" items="${requestScope.list }">
+			<tr>
+				<!--  <td>${vo.r_num }</td>-->
+				<td id="user">
+					<div>
+						<a href="회원정보조회페이지">${vo.nick }</a>
+					</div>
+				</td>
+				<td>${vo.content }</td>
+				<td>${vo.up }</td>
+				<td>${vo.reg_date }</td>
+				<td>${vo.b_num }</td>
+				<td>${vo.report }</td>
+				<!--  삭제/추천 버튼 한가지 폼으로 코딩?? -->
+				<form method="post" action="/semi_team1/reply.delete">
+					<input type="hidden" name="r_num" value=${vo.r_num }> <input
+						type="hidden" name="b_num" value="${param.b_num}">
+					<td><div id="delete">
+							<button type="submit" class="btn btn-xs btn-success">삭제</button>
+						</div></td>
+				</form>
+				<form method="post" action="/semi_team1/reply.recomm">
+					<input type="hidden" name="r_num" value=${vo.r_num }> <input
+						type="hidden" name="b_num" value="${param.b_num}">
+					<td><div id="recommend">
+							<button type="submit" class="btn btn-xs btn-success">추천</button>
+						</div></td>
+				</form>
+			</tr>
+		</c:forEach>
+	</table>
+	<!-- 페이징 -->
+	<div>
+		<!--  이전 -->
+		<c:choose>
+			<c:when test="${startPage>10 }">
+				<a
+					href="/semi_team1/reply.list?pageNum=${startPage -1 }&b_num=${param.b_num}"></a>
+			</c:when>
+			<c:otherwise>
+		[◁]	
+	</c:otherwise>
+		</c:choose>
+		<c:forEach var="i" begin="${startPage }" end="${endPage }">
+			<c:choose>
+				<c:when test="${i==pageNum }">
+					<a href="/semi_team1/reply.list?pageNum=${i }&b_num=${param.b_num}"><span
+						style="color: green">[${i }]</span></a>
+				</c:when>
+				<c:otherwise>
+					<a href="/semi_team1/reply.list?pageNum=${i }&b_num=${param.b_num}"><span
+						style="color: #aaa">[${i }]</span></a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<!-- 다음 -->
+		<c:choose>
+			<c:when test="${endPage<pageCount }">
+				<a
+					href="/semi_team1/reply.list?pageNum=${endPage+1 }&b_num=${param.b_num}">다음</a>
+			</c:when>
+			<c:otherwise>
+		[▷]
+	</c:otherwise>
+		</c:choose>
 	</div>
 </body>
 </html>

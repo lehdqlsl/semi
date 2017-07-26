@@ -38,9 +38,14 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<input class="btn btn-sm btn-success" type="button" value="글쓰기"
-				onclick="location.href = '/semi_team1/write?s_num=${s_num}';">
-			<br> <br>
+			<c:if test="${!empty sessionScope.m_nick}">
+				<input class="btn btn-sm btn-success" type="button" value="글쓰기"
+					onclick="location.href = '/semi_team1/write?s_num=${s_num}';">
+				<br>
+				<br>
+			</c:if>
+
+
 			<%
 				String search = request.getParameter("search");
 				if (search == null) {
@@ -107,6 +112,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

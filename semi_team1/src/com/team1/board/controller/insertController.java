@@ -32,19 +32,19 @@ public class insertController extends HttpServlet {
 			break;
 
 		case 2: // ¿µÈ­
-
+			url = "/index.jsp?page=/moive/movieIndex.jsp&s_page=/board/insert.jsp";
 			break;
 
 		case 3: // ½ºÆ÷Ã÷
-
+			url = "/index.jsp?page=/sport/sportIndex.jsp&s_page=/board/insert.jsp";
 			break;
 
 		case 4: // ¸ÀÁı
-
+			url = "/index.jsp?page=/tasty/tastyIndex.jsp&s_page=/board/insert.jsp";
 			break;
 
 		case 5: // À½¾Ç
-
+			url = "/index.jsp?page=/music/musicIndex.jsp&s_page=/board/insert.jsp";
 			break;
 
 		}

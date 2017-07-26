@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.team1.dao.ReplyDao;
-@WebServlet("/reply.delete")
+@WebServlet("/reply/delete")
 public class DeleteController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

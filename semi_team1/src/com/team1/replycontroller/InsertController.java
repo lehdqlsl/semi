@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.team1.dao.ReplyDao;
 
-@WebServlet("/reply.insert")
+@WebServlet("/reply/insert")
 public class InsertController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
