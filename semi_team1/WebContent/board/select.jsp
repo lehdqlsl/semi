@@ -67,7 +67,6 @@
 				alert("댓글이 삭제되었습니다.");
 				location.href="/semi_team1/select?num="+bNum;
 			}
-			<%--
 			console.log(flag);
 			if (flag == 1) {
 				alert("댓글 삭제는 작성자만 할 수 있습니다.");
@@ -77,7 +76,7 @@
 					location.href="/semi_team1/select?num="+bNum;
 				}
 			}
-		}--%>
+		}
 	}
 	// 댓글 글자수 표시
 	function textlen() {
@@ -129,13 +128,14 @@
 
 			<table align="right">
 				<tr>
-					<td>
-						<c:if test="${(sessionScope.m_nick eq requestScope.vo.writer) || (sessionScope.m_nick eq 'admin')}">
-							<input class="btn btn-success" type="button" value="수정" onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
-							<input class="btn btn-success" type="button" value="삭제" onclick=delete()> 
-						</c:if>
-						<input class="btn btn-success" type="button" value="목록" onclick="javascript:history.back()">
-					</td>
+					<td><c:if
+							test="${(sessionScope.m_nick eq requestScope.vo.writer) || (sessionScope.m_nick eq 'admin')}">
+							<input class="btn btn-success" type="button" value="수정"
+								onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
+							<input class="btn btn-success" type="button" value="삭제"
+								onclick=delete()>
+						</c:if> <input class="btn btn-success" type="button" value="목록"
+						onclick="javascript:history.back()"></td>
 				</tr>
 			</table>
 
