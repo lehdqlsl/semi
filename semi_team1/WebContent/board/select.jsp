@@ -18,7 +18,8 @@
 </head>
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-		<div style="margin: auto; width: 1000px; height: 1000px;">
+		<div
+			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
 			<table class="table table-bordered">
 				<thead>
 					<tr>
@@ -32,6 +33,7 @@
 					<td>${requestScope.vo.content }</td>
 				</tr>
 			</table>
+			
 			<table align="right">
 				<tr>
 					<td><input class="btn btn-success" type="button" value="수정"
@@ -128,8 +130,7 @@
 	</c:otherwise>
 				</c:choose>
 
-				<br>
-				<br>
+				<br> <br>
 				<form method="post" action="/semi_team1/reply/insert">
 					<div id="input" style="margin: auto; width: 1000px; height: 100px;">
 						<input type="hidden" name="b_num" value="${requestScope.b_num }">
