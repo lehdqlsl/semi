@@ -233,22 +233,123 @@ public class JoinDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
-	//limit-date update
-	public int limitDateUpdate(int days, String writer){
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		try{
-			con=DBCPBean.getConn();
-			String sql="update members set stop=1, limit_date=sysdate+? where m_nick=?";
-			pstmt=con.prepareStatement(sql);
+
+	// 제재 회원 정보 출력-페이징
+	public ArrayList<JoinVo> memberlimitlist(int startRow, int endRow) {
+		String sql = "SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM(SELECT * FROM MEMBERS WHERE STOP=1 ORDER BY NUM DESC) AA) WHERE RNUM>=? AND RNUM<=?";
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs = pstmt.executeQuery();
+			ArrayList<JoinVo> list = new ArrayList<>();
+			while (rs.next()) {
+				JoinVo jv = new JoinVo(rs.getInt("num"), rs.getString("id"), rs.getString("u_pw"),
+						rs.getString("m_nick"), rs.getString("m_mail"), rs.getString("m_orgfilename"),
+						rs.getString("m_savefilename"), rs.getString("grade"), rs.getInt("exp"), rs.getDate("reg_date"),
+						rs.getInt("stop"), rs.getDate("limit_date"));
+				list.add(jv);
+			}
+			return list;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+
+	// 제재 회원의 수 구하기
+	public int getLimitMemCount() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select NVL(count(num),0) cnt from members where stop=1";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int cnt = rs.getInt(1);
+			return cnt;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+
+	// limit-date update
+	public int limitDateUpdate(int days, String writer) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "update members set stop=1, limit_date=sysdate+? where m_nick=?";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, days);
 			pstmt.setString(2, writer);
 			return pstmt.executeUpdate();
-		}catch(SQLException se){
+		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
-		}finally{
+		} finally {
 			DBCPBean.close(con, pstmt, null);
+		}
+	}
+
+	// remove limit-date update
+	public int removeLimitDateUpdate(String writer) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "update members set stop=0, limit_date=sysdate-1 where m_nick=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, writer);
+			return pstmt.executeUpdate();
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			DBCPBean.close(con, pstmt, null);
+		}
+	}
+
+	// 글쓰기 제재
+	public int limitChk(String m_nick) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select trunc((limit_date)-sysdate,0) cnt, stop from members where m_nick=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_nick);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				int cnt = rs.getInt("cnt");
+				int stop = rs.getInt("stop");
+				if (stop == 1) {
+					return 1;
+				} else if (stop == 0 && cnt < 0) {
+					return 2;
+				} else if (stop == 0 && cnt > 0) {
+					return 3;
+				}
+			}
+			return -1;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
 		}
 	}
 }

@@ -6,11 +6,45 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	var xhr = null;
+	function limitCheck() {
+		xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = callback;
+		xhr
+				.open(
+						'get',
+						"/semi_team1/board/limitpage.jsp?writer=${sessionScope.m_nick }",
+						true);
+		xhr.send();
+		console.log("${sessionScope.m_nick }");
+	}
+	function callback() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var data = xhr.responseXML;
+			var limitchk = data.getElementsByTagName("limitChk")[0].firstChild.nodeValue;
+			var limitdays = data.getElementsByTagName("cnt")[0].firstChild.nodeValue;
+			var limitdate = data.getElementsByTagName("limit_date")[0].firstChild.nodeValue;
+			console.log("callback" + limitchk + "/" + limitdays);
+			if (limitchk == 1) {
+				alert("제재처리로 글을 작성할 수 없습니다. [ " + limitdate + " ] 이후부터 작성가능");
+			} else if (limitchk == 2) {
+				alert("신규회원 글작성 제한기간입니다. [ " + limitdate + " ] 이후부터 작성가능");
+			} else if (limitchk == 3) {
+				console.log("확인");
+				location.href = "/semi_team1/write?s_num=${s_num}";
+			}
+		}
+	}
+</script>
 </head>
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
+
+
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
+
 			<table class="table table-bordered">
 				<thead>
 					<tr>
@@ -39,7 +73,8 @@
 			</table>
 			<c:if test="${!empty sessionScope.m_nick}">
 				<input class="btn btn-sm btn-success" type="button" value="글쓰기"
-					onclick="location.href = '/semi_team1/write?s_num=${s_num}';">
+					onclick="limitCheck()">
+				<%-- <input class="btn btn-sm btn-success" type="button" value="글쓰기" onclick="location.href = '/semi_team1/write?s_num=${s_num}';">--%>
 				<br>
 				<br>
 			</c:if>

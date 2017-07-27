@@ -9,22 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.team1.dao.JoinDao;
+import com.team1.dao.BoardDao;
 
-@WebServlet("/limit/day")
-public class LimitUpdateController extends HttpServlet{
+@WebServlet("/board/blind")
+public class BlindUpdateController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		int days=Integer.parseInt(request.getParameter("days"));
-		String m_nick=request.getParameter("m_nick");
+		int boardnum=Integer.parseInt(request.getParameter("boardnum"));
 		
-		JoinDao dao=new JoinDao();
-		int n=dao.limitDateUpdate(days, m_nick);
+		BoardDao dao=new BoardDao();
+		int n=dao.blindUpdate(boardnum);
 		
 		if(n>0){
-			request.getRequestDispatcher("/member/list").forward(request, response);
+			request.getRequestDispatcher("/report/list").forward(request,response);
 		}else{
 			request.setAttribute("result", "fail");
 			RequestDispatcher rd=request.getRequestDispatcher("경로없음");

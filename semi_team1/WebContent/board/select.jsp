@@ -13,13 +13,48 @@
 			alert("먼저 로그인을 하셔야합니다.\n로그인페이지로 이동 하시겠습니까?");
 			document.location.href="index.jsp?page=login/signin.jsp";
 		}
+		
+		//로그인 된 후
+		
+		
 	}
+	
+	
+	function callback(){
+		
+		
+	}
+	
+	function textlen(){
+		var div = document.getElementById("len");
+		var text = document.getElementById("content").value;
+		if(text.byteLength()>=500){
+			 alert("더 이상 글을 작성할 수 없습니다.");
+		}else{
+			var html = text.byteLength()+"/500";
+			div.innerHTML = html;	
+		}
+	}
+	
+	String.prototype.byteLength = function() {
+	    var l= 0;
+	     
+	    for(var idx=0; idx < this.length; idx++) {
+	        var c = escape(this.charAt(idx));
+	         
+	        if( c.length==1 ) l ++;
+	        else if( c.indexOf("%u")!=-1 ) l += 3;
+	        else if( c.indexOf("%")!=-1 ) l += c.length/3;
+	    }
+	     
+	    return l;
+	};
+
 </script>
 </head>
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-		<div
-			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
+		<div style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
 			<table class="table table-bordered">
 				<thead>
 					<tr>
@@ -68,7 +103,8 @@
 									<a href="회원정보조회페이지">${vo.nick }</a>
 								</div>
 							</td>
-							<td style="width: 300px;">${vo.content }</td>
+							<td width="600"
+								style="word-break: break-all; word-wrap: break-word;">${vo.content }</td>
 							<td>${vo.reg_date }</td>
 
 							<!--  삭제/추천 버튼 한가지 폼으로 코딩?? -->
@@ -129,19 +165,25 @@
 		[▷]
 	</c:otherwise>
 				</c:choose>
+<<<<<<< HEAD
 
+=======
+				<!-- 글쓰기 -->
+>>>>>>> branch 'master' of https://github.com/lehdqlsl/semi
 				<br> <br>
 				<form method="post" action="/semi_team1/reply/insert">
 					<div id="input" style="margin: auto; width: 1000px; height: 100px;">
 						<input type="hidden" name="b_num" value="${requestScope.b_num }">
 						<div>
-							<textarea rows="4" cols="80" name="content"
+							<textarea rows="4" cols="80" name="content" id="content"
 								placeholder="댓글 작성 시 타인에 대한 배려와 책임을 담아주세요." style="width: 90%"
-								onclick="login('<%=session.getAttribute("m_nick")%>')"></textarea>
+								onclick="login('<%=session.getAttribute("m_nick")%>')"
+								onkeyup="textlen()"></textarea>
 							<button type="submit" class="btn btn-lg btn-success"
 								style="float: right; height: 88px; width: 10%">등록</button>
 						</div>
 					</div>
+					<div id="len"></div>
 				</form>
 			</div>
 		</div>

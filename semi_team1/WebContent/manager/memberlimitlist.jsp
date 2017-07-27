@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -7,26 +7,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	function inputLimitDays(nick) {
-		var days;
-		var m_nick = nick;
-		console.log(m_nick);
-		days = prompt("제재 일수를 입력하세요");
-		if (days >= -1 && days <= 100) {
-			var flag = confirm("제재하시겠습니까?");
-			if (flag) {
-				location.href = "/semi_team1/limit/day?days=" + days
-						+ "&m_nick=" + m_nick;
-			}
-		} else {
-			alert("1부터 100사이의 숫자만 입력하세요");
-			//return;
+	function removeLimitDays(nick){
+		var m_nick=nick;
+		var flag=confirm("제재를 해제하시겠습니까?");
+		if(flag){
+			location.href="/semi_team1/remove/member/limit?m_nick=" + m_nick;
 		}
 	}
 </script>
 </head>
 <body>
-	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
+<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
 			<table class="table table-bordered">
 				<tr>
@@ -37,8 +28,7 @@
 					<td>회원등급</td>
 					<td>회원경험치</td>
 					<td>가입날짜</td>
-					<td>상태</td>
-					<td>제재</td>
+					<td>제재 해제</td>
 				</tr>
 				<c:forEach var="vo" items="${requestScope.list }">
 					<tr>
@@ -49,16 +39,7 @@
 						<td>${vo.grade }</td>
 						<td>${vo.exp }</td>
 						<td>${vo.reg_date }</td>
-						<c:choose>
-							<c:when test="${vo.stop==0 }">
-								<td>정상</td>
-							</c:when>
-							<c:otherwise>
-								<td>정지</td>
-							</c:otherwise>
-						</c:choose>
-						<td><button type="button" class="btn btn-xs btn-success"
-								onclick="inputLimitDays('${vo.m_nick }')">정지</button></td>
+						<td><button type="button" class="btn btn-xs btn-success" onclick="removeLimitDays('${vo.m_nick }')">해제</button></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -68,7 +49,7 @@
 				<!-- 이전 -->
 				<c:choose>
 					<c:when test="${startPage>5 }">
-						<a href="/semi_team1/member/list?pageNum=${startPage-1 }">[이전]</a>
+						<a href="/semi_team1/member/limit/list?pageNum=${startPage-1 }">[이전]</a>
 					</c:when>
 					<c:otherwise>
 			[ ◁ ]
@@ -78,11 +59,11 @@
 				<c:forEach var="i" begin="${startPage }" end="${endPage }">
 					<c:choose>
 						<c:when test="${i==pageNum }">
-							<a href="/semi_team1/member/list?pageNum=${i }"><span
+							<a href="/semi_team1/member/limit/list?pageNum=${i }"><span
 								style="color: blue">[${i }]</span></a>
 						</c:when>
 						<c:otherwise>
-							<a href="/semi_team1/member/list?pageNum=${i }"><span
+							<a href="/semi_team1/member/limit/list?pageNum=${i }"><span
 								style="color: #aaa">[${i }]</span></a>
 						</c:otherwise>
 					</c:choose>
@@ -90,7 +71,7 @@
 				<!--  다음 -->
 				<c:choose>
 					<c:when test="${endPage<pageCount }">
-						<a href="/board/member/list?pageNum=${endPage+1 }">[다음]</a>
+						<a href="/board/member/limit/list?pageNum=${endPage+1 }">[다음]</a>
 					</c:when>
 					<c:otherwise>
 			[ ▷ ]
