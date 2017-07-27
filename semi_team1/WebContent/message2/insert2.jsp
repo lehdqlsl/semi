@@ -24,9 +24,11 @@ function callnick() {
 		var nickcheckbtn = document.getElementById("nickcheckbtn");
 		var data = xhr1.responseText;
 		var json = eval('(' + data + ')');
+		var div=document.getElementById("result");
 		if (json.check == true) {
 			//a.m_nick.readOnly=true;
 			nickcheckbtn.disabled=true;
+			div.innerHTML="닉네임이 확인되었습니다.";
 		} else {
 			alert("존재하지 않는 닉네임입니다.");
 		}
@@ -50,6 +52,8 @@ function validate() {
 function onclickreset() {
 	var nickcheckbtn = document.getElementById("nickcheckbtn");
 	nickcheckbtn.disabled = false;
+	var div=document.getElementById("result");
+	div.innerHTML="";
 }
 </script>
 
@@ -57,8 +61,11 @@ function onclickreset() {
 <body>
 	<%
 		request.setCharacterEncoding("utf-8");
-		int num = Integer.parseInt(request.getParameter("num"));
+		int num = (int)session.getAttribute("num");
 		String sender = request.getParameter("sender");
+		if(sender==null){
+			sender="";
+		}
 		String receiver = request.getParameter("receiver");
 		String content = request.getParameter("content");
 	%>
@@ -70,20 +77,23 @@ function onclickreset() {
 		<input type="hidden" value="<%=request.getHeader("referer") %>" name="prev">
 		<table class="table table-bordered" style="width: 500px;">
 			<tr>
-				<td>받는사람</td>
-				<td><input type="text" name="receiver" id="m_nick">
+				<td style="width: 75px;">받는사람</td>
+				<td style="width: 200px;"><input type="text" name="receiver" id="m_nick" style="width: 100px;" value="<%=sender%>">
 				<input type="button" id="nickcheckbtn" value="대상체크" onclick="nickcheck()" class="btn btn-sm btn-success">
+				</td>
+				<td style="width: 225px;">
+				<div id="result" style="color: red"></div>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea cols="75" rows="20" name="content" style="resize: none;"></textarea></td>
+				<td colspan="3"><textarea cols="75" rows="20" name="content" style="resize: none;"></textarea></td>
 			</tr>
 
 			<tr>
 				<td colspan="2" align="center">
 				<input class="btn btn-success" type="submit" value="보내기" onclick="return validate()"> 
 				<input class="btn btn-success" type="button" value="목록"
-				onclick="location.href = '/semi_team1/sendlist';">
+				onclick="location.href = '/semi_team1/sendlist2';">
 				<input class="btn btn-success" type="reset" value="다시입력" onclick="onclickreset()">
 				</td>
 			</tr>
