@@ -49,8 +49,6 @@ function validate() {
 }	
 	
 </script>
-
-
 </head>
 <body>
 
@@ -110,7 +108,9 @@ function validate() {
 		<ul class="nav nav-sidebar">
 		<li><a href="">프로필 수정</a></li>
 		<li><a href="/semi_team1/index.jsp?page=profile/userupdate.jsp?num=<%=num %>">개인정보 수정</a></li>
-		<li><a href="">쪽지함</a></li>
+		<li><a href="/semi_team1/recvlist2">받은 쪽지함</a></li>
+		<li><a href="/semi_team1/sendlist2">보낸 쪽지함</a></li>
+		<li><a href="/semi_team1/index.jsp?page=message2/insert2.jsp?num=<%=num %>">쪽지보내기</a></li>
 		</ul>
 	</div>
 	
@@ -159,7 +159,7 @@ function validate() {
 		<input type="button" id="nickcheckbtn"	value="중복확인" onclick="nickcheck()" class="btn btn-sm btn-success"><br><br> 
 		<p>닉네임 설정 안내</p>
 		<textarea cols="100" rows="5" name="notice" readonly="readonly" style="resize: none;">
-		16자까지, 닉네임 앞뒤로 공백 불가, 단어 사이 공백 1회 허용
+		10자까지, 닉네임 앞뒤로 공백 불가, 단어 사이 공백 1회 허용
 		공백 문자 & 보안상 문제되는 특수문자는 발견시 제외처리
 		어법에 맞지 않는 한글 사용 금지
 		불량 닉네임(욕설, 불건전 닉네임)은 임의 삭제 혹은 계정 징계 조치

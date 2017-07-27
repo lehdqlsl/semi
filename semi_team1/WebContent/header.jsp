@@ -4,8 +4,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="text/javascript">
+	function test() {
+		console.log("새로고침");
+	}
+</script>
 </head>
-<body>
+<%
+	int a = 10;
+%>
+
+
+<body onload="test()">
 	<nav class="navbar navbar-fixed-top navbar-inverse">
 	<div class="container">
 		<div class="navbar-header">
@@ -52,6 +62,7 @@
 					<c:otherwise>
 						<div class="navbar-form navbar-right" style="margin-top: 0px;">
 							<ul class="nav navbar-nav">
+								<li><a><%=a++%></a></li>
 								<li><a>${sessionScope.m_nick } 님</a></li>
 								<li><a
 									href="/semi_team1/index.jsp?page=profile/userinfo.jsp?num=${sessionScope.num }">회원정보</a></li>

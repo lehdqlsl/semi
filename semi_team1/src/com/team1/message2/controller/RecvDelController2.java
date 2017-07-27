@@ -1,4 +1,4 @@
-package com.team1.board.controller;
+package com.team1.message2.controller;
 
 import java.io.IOException;
 
@@ -9,28 +9,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.team1.dao.BoardDao;
 import com.team1.message2.dao.recvDao2;
 import com.team1.vo.Message2Vo;
-import com.team1.vo.boardVo;
 
-@WebServlet("/select")
-public class SelectController extends HttpServlet {
+@WebServlet("/recvdelete2")
+public class RecvDelController2 extends HttpServlet{
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		int num = Integer.parseInt(request.getParameter("num"));
-		BoardDao dao = new BoardDao();
-		boardVo vo = dao.select(num);
-		if (vo != null) {
-			request.setAttribute("vo", vo);
-			request.getRequestDispatcher("/index.jsp?page=/game/gameIndex.jsp&s_page=/board/select.jsp")
-					.forward(request, response);
+		Message2Vo vo = new Message2Vo();
+		vo.setNum(num);
+		recvDao2 dao = new recvDao2();
+		int n = dao.delete(vo);
+
+		if (n > 0) {
+			response.sendRedirect("/semi_team1/recvlist2");
 		} else {
 			request.setAttribute("result", "fail");
 			RequestDispatcher rd = request.getRequestDispatcher("/join/result.jsp");
 			rd.forward(request, response);
 		}
+
+	
 	}
 }
-

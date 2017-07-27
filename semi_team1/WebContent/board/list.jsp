@@ -73,35 +73,39 @@
 				<c:choose>
 					<c:when test="${startPageNum>20 }">
 						<a
-							href="/semi_team1/list?s_num=${s_num }&pageNum=${startPageNum-1 }&search=${param.search}&keyword=${param.keyword}">[이전]</a>
+							href="/semi_team1/list?s_num=${s_num }&pageNum=${startPageNum-1 }&search=${param.search}&keyword=${param.keyword}">
+							<input class="btn btn-xs btn-primary" type="submit" value="◁">
+						</a>
 					</c:when>
 					<c:otherwise>
-			[이전]
+			<input class="btn btn-xs btn-primary" type="submit" value="◁">
 		</c:otherwise>
 				</c:choose>
 				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
 					<c:choose>
 						<c:when test="${i==pageNum }">
-							<a
+							<a style="text-decoration: none"
 								href="/semi_team1/list?s_num=${s_num }&pageNum=${i }&search=${param.search}&keyword=${param.keyword}">
-								<span style="color: lime">[${i }]</span>
+								<input class="btn btn-xs btn-link" type="submit" value="${i}">
 							</a>
 						</c:when>
 						<c:otherwise>
-							<a
+							<a style="text-decoration: none"
 								href="/semi_team1/list?s_num=${s_num }&pageNum=${i }&search=${param.search}&keyword=${param.keyword}">
-								<span style="color: blue"> [${i }] </span>
+								<input class="btn btn-xs btn-link" type="submit" value="${i}">
 							</a>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<c:choose>
 					<c:when test="${endPageNum<pageCount }">
-						<a
-							href="/semi_team1/list?s_num=${s_num }&pageNum=${endPageNum+1 }&search=${param.search}&keyword=${param.keyword}">[다음]</a>
+						<a 
+							href="/semi_team1/list?s_num=${s_num }&pageNum=${endPageNum+1 }&search=${param.search}&keyword=${param.keyword}">
+							<input class="btn btn-xs btn-primary" type="submit" value="▷">
+						</a>
 					</c:when>
 					<c:otherwise>
-			[다음]
+			<input class="btn btn-xs btn-primary" type="submit" value="▷">
 		</c:otherwise>
 				</c:choose>
 			</div>
