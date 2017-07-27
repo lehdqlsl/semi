@@ -21,6 +21,12 @@
 			//return;
 		}	
 	}
+	function blindProcess(boardnum){
+		var flag=confirm("블라인드 처리하시겠습니까?");
+		if(flag){
+			location.href = "/semi_team1/board/blind?boardnum="+boardnum;
+		}
+	}
 </script>
 </head>
 <body>
@@ -35,6 +41,7 @@
 					<td>등록일</td>
 					<td>닉네임</td>
 					<td>제재</td>
+					<td>블라인드</td>
 				</tr>
 				<c:forEach var="vo" items="${requestScope.list }">
 					<tr>
@@ -45,6 +52,7 @@
 						<td>${vo.regdate }</td>
 						<td>${vo.writer }</td>
 						<td><button type="button" class="btn btn-xs btn-success"  onclick="inputLimitDays()">정지</button></td>
+						<td><button type="button" class="btn btn-xs btn-success"  onclick="blindProcess(${vo.boardnum})">블라인드</button></td>
 					</tr>
 				</c:forEach>
 			</table>

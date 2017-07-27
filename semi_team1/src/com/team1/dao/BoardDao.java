@@ -23,8 +23,13 @@ public class BoardDao {
 			con = DBCPBean.getConn();
 			if (search.equals("")) {
 				String sql = "select * from ( " + "select a.*, rownum rnum from( "
+						+ "select * from board where s_num=? and blind=0 order by num desc "+ ")a "
+						+ ") where rnum>=? and rnum <=?";
+				/*
+				 * String sql = "select * from ( " + "select a.*, rownum rnum from( "
 						+ "select * from board where s_num=? order by num desc "+ ")a "
 						+ ") where rnum>=? and rnum <=?";
+				 * */
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, s_num);
 				pstmt.setInt(2, startRow);
@@ -272,6 +277,23 @@ public class BoardDao {
 			return -1;
 		} finally {
 			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+	// 글 블라인드 처리
+	public int blindUpdate(int boardnum){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try{
+			con=DBCPBean.getConn();
+			String sql="update board set blind=1 where num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, boardnum);
+			return pstmt.executeUpdate();
+		}catch(SQLException se){
+			System.out.println(se.getMessage());
+			return -1;
+		}finally{
+			DBCPBean.close(con, pstmt, null);
 		}
 	}
 }

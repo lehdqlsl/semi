@@ -251,4 +251,35 @@ public class JoinDao {
 			DBCPBean.close(con, pstmt, null);
 		}
 	}
+	
+	// 글쓰기 제재
+		public int limitChk(String m_nick){
+			Connection con=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			try{
+				con = DBCPBean.getConn();
+				String sql = "select trunc((limit_date)-sysdate,0) cnt, stop from members where m_nick=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, m_nick);
+				rs = pstmt.executeQuery();
+				if(rs.next()){
+					int cnt=rs.getInt("cnt");
+					int stop=rs.getInt("stop");
+					if(stop==1){
+						return 1;
+					}else if(stop==0 && cnt<0){
+						return 2;
+					}else if(stop==0 && cnt>0){
+						return 3;
+					}	
+				}
+				return -1;
+			}catch(SQLException se){
+				System.out.println(se.getMessage());
+				return -1;
+			}finally{
+				DBCPBean.close(con,pstmt,rs);
+			}
+		}
 }
