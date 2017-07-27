@@ -45,7 +45,11 @@
 	function nickCheck(r_num,b_num,nick,sessionNick) {
 		xhr1 = new XMLHttpRequest();
 		xhr1.onreadystatechange = callback1;
-		xhr1.open('get',"/semi_team1/reply/delete?r_num=" + r_num + "&b_num=" + b_num + "&nick=" + nick + "&sessionNick=" + sessionNick,true);
+		xhr1
+				.open(
+						'get',
+						"/semi_team1/reply/delete?r_num=" + r_num + "&b_num=" + b_num + "&nick=" + nick + "&sessionNick=" + sessionNick,
+						true);
 		if(!nick.equals(sessionNick)){
 			alert("댓글 삭제는 작성자만 할 수 있습니다.");
 			return;
@@ -100,7 +104,6 @@
 			else if (c.indexOf("%") != -1)
 				l += c.length / 3;
 		}
-
 		return l;
 	};
 </script>
