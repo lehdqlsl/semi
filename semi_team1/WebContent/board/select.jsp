@@ -45,11 +45,7 @@
 	function nickCheck(r_num,b_num,nick,sessionNick) {
 		xhr1 = new XMLHttpRequest();
 		xhr1.onreadystatechange = callback1;
-		xhr1
-				.open(
-						'get',
-						"/semi_team1/reply/delete?r_num=" + r_num + "&b_num=" + b_num + "&nick=" + nick + "&sessionNick=" + sessionNick,
-						true);
+		xhr1.open('get',"/semi_team1/reply/delete?r_num=" + r_num + "&b_num=" + b_num + "&nick=" + nick + "&sessionNick=" + sessionNick,true);
 		if(!nick.equals(sessionNick)){
 			alert("댓글 삭제는 작성자만 할 수 있습니다.");
 			return;
@@ -129,13 +125,14 @@
 
 			<table align="right">
 				<tr>
-					<td>
-						<c:if test="${(sessionScope.m_nick eq requestScope.vo.writer) || (sessionScope.m_nick eq 'admin')}">
-							<input class="btn btn-success" type="button" value="수정" onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
-							<input class="btn btn-success" type="button" value="삭제" onclick=delete()> 
-						</c:if>
-						<input class="btn btn-success" type="button" value="목록" onclick="javascript:history.back()">
-					</td>
+					<td><c:if
+							test="${(sessionScope.m_nick eq requestScope.vo.writer) || (sessionScope.m_nick eq 'admin')}">
+							<input class="btn btn-success" type="button" value="수정"
+								onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
+							<input class="btn btn-success" type="button" value="삭제"
+								onclick="">
+						</c:if> <input class="btn btn-success" type="button" value="목록"
+						onclick="javascript:history.back()"></td>
 				</tr>
 			</table>
 
