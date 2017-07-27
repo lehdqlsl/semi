@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.team1.db.DBCPBean;
 import com.team1.vo.Message2Vo;
@@ -133,8 +134,8 @@ public class recvDao2 {
 			DBCPBean.close(con, pstmt, null);
 		}
 	}
-	//상태바 신규메시지
-	public int getMsgCount(String m_nick) {
+	//메시지 카운트
+	public int getMsgCount(String receiver) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -142,7 +143,7 @@ public class recvDao2 {
 			con = DBCPBean.getConn();
 			String sql = "select count(*) cnt from message where chk=1 and receiver=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, m_nick);
+			pstmt.setString(1, receiver);
 			rs=pstmt.executeQuery();
 			if(rs.next()){
 				int cnt=rs.getInt("cnt");
@@ -156,5 +157,34 @@ public class recvDao2 {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
+	
+	//메시지 카운트 버전2
+//	public boolean getMsgCount(HashMap<String, String> map){
+//		String receiver=map.get("receiver");
+//		Connection con=null;
+//		PreparedStatement pstmt=null;
+//		ResultSet rs=null;
+//		try{
+//			con = DBCPBean.getConn();
+//			String sql = "select count(*) cnt from message where chk=1 and receiver=?";
+//			pstmt = con.prepareStatement(sql);
+//			pstmt.setString(1, receiver);
+//			rs=pstmt.executeQuery();
+//			if(rs.next()){
+//				return true;
+//			}else{
+//				return false;
+//			}
+//		} catch (SQLException se) {
+//			System.out.println(se.getMessage());
+//			return false;
+//		} finally {
+//			DBCPBean.close(con, pstmt, rs);
+//		}
+//		
+//	}
+	
+	
+	
 	
 }

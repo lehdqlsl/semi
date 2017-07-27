@@ -11,6 +11,8 @@
 
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div style="margin: auto; width: 1000px; height: 1300px;">
+		<h1><span class="label label-primary">보낸쪽지함</span></h1>
+		<br>
 			<table class="table table-bordered">
 				<thead>
 					<tr>

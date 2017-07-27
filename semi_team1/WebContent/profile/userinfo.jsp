@@ -1,3 +1,5 @@
+<%@page import="com.team1.vo.Message2Vo"%>
+<%@page import="com.team1.message2.dao.recvDao2"%>
 <%@page import="com.team1.vo.ProfileVo"%>
 <%@page import="com.team1.dao.UserInfoDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -60,7 +62,12 @@ function validate() {
 			int num = Integer.parseInt(request.getParameter("num"));
 			UserInfoDao dao = new UserInfoDao();
 			ProfileVo vo = dao.select(num);
-		%>
+			
+			String receiver = request.getParameter("receiver");
+			recvDao2 dao1=new recvDao2();
+			int vo1=dao1.getMsgCount(receiver);
+			
+			%>
 		<table class="table table-bordered" width="300px">
 			<tr>
 				<td colspan="2">사용자정보</td>
@@ -109,7 +116,7 @@ function validate() {
 		<ul class="nav nav-sidebar">
 		<li><a href="">프로필 수정</a></li>
 		<li><a href="/semi_team1/index.jsp?page=profile/userupdate.jsp?num=<%=num %>">개인정보 수정</a></li>
-		<li><a href="/semi_team1/recvlist2">받은 쪽지함</a></li>
+		<li><a href="/semi_team1/recvlist2">받은 쪽지함</a><%=vo1 %></li>
 		<li><a href="/semi_team1/sendlist2">보낸 쪽지함</a></li>
 		<li><a href="/semi_team1/index.jsp?page=message2/insert2.jsp?num=<%=num %>">쪽지보내기</a></li>
 		</ul>

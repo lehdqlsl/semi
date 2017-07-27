@@ -27,10 +27,11 @@
 			</table>
 			<table align="right">
 				<tr>
-					<td><input class="btn btn-success" type="button" value="삭제"
-						onclick=delete()> 
+					<td>
+						<input class="btn btn-success" type="button" value="삭제"
+						onclick="location.href = '/semi_team1/senddelete2?num=${vo.num}';"> 
 						<input class="btn btn-success" type="button" value="목록"
-						onclick="location.href = '/semi_team1/list';"></td>
+						onclick="location.href = '/semi_team1/sendlist2';"></td>
 				</tr>
 			</table>
 		</div>
