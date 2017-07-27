@@ -54,7 +54,8 @@
 </head>
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-		<div style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
+		<div
+			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
 			<table class="table table-bordered">
 				<thead>
 					<tr>
@@ -68,17 +69,18 @@
 					<td>${requestScope.vo.content }</td>
 				</tr>
 			</table>
-			
+
 			<table align="right">
 				<tr>
-					<td><input class="btn btn-success" type="button" value="수정"
-						onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
-						<input class="btn btn-success" type="button" value="삭제"
-						onclick=delete()> <input class="btn btn-success"
-						type="button" value="글쓰기"
-						onclick="location.href = 'index.jsp?page=board/insert.jsp';">
-						<input class="btn btn-success" type="button" value="목록"
-						onclick="javascript:history.back()"></td>
+					<td>
+						[${sessionScope.m_nick}]
+						[${requestScope.vo.writer}]
+						<c:if test="'${sessionScope.m_nick}' eq '${requestScope.vo.writer}'">
+							<input class="btn btn-success" type="button" value="수정" onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
+							<input class="btn btn-success" type="button" value="삭제" onclick=delete()> 
+						</c:if>
+						<input class="btn btn-success" type="button" value="목록" onclick="javascript:history.back()">
+					</td>
 				</tr>
 			</table>
 
@@ -165,11 +167,9 @@
 		[▷]
 	</c:otherwise>
 				</c:choose>
-<<<<<<< HEAD
 
-=======
 				<!-- 글쓰기 -->
->>>>>>> branch 'master' of https://github.com/lehdqlsl/semi
+
 				<br> <br>
 				<form method="post" action="/semi_team1/reply/insert">
 					<div id="input" style="margin: auto; width: 1000px; height: 100px;">

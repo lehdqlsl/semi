@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript"
-	src="/editor/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+	src="/semi_team1/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
