@@ -35,7 +35,6 @@
 					<td>닉네임</td>
 					<td>이메일</td>
 					<td>회원등급</td>
-					<td>회원경험치</td>
 					<td>가입날짜</td>
 					<td>상태</td>
 					<td>제재</td>
@@ -47,7 +46,6 @@
 						<td>${vo.m_nick }</td>
 						<td>${vo.m_mail }</td>
 						<td>${vo.grade }</td>
-						<td>${vo.exp }</td>
 						<td>${vo.reg_date }</td>
 						<c:choose>
 							<c:when test="${vo.stop==0 }">
