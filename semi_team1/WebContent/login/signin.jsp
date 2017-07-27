@@ -32,10 +32,12 @@
 			}
 		}
 	}
+	String referrer = request.getHeader("referer");
 %>
 
 	<div class="container" style="width: 330px; height: 236px">
 		<form method="post" action="/semi_team1/login.do?cmd=login"  class="form-signin">
+			<input type="hidden" value="<%=referrer %>" name="prev">
 			<h2 class="form-signin-heading">로그인</h2>
 			<label for="id" class="sr-only">아이디</label> 
 			<input type="text" id="id" name="id" value="<%=id%>" class="form-control" placeholder="아이디" required autofocus> <br>

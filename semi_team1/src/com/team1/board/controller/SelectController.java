@@ -20,12 +20,10 @@ public class SelectController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String spageNum = request.getParameter("pageNum");
 		int b_num = Integer.parseInt(request.getParameter("num"));
 		BoardDao dao = new BoardDao();
 		boardVo vo = dao.select(b_num);
-
-		// 댓글 가져오기
-		String spageNum = request.getParameter("r_pageNum");
 
 		int pageNum = 1;
 		if (spageNum != null) {
@@ -51,6 +49,7 @@ public class SelectController extends HttpServlet {
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("list", list);
 		request.setAttribute("cntTot", cntTot);
+		request.setAttribute("b_num", request.getParameter("num"));
 		///////////////////
 
 		if (vo != null) {
