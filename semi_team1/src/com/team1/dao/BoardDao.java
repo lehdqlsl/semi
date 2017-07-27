@@ -296,4 +296,38 @@ public class BoardDao {
 			DBCPBean.close(con, pstmt, null);
 		}
 	}
+	
+	public int hitupdate(int boardnum){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try{
+			con=DBCPBean.getConn();
+			String sql="update board set hits=hits+1 where num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, boardnum);
+			return pstmt.executeUpdate();
+		}catch(SQLException se){
+			System.out.println(se.getMessage());
+			return -1;
+		}finally{
+			DBCPBean.close(con, pstmt, null);
+		}
+	}
+	
+	public int upupdate(int boardnum){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try{
+			con=DBCPBean.getConn();
+			String sql="update board set up=up+1 where num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, boardnum);
+			return pstmt.executeUpdate();
+		}catch(SQLException se){
+			System.out.println(se.getMessage());
+			return -1;
+		}finally{
+			DBCPBean.close(con, pstmt, null);
+		}
+	}
 }

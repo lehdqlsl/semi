@@ -19,7 +19,7 @@ public class JoinDao {
 		PreparedStatement pstmt = null;
 		try {
 			con = DBCPBean.getConn();
-			String sql = "insert into members values(SEQ_members_num.nextval,?,?,?,?,'test.jpg','test.jpg','1',0,sysdate,0,sysdate+7)";
+			String sql = "insert into members values(SEQ_members_num.nextval,?,?,?,?,'test.jpg','test.jpg','unrank',sysdate,0,sysdate+7)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getId());
 			pstmt.setString(2, vo.getU_pw());
@@ -49,12 +49,6 @@ public class JoinDao {
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				// vo=new JoinVo(rs.getInt("num"), rs.getString("id"),
-				// rs.getString("u_pw"), rs.getString("m_nick"),
-				// rs.getString("m_mail"), rs.getString("m_orgfilename"),
-				// rs.getString("m_savefilename"), rs.getString("grade"),
-				// rs.getInt("exp"), rs.getDate("reg_date"), rs.getInt("stop"),
-				// rs.getDate("limit_date"));
 				using = true;
 				return using;
 			} else {
@@ -170,7 +164,7 @@ public class JoinDao {
 			while (rs.next()) {
 				JoinVo jv = new JoinVo(rs.getInt("num"), rs.getString("id"), rs.getString("u_pw"),
 						rs.getString("m_nick"), rs.getString("m_mail"), rs.getString("m_orgfilename"),
-						rs.getString("m_savefilename"), rs.getString("grade"), rs.getInt("exp"), rs.getDate("reg_date"),
+						rs.getString("m_savefilename"), rs.getString("grade"),rs.getDate("reg_date"),
 						rs.getInt("stop"), rs.getDate("limit_date"));
 				list.add(jv);
 			}
@@ -221,7 +215,7 @@ public class JoinDao {
 			while (rs.next()) {
 				JoinVo jv = new JoinVo(rs.getInt("num"), rs.getString("id"), rs.getString("u_pw"),
 						rs.getString("m_nick"), rs.getString("m_mail"), rs.getString("m_orgfilename"),
-						rs.getString("m_savefilename"), rs.getString("grade"), rs.getInt("exp"), rs.getDate("reg_date"),
+						rs.getString("m_savefilename"), rs.getString("grade"), rs.getDate("reg_date"),
 						rs.getInt("stop"), rs.getDate("limit_date"));
 				list.add(jv);
 			}
@@ -251,7 +245,7 @@ public class JoinDao {
 			while (rs.next()) {
 				JoinVo jv = new JoinVo(rs.getInt("num"), rs.getString("id"), rs.getString("u_pw"),
 						rs.getString("m_nick"), rs.getString("m_mail"), rs.getString("m_orgfilename"),
-						rs.getString("m_savefilename"), rs.getString("grade"), rs.getInt("exp"), rs.getDate("reg_date"),
+						rs.getString("m_savefilename"), rs.getString("grade"), rs.getDate("reg_date"),
 						rs.getInt("stop"), rs.getDate("limit_date"));
 				list.add(jv);
 			}

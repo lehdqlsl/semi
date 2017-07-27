@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+
 	function login(nick){
 		
 		if(nick == 'null'){
@@ -31,7 +32,7 @@
 		if(text.byteLength()>=500){
 			 alert("더 이상 글을 작성할 수 없습니다.");
 		}else{
-			var html = text.byteLength()+"/500";
+			var html = text.byteLength()+"/500 byte";
 			div.innerHTML = html;	
 		}
 	}
@@ -181,7 +182,7 @@
 								style="float: right; height: 88px; width: 10%">등록</button>
 						</div>
 					</div>
-					<div id="len"></div>
+					<div id="len">0/500 byte</div>
 				</form>
 			</div>
 		</div>

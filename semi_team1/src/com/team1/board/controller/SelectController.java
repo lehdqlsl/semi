@@ -24,7 +24,7 @@ public class SelectController extends HttpServlet {
 		int b_num = Integer.parseInt(request.getParameter("num"));
 		BoardDao dao = new BoardDao();
 		boardVo vo = dao.select(b_num);
-
+		dao.hitupdate(b_num);
 		int pageNum = 1;
 		if (spageNum != null) {
 			pageNum = Integer.parseInt(spageNum);

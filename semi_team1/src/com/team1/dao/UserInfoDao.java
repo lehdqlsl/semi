@@ -31,7 +31,6 @@ public class UserInfoDao {
 						rs.getString("m_orgfilename"), 
 						rs.getString("m_savefilename"),
 						rs.getString("grade"), 
-						rs.getInt("exp"), 
 						rs.getDate("reg_date"), 
 						rs.getInt("stop"),
 						rs.getDate("limit_date")
