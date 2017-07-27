@@ -94,16 +94,17 @@ public class ReplyDao {
 			DBCPBean.close(con, pstmt, null);
 		}
 	}
-
-	public int delete(int r_num, int b_num) {
+	// ¥Ò±€ ªË¡¶
+	public int delete(int r_num, int b_num, String nick) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = DBCPBean.getConn();
-			String sql = "delete from reply where r_num=? and b_num=?";
+			String sql = "delete from reply where r_num=? and b_num=? and nick=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, r_num);
 			pstmt.setInt(2, b_num);
+			pstmt.setString(3, nick);
 			return pstmt.executeUpdate();
 		} catch (SQLException se) {
 			System.out.println(se.getMessage());

@@ -7,50 +7,106 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-
-	function login(nick){
-		
-		if(nick == 'null'){
+	var xhr = null;
+	// 로그인 체크 / 제재체크
+	function login(nick) {
+		if (nick == 'null') {
 			alert("먼저 로그인을 하셔야합니다.\n로그인페이지로 이동 하시겠습니까?");
-			document.location.href="index.jsp?page=login/signin.jsp";
+			document.location.href = "index.jsp?page=login/signin.jsp";
 		}
-		
-		//로그인 된 후
-		
+		//로그인 된 후	
+		xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = callback;
+		xhr.open(
+						'get',
+						"/semi_team1/board/replylimitpage.jsp?writer=${sessionScope.m_nick }",
+						true);
+		xhr.send();
 		
 	}
-	
-	
-	function callback(){
-		
-		
+	function callback() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var submitbtn = document.getElementById("submitbtn");
+			var content = document.getElementById("content");
+			var data = xhr.responseXML;
+			var limitchk = data.getElementsByTagName("limitChk")[0].firstChild.nodeValue;
+			var limitdate = data.getElementsByTagName("limit_date")[0].firstChild.nodeValue;
+			console.log("callback" + limitchk);
+			if (limitchk == 1) {
+				alert("제재처리로 댓글을 작성할 수 없습니다. [ " + limitdate + " ] 이후부터 작성가능");
+				submitbtn.disabled = true;
+				content.disabled = true;
+			}
+		}
 	}
-	
-	function textlen(){
+	// 댓글 삭제 체크
+	var xhr1 = null;
+	var bNum=0;
+	function nickCheck(r_num,b_num,nick,sessionNick) {
+		xhr1 = new XMLHttpRequest();
+		xhr1.onreadystatechange = callback1;
+		xhr1
+				.open(
+						'get',
+						"/semi_team1/reply/delete?r_num=" + r_num + "&b_num=" + b_num + "&nick=" + nick + "&sessionNick=" + sessionNick,
+						true);
+		if(!nick.equals(sessionNick)){
+			alert("댓글 삭제는 작성자만 할 수 있습니다.");
+			return;
+		}else{
+			bNum=b_num;
+			xhr1.send();	
+		}
+
+	}
+	function callback1() {
+		if (xhr1.readyState == 4 && xhr1.status == 200) {
+			var data = xhr1.responseXML;
+			var flag = data.getElementsByTagName("flag")[0].firstChild.nodeValue;
+			if(flag==0){
+				alert("댓글이 삭제되었습니다.");
+				location.href="/semi_team1/select?num="+bNum;
+			}
+			<%--
+			console.log(flag);
+			if (flag == 1) {
+				alert("댓글 삭제는 작성자만 할 수 있습니다.");
+			}else{
+				if(confirm("댓글을 삭제하시겠습니까?")){
+					alert("댓글이 삭제되었습니다.");
+					location.href="/semi_team1/select?num="+bNum;
+				}
+			}
+		}--%>
+	}
+	// 댓글 글자수 표시
+	function textlen() {
 		var div = document.getElementById("len");
 		var text = document.getElementById("content").value;
-		if(text.byteLength()>=500){
-			 alert("더 이상 글을 작성할 수 없습니다.");
-		}else{
-			var html = text.byteLength()+"/500 byte";
-			div.innerHTML = html;	
+		if (text.byteLength() >= 500) {
+			alert("더 이상 글을 작성할 수 없습니다.");
+		} else {
+			var html = text.byteLength() + "/500";
+			div.innerHTML = html;
 		}
 	}
-	
-	String.prototype.byteLength = function() {
-	    var l= 0;
-	     
-	    for(var idx=0; idx < this.length; idx++) {
-	        var c = escape(this.charAt(idx));
-	         
-	        if( c.length==1 ) l ++;
-	        else if( c.indexOf("%u")!=-1 ) l += 3;
-	        else if( c.indexOf("%")!=-1 ) l += c.length/3;
-	    }
-	     
-	    return l;
-	};
 
+	String.prototype.byteLength = function() {
+		var l = 0;
+
+		for (var idx = 0; idx < this.length; idx++) {
+			var c = escape(this.charAt(idx));
+
+			if (c.length == 1)
+				l++;
+			else if (c.indexOf("%u") != -1)
+				l += 3;
+			else if (c.indexOf("%") != -1)
+				l += c.length / 3;
+		}
+
+		return l;
+	};
 </script>
 </head>
 <body>
