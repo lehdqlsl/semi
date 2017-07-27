@@ -7,54 +7,112 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	function login(nick){
-		
-		if(nick == 'null'){
+	var xhr = null;
+	// 로그인 체크 / 제재체크
+	function login(nick) {
+		if (nick == 'null') {
 			alert("먼저 로그인을 하셔야합니다.\n로그인페이지로 이동 하시겠습니까?");
-			document.location.href="index.jsp?page=login/signin.jsp";
+			document.location.href = "index.jsp?page=login/signin.jsp";
 		}
-		
-		//로그인 된 후
-		
+		//로그인 된 후	
+		xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = callback;
+		xhr.open(
+						'get',
+						"/semi_team1/board/replylimitpage.jsp?writer=${sessionScope.m_nick }",
+						true);
+		xhr.send();
 		
 	}
-	
-	
-	function callback(){
-		
-		
+	function callback() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var submitbtn = document.getElementById("submitbtn");
+			var content = document.getElementById("content");
+			var data = xhr.responseXML;
+			var limitchk = data.getElementsByTagName("limitChk")[0].firstChild.nodeValue;
+			var limitdate = data.getElementsByTagName("limit_date")[0].firstChild.nodeValue;
+			console.log("callback" + limitchk);
+			if (limitchk == 1) {
+				alert("제재처리로 댓글을 작성할 수 없습니다. [ " + limitdate + " ] 이후부터 작성가능");
+				submitbtn.disabled = true;
+				content.disabled = true;
+			}
+		}
 	}
-	
-	function textlen(){
+	// 댓글 삭제 체크
+	var xhr1 = null;
+	var bNum=0;
+	function nickCheck(r_num,b_num,nick,sessionNick) {
+		xhr1 = new XMLHttpRequest();
+		xhr1.onreadystatechange = callback1;
+		xhr1
+				.open(
+						'get',
+						"/semi_team1/reply/delete?r_num=" + r_num + "&b_num=" + b_num + "&nick=" + nick + "&sessionNick=" + sessionNick,
+						true);
+		if(!nick.equals(sessionNick)){
+			alert("댓글 삭제는 작성자만 할 수 있습니다.");
+			return;
+		}else{
+			bNum=b_num;
+			xhr1.send();	
+		}
+
+	}
+	function callback1() {
+		if (xhr1.readyState == 4 && xhr1.status == 200) {
+			var data = xhr1.responseXML;
+			var flag = data.getElementsByTagName("flag")[0].firstChild.nodeValue;
+			if(flag==0){
+				alert("댓글이 삭제되었습니다.");
+				location.href="/semi_team1/select?num="+bNum;
+			}
+			<%--
+			console.log(flag);
+			if (flag == 1) {
+				alert("댓글 삭제는 작성자만 할 수 있습니다.");
+			}else{
+				if(confirm("댓글을 삭제하시겠습니까?")){
+					alert("댓글이 삭제되었습니다.");
+					location.href="/semi_team1/select?num="+bNum;
+				}
+			}
+		}--%>
+	}
+	// 댓글 글자수 표시
+	function textlen() {
 		var div = document.getElementById("len");
 		var text = document.getElementById("content").value;
-		if(text.byteLength()>=500){
-			 alert("더 이상 글을 작성할 수 없습니다.");
-		}else{
-			var html = text.byteLength()+"/500";
-			div.innerHTML = html;	
+		if (text.byteLength() >= 500) {
+			alert("더 이상 글을 작성할 수 없습니다.");
+		} else {
+			var html = text.byteLength() + "/500";
+			div.innerHTML = html;
 		}
 	}
-	
-	String.prototype.byteLength = function() {
-	    var l= 0;
-	     
-	    for(var idx=0; idx < this.length; idx++) {
-	        var c = escape(this.charAt(idx));
-	         
-	        if( c.length==1 ) l ++;
-	        else if( c.indexOf("%u")!=-1 ) l += 3;
-	        else if( c.indexOf("%")!=-1 ) l += c.length/3;
-	    }
-	     
-	    return l;
-	};
 
+	String.prototype.byteLength = function() {
+		var l = 0;
+
+		for (var idx = 0; idx < this.length; idx++) {
+			var c = escape(this.charAt(idx));
+
+			if (c.length == 1)
+				l++;
+			else if (c.indexOf("%u") != -1)
+				l += 3;
+			else if (c.indexOf("%") != -1)
+				l += c.length / 3;
+		}
+
+		return l;
+	};
 </script>
 </head>
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-		<div style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
+		<div
+			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
 			<table class="table table-bordered">
 				<thead>
 					<tr>
@@ -68,14 +126,13 @@
 					<td>${requestScope.vo.content }</td>
 				</tr>
 			</table>
-			
+
 			<table align="right">
 				<tr>
 					<td><input class="btn btn-success" type="button" value="수정"
 						onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
-						<input class="btn btn-success" type="button" value="삭제"
-						onclick=delete()> <input class="btn btn-success"
-						type="button" value="글쓰기"
+						<input class="btn btn-success" type="button" value="삭제" onclick="">
+						<input class="btn btn-success" type="button" value="글쓰기"
 						onclick="location.href = 'index.jsp?page=board/insert.jsp';">
 						<input class="btn btn-success" type="button" value="목록"
 						onclick="javascript:history.back()"></td>
@@ -107,7 +164,6 @@
 								style="word-break: break-all; word-wrap: break-word;">${vo.content }</td>
 							<td>${vo.reg_date }</td>
 
-							<!--  삭제/추천 버튼 한가지 폼으로 코딩?? -->
 							<form method="post" action="/semi_team1/reply.recomm">
 								<input type="hidden" name="r_num" value=${vo.r_num }> <input
 									type="hidden" name="b_num" value="${param.b_num}">
@@ -117,13 +173,17 @@
 										</button>
 									</div></td>
 							</form>
-							<form method="post" action="/semi_team1/reply.delete">
+							<%-- <form method="post" action="/semi_team1/reply/delete">
 								<input type="hidden" name="r_num" value=${vo.r_num }> <input
-									type="hidden" name="b_num" value="${param.b_num}">
+									type="hidden" name="b_num" value="${vo.b_num}">
+									<input
+									type="hidden" name="nick" value="${vo.nick}">
+									<input
+									type="hidden" name="sessionNick" value="${sessionScope.m_nick}">--%>
 								<td><div id="delete">
-										<button type="submit" class="btn btn-xs btn-success">삭제</button>
+										<button type="button" class="btn btn-xs btn-success" onclick="nickCheck('${vo.r_num }','${vo.b_num}','${vo.nick}','${sessionScope.m_nick}')">삭제</button>
 									</div></td>
-							</form>
+							<%-- </form> --%>
 
 						</tr>
 					</c:forEach>
@@ -165,11 +225,9 @@
 		[▷]
 	</c:otherwise>
 				</c:choose>
-<<<<<<< HEAD
 
-=======
 				<!-- 글쓰기 -->
->>>>>>> branch 'master' of https://github.com/lehdqlsl/semi
+
 				<br> <br>
 				<form method="post" action="/semi_team1/reply/insert">
 					<div id="input" style="margin: auto; width: 1000px; height: 100px;">
@@ -179,7 +237,8 @@
 								placeholder="댓글 작성 시 타인에 대한 배려와 책임을 담아주세요." style="width: 90%"
 								onclick="login('<%=session.getAttribute("m_nick")%>')"
 								onkeyup="textlen()"></textarea>
-							<button type="submit" class="btn btn-lg btn-success"
+							<button type="submit" id="submitbtn"
+								class="btn btn-lg btn-success"
 								style="float: right; height: 88px; width: 10%">등록</button>
 						</div>
 					</div>
