@@ -27,10 +27,14 @@
 			</table>
 			<table align="right">
 				<tr>
-					<td><input class="btn btn-success" type="button" value="삭제"
+					<td>
+						<input class="btn btn-success" type="button" value="답장"
+						onclick="location.href = '/semi_team1/index.jsp?page=message2/insert2.jsp&sender=${vo.sender}';">
+						<input class="btn btn-success" type="button" value="삭제"
 						onclick=delete()> 
 						<input class="btn btn-success" type="button" value="목록"
-						onclick="location.href = '/semi_team1/list';"></td>
+						onclick="location.href = '/semi_team1/list';">
+					</td>
 				</tr>
 			</table>
 		</div>
