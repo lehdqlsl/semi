@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.team1.dao.ExpDao;
 import com.team1.dao.JoinDao;
 import com.team1.vo.JoinVo;
 
@@ -18,6 +20,7 @@ public class ListController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		String spageNum = request.getParameter("pageNum");
 		int pageNum = 1;
 		if (spageNum != null) {
@@ -39,7 +42,7 @@ public class ListController extends HttpServlet {
 		if (endPageNum > pageCount) {
 			endPageNum = pageCount;
 		}
-		System.out.println(startPageNum);
+
 		request.setAttribute("list", list);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("startPage", startPageNum);

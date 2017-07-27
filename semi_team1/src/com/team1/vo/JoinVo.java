@@ -14,6 +14,7 @@ public class JoinVo {
 	private Date reg_date;
 	private int stop;
 	private Date limit_date;
+	private int exp;
 
 	public JoinVo(int num, String id, String u_pw, String m_nick, String m_mail, String m_orgfilename,
 			String m_savefilename, String grade, Date reg_date, int stop, Date limit_date) {
@@ -28,6 +29,22 @@ public class JoinVo {
 		this.reg_date = reg_date;
 		this.stop = stop;
 		this.limit_date = limit_date;
+	}
+
+	public JoinVo(int num, String id, String u_pw, String m_nick, String m_mail, String m_orgfilename,
+			String m_savefilename, String grade, Date reg_date, int stop, Date limit_date, int exp) {
+		this.num = num;
+		this.id = id;
+		this.u_pw = u_pw;
+		this.m_nick = m_nick;
+		this.m_mail = m_mail;
+		this.m_orgfilename = m_orgfilename;
+		this.m_savefilename = m_savefilename;
+		this.grade = grade;
+		this.reg_date = reg_date;
+		this.stop = stop;
+		this.limit_date = limit_date;
+		this.exp = exp;
 	}
 
 	public JoinVo(int num, String id, String u_pw, String m_nick, String m_mail) {
@@ -124,6 +141,14 @@ public class JoinVo {
 
 	public void setLimit_date(Date limit_date) {
 		this.limit_date = limit_date;
+	}
+
+	public int getExp() {
+		return exp;
+	}
+
+	public void setExp(int exp) {
+		this.exp = exp;
 	}
 
 }

@@ -200,7 +200,7 @@ public class JoinDao {
 
 	// 전체 회원 정보 출력-페이징
 	public ArrayList<JoinVo> list(int startRow, int endRow) {
-		String sql = "SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM(SELECT * FROM MEMBERS ORDER BY NUM DESC) AA) WHERE RNUM>=? AND RNUM<=?";
+		String sql = "SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM(SELECT m.*,e.exp FROM MEMBERS m join exp e on m.m_nick = e.nick ORDER BY NUM DESC) AA) WHERE RNUM>=? AND RNUM<=?";
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -216,7 +216,7 @@ public class JoinDao {
 				JoinVo jv = new JoinVo(rs.getInt("num"), rs.getString("id"), rs.getString("u_pw"),
 						rs.getString("m_nick"), rs.getString("m_mail"), rs.getString("m_orgfilename"),
 						rs.getString("m_savefilename"), rs.getString("grade"), rs.getDate("reg_date"),
-						rs.getInt("stop"), rs.getDate("limit_date"));
+						rs.getInt("stop"), rs.getDate("limit_date"),rs.getInt("exp"));
 				list.add(jv);
 			}
 			return list;
