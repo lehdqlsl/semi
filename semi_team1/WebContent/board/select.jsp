@@ -73,9 +73,7 @@
 			<table align="right">
 				<tr>
 					<td>
-						[${sessionScope.m_nick}]
-						[${requestScope.vo.writer}]
-						<c:if test="'${sessionScope.m_nick}' eq '${requestScope.vo.writer}'">
+						<c:if test="${(sessionScope.m_nick eq requestScope.vo.writer) || (sessionScope.m_nick eq 'admin')}">
 							<input class="btn btn-success" type="button" value="수정" onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
 							<input class="btn btn-success" type="button" value="삭제" onclick=delete()> 
 						</c:if>
