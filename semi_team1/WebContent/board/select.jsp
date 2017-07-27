@@ -17,12 +17,13 @@
 		//로그인 된 후	
 		xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = callback;
-		xhr.open(
+		xhr
+				.open(
 						'get',
 						"/semi_team1/board/replylimitpage.jsp?writer=${sessionScope.m_nick }",
 						true);
 		xhr.send();
-		
+
 	}
 	function callback() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
@@ -39,23 +40,25 @@
 			}
 		}
 	}
+
 	// 댓글 삭제 체크
 	var xhr1 = null;
-	var bNum=0;
-	function nickCheck(r_num,b_num,nick,sessionNick) {
+	var bNum = 0;
+	function nickCheck(r_num, b_num, nick, sessionNick) {
 		xhr1 = new XMLHttpRequest();
 		xhr1.onreadystatechange = callback1;
 		xhr1
-				.open(
-						'get',
-						"/semi_team1/reply/delete?r_num=" + r_num + "&b_num=" + b_num + "&nick=" + nick + "&sessionNick=" + sessionNick,
-						true);
-		if(!nick.equals(sessionNick)){
+				.open('get', "/semi_team1/reply/delete?r_num=" + r_num
+						+ "&b_num=" + b_num + "&nick=" + nick + "&sessionNick="
+						+ sessionNick, true);
+		if (nick!=sessionNick) {
 			alert("댓글 삭제는 작성자만 할 수 있습니다.");
 			return;
-		}else{
-			bNum=b_num;
-			xhr1.send();	
+		} else {
+			if(confirm("댓글을 삭제하시겠습니까?")){
+				bNum = b_num;
+				xhr1.send();
+			}
 		}
 
 	}
@@ -63,22 +66,13 @@
 		if (xhr1.readyState == 4 && xhr1.status == 200) {
 			var data = xhr1.responseXML;
 			var flag = data.getElementsByTagName("flag")[0].firstChild.nodeValue;
-			if(flag==0){
+			if (flag == 0) {
 				alert("댓글이 삭제되었습니다.");
-				location.href="/semi_team1/select?num="+bNum;
+				location.href = "/semi_team1/select?num=" + bNum;
 			}
-			<%--
-			console.log(flag);
-			if (flag == 1) {
-				alert("댓글 삭제는 작성자만 할 수 있습니다.");
-			}else{
-				if(confirm("댓글을 삭제하시겠습니까?")){
-					alert("댓글이 삭제되었습니다.");
-					location.href="/semi_team1/select?num="+bNum;
-				}
-			}
-		}--%>
+		}
 	}
+
 	// 댓글 글자수 표시
 	function textlen() {
 		var div = document.getElementById("len");
@@ -104,6 +98,7 @@
 			else if (c.indexOf("%") != -1)
 				l += c.length / 3;
 		}
+
 		return l;
 	};
 </script>
@@ -128,13 +123,12 @@
 
 			<table align="right">
 				<tr>
-					<td><c:if
-							test="${(sessionScope.m_nick eq requestScope.vo.writer) || (sessionScope.m_nick eq 'admin')}">
-							<input class="btn btn-success" type="button" value="수정"
-								onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
-							<input class="btn btn-success" type="button" value="삭제"
-								onclick="">
-						</c:if> <input class="btn btn-success" type="button" value="목록"
+					<td><input class="btn btn-success" type="button" value="수정"
+						onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
+						<input class="btn btn-success" type="button" value="삭제" onclick="">
+						<input class="btn btn-success" type="button" value="글쓰기"
+						onclick="location.href = 'index.jsp?page=board/insert.jsp';">
+						<input class="btn btn-success" type="button" value="목록"
 						onclick="javascript:history.back()"></td>
 				</tr>
 			</table>
@@ -164,7 +158,6 @@
 								style="word-break: break-all; word-wrap: break-word;">${vo.content }</td>
 							<td>${vo.reg_date }</td>
 
-							<!--  삭제/추천 버튼 한가지 폼으로 코딩?? -->
 							<form method="post" action="/semi_team1/reply.recomm">
 								<input type="hidden" name="r_num" value=${vo.r_num }> <input
 									type="hidden" name="b_num" value="${param.b_num}">
@@ -174,13 +167,18 @@
 										</button>
 									</div></td>
 							</form>
-							<form method="post" action="/semi_team1/reply.delete">
+							<%-- <form method="post" action="/semi_team1/reply/delete">
 								<input type="hidden" name="r_num" value=${vo.r_num }> <input
-									type="hidden" name="b_num" value="${param.b_num}">
-								<td><div id="delete">
-										<button type="submit" class="btn btn-xs btn-success">삭제</button>
-									</div></td>
-							</form>
+									type="hidden" name="b_num" value="${vo.b_num}">
+									<input
+									type="hidden" name="nick" value="${vo.nick}">
+									<input
+									type="hidden" name="sessionNick" value="${sessionScope.m_nick}">--%>
+							<td><div id="delete">
+									<button type="button" class="btn btn-xs btn-success"
+										onclick="nickCheck('${vo.r_num }','${vo.b_num}','${vo.nick}','${sessionScope.m_nick}')">삭제</button>
+								</div></td>
+							<%-- </form> --%>
 
 						</tr>
 					</c:forEach>
@@ -234,7 +232,8 @@
 								placeholder="댓글 작성 시 타인에 대한 배려와 책임을 담아주세요." style="width: 90%"
 								onclick="login('<%=session.getAttribute("m_nick")%>')"
 								onkeyup="textlen()"></textarea>
-							<button type="submit" class="btn btn-lg btn-success"
+							<button type="submit" id="submitbtn"
+								class="btn btn-lg btn-success"
 								style="float: right; height: 88px; width: 10%">등록</button>
 						</div>
 					</div>
