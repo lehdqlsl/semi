@@ -18,10 +18,10 @@ public class LimitUpdateController extends HttpServlet{
 		request.setCharacterEncoding("utf-8");
 		
 		int days=Integer.parseInt(request.getParameter("days"));
-		String writer=request.getParameter("writer");
+		String m_nick=request.getParameter("m_nick");
 		
 		JoinDao dao=new JoinDao();
-		int n=dao.limitDateUpdate(days, writer);
+		int n=dao.limitDateUpdate(days, m_nick);
 		
 		if(n>0){
 			request.getRequestDispatcher("/member/list").forward(request, response);

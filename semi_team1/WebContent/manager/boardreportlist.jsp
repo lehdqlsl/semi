@@ -7,20 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	function inputLimitDays(){
-		var days;
-		var writer=document.getElementById("writer").value;
-		days=prompt("제재 일수를 입력하세요");
-		if(days>=1 && days<=100){
-			var flag=confirm("제재하시겠습니까?");
-			if(flag){
-				location.href="/semi_team1/limit/day?days="+days+"&writer="+writer;
-			}
-		}else{
-			alert("1부터 100사이의 숫자만 입력하세요");
-			//return;
-		}	
-	}
 	function blindProcess(boardnum){
 		var flag=confirm("블라인드 처리하시겠습니까?");
 		if(flag){
@@ -40,7 +26,6 @@
 					<td>글제목</td>
 					<td>등록일</td>
 					<td>닉네임</td>
-					<td>제재</td>
 					<td>블라인드</td>
 				</tr>
 				<c:forEach var="vo" items="${requestScope.list }">
@@ -51,7 +36,6 @@
 						<td><a href="/semi_team1/select?num=${vo.boardnum }">${vo.b_title }</a></td>
 						<td>${vo.regdate }</td>
 						<td>${vo.writer }</td>
-						<td><button type="button" class="btn btn-xs btn-success"  onclick="inputLimitDays()">정지</button></td>
 						<td><button type="button" class="btn btn-xs btn-success"  onclick="blindProcess(${vo.boardnum})">블라인드</button></td>
 					</tr>
 				</c:forEach>

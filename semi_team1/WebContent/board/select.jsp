@@ -13,6 +13,16 @@
 			alert("먼저 로그인을 하셔야합니다.\n로그인페이지로 이동 하시겠습니까?");
 			document.location.href="index.jsp?page=login/signin.jsp";
 		}
+		
+		//로그인 된 후
+		
+		
+	}
+	
+	
+	function callback(){
+		
+		
 	}
 	
 	function textlen(){
