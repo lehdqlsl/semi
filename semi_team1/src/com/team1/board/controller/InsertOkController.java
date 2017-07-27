@@ -27,6 +27,7 @@ public class InsertOkController extends HttpServlet {
 		String writer = request.getParameter("writer");
 		String title_name = request.getParameter("title_name");
 		String content = request.getParameter("content");
+		System.out.println(content);
 		int f_num = 1;
 		int s_num = Integer.parseInt(request.getParameter("s_num"));
 		String orgFileName = "text.jpg";

@@ -11,151 +11,160 @@ import com.team1.db.DBCPBean;
 import com.team1.vo.ReplyVo;
 
 public class ReplyDao {
-	private static ReplyDao instance=new ReplyDao();
-	private ReplyDao(){}
-	public static ReplyDao getInstance(){
+	private static ReplyDao instance = new ReplyDao();
+
+	private ReplyDao() {
+	}
+
+	public static ReplyDao getInstance() {
 		return instance;
 	}
-	public ArrayList<ReplyVo> replyList(int bnum,int startRow,int endRow){
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		try{
-			con=DBCPBean.getConn();
-			String sql="SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM (SELECT * FROM REPLY WHERE B_NUM=? ORDER BY R_NUM desc) AA)WHERE RNUM>=? AND RNUM<=?";
-			pstmt=con.prepareStatement(sql);
+
+	public ArrayList<ReplyVo> replyList(int bnum, int startRow, int endRow) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM (SELECT * FROM REPLY WHERE B_NUM=? ORDER BY R_NUM desc) AA)WHERE RNUM>=? AND RNUM<=?";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bnum);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
-			rs=pstmt.executeQuery();
-			ArrayList<ReplyVo> list=new ArrayList<>();
-			while(rs.next()){
-				
-				int r_num=rs.getInt("r_num");
-				String nick=rs.getString("nick");
-				String content=rs.getString("content");
-				int up=rs.getInt("up");
-				Date reg_date=rs.getDate("reg_date");
-				int b_num=rs.getInt("b_num");
-				int report=rs.getInt("report");
-				ReplyVo vo=new ReplyVo(r_num, nick, content, up, reg_date, b_num, report);
+			rs = pstmt.executeQuery();
+			ArrayList<ReplyVo> list = new ArrayList<>();
+			while (rs.next()) {
+
+				int r_num = rs.getInt("r_num");
+				String nick = rs.getString("nick");
+				String content = rs.getString("content");
+				int up = rs.getInt("up");
+				Date reg_date = rs.getDate("reg_date");
+				int b_num = rs.getInt("b_num");
+				int report = rs.getInt("report");
+				ReplyVo vo = new ReplyVo(r_num, nick, content, up, reg_date, b_num, report);
 				list.add(vo);
 			}
 			return list;
-		}catch(SQLException se){
+		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return null;
-		}finally{
-			DBCPBean.close(con,pstmt,rs);
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
 		}
 	}
-	public int getCount(int b_num){
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		try{
-			con=DBCPBean.getConn();
-			String sql="select count(*) from reply where b_num=?";
-			//String sql="select NVL(max(r_num),0) cnt from reply";
-			pstmt=con.prepareStatement(sql);
+
+	public int getCount(int b_num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select count(*) from reply where b_num=?";
+			// String sql="select NVL(max(r_num),0) cnt from reply";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, b_num);
-			rs=pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			rs.next();
-			int cnt=rs.getInt(1);
+			int cnt = rs.getInt(1);
 			return cnt;
-		}catch(SQLException se){
+		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
-		}finally{
-			DBCPBean.close(con,pstmt,rs);
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
 		}
 	}
-	
-	public int insert(String content,int b_num){
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		try{
-			con=DBCPBean.getConn();
-			String sql="insert into reply values(SEQ_reply_r_num.nextval,'·ê·ç',?,0,sysdate,?,0)";
-			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1,content);
-			pstmt.setInt(2, b_num);
+
+	public int insert(String nick, String content, int b_num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "insert into reply values(SEQ_reply_r_num.nextval,?,?,0,sysdate,?,0)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nick);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, b_num);
 			return pstmt.executeUpdate();
-		}catch(SQLException se){
+		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
-		}finally{
-			DBCPBean.close(con,pstmt,null);
+		} finally {
+			DBCPBean.close(con, pstmt, null);
 		}
 	}
-	public int delete(int r_num,int b_num){
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		try{
-			con=DBCPBean.getConn();
-			String sql="delete from reply where r_num=? and b_num=?";
-			pstmt=con.prepareStatement(sql);
+
+	public int delete(int r_num, int b_num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "delete from reply where r_num=? and b_num=?";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, r_num);
 			pstmt.setInt(2, b_num);
 			return pstmt.executeUpdate();
-		}catch(SQLException se){
+		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
-		}finally{
-			DBCPBean.close(con,pstmt,null);
+		} finally {
+			DBCPBean.close(con, pstmt, null);
 		}
 	}
+
 	// ½Å°í ´ñ±Û ¸®½ºÆ®
-	public ArrayList<ReplyVo> replyReport(int startRow,int endRow){
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		try{
-			con=DBCPBean.getConn();
-			String sql="SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM (SELECT * FROM REPLY WHERE REPORT=1 ORDER BY REG_DATE desc) AA)WHERE RNUM>=? AND RNUM<=?";
-			pstmt=con.prepareStatement(sql);
+	public ArrayList<ReplyVo> replyReport(int startRow, int endRow) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM (SELECT * FROM REPLY WHERE REPORT=1 ORDER BY REG_DATE desc) AA)WHERE RNUM>=? AND RNUM<=?";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			rs=pstmt.executeQuery();
-			ArrayList<ReplyVo> list=new ArrayList<>();
-			while(rs.next()){
-				
-				int r_num=rs.getInt("r_num");
-				String nick=rs.getString("nick");
-				String content=rs.getString("content");
-				int up=rs.getInt("up");
-				Date reg_date=rs.getDate("reg_date");
-				int b_num=rs.getInt("b_num");
-				int report=rs.getInt("report");
-				ReplyVo vo=new ReplyVo(r_num, nick, content, up, reg_date, b_num, report);
+			rs = pstmt.executeQuery();
+			ArrayList<ReplyVo> list = new ArrayList<>();
+			while (rs.next()) {
+
+				int r_num = rs.getInt("r_num");
+				String nick = rs.getString("nick");
+				String content = rs.getString("content");
+				int up = rs.getInt("up");
+				Date reg_date = rs.getDate("reg_date");
+				int b_num = rs.getInt("b_num");
+				int report = rs.getInt("report");
+				ReplyVo vo = new ReplyVo(r_num, nick, content, up, reg_date, b_num, report);
 				list.add(vo);
 			}
 			return list;
-		}catch(SQLException se){
+		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return null;
-		}finally{
-			DBCPBean.close(con,pstmt,rs);
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
 		}
 	}
-	//½Å°í ´ñ±Û °³¼ö
-	public int getCnt(){
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		try{
-			con=DBCPBean.getConn();
-			String sql="select count(*) from reply where report=1";
-			pstmt=con.prepareStatement(sql);
-			rs=pstmt.executeQuery();
+
+	// ½Å°í ´ñ±Û °³¼ö
+	public int getCnt() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select count(*) from reply where report=1";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 			rs.next();
-			int cntTot=rs.getInt(1);
+			int cntTot = rs.getInt(1);
 			return cntTot;
-		}catch(SQLException se){
+		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
-		}finally{
-			DBCPBean.close(con,pstmt,rs);
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
 		}
 	}
 }

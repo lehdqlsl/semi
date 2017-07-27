@@ -30,6 +30,7 @@ function callnick() {
 		} else {
 			alert("사용할 수 있는 닉네임입니다");
 			nickcheckbtn.disabled = true;
+			a.m_nick.readOnly=true;
 		}
 	}
 }
@@ -152,10 +153,10 @@ function validate() {
 	
 	<%-- 닉네임파트 --%>
 	<div style="width:1000px;height:500px;padding-left: 350px;">
-	<form action="/semi_team1/nickupdate" method="post" class="navbar-form">
+	<form action="/semi_team1/nickupdate" method="post" class="navbar-form" name="a">
 		<input type="hidden" name="num" value="<%=num %>">
 		<label>닉네임</label><br>
-		<input type="text" placeholder="닉네임" name="m_nick" id="m_nick" class="form-control" value="<%=vo.getM_nick()%>"> 
+		<input type="text" placeholder="닉네임" name="m_nick" id="m_nick" class="form-control" value="${sessionScope.m_nick }"> 
 		<input type="button" id="nickcheckbtn"	value="중복확인" onclick="nickcheck()" class="btn btn-sm btn-success"><br><br> 
 		<p>닉네임 설정 안내</p>
 		<textarea cols="100" rows="5" name="notice" readonly="readonly" style="resize: none;">

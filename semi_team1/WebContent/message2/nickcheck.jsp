@@ -1,4 +1,4 @@
-<%@page import="com.team1.dao.SendDao"%>
+<%@page import="com.team1.message2.dao.sendDao2"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="com.team1.dao.JoinDao"%>
@@ -7,7 +7,7 @@
 <%
 	String m_nick=request.getParameter("m_nick");
 	
-	SendDao dao=new SendDao();
+	sendDao2 dao=new sendDao2();
 	System.out.print("m_nick:"+m_nick);
 	boolean check=dao.nickcheck(m_nick);
 	

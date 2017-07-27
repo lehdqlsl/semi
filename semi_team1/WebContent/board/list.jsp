@@ -6,20 +6,54 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	var xhr = null;
+	function limitCheck() {
+		xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = callback;
+		xhr
+				.open(
+						'get',
+						"/semi_team1/board/limitpage.jsp?writer=${sessionScope.m_nick }",
+						true);
+		xhr.send();
+		console.log("${sessionScope.m_nick }");
+	}
+	function callback() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var data = xhr.responseXML;
+			var limitchk = data.getElementsByTagName("limitChk")[0].firstChild.nodeValue;
+			var limitdays = data.getElementsByTagName("cnt")[0].firstChild.nodeValue;
+			var limitdate = data.getElementsByTagName("limit_date")[0].firstChild.nodeValue;
+			console.log("callback" + limitchk + "/" + limitdays);
+			if (limitchk == 1) {
+				alert("제재처리로 글을 작성할 수 없습니다. [ " + limitdate + " ] 이후부터 작성가능");
+			} else if (limitchk == 2) {
+				alert("신규회원 글작성 제한기간입니다. [ " + limitdate + " ] 이후부터 작성가능");
+			} else if (limitchk == 3) {
+				console.log("확인");
+				location.href = "/semi_team1/write?s_num=${s_num}";
+			}
+		}
+	}
+</script>
 </head>
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-		<div style="margin: auto; width: 1000px; height: 1300px;">
+
+
+		<div
+			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
+
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<th>게시글번호</th>
-						<th>구분</th>
-						<th>제목</th>
-						<th>글쓴이</th>
-						<th>추천</th>
-						<th>조회</th>
-						<th>날짜</th>
+						<th style="width: 100px">게시글번호</th>
+						<th style="text-align: center">제목</th>
+						<th style="width: 140px">글쓴이</th>
+						<th style="width: 50px; text-align: center">추천</th>
+						<th style="width: 75px; text-align: center">조회</th>
+						<th style="width: 100px; text-align: center">날짜</th>
 					</tr>
 				</thead>
 				<c:forEach var="vo" items="${requestScope.list }">
@@ -28,19 +62,24 @@
 						/semi_team1/index.jsp?page=/game/gameIndex.jsp&s_page=/board/insert.jsp 
 						/semi_team1/select?num=${vo.num }
 				-->
-						<td>${vo.num }</td>
-						<td>${vo.f_num }</td>
+						<td style="text-align: center">${vo.num }</td>
 						<td><a href="/semi_team1/select?num=${vo.num }">${vo.title_name }</a></td>
 						<td>${vo.writer }</td>
-						<td>${vo.up }</td>
-						<td>${vo.hits }</td>
-						<td>${vo.regdate }</td>
+						<td style="text-align: center">${vo.up }</td>
+						<td style="text-align: center">${vo.hits }</td>
+						<td style="text-align: center">${vo.regdate }</td>
 					</tr>
 				</c:forEach>
 			</table>
-			<input class="btn btn-sm btn-success" type="button" value="글쓰기"
-				onclick="location.href = '/semi_team1/write?s_num=${s_num}';">
-			<br> <br>
+			<c:if test="${!empty sessionScope.m_nick}">
+				<input class="btn btn-sm btn-success" type="button" value="글쓰기"
+					onclick="limitCheck()">
+				<%-- <input class="btn btn-sm btn-success" type="button" value="글쓰기" onclick="location.href = '/semi_team1/write?s_num=${s_num}';">--%>
+				<br>
+				<br>
+			</c:if>
+
+
 			<%
 				String search = request.getParameter("search");
 				if (search == null) {
@@ -111,6 +150,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

@@ -15,6 +15,7 @@
 <link href="/semi_team1/offcanvas.css" rel="stylesheet">
 <script src="/semi_team1/rs/assets/js/ie-emulation-modes-warning.js"></script>
 <title>Insert title here</title>
+
 </head>
 <body>
 	<%

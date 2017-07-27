@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.team1.db.DBCPBean;
+import com.team1.vo.ManagerVo;
 import com.team1.vo.ReplyVo;
 import com.team1.vo.boardVo;
 
@@ -22,8 +23,13 @@ public class BoardDao {
 			con = DBCPBean.getConn();
 			if (search.equals("")) {
 				String sql = "select * from ( " + "select a.*, rownum rnum from( "
+						+ "select * from board where s_num=? and blind=0 order by num desc "+ ")a "
+						+ ") where rnum>=? and rnum <=?";
+				/*
+				 * String sql = "select * from ( " + "select a.*, rownum rnum from( "
 						+ "select * from board where s_num=? order by num desc "+ ")a "
 						+ ") where rnum>=? and rnum <=?";
+				 * */
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, s_num);
 				pstmt.setInt(2, startRow);
@@ -220,35 +226,28 @@ public class BoardDao {
 	}
 
 	////////////// 신고 글 조회/////////////////////////
-	// 신고 댓글 리스트
-	public ArrayList<boardVo> boardReport(int startRow, int endRow) {
+	// 신고 글 리스트
+	public ArrayList<ManagerVo> boardReport(int startRow, int endRow) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = DBCPBean.getConn();
-			String sql = "SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM (SELECT * FROM BOARD WHERE REPORT=1 ORDER BY REGDATE desc) AA)WHERE RNUM>=? AND RNUM<=?";
+			String sql = "SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM (select b.num boardnum,s.title_name s_title,b.title_name b_title,b.regdate,b.writer,b.report from board b, s_category s where b.s_num=s.num and b.REPORT=1 ORDER BY REGDATE desc) AA)WHERE RNUM>=? AND RNUM<=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
 			rs = pstmt.executeQuery();
-			ArrayList<boardVo> list = new ArrayList<>();
+			ArrayList<ManagerVo> list = new ArrayList<>();
 			while (rs.next()) {
-				int num = rs.getInt("num");
-				String title_name = rs.getString("title_name");
-				int up = rs.getInt("up");
-				int hits = rs.getInt("hits");
-				String orgfilename = rs.getString("orgfilename");
-				String savefilename = rs.getString("savefilename");
-				String content=rs.getString("content");
+				int boardnum = rs.getInt("boardnum");
+				String c_title = rs.getString("s_title");
+				String b_title = rs.getString("b_title");
 				Date regdate = rs.getDate("regdate");
-				String writer=rs.getString("writer");
-				int f_num=rs.getInt("f_num");
-				int s_num=rs.getInt("s_num");
-				int blind=rs.getInt("blind");
-				int report=rs.getInt("report");
-				int top=rs.getInt("top");	
-				boardVo vo=new boardVo(num, title_name, up, hits, orgfilename, savefilename, content, regdate, writer, f_num, s_num, blind, report, top);
+				String writer = rs.getString("writer");
+				int report = rs.getInt("report");
+			
+				ManagerVo vo=new ManagerVo(boardnum, c_title, b_title, regdate, writer, report);
 				list.add(vo);
 			}
 			return list;
@@ -278,6 +277,23 @@ public class BoardDao {
 			return -1;
 		} finally {
 			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+	// 글 블라인드 처리
+	public int blindUpdate(int boardnum){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try{
+			con=DBCPBean.getConn();
+			String sql="update board set blind=1 where num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, boardnum);
+			return pstmt.executeUpdate();
+		}catch(SQLException se){
+			System.out.println(se.getMessage());
+			return -1;
+		}finally{
+			DBCPBean.close(con, pstmt, null);
 		}
 	}
 }

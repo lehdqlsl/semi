@@ -12,6 +12,7 @@
 	<div class="col-sm-3 col-md-2 sidebar">
 		<ul class="nav nav-sidebar">
 			<li><a href="/semi_team1/member/list">전체회원 목록</a></li>
+			<li><a href="/semi_team1/member/limit/list">제재회원 목록</a></li>
 			<li><a href="/semi_team1/report/list">신고된 게시글</a></li>
 			<li><a href="/semi_team1/report/reply">신고된 댓글</a></li>
 		</ul>

@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.team1.dao.UserInfoDao;
 import com.team1.vo.ProfileVo;
@@ -19,11 +20,12 @@ public class NickUpdateController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		int num = Integer.parseInt(request.getParameter("num"));
 		String m_nick = request.getParameter("m_nick");
-
+		HttpSession session = request.getSession();
+		session.setAttribute("m_nick", m_nick);
 		ProfileVo vo = new ProfileVo(num, m_nick);
 		UserInfoDao dao = new UserInfoDao();
 		int n = dao.update(vo);
-		System.out.println("n°ª" + n);
+
 		if (n > 0) {
 			response.sendRedirect("/semi_team1/index.jsp?page=profile/userinfo.jsp?num=" + num);
 		} else {

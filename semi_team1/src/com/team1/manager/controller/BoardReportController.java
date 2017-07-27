@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.team1.dao.BoardDao;
+import com.team1.vo.ManagerVo;
 import com.team1.vo.boardVo;
 
 @WebServlet("/report/list")
@@ -27,7 +28,7 @@ public class BoardReportController extends HttpServlet {
 		int endRow = startRow + 9;
 
 		BoardDao dao = new BoardDao();
-		ArrayList<boardVo> list = dao.boardReport(startRow, endRow);
+		ArrayList<ManagerVo> list = dao.boardReport(startRow, endRow);
 		// 전체 페이지 개수 구하기
 		int pageCount = (int) Math.ceil(dao.getCnt() / 10.0);
 		// 시작 페이지 구하기

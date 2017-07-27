@@ -41,6 +41,7 @@ public class LoginController extends HttpServlet {
 		String u_pw = request.getParameter("u_pw");
 		// String m_nick=request.getParameter("m_nick");
 		String box = request.getParameter("box");
+		String url = request.getParameter("prev");
 
 		HashMap<String, String> map = new HashMap<>();
 		map.put("id", id);
@@ -77,7 +78,8 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("id", id);
 			session.setAttribute("m_nick", vo.getM_nick());
 			session.setAttribute("num", vo.getNum());
-			response.sendRedirect("/semi_team1/index.jsp?page=content.jsp");
+
+			response.sendRedirect(url);
 		} else {
 			request.setAttribute("errMsg", "아이디 또는 비밀번호가 틀립니다");
 			request.getRequestDispatcher("index.jsp?page=login/signin.jsp").forward(request, response);
