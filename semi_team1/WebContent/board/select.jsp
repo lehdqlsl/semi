@@ -130,7 +130,7 @@
 
 			if (!data.up_ok) {
 				alert("이미 추천 한 게시글 입니다.");
-			}else{
+			} else {
 				var bo_up = document.getElementById("bo_up");
 				bo_up.innerHTML = data.cnt;
 			}
@@ -139,8 +139,8 @@
 
 	var r_xhr = null;
 	var index = null;
-	function replyup(r_num,num) {
-		index=num;
+	function replyup(r_num, num) {
+		index = num;
 		r_xhr = new XMLHttpRequest();
 		r_xhr.onreadystatechange = cb_replyup;
 		r_xhr.open('get', "/semi_team1/reply/up?r_num=" + r_num, true);
@@ -153,8 +153,8 @@
 			var data = eval('(' + json + ')');
 			if (!data.up_ok) {
 				alert("이미 추천 한 댓글 입니다.");
-			}else{
-				var re_up = document.getElementById("re_up"+index);
+			} else {
+				var re_up = document.getElementById("re_up" + index);
 				re_up.innerHTML = data.cnt;
 			}
 		}
@@ -162,22 +162,21 @@
 </script>
 </head>
 <body>
-<%
-	// 쿠키 저장하기
-	String snick=(String)session.getAttribute("m_nick");
-	String s_num=request.getParameter("num");
-	String nick=URLEncoder.encode(snick,"utf-8");
-	Cookie cook1=new Cookie("nick",nick);
-	Cookie cook2=new Cookie("s_num",s_num);
-	cook1.setMaxAge(60*60*24);//유지시간 1일
-	cook2.setMaxAge(60*60*24);//유지시간 1일
-	response.addCookie(cook1);
-	response.addCookie(cook2);
-%>
+	<%
+		// 쿠키 저장하기
+		String snick = (String) session.getAttribute("m_nick");
+		String s_num = request.getParameter("num");
+		String nick = URLEncoder.encode(snick, "utf-8");
+		Cookie cook1 = new Cookie("nick", nick);
+		Cookie cook2 = new Cookie("s_num", s_num);
+		cook1.setMaxAge(60 * 60 * 24);//유지시간 1일
+		cook2.setMaxAge(60 * 60 * 24);//유지시간 1일
+		response.addCookie(cook1);
+		response.addCookie(cook2);
+	%>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
-
 			<table class="table table-bordered">
 				<thead>
 					<tr>
@@ -259,7 +258,8 @@
 				</div>
 				<br> <br>
 				<table class="table table-striped" style="padding: 50px;">
-					<c:forEach var="vo" items="${requestScope.list }" varStatus="status">
+					<c:forEach var="vo" items="${requestScope.list }"
+						varStatus="status">
 						<tr>
 							<!--  <td>${vo.r_num }</td>-->
 							<td id="user">
@@ -272,8 +272,6 @@
 							<td>${vo.reg_date }</td>
 
 
-
-
 							<td><button type="button" class="btn btn-xs btn-success"
 									onclick="replyup('${vo.r_num}','${status.index}')">
 									추천 <strong id="re_up${status.index}">${vo.up }</strong>
@@ -281,11 +279,20 @@
 
 
 
-
-							<td><div id="delete">
-									<button type="button" class="btn btn-xs btn-success"
-										onclick="nickCheck('${vo.r_num }','${vo.b_num}','${vo.nick}','${sessionScope.m_nick}')">삭제</button>
-								</div></td>
+							<td><c:choose>
+									<c:when test="${vo.nick==sessionScope.m_nick }">
+										<div id="delete">
+											<button type="button" class="btn btn-xs btn-warning"
+												onclick="nickCheck('${vo.r_num }','${vo.b_num}','${vo.nick}','${sessionScope.m_nick}')">삭제</button>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div id="report">
+											<button type="button" class="btn btn-xs btn-danger"
+												onclick="">신고</button>
+										</div>
+									</c:otherwise>
+								</c:choose></td>
 						</tr>
 					</c:forEach>
 				</table>
