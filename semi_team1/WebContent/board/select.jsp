@@ -130,7 +130,10 @@
 					</tr>
 				</thead>
 				<tr>
-					<td rowspan="6" width="250px"><img src="/semi_team1/upload/${requestScope.mvo.m_savefilename }"></td>
+					<td rowspan="6" width="250px"  style="text-align: center; padding-top: 40px; ">
+					<img src="/semi_team1/upload/${requestScope.mvo.m_savefilename }"
+					style="height: 150px; width: 150px;">
+					</td>
 					<td width="400px" colspan="2">${requestScope.mvo.m_nick }(${requestScope.mvo.id })</td>
 
 				</tr>
@@ -161,7 +164,7 @@
 				
 				
 				<tr>
-					<td>추천 xx / 조회 xx</td>
+					<td>조회 ${requestScope.vo.hits }</td>
 				</tr>
 				
 				<tr>
