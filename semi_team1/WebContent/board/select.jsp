@@ -216,18 +216,25 @@
 										</button>
 									</div></td>
 							</form>
-							<%-- <form method="post" action="/semi_team1/reply/delete">
-								<input type="hidden" name="r_num" value=${vo.r_num }> <input
-									type="hidden" name="b_num" value="${vo.b_num}">
-									<input
-									type="hidden" name="nick" value="${vo.nick}">
-									<input
-									type="hidden" name="sessionNick" value="${sessionScope.m_nick}">--%>
-							<td><div id="delete">
+						
+							<td>
+								<%--  <div id="delete">
 									<button type="button" class="btn btn-xs btn-success"
 										onclick="nickCheck('${vo.r_num }','${vo.b_num}','${vo.nick}','${sessionScope.m_nick}')">삭제</button>
-								</div></td>
-							<%-- </form> --%>
+								</div>--%>
+								<c:choose>
+									<c:when test="${vo.nick==sessionScope.m_nick }">
+										<div id="delete">
+											<button type="button" class="btn btn-xs btn-warning" onclick="nickCheck('${vo.r_num }','${vo.b_num}','${vo.nick}','${sessionScope.m_nick}')">삭제</button>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div id="report">
+											<button type="button" class="btn btn-xs btn-danger" onclick="">신고</button>
+										</div>
+									</c:otherwise>
+								</c:choose>
+							</td>
 
 						</tr>
 					</c:forEach>
