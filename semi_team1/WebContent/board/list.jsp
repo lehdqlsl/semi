@@ -40,12 +40,9 @@
 </head>
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-<<<<<<< HEAD
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
-=======
-		<div style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
->>>>>>> branch 'master' of https://github.com/lehdqlsl/semi
+
 
 			<table class="table table-bordered">
 				<thead>
@@ -65,7 +62,8 @@
 						/semi_team1/select?num=${vo.num }
 				-->
 						<td style="text-align: center">${vo.num }</td>
-						<td><a href="/semi_team1/select?num=${vo.num }&writer=${vo.writer}">${vo.title_name }</a></td>
+						<td><a
+							href="/semi_team1/select?num=${vo.num }&writer=${vo.writer}">${vo.title_name }</a></td>
 						<td>${vo.writer }</td>
 						<td style="text-align: center">${vo.up }</td>
 						<td style="text-align: center">${vo.hits }</td>
@@ -119,8 +117,8 @@
 						</a>
 					</c:when>
 					<c:otherwise>
-			<input class="btn btn-xs btn-primary" type="submit" value="◁">
-		</c:otherwise>
+						<input class="btn btn-xs btn-primary" type="submit" value="◁">
+					</c:otherwise>
 				</c:choose>
 				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
 					<c:choose>
@@ -140,14 +138,14 @@
 				</c:forEach>
 				<c:choose>
 					<c:when test="${endPageNum<pageCount }">
-						<a 
+						<a
 							href="/semi_team1/list?s_num=${s_num }&pageNum=${endPageNum+1 }&search=${param.search}&keyword=${param.keyword}">
 							<input class="btn btn-xs btn-primary" type="submit" value="▷">
 						</a>
 					</c:when>
 					<c:otherwise>
-			<input class="btn btn-xs btn-primary" type="submit" value="▷">
-		</c:otherwise>
+						<input class="btn btn-xs btn-primary" type="submit" value="▷">
+					</c:otherwise>
 				</c:choose>
 			</div>
 		</div>
