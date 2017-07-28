@@ -111,17 +111,59 @@
 
 		return l;
 	};
+
+	var b_xhr = null;
+	function boardup(b_num) {
+
+		b_xhr = new XMLHttpRequest();
+		b_xhr.onreadystatechange = cb_boardup;
+		b_xhr.open('get', "/semi_team1/board/up?b_num=" + b_num, true);
+		b_xhr.send();
+
+	}
+
+	function cb_boardup() {
+		if (b_xhr.status == 200 && b_xhr.readyState == 4) {
+			var json = b_xhr.responseText;
+			var data = eval('(' + json + ')');
+
+			if (!data.up_ok) {
+				alert("이미 추천 한 게시글 입니다.");
+			}else{
+				var bo_up = document.getElementById("bo_up");
+				bo_up.innerHTML = data.cnt;
+			}
+		}
+	}
+
+	var r_xhr = null;
+	var index = null;
+	function replyup(r_num,num) {
+		index=num;
+		r_xhr = new XMLHttpRequest();
+		r_xhr.onreadystatechange = cb_replyup;
+		r_xhr.open('get', "/semi_team1/reply/up?r_num=" + r_num, true);
+		r_xhr.send();
+	}
+
+	function cb_replyup() {
+		if (r_xhr.status == 200 && r_xhr.readyState == 4) {
+			var json = r_xhr.responseText;
+			var data = eval('(' + json + ')');
+			if (!data.up_ok) {
+				alert("이미 추천 한 댓글 입니다.");
+			}else{
+				var re_up = document.getElementById("re_up"+index);
+				re_up.innerHTML = data.cnt;
+			}
+		}
+	}
 </script>
 </head>
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
-
-
-
-
-
 
 			<table class="table table-bordered">
 				<thead>
@@ -166,18 +208,28 @@
 				<tr>
 					<td colspan="2" height="200px">${requestScope.vo.content }</td>
 				</tr>
+
+				<tr style="text-align: center">
+					<td colspan="2"><button type="button" class="btn btn-success"
+							onclick="boardup('${vo.num}')">
+							추천 <strong id="bo_up">${vo.up }</strong>
+						</button></td>
+				</tr>
 			</table>
 
 
 			<table align="right">
 				<tr>
-					<td>
-						<c:if test="${vo.writer eq sessionScope.m_nick || sessionScope.m_nick eq 'admin' }">
-						<input class="btn btn-success" type="button" value="수정" onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
-						<input class="btn btn-success" type="button" value="삭제" onclick="">
-						<input class="btn btn-success" type="button" value="글쓰기" onclick="location.href = 'index.jsp?page=board/insert.jsp';">
-						</c:if>
-						<input class="btn btn-success" type="button" value="목록" onclick="javascript:history.back()"></td>
+					<td><c:if
+							test="${vo.writer eq sessionScope.m_nick || sessionScope.m_nick eq 'admin' }">
+							<input class="btn btn-success" type="button" value="수정"
+								onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
+							<input class="btn btn-success" type="button" value="삭제"
+								onclick="">
+							<input class="btn btn-success" type="button" value="글쓰기"
+								onclick="location.href = 'index.jsp?page=board/insert.jsp';">
+						</c:if> <input class="btn btn-success" type="button" value="목록"
+						onclick="javascript:history.back()"></td>
 				</tr>
 			</table>
 
@@ -194,7 +246,7 @@
 				</div>
 				<br> <br>
 				<table class="table table-striped" style="padding: 50px;">
-					<c:forEach var="vo" items="${requestScope.list }">
+					<c:forEach var="vo" items="${requestScope.list }" varStatus="status">
 						<tr>
 							<!--  <td>${vo.r_num }</td>-->
 							<td id="user">
@@ -209,8 +261,9 @@
 
 
 
-							<td><button type="button" class="btn btn-xs btn-success">
-									추천 <strong>${vo.up }</strong>
+							<td><button type="button" class="btn btn-xs btn-success"
+									onclick="replyup('${vo.r_num}','${status.index}')">
+									추천 <strong id="re_up${status.index}">${vo.up }</strong>
 								</button></td>
 
 
