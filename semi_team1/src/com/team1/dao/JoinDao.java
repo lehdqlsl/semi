@@ -164,11 +164,38 @@ public class JoinDao {
 			while (rs.next()) {
 				JoinVo jv = new JoinVo(rs.getInt("num"), rs.getString("id"), rs.getString("u_pw"),
 						rs.getString("m_nick"), rs.getString("m_mail"), rs.getString("m_orgfilename"),
-						rs.getString("m_savefilename"), rs.getString("grade"),rs.getDate("reg_date"),
+						rs.getString("m_savefilename"), rs.getString("grade"), rs.getDate("reg_date"),
 						rs.getInt("stop"), rs.getDate("limit_date"));
 				list.add(jv);
 			}
 			return list;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+
+	// 해당 회원 정보 가져오기
+	public JoinVo memSelect(String nick) {
+		JoinVo vo = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "SELECT m.*,e.exp FROM MEMBERS m join exp e on m.m_nick = e.nick where m_nick = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nick);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				vo = new JoinVo(rs.getInt("num"), rs.getString("id"), rs.getString("u_pw"), rs.getString("m_nick"),
+						rs.getString("m_mail"), rs.getString("m_orgfilename"), rs.getString("m_savefilename"),
+						rs.getString("grade"), rs.getDate("reg_date"), rs.getInt("stop"), rs.getDate("limit_date"), rs.getInt("exp"));
+			}
+			return vo;
 		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return null;
@@ -216,7 +243,7 @@ public class JoinDao {
 				JoinVo jv = new JoinVo(rs.getInt("num"), rs.getString("id"), rs.getString("u_pw"),
 						rs.getString("m_nick"), rs.getString("m_mail"), rs.getString("m_orgfilename"),
 						rs.getString("m_savefilename"), rs.getString("grade"), rs.getDate("reg_date"),
-						rs.getInt("stop"), rs.getDate("limit_date"),rs.getInt("exp"));
+						rs.getInt("stop"), rs.getDate("limit_date"), rs.getInt("exp"));
 				list.add(jv);
 			}
 			return list;

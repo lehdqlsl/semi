@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.team1.db.DBCPBean;
+import com.team1.vo.JoinVo;
 import com.team1.vo.ManagerVo;
 import com.team1.vo.ReplyVo;
 import com.team1.vo.boardVo;

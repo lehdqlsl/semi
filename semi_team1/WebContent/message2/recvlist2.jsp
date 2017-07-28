@@ -23,7 +23,7 @@
 				</thead>
 				<c:forEach var="vo" items="${requestScope.list }">
 					<tr>
-					<td>${vo.receiver }</td>
+					<td>${vo.sender }</td>
 					<td><a href="/semi_team1/recvview2?num=${vo.num }">${vo.content }</a></td>
 					<td>${vo.regdate }</td>
 					<td>
