@@ -41,7 +41,7 @@
 					</tr>
 					<tr>
 						<td>제목</td>
-						<td><input type="text" name="title_name"></td>
+						<td><input type="text" name="title_name" id="title_name"></td>
 					</tr>
 					<tr>
 						<td>내용</td>
@@ -64,8 +64,8 @@
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><input class="btn btn-success"
-							type="submit" value="확인" onclick="submitContents(this);"> <input class="btn btn-success"
-							type="button" value="목록"
+							type="button" value="확인" onclick="submitContents(this);">
+							<input class="btn btn-success" type="button" value="목록"
 							onclick="location.href = '/semi_team1/list';"></td>
 					</tr>
 				</table>
@@ -117,10 +117,20 @@
 			oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
 
 			// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
-
-			try {
-				elClickedObj.form.submit();
-			} catch (e) {
+			var title = document.getElementById("title_name").value;
+			var content = document.getElementById("ir1").value;
+			if (title == null || title == "") {
+				alert("제목을 입력해주세요");
+				return;
+			} else if (content == null || content == "") {
+				alert("내용을 입력해주세요!!");
+				return;
+			} else if (!(title == null || title == "")
+					&& !(content == null || content == "")) {
+				try {
+					elClickedObj.form.submit();
+				} catch (e) {
+				}
 			}
 		}
 

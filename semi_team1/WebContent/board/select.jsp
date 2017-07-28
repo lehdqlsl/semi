@@ -190,23 +190,24 @@
 				<c:choose>
 					<c:when test="${startPage>10 }">
 						<a
-							href="/semi_team1/select?pageNum=${startPage-1 }&num=${requestScope.b_num }"></a>
+							href="/semi_team1/select?pageNum=${startPage-1 }&num=${requestScope.b_num }"><input class="btn btn-xs btn-primary" type="submit" value="◁"></a>
 					</c:when>
 					<c:otherwise>
-		[◁]	
+		<input class="btn btn-xs btn-primary" type="submit" value="◁">	
 	</c:otherwise>
 				</c:choose>
 				<c:forEach var="i" begin="${startPage }" end="${endPage }">
 					<c:choose>
 						<c:when test="${i==pageNum }">
-							<a
-								href="/semi_team1/select?pageNum=${i }&num=${requestScope.b_num }"><span
-								style="color: green">[${i }]</span></a>
+							<a style="text-decoration: none"
+								href="/semi_team1/select?pageNum=${i }&num=${requestScope.b_num }">
+								<input class="btn btn-xs btn-link" type="submit" value="${i}"></a>
 						</c:when>
 						<c:otherwise>
-							<a
-								href="/semi_team1/select?pageNum=${i }&num=${requestScope.b_num }"><span
-								style="color: #aaa">[${i }]</span></a>
+							<a style="text-decoration: none" 
+								href="/semi_team1/select?pageNum=${i }&num=${requestScope.b_num }">
+								<input class="btn btn-xs btn-link" type="submit" value="${i}">
+								</a>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -214,10 +215,10 @@
 				<c:choose>
 					<c:when test="${endPage<pageCount }">
 						<a
-							href="/semi_team1/select?pageNum=${endPage+1 }&num=${requestScope.b_num }">다음</a>
+							href="/semi_team1/select?pageNum=${endPage+1 }&num=${requestScope.b_num }"><input class="btn btn-xs btn-primary" type="submit" value="▷"></a>
 					</c:when>
 					<c:otherwise>
-		[▷]
+		<input class="btn btn-xs btn-primary" type="submit" value="▷">
 	</c:otherwise>
 				</c:choose>
 

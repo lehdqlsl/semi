@@ -49,32 +49,30 @@
 				<!-- 이전 -->
 				<c:choose>
 					<c:when test="${startPage>5 }">
-						<a href="/semi_team1/member/limit/list?pageNum=${startPage-1 }">[이전]</a>
+						<a href="/semi_team1/member/limit/list?pageNum=${startPage-1 }"><input class="btn btn-xs btn-primary" type="submit" value="◁"></a>
 					</c:when>
 					<c:otherwise>
-			[ ◁ ]
+			<input class="btn btn-xs btn-primary" type="submit" value="◁">
 		</c:otherwise>
 				</c:choose>
 
 				<c:forEach var="i" begin="${startPage }" end="${endPage }">
 					<c:choose>
 						<c:when test="${i==pageNum }">
-							<a href="/semi_team1/member/limit/list?pageNum=${i }"><span
-								style="color: blue">[${i }]</span></a>
+							<a style="text-decoration: none" href="/semi_team1/member/limit/list?pageNum=${i }"><input class="btn btn-xs btn-link" type="submit" value="${i}"></a>
 						</c:when>
 						<c:otherwise>
-							<a href="/semi_team1/member/limit/list?pageNum=${i }"><span
-								style="color: #aaa">[${i }]</span></a>
+							<a style="text-decoration: none" href="/semi_team1/member/limit/list?pageNum=${i }"><input class="btn btn-xs btn-link" type="submit" value="${i}"></a>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<!--  다음 -->
 				<c:choose>
 					<c:when test="${endPage<pageCount }">
-						<a href="/board/member/limit/list?pageNum=${endPage+1 }">[다음]</a>
+						<a href="/board/member/limit/list?pageNum=${endPage+1 }"><input class="btn btn-xs btn-primary" type="submit" value="▷"></a>
 					</c:when>
 					<c:otherwise>
-			[ ▷ ]
+			<input class="btn btn-xs btn-primary" type="submit" value="▷">
 		</c:otherwise>
 				</c:choose>
 			</div>
