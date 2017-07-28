@@ -7,7 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript"
-	src="/semi_team1/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+	src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
+	
 </head>
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
@@ -64,8 +65,8 @@
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><input class="btn btn-success"
-							type="submit" value="확인" onclick="submitContents(this);"> <input class="btn btn-success"
-							type="button" value="목록"
+							type="submit" value="확인" onclick="submitContents(this);">
+							<input class="btn btn-success" type="button" value="목록"
 							onclick="location.href = '/semi_team1/list';"></td>
 					</tr>
 				</table>
@@ -75,8 +76,6 @@
 	</div>
 	<script type="text/javascript">
 		var oEditors = [];
-
-		var sLang = "ko_KR"; // 언어 (ko_KR/ en_US/ ja_JP/ zh_CN/ zh_TW), default = ko_KR
 
 		// 추가 글꼴 목록
 		//var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
@@ -89,12 +88,10 @@
 				bUseToolbar : true, // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 				bUseVerticalResizer : true, // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
 				bUseModeChanger : true, // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-				//bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
 				//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
 				fOnBeforeUnload : function() {
 					//alert("완료!");
-				},
-				I18N_LOCALE : sLang
+				}
 			}, //boolean
 			fOnAppLoad : function() {
 				//예제 코드
