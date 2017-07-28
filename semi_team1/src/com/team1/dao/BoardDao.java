@@ -331,4 +331,64 @@ public class BoardDao {
 			DBCPBean.close(con, pstmt, null);
 		}
 	}
+	
+	//작성글 보기 리스트
+	public ArrayList<boardVo> MyWriteList(String writer, int startRow, int endRow, String search, String keyword) {
+		ArrayList<boardVo> list = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			if (search.equals("")) {
+				String sql = "select * from ( " + "select a.*, rownum rnum from( "
+						+ "select * from board where writer=? and blind=0 order by num desc "+ ")a "
+						+ ") where rnum>=? and rnum <=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, writer);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+				rs = pstmt.executeQuery();
+			} else {
+				String searchCase = "";
+				if (search.equals("writer")) {
+					searchCase = " = ? ";
+				} else {
+					searchCase = " like '%'||?||'%' ";
+				}
+
+				String sql = "select * from ( " + "select a.*, rownum rnum from( " + "select * from board where "
+						+ search + " " + searchCase + " order by num desc " + ")a " + ") where rnum>=? and rnum <=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, keyword);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+				rs = pstmt.executeQuery();
+			}
+			while (rs.next()) {
+				int num = rs.getInt("num");
+				String title_name = rs.getString("title_name");
+				int up = rs.getInt("up");
+				int hits = rs.getInt("hits");
+				String orgfilename = rs.getString("orgfilename");
+				String savefilename = rs.getString("savefilename");
+				String content = rs.getString("content");
+				Date regdate = rs.getDate("regdate");
+				writer = rs.getString("writer");
+				int s_num = rs.getInt("s_num");
+				int blind = rs.getInt("blind");
+				int report = rs.getInt("report");
+				int top = rs.getInt("top");
+				list.add(new boardVo(num, title_name, up, hits, orgfilename, savefilename, content, regdate, writer, 1,
+						s_num, blind, report, top));
+			}
+			return list;
+		} catch (SQLException se) {
+			se.printStackTrace();
+			return null;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+	
 }
