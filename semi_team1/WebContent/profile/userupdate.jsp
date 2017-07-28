@@ -120,6 +120,7 @@ function validate() {
 	ProfileVo vo=dao.select(num);
 %>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+	<h2><span class="label label-info">개인정보 수정</span></h2><br>
 	<form action="/semi_team1/userupdate" method="post" class="navbar-form">
 		
 		<input type="hidden" name="num" value="<%=num %>">
@@ -137,8 +138,8 @@ function validate() {
 		
 		<label>이메일</label><br>
 		<input type="text" placeholder="이메일" name="m_mail" id="m_mail" class="form-control" value="<%=vo.getM_mail()%>"> 
-		<input type="button" id="emailcheckbtn"	value="중복확인" onclick="return emailcheck()" class="btn btn-sm btn-success"><br><br> 
-		<input type="submit" value="수정" onclick="return validate()" class="btn btn-sm btn-success">
+		<input type="button" id="emailcheckbtn"	value="중복확인" onclick="return emailcheck()" class="btn btn-sm btn-info"><br><br> 
+		<input type="submit" value="수정" onclick="return validate()" class="btn btn-sm btn-info">
 	</form>
 </div>
 </body>
