@@ -172,10 +172,11 @@
 			<table align="right">
 				<tr>
 					<td>
-						<c:if test="${vo.m_nick eq sessionScope.m_nick || sessionScope.m_nick eq 'admin' }"></c:if>
+						<c:if test="${vo.writer eq sessionScope.m_nick || sessionScope.m_nick eq 'admin' }">
 						<input class="btn btn-success" type="button" value="수정" onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
 						<input class="btn btn-success" type="button" value="삭제" onclick="">
 						<input class="btn btn-success" type="button" value="글쓰기" onclick="location.href = 'index.jsp?page=board/insert.jsp';">
+						</c:if>
 						<input class="btn btn-success" type="button" value="목록" onclick="javascript:history.back()"></td>
 				</tr>
 			</table>
