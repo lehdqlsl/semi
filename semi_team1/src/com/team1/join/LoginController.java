@@ -79,7 +79,7 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("m_nick", vo.getM_nick());
 			session.setAttribute("num", vo.getNum());
 
-			response.sendRedirect(url);
+			response.sendRedirect("/semi_team1/index.jsp?page=content.jsp");
 		} else {
 			request.setAttribute("errMsg", "아이디 또는 비밀번호가 틀립니다");
 			request.getRequestDispatcher("index.jsp?page=login/signin.jsp").forward(request, response);
