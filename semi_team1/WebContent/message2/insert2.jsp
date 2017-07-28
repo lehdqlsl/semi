@@ -82,7 +82,7 @@ function onclickreset() {
 				<input type="button" id="nickcheckbtn" value="대상체크" onclick="nickcheck()" class="btn btn-sm btn-success">
 				</td>
 				<td style="width: 225px;">
-				<div id="result" style="color: red"></div>
+				<span id="result" style="color: red"></span>
 				</td>
 			</tr>
 			<tr>

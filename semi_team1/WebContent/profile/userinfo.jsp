@@ -1,3 +1,4 @@
+<%@page import="com.team1.message2.dao.recvDao2"%>
 <%@page import="com.team1.dao.ExpDao"%>
 <%@page import="com.team1.vo.ProfileVo"%>
 <%@page import="com.team1.dao.UserInfoDao"%>
@@ -63,6 +64,9 @@
 			String nick = (String) session.getAttribute("m_nick");
 			ExpDao expdao = new ExpDao();
 			int exp = expdao.select(nick);
+			
+			recvDao2 dao1 = new recvDao2();
+			int recvm=dao1.getMsgCount(nick);
 		%>
 		<table class="table table-bordered" width="300px">
 			<tr>
@@ -114,7 +118,7 @@
 			<li><a
 				href="/semi_team1/index.jsp?page=profile/userupdate.jsp?num=<%=num%>">개인정보
 					수정</a></li>
-			<li><a href="/semi_team1/recvlist2">받은 쪽지함</a></li>
+			<li><a href="/semi_team1/recvlist2">받은 쪽지함&nbsp;<%=recvm %></a></li>
 			<li><a href="/semi_team1/sendlist2">보낸 쪽지함</a></li>
 			<li><a
 				href="/semi_team1/index.jsp?page=message2/insert2.jsp?num=<%=num%>">쪽지보내기</a></li>

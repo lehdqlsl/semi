@@ -10,6 +10,7 @@ import com.team1.db.DBCPBean;
 import com.team1.vo.Message2Vo;
 
 public class recvDao2 {
+	
 	public ArrayList<Message2Vo> list(String recv, int startRow, int endRow){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -71,6 +72,7 @@ public class recvDao2 {
 		}
 	}
 	
+	//받은메시지 상세보기
 	public Message2Vo select(int num){
 		Connection con=null;
 		PreparedStatement pstmt1=null;
@@ -117,6 +119,8 @@ public class recvDao2 {
 			}
 		}
 	}
+	
+	//받은메시지 삭제
 	public int delete(Message2Vo vo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -133,14 +137,15 @@ public class recvDao2 {
 			DBCPBean.close(con, pstmt, null);
 		}
 	}
-	//상태바 신규메시지
+	
+	//받은쪽지함 신규메시지 개수 표시
 	public int getMsgCount(String m_nick) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = DBCPBean.getConn();
-			String sql = "select count(*) cnt from message where chk=1 and receiver=?";
+			String sql = "select count(*) cnt from message where chk=1 and send_cxl=1 and receiver=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m_nick);
 			rs=pstmt.executeQuery();
