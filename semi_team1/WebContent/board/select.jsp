@@ -14,7 +14,7 @@
 			alert("먼저 로그인을 하셔야합니다.\n로그인페이지로 이동 하시겠습니까?");
 			document.location.href = "index.jsp?page=login/signin.jsp";
 		}
-		//로그인 된 후	
+		//로그인 된 후
 		xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = callback;
 		xhr
@@ -32,7 +32,6 @@
 			var data = xhr.responseXML;
 			var limitchk = data.getElementsByTagName("limitChk")[0].firstChild.nodeValue;
 			var limitdate = data.getElementsByTagName("limit_date")[0].firstChild.nodeValue;
-			console.log("callback" + limitchk);
 			if (limitchk == 1) {
 				alert("제재처리로 댓글을 작성할 수 없습니다. [ " + limitdate + " ] 이후부터 작성가능");
 				submitbtn.disabled = true;
@@ -40,7 +39,18 @@
 			}
 		}
 	}
-
+	// 댓글 공백 체크
+	function checkBlank(object){
+		var content=document.getElementById("content").value;
+		console.log("내용 : "+content);
+		if (content == null || content == "") {
+			alert("내용을 입력하세요!");
+			return;
+		}else{
+			object.form.submit();
+		}
+	}
+	
 	// 댓글 삭제 체크
 	var xhr1 = null;
 	var bNum = 0;
@@ -51,11 +61,11 @@
 				.open('get', "/semi_team1/reply/delete?r_num=" + r_num
 						+ "&b_num=" + b_num + "&nick=" + nick + "&sessionNick="
 						+ sessionNick, true);
-		if (nick!=sessionNick) {
+		if (nick != sessionNick) {
 			alert("댓글 삭제는 작성자만 할 수 있습니다.");
 			return;
 		} else {
-			if(confirm("댓글을 삭제하시겠습니까?")){
+			if (confirm("댓글을 삭제하시겠습니까?")) {
 				bNum = b_num;
 				xhr1.send();
 			}
@@ -190,24 +200,26 @@
 				<c:choose>
 					<c:when test="${startPage>10 }">
 						<a
-							href="/semi_team1/select?pageNum=${startPage-1 }&num=${requestScope.b_num }"><input class="btn btn-xs btn-primary" type="submit" value="◁"></a>
+							href="/semi_team1/select?pageNum=${startPage-1 }&num=${requestScope.b_num }"><input
+							class="btn btn-xs btn-primary" type="submit" value="◁"></a>
 					</c:when>
 					<c:otherwise>
-		<input class="btn btn-xs btn-primary" type="submit" value="◁">	
-	</c:otherwise>
+						<input class="btn btn-xs btn-primary" type="submit" value="◁">
+					</c:otherwise>
 				</c:choose>
 				<c:forEach var="i" begin="${startPage }" end="${endPage }">
 					<c:choose>
 						<c:when test="${i==pageNum }">
 							<a style="text-decoration: none"
 								href="/semi_team1/select?pageNum=${i }&num=${requestScope.b_num }">
-								<input class="btn btn-xs btn-link" type="submit" value="${i}"></a>
+								<input class="btn btn-xs btn-link" type="submit" value="${i}">
+							</a>
 						</c:when>
 						<c:otherwise>
-							<a style="text-decoration: none" 
+							<a style="text-decoration: none"
 								href="/semi_team1/select?pageNum=${i }&num=${requestScope.b_num }">
 								<input class="btn btn-xs btn-link" type="submit" value="${i}">
-								</a>
+							</a>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -215,11 +227,12 @@
 				<c:choose>
 					<c:when test="${endPage<pageCount }">
 						<a
-							href="/semi_team1/select?pageNum=${endPage+1 }&num=${requestScope.b_num }"><input class="btn btn-xs btn-primary" type="submit" value="▷"></a>
+							href="/semi_team1/select?pageNum=${endPage+1 }&num=${requestScope.b_num }"><input
+							class="btn btn-xs btn-primary" type="submit" value="▷"></a>
 					</c:when>
 					<c:otherwise>
-		<input class="btn btn-xs btn-primary" type="submit" value="▷">
-	</c:otherwise>
+						<input class="btn btn-xs btn-primary" type="submit" value="▷">
+					</c:otherwise>
 				</c:choose>
 
 				<!-- 글쓰기 -->
@@ -233,9 +246,9 @@
 								placeholder="댓글 작성 시 타인에 대한 배려와 책임을 담아주세요." style="width: 90%"
 								onclick="login('<%=session.getAttribute("m_nick")%>')"
 								onkeyup="textlen()"></textarea>
-							<button type="submit" id="submitbtn"
+							<button type="button" id="submitbtn"
 								class="btn btn-lg btn-success"
-								style="float: right; height: 88px; width: 10%">등록</button>
+								style="float: right; height: 88px; width: 10%" onclick="checkBlank(this)">등록</button>
 						</div>
 					</div>
 					<div id="len">0/500 byte</div>

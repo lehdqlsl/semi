@@ -113,10 +113,20 @@ src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 			oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
 
 			// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
-
-			try {
-				elClickedObj.form.submit();
-			} catch (e) {
+			var content=document.getElementById("ir1").value;
+			var title=document.getElementById("title_name").value;
+			console.log("내용 : "+content);
+			if(content==null || content=="<p>&nbsp;</p>"){
+				alert("내용을 입력하세요!");
+				return;
+			}else if(title==null || title==""){
+				alert("제목을 입력하세요!");
+				return;
+			}else{
+				try {
+					elClickedObj.form.submit();
+				} catch (e) {
+				}
 			}
 		}
 
