@@ -17,7 +17,6 @@
 	line-height: 1.5;
 	text-align: left;
 }
-
 </style>
 <script type="text/javascript">
 	var xhr1 = null;
@@ -64,6 +63,7 @@
 </head>
 <body>
 
+
 	<%-- 왼쪽 사이드바 --%>
 	<div class="col-sm-3 col-md-2 sidebar">
 		<%
@@ -76,8 +76,7 @@
 			int exp = expdao.select(nick);
 			String src = vo.getGrade() + ".png";
 			recvDao2 dao1 = new recvDao2();
-			int recvm=dao1.getMsgCount(nick);
-
+			int recvm = dao1.getMsgCount(nick);
 		%>
 		<table class="table table-bordered" width="300px">
 			<tr>
@@ -102,13 +101,15 @@
 		<!-- 랭킹 이미지 -->
 		<table class="table table-bordered" style="margin: auto;">
 			<tr>
-				<td rowspan="2" style="text-align: center;"><img src="/semi_team1/rs/img/<%=src%>"
+				<td rowspan="2" style="text-align: center;"><img
+					src="/semi_team1/rs/img/<%=src%>"
 					style="height: 125px; width: 125px;"></td>
 				<td style="padding-top: 40px;">
 					<div id="RankInfo">
-						<span style="color: #1f8ecd;font-size: 14.5px;line-height: 19.5px;">등급:<%=vo.getGrade()%></span>
-						<br><br>
-						<span style="color: #555e5e;font-weight: bold;font-size: 12.5px;">경험치:<%=exp%></span>
+						<span
+							style="color: #1f8ecd; font-size: 14.5px; line-height: 19.5px;">등급:<%=vo.getGrade()%></span>
+						<br> <br> <span
+							style="color: #555e5e; font-weight: bold; font-size: 12.5px;">경험치:<%=exp%></span>
 					</div>
 				</td>
 			</tr>
@@ -139,7 +140,7 @@
 			<li><a
 				href="/semi_team1/index.jsp?page=profile/userupdate.jsp?num=<%=num%>">개인정보
 					수정</a></li>
-			<li><a href="/semi_team1/recvlist2">받은 쪽지함&nbsp;<%=recvm %></a></li>
+			<li><a href="/semi_team1/recvlist2">받은 쪽지함&nbsp;<%=recvm%></a></li>
 			<li><a href="/semi_team1/sendlist2">보낸 쪽지함</a></li>
 			<li><a
 				href="/semi_team1/index.jsp?page=message2/insert2.jsp?num=<%=num%>">쪽지보내기</a></li>
@@ -185,7 +186,7 @@
 	</form>
 
 	<%-- 닉네임파트 --%>
-	<div style="width: 1000px; height: 500px; padding-left: 350px;">
+	<div style="width: 1000px; height: 600px; padding-left: 350px;">
 		<form action="/semi_team1/nickupdate" method="post"
 			class="navbar-form" name="a">
 			<input type="hidden" name="num" value="<%=num%>"> <label>닉네임</label><br>
