@@ -21,7 +21,7 @@
 				</tr>
 					
 				<tr>
-					<td colspan="2">${vo.content }</td>
+					<td colspan="2" style="height: 200px;">${vo.content }</td>
 				</tr>
 				
 			</table>
