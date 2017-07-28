@@ -115,30 +115,23 @@
 </script>
 </head>
 <body>
-<%
-	// 쿠키 저장하기
-	String snick=(String)session.getAttribute("m_nick");
-	String s_num=request.getParameter("num");
-	String nick=URLEncoder.encode(snick,"utf-8");
-	Cookie cook1=new Cookie("nick",nick);
-	Cookie cook2=new Cookie("s_num",s_num);
-	cook1.setMaxAge(60*60*24);//유지시간 1일
-	cook2.setMaxAge(60*60*24);//유지시간 1일
-	response.addCookie(cook1);
-	response.addCookie(cook2);
-%>
+	<%
+		// 쿠키 저장하기
+		String snick = (String) session.getAttribute("m_nick");
+		String s_num = request.getParameter("num");
+		String nick = URLEncoder.encode(snick, "utf-8");
+		Cookie cook1 = new Cookie("nick", nick);
+		Cookie cook2 = new Cookie("s_num", s_num);
+		cook1.setMaxAge(60 * 60 * 24);//유지시간 1일
+		cook2.setMaxAge(60 * 60 * 24);//유지시간 1일
+		response.addCookie(cook1);
+		response.addCookie(cook2);
+	%>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
->>>>>>> branch 'master' of https://github.com/lehdqlsl/semi
+			<<<<<<< HEAD ======= >>>>>>> branch 'master' of
+			https://github.com/lehdqlsl/semi
 			<table class="table table-bordered">
 				<thead>
 					<tr>
@@ -187,13 +180,16 @@
 
 			<table align="right">
 				<tr>
-					<td>
-						<c:if test="${vo.writer eq sessionScope.m_nick || sessionScope.m_nick eq 'admin' }">
-						<input class="btn btn-success" type="button" value="수정" onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
-						<input class="btn btn-success" type="button" value="삭제" onclick="">
-						<input class="btn btn-success" type="button" value="글쓰기" onclick="location.href = 'index.jsp?page=board/insert.jsp';">
-						</c:if>
-						<input class="btn btn-success" type="button" value="목록" onclick="javascript:history.back()"></td>
+					<td><c:if
+							test="${vo.writer eq sessionScope.m_nick || sessionScope.m_nick eq 'admin' }">
+							<input class="btn btn-success" type="button" value="수정"
+								onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
+							<input class="btn btn-success" type="button" value="삭제"
+								onclick="">
+							<input class="btn btn-success" type="button" value="글쓰기"
+								onclick="location.href = 'index.jsp?page=board/insert.jsp';">
+						</c:if> <input class="btn btn-success" type="button" value="목록"
+						onclick="javascript:history.back()"></td>
 				</tr>
 			</table>
 
@@ -222,20 +218,25 @@
 								style="word-break: break-all; word-wrap: break-word;">${vo.content }</td>
 							<td>${vo.reg_date }</td>
 
-
-
-
 							<td><button type="button" class="btn btn-xs btn-success">
 									추천 <strong>${vo.up }</strong>
 								</button></td>
 
 
-
-
-							<td><div id="delete">
-									<button type="button" class="btn btn-xs btn-success"
-										onclick="nickCheck('${vo.r_num }','${vo.b_num}','${vo.nick}','${sessionScope.m_nick}')">삭제</button>
-								</div></td>
+							<td><c:choose>
+									<c:when test="${vo.nick==sessionScope.m_nick }">
+										<div id="delete">
+											<button type="button" class="btn btn-xs btn-warning"
+												onclick="nickCheck('${vo.r_num }','${vo.b_num}','${vo.nick}','${sessionScope.m_nick}')">삭제</button>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div id="report">
+											<button type="button" class="btn btn-xs btn-danger"
+												onclick="">신고</button>
+										</div>
+									</c:otherwise>
+								</c:choose></td>
 						</tr>
 					</c:forEach>
 				</table>
