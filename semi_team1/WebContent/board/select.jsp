@@ -103,6 +103,16 @@
 	};
 </script>
 </head>
+<%
+		request.setCharacterEncoding("utf-8");
+		int num = (int)session.getAttribute("num");
+		String sender = request.getParameter("sender");
+		if(sender==null){
+			sender="";
+		}
+		String receiver = request.getParameter("receiver");
+		String content = request.getParameter("content");
+	%>
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div
@@ -130,9 +140,10 @@
 
 				<tr>
 					<td colspan="2">
-					<input type="button" value="작성글보기" class="btn btn-xs btn-default">
+					<input type="button" value="작성글보기" class="btn btn-xs btn-default"
+					onclick="location.href = 'index.jsp?page=mywritelist?writer=${vo.writer}';">
 					<input type="button" value="쪽지보내기" class="btn btn-xs btn-default"
-					onclick="location.href = 'index.jsp?page=message2/insert2.jsp';" >
+					onclick="location.href = 'index.jsp?page=message2/insert2.jsp?sender=${vo.writer}';" >
 									
 					</td>
 

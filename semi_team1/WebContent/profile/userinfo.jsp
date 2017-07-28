@@ -60,12 +60,17 @@
 		}
 		alert("수정이 완료되었습니다!!");
 	}
+	
+
+	
+
+	
 </script>
 </head>
 <body>
 
 	<%-- 왼쪽 사이드바 --%>
-	<div class="col-sm-3 col-md-2 sidebar">
+	<div class="col-sm-3 col-md-2 sidebar" id="sidebar">
 		<%
 			request.setCharacterEncoding("utf-8");
 			int num = Integer.parseInt(request.getParameter("num"));
@@ -75,6 +80,9 @@
 			ExpDao expdao = new ExpDao();
 			int exp = expdao.select(nick);
 			String src = vo.getGrade() + ".png";
+			
+			
+			
 			recvDao2 dao1 = new recvDao2();
 			int recvm=dao1.getMsgCount(nick);
 
@@ -152,6 +160,7 @@
 	<form method="post" action="/semi_team1/imgupdate"
 		enctype="multipart/form-data">
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<h2><span class="label label-success">프로필 수정</span></h2><br>
 			<input type="hidden" name="num" value="<%=num%>"> <input
 				type="hidden" name="savefilename"
 				value="<%=vo.getM_savefilename()%>">
@@ -185,7 +194,7 @@
 	</form>
 
 	<%-- 닉네임파트 --%>
-	<div style="width: 1000px; height: 500px; padding-left: 350px;">
+	<div style="width: 1000px; height: 600px; padding-left: 350px;">
 		<form action="/semi_team1/nickupdate" method="post"
 			class="navbar-form" name="a">
 			<input type="hidden" name="num" value="<%=num%>"> <label>닉네임</label><br>

@@ -4,6 +4,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="text/javascript">
+	//var test="location.href='/semi_team1/index.jsp?page=profile/userinfo.jsp'";
+
+	setInterval(msgrefresh, 1000)
+
+	var xhr = null;
+	function msgrefresh() {
+		xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = callback;
+		xhr.open('get', '/semi_team1/message2/msgrefresh.jsp', true);
+		xhr.send();
+	}
+	function callback() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+
+			var data = xhr.responseText;
+			var json = eval('(' + data + ')');
+			console.log(json.cnt);
+			var div = document.getElementById("msg");
+			console.log(div);
+			//	alert(div);
+			div.innerHTML = json.cnt;
+		}
+	}
+</script>
 </head>
 <body>
 	<nav class="navbar navbar-fixed-top navbar-inverse">
@@ -51,6 +76,7 @@
 				<c:otherwise>
 					<div class="navbar-form navbar-right" style="margin-top: 0px;">
 						<ul class="nav navbar-nav">
+							<li><a href="/semi_team1/recvlist2" id="msg"></a></li>
 							<li><a>${sessionScope.m_nick } 님</a></li>
 							<li><a
 								href="/semi_team1/index.jsp?page=profile/userinfo.jsp?num=${sessionScope.num }">회원정보</a></li>
