@@ -131,7 +131,8 @@
 				<tr>
 					<td colspan="2">
 					<input type="button" value="작성글보기" class="btn btn-xs btn-default">
-					<input type="button" value="쪽지보내기" class="btn btn-xs btn-default">
+					<input type="button" value="쪽지보내기" class="btn btn-xs btn-default"
+					onclick="location.href = 'index.jsp?page=message2/insert2.jsp';" >
 									
 					</td>
 
