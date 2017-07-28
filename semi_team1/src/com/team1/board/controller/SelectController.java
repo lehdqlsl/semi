@@ -30,8 +30,11 @@ public class SelectController extends HttpServlet {
 		JoinDao memdao = new JoinDao();
 		JoinVo mvo = memdao.memSelect(nick);
 		
-
 		boardVo vo = dao.select(b_num);
+		//////////////////////////////////////////////////////
+
+		
+		/////////////////////////////////////////////////////
 		dao.hitupdate(b_num);
 
 		int pageNum = 1;

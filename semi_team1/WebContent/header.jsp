@@ -33,7 +33,7 @@
 				<li id="c5"><a
 					href="/semi_team1/index.jsp?page=music/musicIndex.jsp">음악</a></li>
 				<li id="c6"><a
-					href="/semi_team1/index.jsp?page=ranking.jsp">랭킹</a></li>
+					href="/semi_team1/index.jsp?page=ranking/list">랭킹</a></li>
 					
 				<c:if test="${sessionScope.m_nick == 'admin'}">
 					<li id="c7"><a

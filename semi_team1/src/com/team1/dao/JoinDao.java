@@ -373,4 +373,31 @@ public class JoinDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
+	public ArrayList<JoinVo> rankingList() {
+		String sql = "SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM(SELECT m.*,e.exp FROM MEMBERS m, exp e where m.m_nick = e.nick and m.num not like 0 ORDER BY e.exp DESC) AA) WHERE RNUM<=100";
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			ArrayList<JoinVo> list = new ArrayList<>();
+			while (rs.next()) {
+				JoinVo jv = new JoinVo(rs.getInt("num"), rs.getString("id"), rs.getString("u_pw"),
+						rs.getString("m_nick"), rs.getString("m_mail"), rs.getString("m_orgfilename"),
+						rs.getString("m_savefilename"), rs.getString("grade"), rs.getDate("reg_date"),
+						rs.getInt("stop"), rs.getDate("limit_date"), rs.getInt("exp"));
+				list.add(jv);
+			}
+	
+			return list;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
 }

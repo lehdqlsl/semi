@@ -25,7 +25,6 @@ public class ListController extends HttpServlet {
 		String spageNum=request.getParameter("pageNum");
 		// 임시로 b_num(게시판번호) 1로 받아옴 -> 수정필요
 		int b_num=Integer.parseInt(request.getParameter("b_num"));
-		System.out.println(b_num);
 		
 		int pageNum=1;
 		if(spageNum!=null){
