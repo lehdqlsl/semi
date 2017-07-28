@@ -71,6 +71,7 @@ function onclickreset() {
 	%>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div style="margin: auto; width: 1000px; height: 1300px;">
+		<h2><span class="label label-warning">쪽지보내기</span></h2><br>
 	<form action="/semi_team1/sendinsert2" method="post" id="a">
 		<%-- <input type="hidden" value="<%=num%>" name="num">--%>
 		<input type="hidden" value="${sessionScope.m_nick }" name="sender">
@@ -78,8 +79,9 @@ function onclickreset() {
 		<table class="table table-bordered" style="width: 500px;">
 			<tr>
 				<td style="width: 75px;">받는사람</td>
-				<td style="width: 200px;"><input type="text" name="receiver" id="m_nick" style="width: 100px;" value="<%=sender%>">
-				<input type="button" id="nickcheckbtn" value="대상체크" onclick="nickcheck()" class="btn btn-sm btn-success">
+				<td style="width: 200px;">
+				<input type="text" name="receiver" id="m_nick" style="width: 100px;" value="<%=sender%>">
+				<input type="button" id="nickcheckbtn" value="대상체크" onclick="nickcheck()" class="btn btn-sm btn-warning">
 				</td>
 				<td style="width: 225px;">
 				<span id="result" style="color: red"></span>
@@ -90,11 +92,11 @@ function onclickreset() {
 			</tr>
 
 			<tr>
-				<td colspan="2" align="center">
-				<input class="btn btn-success" type="submit" value="보내기" onclick="return validate()"> 
-				<input class="btn btn-success" type="button" value="목록"
+				<td colspan="3" align="center">
+				<input class="btn btn-warning" type="submit" value="보내기" onclick="return validate()"> 
+				<input class="btn btn-warning" type="button" value="목록"
 				onclick="location.href = '/semi_team1/sendlist2';">
-				<input class="btn btn-success" type="reset" value="다시입력" onclick="onclickreset()">
+				<input class="btn btn-warning" type="reset" value="다시입력" onclick="onclickreset()">
 				</td>
 			</tr>
 		</table>

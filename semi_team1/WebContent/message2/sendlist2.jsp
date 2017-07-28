@@ -8,9 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div style="margin: auto; width: 1000px; height: 1300px;">
+		<h2><span class="label label-danger">보낸 쪽지함</span></h2><br>
 			<table class="table table-bordered">
 				<thead>
 					<tr>
@@ -65,11 +65,11 @@
 					<c:when test="${startPageNum>10 }">
 						<a
 							href="">
-							<input class="btn btn-xs btn-primary" type="submit" value="◁">
+							<input class="btn btn-xs btn-danger" type="submit" value="◁">
 						</a>
 					</c:when>
 					<c:otherwise>
-			<input class="btn btn-xs btn-primary" type="submit" value="◁">
+			<input class="btn btn-xs btn-danger" type="submit" value="◁">
 		</c:otherwise>
 				</c:choose>
 				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
@@ -92,11 +92,11 @@
 					<c:when test="${endPageNum<pageCount }">
 						<a
 							href="">
-							<input class="btn btn-xs btn-primary" type="submit" value="▷">
+							<input class="btn btn-xs btn-danger" type="submit" value="▷">
 						</a>
 					</c:when>
 					<c:otherwise>
-			<input class="btn btn-xs btn-primary" type="submit" value="▷">
+			<input class="btn btn-xs btn-danger" type="submit" value="▷">
 		</c:otherwise>
 				</c:choose>
 			</div>

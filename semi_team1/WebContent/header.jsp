@@ -32,9 +32,11 @@
 					href="/semi_team1/index.jsp?page=tasty/tastyIndex.jsp">맛집</a></li>
 				<li id="c5"><a
 					href="/semi_team1/index.jsp?page=music/musicIndex.jsp">음악</a></li>
-
+				<li id="c6"><a
+					href="/semi_team1/index.jsp?page=ranking.jsp">랭킹</a></li>
+					
 				<c:if test="${sessionScope.m_nick == 'admin'}">
-					<li id="c5"><a
+					<li id="c7"><a
 						href="/semi_team1/index.jsp?page=manager/managerIndex.jsp">관리자페이지</a></li>
 				</c:if>
 			</ul>
