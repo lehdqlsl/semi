@@ -117,20 +117,59 @@
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
+			
+			
+			
+			
+			
+			
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<th>${requestScope.vo.title_name}</th>
+						<th colspan="2">${requestScope.vo.title_name}</th>
 					</tr>
 				</thead>
 				<tr>
-					<td>사용자정보표시란</td>
-				</tr>
-				<tr>
-					<td>${requestScope.vo.content }</td>
-				</tr>
-			</table>
+					<td rowspan="6" width="250px"><img src="/semi_team1/upload/${requestScope.mvo.m_savefilename }"></td>
+					<td width="400px" colspan="2">${requestScope.mvo.m_nick }(${requestScope.mvo.id })</td>
 
+				</tr>
+
+				<tr>
+					<td colspan="2">
+					<input type="button" value="작성글보기" class="btn btn-xs btn-default">
+					<input type="button" value="쪽지보내기" class="btn btn-xs btn-default">
+									
+					</td>
+
+				</tr>
+
+				<tr>
+					<td colspan="2">가입날짜 ${requestScope.mvo.reg_date }</td>
+
+				</tr>
+				
+				<tr>
+					<td colspan="2">등급 ${requestScope.mvo.grade }</td>
+
+				</tr>
+				
+				<tr>
+					<td colspan="2">경험치 ${requestScope.mvo.exp }</td>
+
+				</tr>
+				
+				
+				<tr>
+					<td>추천 xx / 조회 xx</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" height="200px">${requestScope.vo.content }</td>
+				</tr>
+			</table>	
+				
+					
 			<table align="right">
 				<tr>
 					<td><input class="btn btn-success" type="button" value="수정"
