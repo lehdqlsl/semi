@@ -8,6 +8,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.RankInfo {
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 12px;
+	line-height: 1.5;
+	text-align: left;
+}
+
+</style>
 <script type="text/javascript">
 	var xhr1 = null;
 	function nickcheck() {
@@ -63,10 +73,11 @@
 			String nick = (String) session.getAttribute("m_nick");
 			ExpDao expdao = new ExpDao();
 			int exp = expdao.select(nick);
+			String src = vo.getGrade() + ".png";
 		%>
 		<table class="table table-bordered" width="300px">
 			<tr>
-				<td colspan="2">사용자정보</td>
+				<td colspan="2" style="text-align: center">사용자정보</td>
 			<tr>
 				<td rowspan="5" width="100px"><img
 					src="/semi_team1/upload/<%=vo.getM_savefilename()%>"
@@ -80,21 +91,31 @@
 			</tr>
 
 			<tr>
-				<td>등급:<%=vo.getGrade()%></td>
-			</tr>
-
-			<tr>
-				<td>경험치:<%=exp%></td>
-			</tr>
-
-			<tr>
 				<td>가입일:<br><%=vo.getReg_date()%></td>
 			</tr>
 		</table>
+		<br>
+		<!-- 랭킹 이미지 -->
+		<table class="table table-bordered" style="margin: auto;">
+			<tr>
+				<td rowspan="2" style="text-align: center;"><img src="/semi_team1/rs/img/<%=src%>"
+					style="height: 125px; width: 125px;"></td>
+				<td style="padding-top: 40px;">
+					<div id="RankInfo">
+						<span style="color: #1f8ecd;font-size: 14.5px;line-height: 19.5px;">등급:<%=vo.getGrade()%></span>
+						<br><br>
+						<span style="color: #555e5e;font-weight: bold;font-size: 12.5px;">경험치:<%=exp%></span>
+					</div>
+				</td>
+			</tr>
 
+
+
+
+		</table>
 		<table class="table table-bordered">
 			<tr>
-				<td colspan="3">활동내역</td>
+				<td colspan="3" style="text-align: center">활동내역</td>
 			</tr>
 
 			<tr>
