@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.xml.internal.ws.wsdl.parser.MemberSubmissionAddressingWSDLParserExtension;
 import com.team1.dao.BoardDao;
+import com.team1.dao.JoinDao;
 import com.team1.dao.ReplyDao;
+import com.team1.vo.JoinVo;
 import com.team1.vo.ReplyVo;
 import com.team1.vo.boardVo;
 
@@ -22,9 +25,15 @@ public class SelectController extends HttpServlet {
 			throws ServletException, IOException {
 		String spageNum = request.getParameter("pageNum");
 		int b_num = Integer.parseInt(request.getParameter("num"));
+		String nick = request.getParameter("writer");
 		BoardDao dao = new BoardDao();
+		JoinDao memdao = new JoinDao();
+		JoinVo mvo = memdao.memSelect(nick);
+		
+
 		boardVo vo = dao.select(b_num);
 		dao.hitupdate(b_num);
+
 		int pageNum = 1;
 		if (spageNum != null) {
 			pageNum = Integer.parseInt(spageNum);
@@ -54,6 +63,7 @@ public class SelectController extends HttpServlet {
 
 		if (vo != null) {
 			request.setAttribute("vo", vo);
+			request.setAttribute("mvo", mvo);
 			request.getRequestDispatcher("/index.jsp?page=/game/gameIndex.jsp&s_page=/board/select.jsp")
 					.forward(request, response);
 		} else {
