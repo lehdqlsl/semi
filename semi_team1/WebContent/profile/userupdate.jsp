@@ -70,16 +70,30 @@ function validate() {
 	for(var i=0;i<u_pw.length;i++){
 		var ch=u_pw.charAt(i);
 		if(!((ch>='A'&&ch<='Z')||(ch>='a'&&ch<='z')||(ch>=0&&ch<=9)||ch=='!'||ch=='@')){
-			alert("비밀번호는 영문자, 숫자, !, @로만 입력하세요!!");
+			alert("비밀번호는 영문자, 숫자, !, @로만 입력하세요");
 			return;
 		}
 	}
 	//////////////////////비밀번호 확인 조건///////////////////////////////////
 	var checkpw = document.getElementById("checkpw").value;
+	
+	<%--
+	var span=document.getElementById("span");//결과출력란
+	--%>
+	
 	if (u_pw != checkpw) {
 		alert("비밀번호를 확인하세요");
 		return false;
-	}
+	}	
+		<%-- //결과출력란
+		if(u_pw==""){
+			document.getElementById("result").innerHTML="";
+			return;
+		} 
+			
+	} else if(u_pw = checkpw){
+		span.innerHTML="비밀번호가 확인되었습니다.";
+	} --%>
 	
 	////////////////////빈 칸이 입력되면////////////////////////////////////////
 	var m_mail=document.getElementById("m_mail").value;
@@ -94,7 +108,7 @@ function validate() {
 		alert("중복확인을 해주세요");
 		return false;
 	}
-	alert("수정이 완료되었습니다!!");
+	alert("수정이 완료되었습니다");
 }
 </script>
 </head>
@@ -114,7 +128,12 @@ function validate() {
 		<input type="password" placeholder="비밀번호" name="u_pw" id="u_pw"	class="form-control"><br> 
 		
 		<label>비밀번호 확인</label><br>
-		<input type="password" placeholder="비밀번호 확인" name="checkpw" id="checkpw" class="form-control"><br> 
+		<input type="password" placeholder="비밀번호 확인" name="checkpw" id="checkpw" class="form-control">
+		
+		<%-- <span id="span" style="color: red"> </span> 
+		ajax01/4/insert.html 참고 idcheck.jsp -> pwdcheck(dao) --%>
+
+		<br> 
 		
 		<label>이메일</label><br>
 		<input type="text" placeholder="이메일" name="m_mail" id="m_mail" class="form-control" value="<%=vo.getM_mail()%>"> 
