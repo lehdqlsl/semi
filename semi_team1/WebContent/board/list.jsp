@@ -40,7 +40,12 @@
 </head>
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
+<<<<<<< HEAD
+		<div
+			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
+=======
 		<div style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
+>>>>>>> branch 'master' of https://github.com/lehdqlsl/semi
 
 			<table class="table table-bordered">
 				<thead>

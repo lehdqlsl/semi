@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -161,6 +162,18 @@
 </script>
 </head>
 <body>
+<%
+	// 쿠키 저장하기
+	String snick=(String)session.getAttribute("m_nick");
+	String s_num=request.getParameter("num");
+	String nick=URLEncoder.encode(snick,"utf-8");
+	Cookie cook1=new Cookie("nick",nick);
+	Cookie cook2=new Cookie("s_num",s_num);
+	cook1.setMaxAge(60*60*24);//유지시간 1일
+	cook2.setMaxAge(60*60*24);//유지시간 1일
+	response.addCookie(cook1);
+	response.addCookie(cook2);
+%>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
