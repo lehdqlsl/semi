@@ -20,6 +20,6 @@ public class RankingController extends HttpServlet{
 		ArrayList<JoinVo> list = dao.rankingList();
 		
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("/index.jsp?page=/manager/managerIndex.jsp&s_page=/ranking/ranking.jsp").forward(request, response);
+		request.getRequestDispatcher("/index.jsp?page=/ranking/ranking.jsp").forward(request, response);
 	}
 }
