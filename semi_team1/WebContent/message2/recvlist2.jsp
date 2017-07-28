@@ -8,9 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div style="margin: auto; width: 1000px; height: 1300px;">
+		<h2><span class="label label-primary">받은 쪽지함</span></h2><br>
 			<table class="table table-bordered">
 				<thead>
 					<tr>
