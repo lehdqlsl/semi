@@ -41,17 +41,17 @@
 		}
 	}
 	// 댓글 공백 체크
-	function checkBlank(object){
-		var content=document.getElementById("content").value;
-		console.log("내용 : "+content);
+	function checkBlank(object) {
+		var content = document.getElementById("content").value;
+		console.log("내용 : " + content);
 		if (content == null || content == "") {
 			alert("내용을 입력하세요!");
 			return;
-		}else{
+		} else {
 			object.form.submit();
 		}
 	}
-	
+
 	// 댓글 삭제 체크
 	var xhr1 = null;
 	var bNum = 0;
@@ -130,6 +130,15 @@
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+>>>>>>> branch 'master' of https://github.com/lehdqlsl/semi
 			<table class="table table-bordered">
 				<thead>
 					<tr>
@@ -137,21 +146,16 @@
 					</tr>
 				</thead>
 				<tr>
-					<td rowspan="6" width="250px"  style="text-align: center; padding-top: 40px; ">
-					<img src="/semi_team1/upload/${requestScope.mvo.m_savefilename }"
-					style="height: 150px; width: 150px;">
-					</td>
+					<td rowspan="6" width="250px"><img
+						src="/semi_team1/upload/${requestScope.mvo.m_savefilename }"></td>
 					<td width="400px" colspan="2">${requestScope.mvo.m_nick }(${requestScope.mvo.id })</td>
 
 				</tr>
 
 				<tr>
-					<td colspan="2">
-					<input type="button" value="작성글보기" class="btn btn-xs btn-default">
-					<input type="button" value="쪽지보내기" class="btn btn-xs btn-default"
-					onclick="location.href = 'index.jsp?page=message2/insert2.jsp';" >
-									
-					</td>
+					<td colspan="2"><input type="button" value="작성글보기"
+						class="btn btn-xs btn-default"> <input type="button"
+						value="쪽지보내기" class="btn btn-xs btn-default"></td>
 
 				</tr>
 
@@ -159,37 +163,37 @@
 					<td colspan="2">가입날짜 ${requestScope.mvo.reg_date }</td>
 
 				</tr>
-				
+
 				<tr>
 					<td colspan="2">등급 ${requestScope.mvo.grade }</td>
 
 				</tr>
-				
+
 				<tr>
 					<td colspan="2">경험치 ${requestScope.mvo.exp }</td>
 
 				</tr>
-				
-				
+
+
 				<tr>
-					<td>조회 ${requestScope.vo.hits }</td>
+					<td>추천 xx / 조회 xx</td>
 				</tr>
-				
+
 				<tr>
 					<td colspan="2" height="200px">${requestScope.vo.content }</td>
 				</tr>
-			</table>	
-				
-					
+			</table>
+
+
 			<table align="right">
 				<tr>
-					<td><input class="btn btn-success" type="button" value="수정"
-						onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
+					<td>
+						<c:if test="${vo.writer eq sessionScope.m_nick || sessionScope.m_nick eq 'admin' }">
+						<input class="btn btn-success" type="button" value="수정" onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
 						<input class="btn btn-success" type="button" value="삭제" onclick="">
-						<input class="btn btn-success" type="button" value="글쓰기"
-						onclick="location.href = 'index.jsp?page=board/insert.jsp';">
-						<input class="btn btn-success" type="button" value="목록"
-						onclick="javascript:history.back()"></td>
+						<input class="btn btn-success" type="button" value="글쓰기" onclick="location.href = 'index.jsp?page=board/insert.jsp';">
+						</c:if>
+						<input class="btn btn-success" type="button" value="목록" onclick="javascript:history.back()"></td>
 				</tr>
 			</table>
 
@@ -218,35 +222,20 @@
 								style="word-break: break-all; word-wrap: break-word;">${vo.content }</td>
 							<td>${vo.reg_date }</td>
 
-							<form method="post" action="/semi_team1/reply.recomm">
-								<input type="hidden" name="r_num" value=${vo.r_num }> <input
-									type="hidden" name="b_num" value="${param.b_num}">
-								<td><div id="recommend">
-										<button type="submit" class="btn btn-xs btn-success">
-											추천 <strong>${vo.up }</strong>
-										</button>
-									</div></td>
-							</form>
-						
-							<td>
-								<%--  <div id="delete">
+
+
+
+							<td><button type="button" class="btn btn-xs btn-success">
+									추천 <strong>${vo.up }</strong>
+								</button></td>
+
+
+
+
+							<td><div id="delete">
 									<button type="button" class="btn btn-xs btn-success"
 										onclick="nickCheck('${vo.r_num }','${vo.b_num}','${vo.nick}','${sessionScope.m_nick}')">삭제</button>
-								</div>--%>
-								<c:choose>
-									<c:when test="${vo.nick==sessionScope.m_nick }">
-										<div id="delete">
-											<button type="button" class="btn btn-xs btn-warning" onclick="nickCheck('${vo.r_num }','${vo.b_num}','${vo.nick}','${sessionScope.m_nick}')">삭제</button>
-										</div>
-									</c:when>
-									<c:otherwise>
-										<div id="report">
-											<button type="button" class="btn btn-xs btn-danger" onclick="">신고</button>
-										</div>
-									</c:otherwise>
-								</c:choose>
-							</td>
-
+								</div></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -305,7 +294,8 @@
 								onkeyup="textlen()"></textarea>
 							<button type="button" id="submitbtn"
 								class="btn btn-lg btn-success"
-								style="float: right; height: 88px; width: 10%" onclick="checkBlank(this)">등록</button>
+								style="float: right; height: 88px; width: 10%"
+								onclick="checkBlank(this)">등록</button>
 						</div>
 					</div>
 					<div id="len">0/500 byte</div>
