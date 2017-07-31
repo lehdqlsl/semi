@@ -71,7 +71,6 @@
 				xhr1.send();
 			}
 		}
-
 	}
 	function callback1() {
 		if (xhr1.readyState == 4 && xhr1.status == 200) {
@@ -159,21 +158,27 @@
 			}
 		}
 	}
+	// 게시글 신고
+	function boardreport(num, writer){
+		var flag=confirm("해당 글을 신고하시겠습니까?");
+		
+		if(flag){
+			location.href="/semi_team1/board/report/update?num="+num+"&writer="+writer;
+			alert("신고되었습니다!");
+		}
+	}
+	//댓글 신고
+	function replyreport(r_num,writer,b_num){
+		var flag=confirm("해당 댓글을 신고하시겠습니까?");
+		console.log(writer);
+		if(flag){
+			location.href="/semi_team1/reply/report/update?r_num="+r_num+"&writer="+writer+"&b_num="+b_num;
+			alert("신고되었습니다!");
+		}
+	}
 </script>
 </head>
 <body>
-	<%
-		// 쿠키 저장하기
-		String snick = (String) session.getAttribute("m_nick");
-		String s_num = request.getParameter("num");
-		String nick = URLEncoder.encode(snick, "utf-8");
-		Cookie cook1 = new Cookie("nick", nick);
-		Cookie cook2 = new Cookie("s_num", s_num);
-		cook1.setMaxAge(60 * 60 * 24);//유지시간 1일
-		cook2.setMaxAge(60 * 60 * 24);//유지시간 1일
-		response.addCookie(cook1);
-		response.addCookie(cook2);
-	%>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
@@ -243,7 +248,10 @@
 								onclick="">
 							<input class="btn btn-success" type="button" value="글쓰기"
 								onclick="location.href = 'index.jsp?page=board/insert.jsp';">
-						</c:if> <input class="btn btn-success" type="button" value="목록"
+						</c:if> 
+						<input class="btn btn-danger" type="button" value="신고"
+						onclick="boardreport(${vo.num},'${vo.writer }')">
+						<input class="btn btn-success" type="button" value="목록"
 						onclick="javascript:history.back()"></td>
 				</tr>
 			</table>
@@ -292,7 +300,7 @@
 									<c:otherwise>
 										<div id="report">
 											<button type="button" class="btn btn-xs btn-danger"
-												onclick="">신고</button>
+												onclick="replyreport(${vo.r_num},'${requestScope.mvo.m_nick }',${vo.b_num })">신고</button>
 										</div>
 									</c:otherwise>
 								</c:choose></td>

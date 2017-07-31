@@ -391,5 +391,21 @@ public class BoardDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
-
+	//게시글 신고하기
+	public int reportUpdate(int boardnum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "update board set report=1 where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, boardnum);
+			return pstmt.executeUpdate();
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			DBCPBean.close(con, pstmt, null);
+		}
+	}
 }

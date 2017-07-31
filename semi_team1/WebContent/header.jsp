@@ -7,7 +7,7 @@
 <script type="text/javascript">
 	//var test="location.href='/semi_team1/index.jsp?page=profile/userinfo.jsp'";
 
-	setInterval(msgrefresh, 1000)
+	//setInterval(msgrefresh, 1000)
 
 	var xhr = null;
 	function msgrefresh() {

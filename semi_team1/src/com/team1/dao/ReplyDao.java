@@ -94,6 +94,7 @@ public class ReplyDao {
 			DBCPBean.close(con, pstmt, null);
 		}
 	}
+
 	// ¥Ò±€ ªË¡¶
 	public int delete(int r_num, int b_num, String nick) {
 		Connection con = null;
@@ -166,6 +167,24 @@ public class ReplyDao {
 			return -1;
 		} finally {
 			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+
+	// ¥Ò±€ Ω≈∞Ì«œ±‚
+	public int reportUpdate(int replynum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "update reply set report=1 where r_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,replynum);
+			return pstmt.executeUpdate();
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			DBCPBean.close(con, pstmt, null);
 		}
 	}
 }

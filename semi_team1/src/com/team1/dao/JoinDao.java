@@ -227,7 +227,7 @@ public class JoinDao {
 
 	// 전체 회원 정보 출력-페이징
 	public ArrayList<JoinVo> list(int startRow, int endRow) {
-		String sql = "SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM(SELECT m.*,e.exp FROM MEMBERS m join exp e on m.m_nick = e.nick ORDER BY NUM DESC) AA) WHERE RNUM>=? AND RNUM<=?";
+		String sql = "SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM(SELECT m.*,e.exp FROM MEMBERS m,EXP E WHERE m.m_nick = e.nick AND M.NUM NOT LIKE 0 ORDER BY NUM DESC) AA) WHERE RNUM>=? AND RNUM<=?";
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
