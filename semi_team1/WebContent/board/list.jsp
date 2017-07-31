@@ -62,8 +62,7 @@
 						/semi_team1/select?num=${vo.num }
 				-->
 						<td style="text-align: center">${vo.num }</td>
-						<td><a
-							href="/semi_team1/select?num=${vo.num }&writer=${vo.writer}">${vo.title_name }</a></td>
+						<td><a href="/semi_team1/select?num=${vo.num }&writer=${vo.writer}">${vo.title_name }</a></td>
 						<td >${vo.writer }</td>
 						<td style="text-align: center">${vo.up }</td>
 						<td style="text-align: center">${vo.hits }</td>
