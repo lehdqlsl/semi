@@ -13,7 +13,7 @@
 			<li class="active"><a href="#">맛집게시판<span class="sr-only">(current)</span></a></li>
 		</ul>
 		<ul class="nav nav-sidebar">
-			<li><a href="">맛집 게시판1</a></li>
+			<li><a href="/semi_team1/tasty/list?s_num=30">맛집 게시판1</a></li>
 			<li><a href="">맛집 게시판2</a></li>
 			<li><a href="">맛집 게시판3</a></li>
 			<li><a href="">맛집 게시판4</a></li>

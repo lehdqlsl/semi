@@ -25,7 +25,7 @@
 				<c:forEach var="vo" items="${requestScope.list }">
 					<tr>
 					<td>${vo.receiver }</td>
-					<td><a href="/semi_team1/sendview2?num=${vo.num }">${vo.content }</a></td>
+					<td><a href="/semi_team1/sendview2?num=${vo.num }" style="color: #777;">${vo.content }</a></td>
 					<td>${vo.regdate }</td>
 					<td>
 					<a href="/semi_team1/senddelete2?num=${vo.num}">삭제</a>
@@ -34,7 +34,7 @@
 					<td>
 					<c:choose>
 						<c:when test="${vo.chk==1 }">
-							읽지않음
+							<span style="font-weight: bold;">읽지않음</span>
 						</c:when>
 						
 						<c:otherwise>

@@ -17,30 +17,22 @@
 						<th>보낸 사람</th>
 						<th>내용</th>
 						<th>받은 날짜</th>
-						<th>확인</th>
 						<th>삭제</th>
 					</tr>
 				</thead>
 				<c:forEach var="vo" items="${requestScope.list }">
 					<tr>
 					<td>${vo.sender }</td>
-					<td><a href="/semi_team1/recvview2?num=${vo.num }">${vo.content }</a></td>
-					<td>${vo.regdate }</td>
-					<td>
 					<c:choose>
 						<c:when test="${vo.chk==1 }">
-							읽지않음
+								<td><a href="/semi_team1/recvview2?num=${vo.num }">${vo.content }</a></td>
 						</c:when>
-						
 						<c:otherwise>
-							읽음
+								<td><a href="/semi_team1/recvview2?num=${vo.num }" style="color: #777;">${vo.content }</a></td>
 						</c:otherwise>
-					
-					
 					</c:choose>
-					
-					
-					</td>
+				
+					<td>${vo.regdate }</td>
 					<td>
 					<a href="/semi_team1/recvdelete2?num=${vo.num}">삭제</a>
 					</td>

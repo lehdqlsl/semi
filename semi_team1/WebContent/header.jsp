@@ -18,19 +18,15 @@
 	}
 	function callback() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
-
 			var data = xhr.responseText;
 			var json = eval('(' + data + ')');
-			console.log(json.cnt);
-			var div = document.getElementById("msg");
-			console.log(div);
-			//	alert(div);
+			var div = document.getElementById("cnt");
 			div.innerHTML = json.cnt;
 		}
 	}
 </script>
 </head>
-<body>
+<body onload="msgrefresh()">
 	<nav class="navbar navbar-fixed-top navbar-inverse">
 	<div class="container">
 		<div class="navbar-header">
@@ -57,9 +53,8 @@
 					href="/semi_team1/index.jsp?page=tasty/tastyIndex.jsp">맛집</a></li>
 				<li id="c5"><a
 					href="/semi_team1/index.jsp?page=music/musicIndex.jsp">음악</a></li>
-				<li id="c6"><a
-					href="/semi_team1/index.jsp?page=ranking/list">랭킹</a></li>
-					
+				<li id="c6"><a href="/semi_team1/index.jsp?page=ranking/list">랭킹</a></li>
+
 				<c:if test="${sessionScope.m_nick == 'admin'}">
 					<li id="c7"><a
 						href="/semi_team1/index.jsp?page=manager/managerIndex.jsp">관리자페이지</a></li>
@@ -70,15 +65,15 @@
 				<c:when test="${empty sessionScope.m_nick }">
 					<div class="navbar-form navbar-right">
 						<Button type="button" class="btn btn-success"
-							onclick="location.href = 'index.jsp?page=login/signin.jsp';">로그인</Button>
+							onclick="location.href = '/semi_team1/index.jsp?page=login/signin.jsp';">로그인</Button>
 						<Button type="button" class="btn btn-success"
-							onclick="location.href = 'index.jsp?page=join/joinForm.jsp';">회원가입</Button>
+							onclick="location.href = '/semi_team1/index.jsp?page=join/joinForm.jsp';">회원가입</Button>
 					</div>
 				</c:when>
 				<c:otherwise>
 					<div class="navbar-form navbar-right" style="margin-top: 0px;">
 						<ul class="nav navbar-nav">
-							<li><a href="/semi_team1/recvlist2" id="msg"></a></li>
+							<li><a href="/semi_team1/recvlist2" id="cnt"></a></li>
 							<li><a>${sessionScope.m_nick } 님</a></li>
 							<li><a
 								href="/semi_team1/index.jsp?page=profile/userinfo.jsp?num=${sessionScope.num }">회원정보</a></li>
