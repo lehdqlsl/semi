@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.team1.dao.BoardDao;
 import com.team1.dao.CategoryDao;
 import com.team1.dao.ReplyDao;
+import com.team1.dao.UserInfoDao;
 import com.team1.vo.ReplyVo;
+import com.team1.vo.boardListVo;
 import com.team1.vo.boardVo;
 
 @WebServlet("/list")
@@ -47,7 +49,7 @@ public class ListController extends HttpServlet {
 		int endRow = (pageNum * 20);// 끝행 번호
 
 		BoardDao dao = new BoardDao();
-		ArrayList<boardVo> list = dao.list(s_num, startRow, endRow, search, keyword);
+		ArrayList<boardListVo> list = dao.list(s_num, startRow, endRow, search, keyword);
 
 		if (list != null) {
 
@@ -72,7 +74,14 @@ public class ListController extends HttpServlet {
 			}
 
 			CategoryDao c_dao = new CategoryDao();
+			UserInfoDao dao1 = new UserInfoDao();
+
 			int n = c_dao.isMember(s_num);
+
+			for (boardListVo vo : list) {
+				String writer = dao1.getGrade(vo.getWriter());
+				vo.setGrade(writer);
+			}
 
 			request.setAttribute("pageCount", pageCount);
 			request.setAttribute("startPageNum", startPageNum);

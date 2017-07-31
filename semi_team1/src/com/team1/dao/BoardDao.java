@@ -9,12 +9,13 @@ import java.util.Date;
 
 import com.team1.db.DBCPBean;
 import com.team1.vo.ManagerVo;
+import com.team1.vo.boardListVo;
 import com.team1.vo.boardVo;
 
 public class BoardDao {
 
-	public ArrayList<boardVo> list(int s_num, int startRow, int endRow, String search, String keyword) {
-		ArrayList<boardVo> list = new ArrayList<>();
+	public ArrayList<boardListVo> list(int s_num, int startRow, int endRow, String search, String keyword) {
+		ArrayList<boardListVo> list = new ArrayList<>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -22,13 +23,14 @@ public class BoardDao {
 			con = DBCPBean.getConn();
 			if (search.equals("")) {
 				String sql = "select * from ( " + "select a.*, rownum rnum from( "
-						+ "select * from board where s_num=? and blind=0 order by num desc "+ ")a "
+						+ "select * from board where s_num=? and blind=0 order by num desc " + ")a "
 						+ ") where rnum>=? and rnum <=?";
 				/*
-				 * String sql = "select * from ( " + "select a.*, rownum rnum from( "
-						+ "select * from board where s_num=? order by num desc "+ ")a "
-						+ ") where rnum>=? and rnum <=?";
-				 * */
+				 * String sql = "select * from ( " +
+				 * "select a.*, rownum rnum from( " +
+				 * "select * from board where s_num=? order by num desc "+ ")a "
+				 * + ") where rnum>=? and rnum <=?";
+				 */
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, s_num);
 				pstmt.setInt(2, startRow);
@@ -64,8 +66,8 @@ public class BoardDao {
 				int blind = rs.getInt("blind");
 				int report = rs.getInt("report");
 				int top = rs.getInt("top");
-				list.add(new boardVo(num, title_name, up, hits, orgfilename, savefilename, content, regdate, writer, 1,
-						s_num, blind, report, top));
+				list.add(new boardListVo(num, title_name, up, hits, orgfilename, savefilename, content, regdate, writer,
+						1, s_num, blind, report, top));
 			}
 			return list;
 		} catch (SQLException se) {
@@ -77,7 +79,7 @@ public class BoardDao {
 	}
 
 	public int insert(boardVo vo) {
-	
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = "insert into board values(SEQ_board_num.nextval,?,0,0,?,?,?,sysdate,?,?,?,0,0,0)";
@@ -245,8 +247,8 @@ public class BoardDao {
 				Date regdate = rs.getDate("regdate");
 				String writer = rs.getString("writer");
 				int report = rs.getInt("report");
-			
-				ManagerVo vo=new ManagerVo(boardnum, c_title, b_title, regdate, writer, report);
+
+				ManagerVo vo = new ManagerVo(boardnum, c_title, b_title, regdate, writer, report);
 				list.add(vo);
 			}
 			return list;
@@ -278,59 +280,60 @@ public class BoardDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
+
 	// 글 블라인드 처리
-	public int blindUpdate(int boardnum){
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		try{
-			con=DBCPBean.getConn();
-			String sql="update board set blind=1 where num=?";
-			pstmt=con.prepareStatement(sql);
+	public int blindUpdate(int boardnum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "update board set blind=1 where num=?";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, boardnum);
 			return pstmt.executeUpdate();
-		}catch(SQLException se){
+		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
-		}finally{
+		} finally {
 			DBCPBean.close(con, pstmt, null);
 		}
 	}
-	
-	public int hitupdate(int boardnum){
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		try{
-			con=DBCPBean.getConn();
-			String sql="update board set hits=hits+1 where num=?";
-			pstmt=con.prepareStatement(sql);
+
+	public int hitupdate(int boardnum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "update board set hits=hits+1 where num=?";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, boardnum);
 			return pstmt.executeUpdate();
-		}catch(SQLException se){
+		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
-		}finally{
+		} finally {
 			DBCPBean.close(con, pstmt, null);
 		}
 	}
-	
-	public int upupdate(int boardnum){
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		try{
-			con=DBCPBean.getConn();
-			String sql="update board set up=up+1 where num=?";
-			pstmt=con.prepareStatement(sql);
+
+	public int upupdate(int boardnum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "update board set up=up+1 where num=?";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, boardnum);
 			return pstmt.executeUpdate();
-		}catch(SQLException se){
+		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
-		}finally{
+		} finally {
 			DBCPBean.close(con, pstmt, null);
 		}
 	}
-	
-	//작성글 보기 리스트
+
+	// 작성글 보기 리스트
 	public ArrayList<boardVo> MyWriteList(String writer, int startRow, int endRow, String search, String keyword) {
 		ArrayList<boardVo> list = new ArrayList<>();
 		Connection con = null;
@@ -340,7 +343,7 @@ public class BoardDao {
 			con = DBCPBean.getConn();
 			if (search.equals("")) {
 				String sql = "select * from ( " + "select a.*, rownum rnum from( "
-						+ "select * from board where writer=? and blind=0 order by num desc "+ ")a "
+						+ "select * from board where writer=? and blind=0 order by num desc " + ")a "
 						+ ") where rnum>=? and rnum <=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, writer);
@@ -388,5 +391,5 @@ public class BoardDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
-	
+
 }
