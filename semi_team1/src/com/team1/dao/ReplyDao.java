@@ -9,6 +9,7 @@ import java.util.Date;
 
 import com.team1.db.DBCPBean;
 import com.team1.vo.ReplyVo;
+import com.team1.vo.boardVo;
 
 public class ReplyDao {
 	private static ReplyDao instance = new ReplyDao();
@@ -178,13 +179,90 @@ public class ReplyDao {
 			con = DBCPBean.getConn();
 			String sql = "update reply set report=1 where r_num=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1,replynum);
+			pstmt.setInt(1, replynum);
 			return pstmt.executeUpdate();
 		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
 		} finally {
 			DBCPBean.close(con, pstmt, null);
+		}
+	}
+
+	public ArrayList<ReplyVo> MyReplyList(String nick, int startRow, int endRow) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select * from (select a.*, rownum rnum from(select * from reply where nick=? order by r_num desc )a) where rnum>=? and rnum <=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nick);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rs = pstmt.executeQuery();
+			ArrayList<ReplyVo> list = new ArrayList<>();
+			while (rs.next()) {
+
+				int r_num = rs.getInt("r_num");
+				nick = rs.getString("nick");
+				String content = rs.getString("content");
+				int up = rs.getInt("up");
+				Date reg_date = rs.getDate("reg_date");
+				int b_num = rs.getInt("b_num");
+				int report = rs.getInt("report");
+				ReplyVo vo = new ReplyVo(r_num, nick, content, up, reg_date, b_num, report);
+				list.add(vo);
+			}
+			return list;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+
+	public int getCount2() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select NVL(count(num),0) cnt from board";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int cnt = rs.getInt(1);
+			return cnt;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+
+	public int getReplyCount(String nick) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select count(*) cnt from reply where nick=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nick);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				int cnt = rs.getInt("cnt");
+				return cnt;
+			}
+			return pstmt.executeUpdate();
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
 		}
 	}
 }

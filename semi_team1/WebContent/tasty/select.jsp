@@ -1,4 +1,3 @@
-<%@page import="com.team1.dao.BoardDao"%>
 <%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -72,6 +71,7 @@
 				xhr1.send();
 			}
 		}
+
 	}
 	function callback1() {
 		if (xhr1.readyState == 4 && xhr1.status == 200) {
@@ -159,34 +159,28 @@
 			}
 		}
 	}
-	// 게시글 신고
-	function boardreport(num, writer){
-		var flag=confirm("해당 글을 신고하시겠습니까?");
-		
-		if(flag){
-			location.href="/semi_team1/board/report/update?num="+num+"&writer="+writer;
-			alert("신고되었습니다!");
-		}
-	}
-	//댓글 신고
-	function replyreport(r_num,writer,b_num){
-		var flag=confirm("해당 댓글을 신고하시겠습니까?");
-		console.log(writer);
-		if(flag){
-			location.href="/semi_team1/reply/report/update?r_num="+r_num+"&writer="+writer+"&b_num="+b_num;
-			alert("신고되었습니다!");
-		}
-	}
 </script>
 </head>
 <body>
+	<%
+		// 쿠키 저장하기
+		String snick = (String) session.getAttribute("m_nick");
+		String s_num = request.getParameter("num");
+		String nick = URLEncoder.encode(snick, "utf-8");
+		Cookie cook1 = new Cookie("nick", nick);
+		Cookie cook2 = new Cookie("s_num", s_num);
+		cook1.setMaxAge(60 * 60 * 24);//유지시간 1일
+		cook2.setMaxAge(60 * 60 * 24);//유지시간 1일
+		response.addCookie(cook1);
+		response.addCookie(cook2);
+	%>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<th colspan="2">${requestScope.vo.title_name}</th>
+						<th colspan="2">${requestScope.vo.title}</th>
 					</tr>
 				</thead>
 				<tr>
@@ -199,9 +193,8 @@
 
 				<tr>
 					<td colspan="2"><input type="button" value="작성글보기"
-						class="btn btn-xs btn-default"
-						onclick="location.href='/semi_team1/index.jsp?page=mywritelist?writer=${vo.writer }'">
-						<input type="button" value="쪽지보내기" class="btn btn-xs btn-default"
+						class="btn btn-xs btn-default"> <input type="button"
+						value="쪽지보내기" class="btn btn-xs btn-default"
 						onclick="location.href='/semi_team1/index.jsp?page=message2/insert2.jsp?&sender=${vo.writer }'">
 					</td>
 
@@ -228,13 +221,20 @@
 				</tr>
 
 				<tr>
-					<td colspan="2" height="200px">${requestScope.vo.content }</td>
+					<td colspan="2" height="200px">${vo.content}</td>
+				</tr>
+
+				<tr>
+					<td colspan="2" style="text-align: center">${vo.addr }</td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: center">${vo.map }</td>
 				</tr>
 
 				<tr style="text-align: center">
 					<td colspan="2"><button type="button" class="btn btn-success"
 							onclick="boardup('${vo.num}')">
-							추천 <strong id="bo_up">${vo.up }</strong>
+							평점 <strong id="bo_up">${vo.rating }</strong>
 						</button></td>
 				</tr>
 			</table>
@@ -250,9 +250,7 @@
 								onclick="">
 							<input class="btn btn-success" type="button" value="글쓰기"
 								onclick="location.href = 'index.jsp?page=board/insert.jsp';">
-						</c:if> <input class="btn btn-danger" type="button" value="신고"
-						onclick="boardreport(${vo.num},'${vo.writer }')"> <input
-						class="btn btn-success" type="button" value="목록"
+						</c:if> <input class="btn btn-success" type="button" value="목록"
 						onclick="javascript:history.back()"></td>
 				</tr>
 			</table>
@@ -301,7 +299,7 @@
 									<c:otherwise>
 										<div id="report">
 											<button type="button" class="btn btn-xs btn-danger"
-												onclick="replyreport(${vo.r_num},'${requestScope.mvo.m_nick }',${vo.b_num })">신고</button>
+												onclick="">신고</button>
 										</div>
 									</c:otherwise>
 								</c:choose></td>

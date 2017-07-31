@@ -41,7 +41,7 @@ public class insertController extends HttpServlet {
 			break;
 
 		case 4: // ¸ÀÁı
-
+			url = "/index.jsp?page=/game/gameIndex.jsp&s_page=/tasty/insert.jsp";
 			break;
 
 		case 5: // À½¾Ç

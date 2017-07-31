@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
 
 		<div class="row row-offcanvas row-offcanvas-right">
