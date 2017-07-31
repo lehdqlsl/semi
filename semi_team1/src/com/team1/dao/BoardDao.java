@@ -372,26 +372,7 @@ public class BoardDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
-	public int getCount2() {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			con = DBCPBean.getConn();
-			String sql = "select NVL(count(num),0) cnt from board";
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			rs.next();
-			int cnt = rs.getInt(1);
-			return cnt;
-		} catch (SQLException se) {
-			System.out.println(se.getMessage());
-			return -1;
-		} finally {
-			DBCPBean.close(con, pstmt, rs);
-		}
-	}
-	
+		
 	public int getWriteCount(String m_nick) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

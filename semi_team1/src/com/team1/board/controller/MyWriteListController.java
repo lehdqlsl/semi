@@ -22,33 +22,37 @@ public class MyWriteListController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String spageNum = request.getParameter("pageNum");
 		String writer = request.getParameter("writer");
+		String m_nick= request.getParameter("m_nick");
 		// int s_num=Integer.parseInt(request.getParameter("s_num"));
 
 		int pageNum = 1;
 		if (spageNum != null) {
 			pageNum = Integer.parseInt(spageNum);
 		}
-		int startRow = (pageNum - 1) * 20 + 1;
-		int endRow = startRow + 19;
+		int startRow = (pageNum * 20) - 19;
+		int endRow = (pageNum * 20);
 
 		BoardDao dao = new BoardDao();
 		ArrayList<boardVo> list = dao.MyWriteList(writer, startRow, endRow);
 
-		int pageCount = (int) (Math.ceil(dao.getCount2() / 20.0));
-		int startPageNum = (int) (Math.ceil(pageNum / 20.0) * 20 - 19);
-		int endPageNum = (int) (Math.ceil(pageNum / 20.0) * 20);
-		if (endPageNum > pageCount) {
-			endPageNum = pageCount;
+		if (list != null) {
+			int pageCount = (int) (Math.ceil(dao.getWriteCount(m_nick) / 20.0));
+			int startPageNum = (int) (Math.ceil(pageNum / 10.0) * 10 - 19);
+			int endPageNum = (int) (Math.ceil(pageNum / 10.0) * 10);
+			if (endPageNum > pageCount) {
+				endPageNum = pageCount;
+			}
+
+			request.setAttribute("pageCount", pageCount);
+			request.setAttribute("startPageNum", startPageNum);
+			request.setAttribute("endPageNum", endPageNum);
+			request.setAttribute("pageNum", pageNum);
+			request.setAttribute("list", list);
+			// request.setAttribute("s_num", s_num);
+			request.setAttribute("writer", writer);
+			request.getRequestDispatcher("/index.jsp?page=/board/mywritelist.jsp").forward(request, response);
+		} else {
+			response.sendRedirect("/fail.jsp");
 		}
-
-		request.setAttribute("pageCount", pageCount);
-		request.setAttribute("startPageNum", startPageNum);
-		request.setAttribute("endPageNum", endPageNum);
-		request.setAttribute("pageNum", pageNum);
-		request.setAttribute("list", list);
-		// request.setAttribute("s_num", s_num);
-		request.setAttribute("writer", writer);
-		request.getRequestDispatcher("/index.jsp?page=/board/mywritelist.jsp").forward(request, response);
-
 	}
 }

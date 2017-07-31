@@ -39,30 +39,30 @@
 			<div align="center">
 <c:choose>
 	<c:when test="${startPage>20}">
-		<a href="/board/myreplylist?pageNum=${startPage-1 }">[이전]</a>	
+		<a href="/board/myreplylist?pageNum=${startPage-1 }"><input class="btn btn-xs btn-primary" type="submit" value="◁"></a>	
 	</c:when>
 	<c:otherwise>
-		[이전]
+		<input class="btn btn-xs btn-primary" type="submit" value="◁">
 	</c:otherwise>
 </c:choose>
 
 <c:forEach var="i" begin="${startPage }" end="${endPage }" >
 	<c:choose>
 		<c:when test="${i==pageNum }">
-			<a href="/board/myreplylist?pageNum=${i }"><span style="color:blue">[${i }]</span></a>	
+			<a href="/board/myreplylist?pageNum=${i }"><input class="btn btn-xs btn-link" type="submit" value="${i}"></a>	
 		</c:when>
 		<c:otherwise>
-			<a href="/board/myreplylist?pageNum=${i }"><span style="color:gray">[${i }]</span></a>
+			<a href="/board/myreplylist?pageNum=${i }"><input class="btn btn-xs btn-link" type="submit" value="${i}"></a>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
 
 <c:choose>
 	<c:when test="${endPage<pageCount }">
-		<a href="/board/myreplylist?pageNum=${endPage+1 }">[다음]</a>
+		<a href="/board/myreplylist?pageNum=${endPage+1 }"><input class="btn btn-xs btn-primary" type="submit" value="▷">	</a>
 	</c:when>
 	<c:otherwise>
-		[다음]
+		<input class="btn btn-xs btn-primary" type="submit" value="▷">	
 	</c:otherwise>
 </c:choose>
 </div>
