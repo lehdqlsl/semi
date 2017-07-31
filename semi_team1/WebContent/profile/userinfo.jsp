@@ -1,3 +1,5 @@
+<%@page import="com.team1.dao.ReplyDao"%>
+<%@page import="com.team1.dao.BoardDao"%>
 <%@page import="com.team1.message2.dao.recvDao2"%>
 <%@page import="com.team1.dao.ExpDao"%>
 <%@page import="com.team1.vo.ProfileVo"%>
@@ -85,6 +87,16 @@
 			
 			recvDao2 dao1 = new recvDao2();
 			int recvm = dao1.getMsgCount(nick);
+			
+			BoardDao dao2 = new BoardDao();
+			int mywrite = dao2.getWriteCount(nick);
+			int mygethits = dao2.gethitsCount(nick);
+			
+			ReplyDao dao3 = ReplyDao.getInstance();
+			int myreply = dao3.getReplyCount(nick);
+			
+			
+			
 		%>
 		<table class="table table-bordered" width="300px">
 			<tr>
@@ -138,9 +150,9 @@
 			</tr>
 
 			<tr>
-				<td>xx개</td>
-				<td>xx개</td>
-				<td>xx개</td>
+				<td><a href="/semi_team1//mywritelist?writer=${sessionScope.m_nick }"><%=mywrite %>개</a></td>
+				<td><a href="/semi_team1//myreplylist?nick=${sessionScope.m_nick }"><%=myreply %>개</a></td>
+				<td><%=mygethits %>개</td>
 			</tr>
 		</table>
 		<ul class="nav nav-sidebar">

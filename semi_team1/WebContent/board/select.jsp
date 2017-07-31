@@ -1,3 +1,4 @@
+<%@page import="com.team1.dao.BoardDao"%>
 <%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -164,6 +165,7 @@
 <body>
 	<%
 		// 쿠키 저장하기
+		request.setCharacterEncoding("utf-8");
 		String snick = (String) session.getAttribute("m_nick");
 		String s_num = request.getParameter("num");
 		String nick = URLEncoder.encode(snick, "utf-8");
@@ -173,6 +175,8 @@
 		cook2.setMaxAge(60 * 60 * 24);//유지시간 1일
 		response.addCookie(cook1);
 		response.addCookie(cook2);
+		
+		
 	%>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div
@@ -193,7 +197,7 @@
 				<tr>
 					<td colspan="2">
 					<input type="button" value="작성글보기"
-						class="btn btn-xs btn-default"> 
+						class="btn btn-xs btn-default" onclick="location.href='/semi_team1/index.jsp?page=mywritelist?writer=${vo.writer }'"> 
 					<input type="button"	value="쪽지보내기" class="btn btn-xs btn-default" 
 					onclick="location.href='/semi_team1/index.jsp?page=message2/insert2.jsp?&sender=${vo.writer }'">
 					</td>

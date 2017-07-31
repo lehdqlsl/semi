@@ -14,20 +14,16 @@ import com.team1.dao.CategoryDao;
 import com.team1.vo.boardVo;
 
 @WebServlet("/mywritelist")
-public class MyWriteListController extends HttpServlet{
+public class MyWriteListController extends HttpServlet {
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String search = request.getParameter("search");
-		String keyword = request.getParameter("keyword");
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-		if (keyword == null || keyword.equals("")) {
-			keyword = "";
-			search = "";
-		}
-
+		request.setCharacterEncoding("utf-8");
 		String spageNum = request.getParameter("pageNum");
-		String writer=request.getParameter("writer");
-		int s_num = Integer.parseInt(request.getParameter("s_num"));
+		String writer = request.getParameter("writer");
+		String m_nick= request.getParameter("m_nick");
+		// int s_num=Integer.parseInt(request.getParameter("s_num"));
 
 		int pageNum = 1;
 		if (spageNum != null) {
@@ -37,28 +33,24 @@ public class MyWriteListController extends HttpServlet{
 		int endRow = (pageNum * 20);
 
 		BoardDao dao = new BoardDao();
-		ArrayList<boardVo> list = dao.MyWriteList(writer, startRow, endRow, search, keyword);
+		ArrayList<boardVo> list = dao.MyWriteList(writer, startRow, endRow);
 
 		if (list != null) {
-			int pageCount = (int) (Math.ceil(dao.getCount(s_num, search, keyword) / 20.0));
-			int startPageNum = (int) (Math.ceil(pageNum / 10.0) * 10 - 9); 
-			int endPageNum = (int) (Math.ceil(pageNum / 10.0) * 10); 
+			int pageCount = (int) (Math.ceil(dao.getWriteCount(m_nick) / 20.0));
+			int startPageNum = (int) (Math.ceil(pageNum / 10.0) * 10 - 19);
+			int endPageNum = (int) (Math.ceil(pageNum / 10.0) * 10);
 			if (endPageNum > pageCount) {
 				endPageNum = pageCount;
 			}
-
 
 			request.setAttribute("pageCount", pageCount);
 			request.setAttribute("startPageNum", startPageNum);
 			request.setAttribute("endPageNum", endPageNum);
 			request.setAttribute("pageNum", pageNum);
-			request.setAttribute("search", search);
-			request.setAttribute("keyword", keyword);
 			request.setAttribute("list", list);
-			request.setAttribute("s_num", s_num);
+			// request.setAttribute("s_num", s_num);
 			request.setAttribute("writer", writer);
-			request.getRequestDispatcher("/index.jsp?page=/board/list.jsp")
-			.forward(request, response);
+			request.getRequestDispatcher("/index.jsp?page=/board/mywritelist.jsp").forward(request, response);
 		} else {
 			response.sendRedirect("/fail.jsp");
 		}

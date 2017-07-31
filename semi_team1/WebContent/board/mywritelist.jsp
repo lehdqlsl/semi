@@ -37,47 +37,47 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<div>
-				<c:choose>
-					<c:when test="${startPageNum>20 }">
-						<a
-							href="/semi_team1/list?s_num=${s_num }&pageNum=${startPageNum-1 }&search=${param.search}&keyword=${param.keyword}">
-							<input class="btn btn-xs btn-primary" type="submit" value="◁">
-						</a>
-					</c:when>
-					<c:otherwise>
-			<input class="btn btn-xs btn-primary" type="submit" value="◁">
+			
+			<div align="center">
+<!-- 이전 -->
+<c:choose>
+	<c:when test="${startPage>20 }">
+		<a href="/semi_team1/mywritelist?pageNum=${startPage-1 }"><input class="btn btn-xs btn-primary" type="submit" value="◁"></a>
+	</c:when>
+	<c:otherwise>
+		<input class="btn btn-xs btn-primary" type="submit" value="◁">
+	</c:otherwise>
+</c:choose>
+
+<c:forEach var="i" begin="${startPage }" end="${endPage }">
+	<c:choose>
+		<c:when test="${i==pageNum }">
+			<a href="/semi_team1/mywritelist?writer=${writer }pageNum=${i }"><input class="btn btn-xs btn-link" type="submit" value="${i}"></a>
+			
+		</c:when>
+		<c:otherwise>
+			<a href="/semi_team1/mywritelist?writer=${writer }pageNum=${i }"><input class="btn btn-xs btn-link" type="submit" value="${i}"></a>
+			
 		</c:otherwise>
-				</c:choose>
-				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
-					<c:choose>
-						<c:when test="${i==pageNum }">
-							<a style="text-decoration: none"
-								href="/semi_team1/list?s_num=${s_num }&pageNum=${i }&search=${param.search}&keyword=${param.keyword}">
-								<input class="btn btn-xs btn-link" type="submit" value="${i}">
-							</a>
-						</c:when>
-						<c:otherwise>
-							<a style="text-decoration: none"
-								href="/semi_team1/list?s_num=${s_num }&pageNum=${i }&search=${param.search}&keyword=${param.keyword}">
-								<input class="btn btn-xs btn-link" type="submit" value="${i}">
-							</a>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-				<c:choose>
-					<c:when test="${endPageNum<pageCount }">
-						<a 
-							href="/semi_team1/list?s_num=${s_num }&pageNum=${endPageNum+1 }&search=${param.search}&keyword=${param.keyword}">
-							<input class="btn btn-xs btn-primary" type="submit" value="▷">
-						</a>
-					</c:when>
-					<c:otherwise>
-			<input class="btn btn-xs btn-primary" type="submit" value="▷">
-		</c:otherwise>
-				</c:choose>
-			</div>
-		</div>
-	</div>
+	</c:choose>
+</c:forEach>
+<!-- 다음 -->
+<c:choose>
+	<c:when test="${endPage<pageCount }">
+		<a href="/semi_team1/mywritelist?writer=${writer }pageNum=${endPage+1 }">
+		<input class="btn btn-xs btn-primary" type="submit" value="▷">		
+		</a>
+	</c:when>
+	<c:otherwise>
+		<input class="btn btn-xs btn-primary" type="submit" value="▷">
+	</c:otherwise>
+</c:choose>
+
+</div>
+			
+	
+</div>
+</div>
+			
 </body>
 </html>
