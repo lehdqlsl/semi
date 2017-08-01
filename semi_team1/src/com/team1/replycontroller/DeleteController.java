@@ -20,7 +20,7 @@ public class DeleteController extends HttpServlet{
 		String nick=request.getParameter("nick");
 		String sessionNick=request.getParameter("sessionNick");
 		int flag=0;
-		if(nick.equals(sessionNick)){
+		if(nick.equals(sessionNick) || sessionNick.equals("admin")){
 			ReplyDao dao=ReplyDao.getInstance();
 			int n=dao.delete(r_num,b_num,nick);
 	

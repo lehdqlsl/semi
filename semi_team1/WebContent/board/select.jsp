@@ -177,18 +177,6 @@
 			alert("신고되었습니다!");
 		}
 	}
-
-	//로그인 여부에 따른 쪽지 보내기
-	function sendmsg(nick) {
-		console.log(nick);
-		if (nick == 'null') {
-			alert("먼저 로그인을 하셔야합니다.\n로그인페이지로 이동 하시겠습니까?");
-			document.location.href = "index.jsp?page=login/signin.jsp";
-		}else{
-			location.href="/semi_team1/index.jsp?page=message2/insert2.jsp?&sender="+nick;
-		}
-	}
-
 	//게시글 삭제
 	function boarddelete(boardnum){
 		var flag=confirm("정말 삭제하시겠습니까?");
@@ -196,8 +184,16 @@
 			location.href = "/semi_team1/boarddelete?b_num="+${requestScope.b_num }+"&s_num="+${vo.s_num};
 		}
 	}
-	
-
+	/*//로그인 여부에 따른 쪽지 보내기
+	function sendmsg(nick) {
+		console.log(nick);
+		if (nick == null) {
+			alert("먼저 로그인을 하셔야합니다.\n로그인페이지로 이동 하시겠습니까?");
+			document.location.href = "index.jsp?page=login/signin.jsp";
+		}else{
+			location.href="/semi_team1/index.jsp?page=message2/insert2.jsp?&sender="+nick;
+		}
+	}*/
 </script>
 </head>
 <body>
@@ -226,8 +222,13 @@
 					<td colspan="2"><input type="button" value="작성글보기"
 						class="btn btn-xs btn-default"
 						onclick="location.href='/semi_team1/index.jsp?page=mywritelist?writer=${vo.writer }'">
-						<input type="button" value="쪽지보내기" class="btn btn-xs btn-default"
-						onclick="sendmsg('${vo.writer}')"></td>
+						<c:choose>
+							<c:when test="${sessionScope.m_nick != null }">
+								<input type="button" value="쪽지보내기" class="btn btn-xs btn-default" onclick="location.href='/semi_team1/index.jsp?page=message2/insert2.jsp?&sender=${vo.writer}'">
+							</c:when>
+						</c:choose>
+				
+					</td>
 
 				</tr>
 
@@ -274,8 +275,12 @@
 								onclick="boarddelete('${vo.num}')">
 							<input class="btn btn-success" type="button" value="글쓰기"
 								onclick="location.href = 'index.jsp?page=board/insert.jsp';">
-						</c:if> <input class="btn btn-danger" type="button" value="신고"
-						onclick="boardreport(${vo.num},'${vo.writer }')"> <input
+						</c:if> 
+					
+								<input class="btn btn-danger" type="button" value="신고"
+						onclick="boardreport(${vo.num},'${vo.writer }')">
+						
+						 <input
 						class="btn btn-success" type="button" value="목록"
 						onclick="javascript:history.back()"></td>
 				</tr>
