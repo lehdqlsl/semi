@@ -26,7 +26,8 @@ public class ReportUpdateController extends HttpServlet{
 		int n=dao.reportUpdate(r_num);
 		
 		if(n>0){
-			response.sendRedirect("/semi_team1/select?num="+b_num+"&writer="+writer);
+			String url = request.getHeader("referer");
+			response.sendRedirect(url);
 		}else{
 			request.setAttribute("result", "fail");
 			RequestDispatcher rd=request.getRequestDispatcher("/join/result.jsp");

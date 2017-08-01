@@ -24,7 +24,7 @@ public class ListController extends HttpServlet {
 			throws ServletException, IOException {
 		String search = request.getParameter("search");
 		String keyword = request.getParameter("keyword");
-
+		BoardDao dao = new BoardDao();
 		if (keyword == null || keyword.equals("")) {
 			keyword = "";
 			search = "";
@@ -42,6 +42,9 @@ public class ListController extends HttpServlet {
 			pageNum = Integer.parseInt(spageNum);// 페이지 번호가 들어오면 pageNum에 저장.
 		}
 
+		// 공지사항 가져오기
+		ArrayList<boardListVo> noticelist = dao.noticelist(s_num);
+		int notice_length = noticelist.size();
 		/*
 		 * 시작 행 자신의 페이지 * 5 - 4 끝 행 : 자신의 페이지 * 5
 		 * 
@@ -49,9 +52,8 @@ public class ListController extends HttpServlet {
 		 */
 		// --------------- 선택한 페이지에 출력할 게시글 행의 개수-------------------
 		int startRow = (pageNum * 20) - 19;// 시작행 번호
-		int endRow = (pageNum * 20);// 끝행 번호
+		int endRow = (pageNum * 20) - notice_length;// 끝행 번호
 
-		BoardDao dao = new BoardDao();
 		ArrayList<boardListVo> list = dao.list(s_num, startRow, endRow, search, keyword);
 
 		for (boardListVo vo : list) {
@@ -62,7 +64,7 @@ public class ListController extends HttpServlet {
 		if (list != null) {
 
 			// 페이지 갯수 구하기 (전체글의 갯수/한 페이지 행의 총 갯수) Math.ceil로 소수 무조건 올림처리
-			int pageCount = (int) (Math.ceil(dao.getCount(s_num, search, keyword) / 20.0));
+			int pageCount = (int) (Math.ceil(dao.getCount(s_num, search, keyword) / (double) 20.0));
 
 			// 시작페이지번호 구하기
 			int startPageNum = (int) (Math.ceil(pageNum / 10.0) * 10 - 9); // 1페이지일
@@ -91,6 +93,9 @@ public class ListController extends HttpServlet {
 				vo.setGrade(writer);
 			}
 
+			// 베스트게시글
+			ArrayList<boardListVo> bestlist = dao.bestlist(s_num);
+
 			request.setAttribute("pageCount", pageCount);
 			request.setAttribute("startPageNum", startPageNum);
 			request.setAttribute("endPageNum", endPageNum);
@@ -98,6 +103,8 @@ public class ListController extends HttpServlet {
 			request.setAttribute("search", search);
 			request.setAttribute("keyword", keyword);
 			request.setAttribute("list", list);
+			request.setAttribute("bestlist", bestlist);
+			request.setAttribute("noticelist", noticelist);
 			request.setAttribute("s_num", s_num);
 
 			switch (n) {

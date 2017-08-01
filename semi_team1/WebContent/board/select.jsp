@@ -184,16 +184,20 @@
 			location.href = "/semi_team1/boarddelete?b_num="+${requestScope.b_num }+"&s_num="+${vo.s_num};
 		}
 	}
-	
-	
+	/*//로그인 여부에 따른 쪽지 보내기
+	function sendmsg(nick) {
+		console.log(nick);
+		if (nick == null) {
+			alert("먼저 로그인을 하셔야합니다.\n로그인페이지로 이동 하시겠습니까?");
+			document.location.href = "index.jsp?page=login/signin.jsp";
+		}else{
+			location.href="/semi_team1/index.jsp?page=message2/insert2.jsp?&sender="+nick;
+		}
+	}*/
 </script>
 </head>
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-		
-		<%--   <% String s_num = request.getParameter("s_num"); %>
-		<input type="hidden" value="<%=s_num%>" name="s_num"> --%>
-		
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
 			<table class="table table-bordered">
@@ -214,8 +218,12 @@
 					<td colspan="2"><input type="button" value="작성글보기"
 						class="btn btn-xs btn-default"
 						onclick="location.href='/semi_team1/index.jsp?page=mywritelist?writer=${vo.writer }'">
-						<input type="button" value="쪽지보내기" class="btn btn-xs btn-default"
-						onclick="location.href='/semi_team1/index.jsp?page=message2/insert2.jsp?&sender=${vo.writer }'">
+						<c:choose>
+							<c:when test="${sessionScope.m_nick != null }">
+								<input type="button" value="쪽지보내기" class="btn btn-xs btn-default" onclick="location.href='/semi_team1/index.jsp?page=message2/insert2.jsp?&sender=${vo.writer}'">
+							</c:when>
+						</c:choose>
+				
 					</td>
 
 				</tr>
@@ -247,7 +255,9 @@
 				<tr style="text-align: center">
 					<td colspan="2"><button type="button" class="btn btn-success"
 							onclick="boardup('${vo.num}')">
-							추천 <strong id="bo_up">${vo.up }</strong>
+							<span class="glyphicon glyphicon-thumbs-up"
+								style="font-size: 20px"></span> <strong id="bo_up"
+								style="font-size: 15px">${vo.up }</strong>
 						</button></td>
 				</tr>
 			</table>
@@ -263,8 +273,12 @@
 								onclick="boarddelete('${vo.num}')">
 							<input class="btn btn-success" type="button" value="글쓰기"
 								onclick="location.href = 'index.jsp?page=board/insert.jsp';">
-						</c:if> <input class="btn btn-danger" type="button" value="신고"
-						onclick="boardreport(${vo.num},'${vo.writer }')"> <input
+						</c:if> 
+					
+								<input class="btn btn-danger" type="button" value="신고"
+						onclick="boardreport(${vo.num},'${vo.writer }')">
+						
+						 <input
 						class="btn btn-success" type="button" value="목록"
 						onclick="location.href = 'index.jsp?page=list?s_num=${vo.s_num }&pageNum=${pageNum }';"></td>
 				</tr>
@@ -299,7 +313,8 @@
 
 							<td><button type="button" class="btn btn-xs btn-success"
 									onclick="replyup('${vo.r_num}','${status.index}')">
-									추천 <strong id="re_up${status.index}">${vo.up }</strong>
+									<span class="glyphicon glyphicon-thumbs-up"></span> <strong
+										id="re_up${status.index}">${vo.up }</strong>
 								</button></td>
 
 

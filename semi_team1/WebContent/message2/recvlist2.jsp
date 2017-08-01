@@ -16,9 +16,9 @@
 			<br>
 			<table class="table table-bordered">
 				<thead>
-					<tr>
+					<tr style="text-overflow: ellipsis; overflow: hidden;">
 						<th>보낸 사람</th>
-						<th>내용</th>
+						<th style="width: 500px">내용</th>
 						<th>받은 날짜</th>
 						<th>삭제</th>
 					</tr>
@@ -28,10 +28,14 @@
 						<td>${vo.sender }</td>
 						<c:choose>
 							<c:when test="${vo.chk==1 }">
-								<td><a href="/semi_team1/recvview2?num=${vo.num }">${vo.content }</a></td>
+								<td
+									style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 500px;"><a
+									href="/semi_team1/recvview2?num=${vo.num }">${vo.content }</a></td>
 							</c:when>
 							<c:otherwise>
-								<td><a href="/semi_team1/recvview2?num=${vo.num }"
+								<td
+									style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 500px;"><a
+									href="/semi_team1/recvview2?num=${vo.num }"
 									style="color: #777;">${vo.content }</a></td>
 							</c:otherwise>
 						</c:choose>
