@@ -53,13 +53,13 @@
 				</tr>
 
 				<c:forEach var="vo" items="${requestScope.bestlist }"
-					varStatus="status" begin="1" end="6" step="2">
+					varStatus="status" begin="0" end="6" step="2">
 					<tr class="active">
 						<td><a
-							href="/semi_team1/select?num=${vo.num}">${vo.title_name} ${status.index }
+							href="/semi_team1/select?num=${bestlist[status.index].num}">${bestlist[status.index].title_name}
 						</a></td>
 						<td><a
-							href="/semi_team1/select?num=${vo.num}">${vo.title_name} ${status.index+1 }</a></td>
+							href="/semi_team1/select?num=${bestlist[status.index+1].num}">${bestlist[status.index+1].title_name}</a></td>
 					</tr>
 				</c:forEach>
 
@@ -83,6 +83,19 @@
 						<th style="width: 100px; text-align: center">날짜</th>
 					</tr>
 				</thead>
+				<c:forEach var="vo" items="${requestScope.noticelist }">
+					<tr class="info">
+						<td style="text-align: center">${vo.num }</td>
+
+						<td><a href="/semi_team1/select?num=${vo.num }">${vo.title_name }
+								[${vo.cnt }]</a></td>
+						<td>${vo.writer }</td>
+
+						<td style="text-align: center">${vo.up }</td>
+						<td style="text-align: center">${vo.hits }</td>
+						<td style="text-align: center">${vo.regdate }</td>
+					</tr>
+				</c:forEach>
 				<c:forEach var="vo" items="${requestScope.list }">
 					<tr>
 						<td style="text-align: center">${vo.num }</td>
