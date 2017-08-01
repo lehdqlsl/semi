@@ -9,16 +9,16 @@
 
 	//setInterval(msgrefresh, 1000)
 
-	var xhr = null;
+	var msgxhr = null;
 	function msgrefresh() {
-		xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = callback;
-		xhr.open('get', '/semi_team1/message2/msgrefresh.jsp', true);
-		xhr.send();
+		msgxhr = new XMLHttpRequest();
+		msgxhr.onreadystatechange = callback;
+		msgxhr.open('get', '/semi_team1/message2/msgrefresh.jsp', true);
+		msgxhr.send();
 	}
 	function callback() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-			var data = xhr.responseText;
+		if (msgxhr.readyState == 4 && msgxhr.status == 200) {
+			var data = msgxhr.responseText;
 			var json = eval('(' + data + ')');
 			var div = document.getElementById("cnt");
 			div.innerHTML = json.cnt;

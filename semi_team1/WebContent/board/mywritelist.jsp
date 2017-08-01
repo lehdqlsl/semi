@@ -41,30 +41,30 @@
 			<div align="center">
 <!-- 이전 -->
 <c:choose>
-	<c:when test="${startPage>20 }">
-		<a href="/semi_team1/mywritelist?pageNum=${startPage-1 }"><input class="btn btn-xs btn-primary" type="submit" value="◁"></a>
+	<c:when test="${startPageNum>5 }">
+		<a href="/semi_team1/mywritelist?writer=${requestScope.writer }&pageNum=${startPageNum-1 }"><input class="btn btn-xs btn-primary" type="submit" value="◁"></a>
 	</c:when>
 	<c:otherwise>
 		<input class="btn btn-xs btn-primary" type="submit" value="◁">
 	</c:otherwise>
 </c:choose>
 
-<c:forEach var="i" begin="${startPage }" end="${endPage }">
+<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
 	<c:choose>
 		<c:when test="${i==pageNum }">
-			<a href="/semi_team1/mywritelist?writer=${writer }pageNum=${i }"><input class="btn btn-xs btn-link" type="submit" value="${i}"></a>
+			<a href="/semi_team1/mywritelist?writer=${requestScope.writer }&pageNum=${i }"><input class="btn btn-xs btn-link" type="submit" value="${i}"></a>
 			
 		</c:when>
 		<c:otherwise>
-			<a href="/semi_team1/mywritelist?writer=${writer }pageNum=${i }"><input class="btn btn-xs btn-link" type="submit" value="${i}"></a>
+			<a href="/semi_team1/mywritelist?writer=${requestScope.writer }&pageNum=${i }"><input class="btn btn-xs btn-link" type="submit" value="${i}"></a>
 			
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
 <!-- 다음 -->
 <c:choose>
-	<c:when test="${endPage<pageCount }">
-		<a href="/semi_team1/mywritelist?writer=${writer }pageNum=${endPage+1 }">
+	<c:when test="${endPageNum<pageCount }">
+		<a href="/semi_team1/mywritelist?writer=${requestScope.writer }&pageNum=${endPageNum+1 }">
 		<input class="btn btn-xs btn-primary" type="submit" value="▷">		
 		</a>
 	</c:when>

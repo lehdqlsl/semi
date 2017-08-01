@@ -2,7 +2,6 @@ package com.team1.board.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.xml.internal.ws.wsdl.parser.MemberSubmissionAddressingWSDLParserExtension;
 import com.team1.dao.BoardDao;
 import com.team1.dao.JoinDao;
 import com.team1.dao.ReplyDao;
@@ -34,6 +32,10 @@ public class SelectController extends HttpServlet {
 		String bnum = request.getParameter("num");
 
 		String nick = request.getParameter("writer");
+
+		System.out.println("Âï´Â´Ù" + bnum);
+		System.out.println("Âï´Â´Ù" + nick);
+
 		BoardDao dao = new BoardDao();
 		JoinDao memdao = new JoinDao();
 		JoinVo mvo = memdao.memSelect(nick);

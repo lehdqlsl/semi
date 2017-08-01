@@ -13,9 +13,10 @@ import com.team1.dao.ReplyDao;
 import com.team1.vo.ReplyVo;
 
 @WebServlet("/myreplylist")
-public class MyReplyListController extends HttpServlet{
+public class MyReplyListController extends HttpServlet {
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String spageNum = request.getParameter("pageNum");
 		String nick = request.getParameter("nick");
 		// int s_num=Integer.parseInt(request.getParameter("s_num"));
@@ -31,19 +32,21 @@ public class MyReplyListController extends HttpServlet{
 		ArrayList<ReplyVo> list = dao.MyReplyList(nick, startRow, endRow);
 
 		if (list != null) {
-			int pageCount = (int) (Math.ceil(dao.getCount2() / 20.0));
-			int startPageNum = (int) (Math.ceil(pageNum / 20.0) * 20 - 19);
-			int endPageNum = (int) (Math.ceil(pageNum / 20.0) * 20);
+			int pageCount = (int) (Math.ceil(dao.getReplyCount(nick) / 20.0));
+			int startPageNum = (int) (Math.ceil(pageNum / 5.0) * 5 - 4);
+			int endPageNum = (int) (Math.ceil(pageNum / 5.0) * 5);
 			if (endPageNum > pageCount) {
 				endPageNum = pageCount;
 			}
-
+			System.out.println(pageCount);
+			System.out.println(startPageNum);
+			System.out.println(endPageNum);
+			
 			request.setAttribute("pageCount", pageCount);
-			request.setAttribute("startPageNum", startPageNum);
-			request.setAttribute("endPageNum", endPageNum);
+			request.setAttribute("startPage", startPageNum);
+			request.setAttribute("endPage", endPageNum);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("list", list);
-			
 			request.setAttribute("nick", nick);
 			request.getRequestDispatcher("/index.jsp?page=/reply/myreplylist.jsp").forward(request, response);
 		} else {

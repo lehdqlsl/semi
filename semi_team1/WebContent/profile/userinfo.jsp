@@ -150,8 +150,8 @@
 			</tr>
 
 			<tr>
-				<td><a href="/semi_team1//mywritelist?writer=${sessionScope.m_nick }"><%=mywrite %>개</a></td>
-				<td><a href="/semi_team1//myreplylist?nick=${sessionScope.m_nick }"><%=myreply %>개</a></td>
+				<td><a href="/semi_team1/mywritelist?writer=${sessionScope.m_nick }"><%=mywrite %>개</a></td>
+				<td><a href="/semi_team1/myreplylist?nick=${sessionScope.m_nick }"><%=myreply %>개</a></td>
 				<td><%=mygethits %>개</td>
 			</tr>
 		</table>
