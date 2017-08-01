@@ -10,7 +10,7 @@ import com.team1.db.DBCPBean;
 import com.team1.vo.Message2Vo;
 
 public class recvDao2 {
-	
+	//받은 메시지 전체리스트(페이징)
 	public ArrayList<Message2Vo> list(String recv, int startRow, int endRow){
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -51,15 +51,16 @@ public class recvDao2 {
 		}
 	}
 	
-	//전체 글의 갯수 구하기
-	public int getCount(){
+	//받은 사람의 전체 글의 갯수 구하기
+	public int getCount(String receiver){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try{
 			con=DBCPBean.getConn();
-			String sql="select NVL(count(num),0) cnt from message";
+			String sql="select NVL(count(num),0) cnt from message where receiver=? and recv_del=1 and send_cxl=1";
 			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, receiver);
 			rs=pstmt.executeQuery();
 			rs.next();
 			int cnt=rs.getInt(1);
