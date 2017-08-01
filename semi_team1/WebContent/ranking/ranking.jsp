@@ -31,7 +31,7 @@
 								<td style="padding: 36px;">${vo.exp }</td>
 								<td style="padding: 36px;">${vo.grade }</td>
 								<td><img src="/semi_team1/rs/img/${vo.grade }.png"
-									style="width: 90px; height: 90px;"></td>
+									style="width: 80px; height: 80px;"></td>
 						</c:when>
 						<c:when test="${status.index+1 == 2}">
 							<tr
@@ -42,7 +42,7 @@
 								<td style="padding: 35px;">${vo.exp }</td>
 								<td style="padding: 35px;">${vo.grade }</td>
 								<td><img src="/semi_team1/rs/img/${vo.grade }.png"
-									style="width: 70px; height: 70px;"></td>
+									style="width: 75px; height: 75px;"></td>
 						</c:when>
 						<c:when test="${status.index+1 == 3}">
 							<tr
