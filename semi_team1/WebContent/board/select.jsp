@@ -202,10 +202,6 @@
 </head>
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-
-		<%--   <% String s_num = request.getParameter("s_num"); %>
-		<input type="hidden" value="<%=s_num%>" name="s_num"> --%>
-
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
 			<table class="table table-bordered">

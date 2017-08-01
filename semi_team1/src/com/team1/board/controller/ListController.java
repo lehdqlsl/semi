@@ -91,6 +91,8 @@ public class ListController extends HttpServlet {
 				vo.setGrade(writer);
 			}
 
+			ArrayList<boardListVo> bestlist = dao.bestlist(s_num);
+			
 			request.setAttribute("pageCount", pageCount);
 			request.setAttribute("startPageNum", startPageNum);
 			request.setAttribute("endPageNum", endPageNum);
@@ -98,6 +100,7 @@ public class ListController extends HttpServlet {
 			request.setAttribute("search", search);
 			request.setAttribute("keyword", keyword);
 			request.setAttribute("list", list);
+			request.setAttribute("bestlist", bestlist);
 			request.setAttribute("s_num", s_num);
 
 			switch (n) {
