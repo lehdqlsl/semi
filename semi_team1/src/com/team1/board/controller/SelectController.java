@@ -23,17 +23,14 @@ public class SelectController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		BoardDao dao = new BoardDao();
 		boolean flag = true;
 
 		String spageNum = request.getParameter("pageNum");
 		int b_num = Integer.parseInt(request.getParameter("num"));
-
+		String nick = dao.getWriter(b_num);
 		String bnum = request.getParameter("num");
 
-		String nick = request.getParameter("writer");
-
-		BoardDao dao = new BoardDao();
 		JoinDao memdao = new JoinDao();
 		JoinVo mvo = memdao.memSelect(nick);
 		boardVo vo = dao.select(b_num);

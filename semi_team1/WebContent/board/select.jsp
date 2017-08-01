@@ -190,10 +190,10 @@
 </head>
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-		
+
 		<%--   <% String s_num = request.getParameter("s_num"); %>
 		<input type="hidden" value="<%=s_num%>" name="s_num"> --%>
-		
+
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
 			<table class="table table-bordered">
@@ -247,7 +247,9 @@
 				<tr style="text-align: center">
 					<td colspan="2"><button type="button" class="btn btn-success"
 							onclick="boardup('${vo.num}')">
-							추천 <strong id="bo_up">${vo.up }</strong>
+							<span class="glyphicon glyphicon-thumbs-up"
+								style="font-size: 20px"></span> <strong id="bo_up"
+								style="font-size: 15px">${vo.up }</strong>
 						</button></td>
 				</tr>
 			</table>
@@ -299,7 +301,8 @@
 
 							<td><button type="button" class="btn btn-xs btn-success"
 									onclick="replyup('${vo.r_num}','${status.index}')">
-									추천 <strong id="re_up${status.index}">${vo.up }</strong>
+									<span class="glyphicon glyphicon-thumbs-up"></span> <strong
+										id="re_up${status.index}">${vo.up }</strong>
 								</button></td>
 
 
