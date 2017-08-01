@@ -30,6 +30,9 @@ public class ListController extends HttpServlet {
 			search = "";
 		}
 
+		// 글에 해당하는 댓글 개수 가져오기
+		ReplyDao rdao = ReplyDao.getInstance();
+
 		String spageNum = request.getParameter("pageNum");
 		int s_num = Integer.parseInt(request.getParameter("s_num"));
 
@@ -50,6 +53,11 @@ public class ListController extends HttpServlet {
 
 		BoardDao dao = new BoardDao();
 		ArrayList<boardListVo> list = dao.list(s_num, startRow, endRow, search, keyword);
+
+		for (boardListVo vo : list) {
+			int rcnt = rdao.getCount(vo.getNum());
+			vo.setCnt(rcnt);
+		}
 
 		if (list != null) {
 

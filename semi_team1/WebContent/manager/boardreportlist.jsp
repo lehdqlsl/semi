@@ -35,7 +35,7 @@
 						<td>${vo.c_title }</td>
 						<td><a href="/semi_team1/select?num=${vo.boardnum }">${vo.b_title }</a></td>
 						<td>${vo.regdate }</td>
-						<td>${vo.writer }</td>
+						<td><a href="/semi_team1/select/limit/mem?writer=${vo.writer }">${vo.writer }</a></td>
 						<td><button type="button" class="btn btn-xs btn-success"  onclick="blindProcess(${vo.boardnum})">블라인드</button></td>
 					</tr>
 				</c:forEach>

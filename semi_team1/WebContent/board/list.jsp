@@ -54,7 +54,7 @@
 						<th style="width: 100px; text-align: center">날짜</th>
 					</tr>
 				</thead>
-				<c:forEach var="vo" items="${requestScope.list }">
+				<c:forEach var="vo" items="${requestScope.list }" >
 					<tr>
 						<!--  	
 						/semi_team1/index.jsp?page=/game/gameIndex.jsp&s_page=/board/insert.jsp 
@@ -63,7 +63,7 @@
 						<td style="text-align: center">${vo.num }</td>
 
 						<td><a
-							href="/semi_team1/select?num=${vo.num }&writer=${vo.writer}">${vo.title_name }</a></td>
+							href="/semi_team1/select?num=${vo.num }&writer=${vo.writer}">${vo.title_name } [${vo.cnt }]</a></td>
 						<td>${vo.writer }</td>
 
 						<td style="text-align: center">${vo.up }</td>

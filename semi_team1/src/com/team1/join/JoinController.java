@@ -23,8 +23,11 @@ public class JoinController extends HttpServlet {
 		String u_pw = request.getParameter("u_pw");
 		String m_nick = request.getParameter("m_nick");
 		String m_mail = request.getParameter("m_mail");
+		String img = request.getParameter("m_img");
 
-		JoinVo vo = new JoinVo(0,id, u_pw, m_nick, m_mail);
+		JoinVo vo = new JoinVo(0, id, u_pw, m_nick, m_mail);
+		vo.setM_orgfilename(img);
+		vo.setM_savefilename(img);
 
 		JoinDao dao = new JoinDao();
 		int n = dao.insert(vo);
