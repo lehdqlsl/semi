@@ -177,6 +177,16 @@
 			alert("신고되었습니다!");
 		}
 	}
+	//로그인 여부에 따른 쪽지 보내기
+	function sendmsg(nick) {
+		console.log(nick);
+		if (nick == 'null') {
+			alert("먼저 로그인을 하셔야합니다.\n로그인페이지로 이동 하시겠습니까?");
+			document.location.href = "index.jsp?page=login/signin.jsp";
+		}else{
+			location.href="/semi_team1/index.jsp?page=message2/insert2.jsp?&sender="+nick;
+		}
+	}
 </script>
 </head>
 <body>
@@ -202,7 +212,7 @@
 						class="btn btn-xs btn-default"
 						onclick="location.href='/semi_team1/index.jsp?page=mywritelist?writer=${vo.writer }'">
 						<input type="button" value="쪽지보내기" class="btn btn-xs btn-default"
-						onclick="location.href='/semi_team1/index.jsp?page=message2/insert2.jsp?&sender=${vo.writer }'">
+						onclick="sendmsg('${vo.writer}')">
 					</td>
 
 				</tr>
