@@ -106,4 +106,55 @@ public class UserInfoDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
+	
+	//userinfo추천수1(게시판 추천)
+	public int getUpCount1(String writer) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select count(*) cnt from board_up where b_num IN (select num from board where writer = ?) ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, writer);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				int cnt = rs.getInt("cnt");
+				System.out.println("추천수1:"+cnt);
+				return cnt;
+			}
+			return pstmt.executeUpdate();
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+	//select count(*) from board_up where b_num IN (select num from board where writer = 'admin'); 
+	
+	//userinfo추천수2(댓글 추천)
+	public int getUpCount2(String nick) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select count(*) cnt from reply_up where r_num IN (select r_num from reply where nick = ?) ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nick);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				int cnt = rs.getInt("cnt");
+				return cnt;
+			}
+			return pstmt.executeUpdate();
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+	
 }

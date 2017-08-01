@@ -78,4 +78,5 @@ public class BoardUpDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
+	
 }

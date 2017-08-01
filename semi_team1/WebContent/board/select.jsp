@@ -237,7 +237,7 @@
 
 
 				<tr>
-					<td>추천 xx / 조회 xx</td>
+					<td>추천 ${vo.up } / 조회 ${vo.hits }</td>
 				</tr>
 
 				<tr>
@@ -266,7 +266,7 @@
 						</c:if> <input class="btn btn-danger" type="button" value="신고"
 						onclick="boardreport(${vo.num},'${vo.writer }')"> <input
 						class="btn btn-success" type="button" value="목록"
-						onclick="javascript:history.back()"></td>
+						onclick="location.href = 'index.jsp?page=list?s_num=${vo.s_num }&pageNum=${pageNum }';"></td>
 				</tr>
 			</table>
 

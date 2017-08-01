@@ -125,6 +125,8 @@
 				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
 					<c:choose>
 						<c:when test="${i==pageNum }">
+						<input type="hidden" value="${param.pageNum }" name="pageNum">
+				
 							<a style="text-decoration: none"
 								href="/semi_team1/list?s_num=${s_num }&pageNum=${i }&search=${param.search}&keyword=${param.keyword}">
 								<input class="btn btn-xs btn-link" type="submit" value="${i}">

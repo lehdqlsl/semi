@@ -100,6 +100,10 @@
 		</c:otherwise>
 				</c:choose>
 			</div>
+			<br><input class="btn btn-danger" type="button" value="이전" 
+			onclick="location.href = '/semi_team1/index.jsp?page=profile/userinfo.jsp?num=${sessionScope.num }';">
+			<input class="btn btn-danger" type="button" value="쪽지보내기" 
+			onclick="location.href = '/semi_team1/index.jsp?page=message2/insert2.jsp?num=${sessionScope.num }';">
 		</div>
 	</div>
 

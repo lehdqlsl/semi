@@ -1,3 +1,4 @@
+<%@page import="com.team1.dao.BoardUpDao"%>
 <%@page import="com.team1.dao.ReplyDao"%>
 <%@page import="com.team1.dao.BoardDao"%>
 <%@page import="com.team1.message2.dao.recvDao2"%>
@@ -90,11 +91,16 @@
 			
 			BoardDao dao2 = new BoardDao();
 			int mywrite = dao2.getWriteCount(nick);
-			int mygethits = dao2.gethitsCount(nick);
-			
+			//작성댓글 
 			ReplyDao dao3 = ReplyDao.getInstance();
 			int myreply = dao3.getReplyCount(nick);
 			
+			//추천수
+			int n1=dao.getUpCount1(nick);
+			System.out.println("n1:"+n1);
+			int n2=dao.getUpCount2(nick);
+			System.out.println("n2:"+n2);
+			int n3=n1+n2;
 			
 			
 		%>
@@ -152,7 +158,7 @@
 			<tr>
 				<td><a href="/semi_team1/mywritelist?writer=${sessionScope.m_nick }"><%=mywrite %>개</a></td>
 				<td><a href="/semi_team1/myreplylist?nick=${sessionScope.m_nick }"><%=myreply %>개</a></td>
-				<td><%=mygethits %>개</td>
+				<td><%=n3 %>개</td>
 			</tr>
 		</table>
 		<ul class="nav nav-sidebar">
@@ -218,13 +224,13 @@
 			<p>닉네임 설정 안내</p>
 			<textarea cols="100" rows="5" name="notice" readonly="readonly"
 				style="resize: none;">
-		10자까지, 닉네임 앞뒤로 공백 불가, 단어 사이 공백 1회 허용
+		20자까지, 닉네임 앞뒤로 공백 불가, 단어 사이 공백 불가
 		공백 문자 & 보안상 문제되는 특수문자는 발견시 제외처리
 		어법에 맞지 않는 한글 사용 금지
 		불량 닉네임(욕설, 불건전 닉네임)은 임의 삭제 혹은 계정 징계 조치
 		</textarea>
 			<br> <br> &nbsp;<input type="submit" value="수정완료"
-				onclick="return validate()" class="btn btn-lg btn-success">
+				onclick="return validate()" class="btn btn-success">
 		</form>
 	</div>
 

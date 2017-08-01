@@ -396,7 +396,7 @@ public class BoardDao {
 		}
 	}
 
-	////// 내 추천수 조회 (총합계)
+	////// 조회수
 	public int gethitsCount(String writer) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -444,4 +444,6 @@ public class BoardDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
+	
+	
 }

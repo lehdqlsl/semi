@@ -80,6 +80,8 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
+			<br><input class="btn btn-primary" type="button" value="이전" 
+			onclick="location.href = '/semi_team1/index.jsp?page=profile/userinfo.jsp?num=${sessionScope.num }';">
 		</div>
 	</div>
 

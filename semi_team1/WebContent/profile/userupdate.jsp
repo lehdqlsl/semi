@@ -139,7 +139,8 @@ function validate() {
 		<label>이메일</label><br>
 		<input type="text" placeholder="이메일" name="m_mail" id="m_mail" class="form-control" value="<%=vo.getM_mail()%>"> 
 		<input type="button" id="emailcheckbtn"	value="중복확인" onclick="return emailcheck()" class="btn btn-sm btn-info"><br><br> 
-		<input type="submit" value="수정" onclick="return validate()" class="btn btn-sm btn-info">
+		<input type="submit" value="수정" onclick="return validate()" class="btn btn-info">
+		<input class="btn btn-info" type="button" value="이전" onclick="javascript:history.back()">
 	</form>
 </div>
 </body>
