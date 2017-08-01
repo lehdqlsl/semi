@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.team1.dao.BoardDao;
 import com.team1.vo.boardVo;
@@ -17,26 +19,23 @@ public class UpdateController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 		request.setCharacterEncoding("utf-8");
 		int num=Integer.parseInt(request.getParameter("num"));
 		String title_name=request.getParameter("title_name");
 		String content=request.getParameter("content");
-		int f_num=Integer.parseInt(request.getParameter("f_num"));
+		//int f_num=Integer.parseInt(request.getParameter("f_num"));
 		int s_num=Integer.parseInt(request.getParameter("s_num"));
-		String orgFileName="text.jpg";
-		String saveFileName="text.jpg";
 		
 		System.out.println("num"+num);
 		System.out.println("title_name"+title_name);
 		System.out.println("content"+content);
-		System.out.println("f_num"+f_num);
+		//System.out.println("f_num"+f_num);
 		System.out.println("s_num"+s_num);
-		System.out.println("orgFileName"+orgFileName);
-		System.out.println("saveFileName"+saveFileName);
 		
 		
 		
-		boardVo vo=new boardVo(num, title_name, 0, 0, orgFileName, saveFileName, content, null, null, f_num, s_num, 0, 0, 0);
+		boardVo vo=new boardVo(num, title_name, content, s_num);
 		BoardDao dao=new BoardDao();
 		int n=dao.update(vo);
 		

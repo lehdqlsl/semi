@@ -105,6 +105,14 @@ public class boardVo {
 	public void setTop(int top) {
 		this.top = top;
 	}
+	
+	public boardVo(int num, String title_name, String content, int s_num) {
+		this.num = num;
+		this.title_name = title_name;
+		this.content = content;
+		this.s_num = s_num;
+	}
+	
 	public boardVo(int num, String title_name, int up, int hits, String orgfilename, String savefilename,
 			String content, Date regdate, String writer, int f_num, int s_num, int blind, int report, int top) {
 		

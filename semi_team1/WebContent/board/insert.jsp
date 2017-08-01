@@ -57,7 +57,7 @@ src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 					<tr>
 						<td colspan="2" align="center"><input class="btn btn-success"
 							type="button" value="확인" onclick="submitContents(this);">
-							<input class="btn btn-success" type="button" value="목록"
+							<input class="btn btn-success" type="button" value="이전"
 							onclick="javascript:history.back()"></td>
 					</tr>
 				</table>

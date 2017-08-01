@@ -40,8 +40,8 @@ src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 		%>
 		<div style="margin: auto; width: 1000px">
 			<form action="/semi_team1/update" method="post">
-				<input type="hidden" value="<%=s_num%>" name="s_num">
-				<input type="hidden" value="<%=f_num%>" name="f_num">
+				<input type="hidden" value="${param.num }" name="num">
+				<input type="hidden" value="${param.s_num }" name="s_num">
 				<table class="table table-bordered">
 					<tr>
 						<td>작성자</td>
@@ -56,18 +56,11 @@ src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 						<td>내용</td>
 						<td><textarea name="content" id="ir1" rows="10" cols="100"
 								style="width: 766px; height: 412px; display: none;"><%=vo.getContent() %></textarea>
-							<p>
-								<input type="button" onclick="pasteHTML();" value="본문에 내용 넣기" />
-								<input type="button" onclick="showHTML();" value="본문 내용 가져오기" />
-								<input type="button" onclick="submitContents(this);"
-									value="서버로 내용 전송" /> <input type="button"
-									onclick="setDefaultFont();" value="기본 폰트 지정하기 (궁서_24)" />
-							</p></td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><input class="btn btn-success"
 							type="button" value="확인" onclick="submitContents(this);">
-							<input class="btn btn-success" type="button" value="목록"
+							<input class="btn btn-success" type="button" value="이전"
 							onclick="javascript:history.back()"></td>
 					</tr>
 				</table>
@@ -101,15 +94,6 @@ src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 			fCreator : "createSEditor2"
 		});
 
-		function pasteHTML() {
-			var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
-			oEditors.getById["ir1"].exec("PASTE_HTML", [ sHTML ]);
-		}
-
-		function showHTML() {
-			var sHTML = oEditors.getById["ir1"].getIR();
-			alert(sHTML);
-		}
 
 		function submitContents(elClickedObj) {
 			oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
@@ -130,12 +114,6 @@ src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 				} catch (e) {
 				}
 			}
-		}
-
-		function setDefaultFont() {
-			var sDefaultFont = '궁서';
-			var nFontSize = 24;
-			oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
 		}
 	</script>
 </body>

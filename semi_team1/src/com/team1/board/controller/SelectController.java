@@ -33,9 +33,6 @@ public class SelectController extends HttpServlet {
 
 		String nick = request.getParameter("writer");
 
-		System.out.println("Âï´Â´Ù" + bnum);
-		System.out.println("Âï´Â´Ù" + nick);
-
 		BoardDao dao = new BoardDao();
 		JoinDao memdao = new JoinDao();
 		JoinVo mvo = memdao.memSelect(nick);
