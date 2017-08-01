@@ -38,7 +38,36 @@
 </script>
 </head>
 <body>
+
+
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
+
+		<!-- 베스트 게시글 -->
+		<div
+			style="width: 500px; word-break: break-all; word-wrap: break-word; margin-left: 200px;">
+			<table class="table">
+				<tr>
+					<th style="text-align: center; font-size: 18px;" colspan="2">게시판
+						<span style="font-weight: bold; color: red">BEST</span>
+					</th>
+				</tr>
+
+				<c:forEach var="vo" items="${requestScope.bestlist }"
+					varStatus="status" begin="1" end="6" step="2">
+					<tr class="active">
+						<td><a
+							href="/semi_team1/select?num=${vo.num}">${vo.title_name} ${status.index }
+						</a></td>
+						<td><a
+							href="/semi_team1/select?num=${vo.num}">${vo.title_name} ${status.index+1 }</a></td>
+					</tr>
+				</c:forEach>
+
+
+			</table>
+		</div>
+
+		<!-- 일반 게시글 -->
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
 
@@ -54,16 +83,12 @@
 						<th style="width: 100px; text-align: center">날짜</th>
 					</tr>
 				</thead>
-				<c:forEach var="vo" items="${requestScope.list }" >
+				<c:forEach var="vo" items="${requestScope.list }">
 					<tr>
-						<!--  	
-						/semi_team1/index.jsp?page=/game/gameIndex.jsp&s_page=/board/insert.jsp 
-						/semi_team1/select?num=${vo.num }
-				-->
 						<td style="text-align: center">${vo.num }</td>
 
-						<td><a
-							href="/semi_team1/select?num=${vo.num }&writer=${vo.writer}">${vo.title_name } [${vo.cnt }]</a></td>
+						<td><a href="/semi_team1/select?num=${vo.num }">${vo.title_name }
+								[${vo.cnt }]</a></td>
 						<td>${vo.writer }</td>
 
 						<td style="text-align: center">${vo.up }</td>
@@ -152,5 +177,8 @@
 			</div>
 		</div>
 	</div>
+
+
+
 </body>
 </html>

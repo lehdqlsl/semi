@@ -27,7 +27,7 @@ public class ReplyDao {
 		ResultSet rs = null;
 		try {
 			con = DBCPBean.getConn();
-			String sql = "SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM (SELECT * FROM REPLY WHERE B_NUM=? ORDER BY R_NUM desc) AA)WHERE RNUM>=? AND RNUM<=?";
+			String sql = "SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM (SELECT * FROM REPLY WHERE B_NUM=? ORDER BY R_NUM asc) AA)WHERE RNUM>=? AND RNUM<=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bnum);
 			pstmt.setInt(2, startRow);
