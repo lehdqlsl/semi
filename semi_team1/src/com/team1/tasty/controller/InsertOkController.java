@@ -41,7 +41,7 @@ public class InsertOkController extends HttpServlet {
 		int n = dao.insert(vo);
 
 		if (n > 0) {
-			response.sendRedirect("/semi_team1/list?s_num=" + s_num);
+			response.sendRedirect("/semi_team1/tasty/list?s_num=" + s_num);
 		} else {
 			request.setAttribute("result", "fail");
 			RequestDispatcher rd = request.getRequestDispatcher("/join/result.jsp");
