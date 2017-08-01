@@ -9,6 +9,7 @@ import java.util.Date;
 
 import com.team1.db.DBCPBean;
 import com.team1.vo.ManagerVo;
+import com.team1.vo.Message2Vo;
 import com.team1.vo.boardListVo;
 import com.team1.vo.boardVo;
 
@@ -102,24 +103,6 @@ public class BoardDao {
 		}
 	}
 
-	public int delete(int num) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		String sql = "delete from board where num=?";
-		try {
-			con = DBCPBean.getConn();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, num);
-			int n = pstmt.executeUpdate();
-			return n;
-		} catch (SQLException se) {
-			System.out.println(se.getMessage());
-			return -1;
-		} finally {
-			DBCPBean.close(con, pstmt, null);
-		}
-	}
-
 	public boardVo select(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -152,13 +135,11 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		try {
 			con = DBCPBean.getConn();
-			String sql = "update board set title_name=?, content=?, orgfilename=?, savefilename=?, s_num=1 where num=?";
+			String sql = "update board set title_name=?, content=?, regdate=sysdate where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle_name());
 			pstmt.setString(2, vo.getContent());
-			pstmt.setString(3, vo.getOrgfilename());
-			pstmt.setString(4, vo.getSavefilename());
-			pstmt.setInt(5, vo.getNum());
+			pstmt.setInt(3, vo.getNum());
 			return pstmt.executeUpdate();
 		} catch (SQLException se) {
 			System.out.println(se.getMessage());
@@ -340,7 +321,7 @@ public class BoardDao {
 		ResultSet rs = null;
 		try {
 			con = DBCPBean.getConn();
-			String sql = "select * from (select a.*, rownum rnum from(select * from board where writer=? order by num desc )a) where rnum>=? and rnum <=?";
+			String sql = "select * from (select a.*, rownum rnum from(select * from board where writer=? and blind=0 order by num desc )a) where rnum>=? and rnum <=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, writer);
 			pstmt.setInt(2, startRow);
@@ -372,7 +353,8 @@ public class BoardDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
-	//작성자당 쓴 글의 개수
+
+	// 작성자당 쓴 글의 개수
 	public int getWriteCount(String writer) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -395,7 +377,7 @@ public class BoardDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
-	
+
 	// 게시글 신고하기
 	public int reportUpdate(int boardnum) {
 		Connection con = null;
@@ -413,8 +395,6 @@ public class BoardDao {
 			DBCPBean.close(con, pstmt, null);
 		}
 	}
-
-	
 
 	////// 내 추천수 조회 (총합계)
 	public int gethitsCount(String writer) {
@@ -435,6 +415,31 @@ public class BoardDao {
 		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+
+	////// 게시글의 작성자 구하기
+	public String getWriter(int num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select writer from board where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				String writer = rs.getString("writer");
+				return writer;
+			} else {
+				return null;
+			}
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
 		} finally {
 			DBCPBean.close(con, pstmt, rs);
 		}

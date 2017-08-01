@@ -177,6 +177,7 @@
 			alert("신고되었습니다!");
 		}
 	}
+
 	//로그인 여부에 따른 쪽지 보내기
 	function sendmsg(nick) {
 		console.log(nick);
@@ -187,10 +188,24 @@
 			location.href="/semi_team1/index.jsp?page=message2/insert2.jsp?&sender="+nick;
 		}
 	}
+
+	//게시글 삭제
+	function boarddelete(boardnum){
+		var flag=confirm("정말 삭제하시겠습니까?");
+		if(flag){
+			location.href = "/semi_team1/boarddelete?b_num="+${requestScope.b_num }+"&s_num="+${vo.s_num};
+		}
+	}
+	
+
 </script>
 </head>
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
+
+		<%--   <% String s_num = request.getParameter("s_num"); %>
+		<input type="hidden" value="<%=s_num%>" name="s_num"> --%>
+
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
 			<table class="table table-bordered">
@@ -212,8 +227,7 @@
 						class="btn btn-xs btn-default"
 						onclick="location.href='/semi_team1/index.jsp?page=mywritelist?writer=${vo.writer }'">
 						<input type="button" value="쪽지보내기" class="btn btn-xs btn-default"
-						onclick="sendmsg('${vo.writer}')">
-					</td>
+						onclick="sendmsg('${vo.writer}')"></td>
 
 				</tr>
 
@@ -255,9 +269,9 @@
 					<td><c:if
 							test="${vo.writer eq sessionScope.m_nick || sessionScope.m_nick eq 'admin' }">
 							<input class="btn btn-success" type="button" value="수정"
-								onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}';">
+								onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}&s_num=${vo.s_num }';">
 							<input class="btn btn-success" type="button" value="삭제"
-								onclick="">
+								onclick="boarddelete('${vo.num}')">
 							<input class="btn btn-success" type="button" value="글쓰기"
 								onclick="location.href = 'index.jsp?page=board/insert.jsp';">
 						</c:if> <input class="btn btn-danger" type="button" value="신고"

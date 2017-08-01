@@ -94,8 +94,8 @@ function onclickreset() {
 			<tr>
 				<td colspan="3" align="center">
 				<input class="btn btn-warning" type="submit" value="보내기" onclick="return validate()"> 
-				<input class="btn btn-warning" type="button" value="목록"
-				onclick="location.href = '/semi_team1/sendlist2';">
+				<input class="btn btn-warning" type="button" value="이전"
+				onclick="javascript:history.back()">
 				<input class="btn btn-warning" type="reset" value="다시입력" onclick="onclickreset()">
 				</td>
 			</tr>

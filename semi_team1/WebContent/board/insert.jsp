@@ -21,9 +21,7 @@ src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 			//카테고리 번호
 			String s_num = request.getParameter("s_num");
 			int cnt = 0;
-			if (scnt != null) {
-				cnt = Integer.parseInt(scnt);
-			}
+
 			if (writer == null) {
 				writer = "";
 				title_name = "";
@@ -56,17 +54,11 @@ src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 									onclick="setDefaultFont();" value="기본 폰트 지정하기 (궁서_24)" />
 							</p></td>
 					</tr>
-
-					<tr>
-						<td>첨부파일갯수</td>
-						<td><input type="text" name="cnt" value="<%=cnt%>"> <!-- <input type="submit" value="확인"> -->
-						</td>
-					</tr>
 					<tr>
 						<td colspan="2" align="center"><input class="btn btn-success"
 							type="button" value="확인" onclick="submitContents(this);">
-							<input class="btn btn-success" type="button" value="목록"
-							onclick="location.href = '/semi_team1/list';"></td>
+							<input class="btn btn-success" type="button" value="이전"
+							onclick="javascript:history.back()"></td>
 					</tr>
 				</table>
 			</form>
