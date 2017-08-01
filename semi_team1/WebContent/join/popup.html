@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function img_select(img) {
+		console.log("선택");
+		var m_img = window.opener.document.getElementById("m_img");
+		m_img.value = img;
+		window.close();
+	}
+</script>
+</head>
+<body>
+	<table border=1 id="table">
+		<tr>
+			<td><img src="/semi_team1/rs/img/1.jpg"
+				style="width: 200px; height: 200px;"></td>
+			<td><img src="/semi_team1/rs/img/2.jpg"
+				style="width: 200px; height: 200px;"></td>
+			<td><img src="/semi_team1/rs/img/3.jpg"
+				style="width: 200px; height: 200px;"></td>
+			<td><img src="/semi_team1/rs/img/4.jpg"
+				style="width: 200px; height: 200px;"></td>
+
+		</tr>
+		<tr>
+			<td style="text-align: center"><input type="button" value="선택"
+				onclick="img_select('1.jpg')"></td>
+			<td style="text-align: center"><input type="button" value="선택"
+				onclick="img_select('2.jpg')"></td>
+			<td style="text-align: center"><input type="button" value="선택"
+				onclick="img_select('3.jpg')"></td>
+			<td style="text-align: center"><input type="button" value="선택"
+				onclick="img_select('4.jpg')"></td>
+
+		</tr>
+		<tr>
+
+			<td><img src="/semi_team1/rs/img/5.jpg"
+				style="width: 200px; height: 200px;"></td>
+			<td><img src="/semi_team1/rs/img/6.jpg"
+				style="width: 200px; height: 200px;"></td>
+			<td><img src="/semi_team1/rs/img/7.jpg"
+				style="width: 200px; height: 200px;"></td>
+		</tr>
+		<tr>
+
+			<td style="text-align: center"><input type="button" value="선택"
+				onclick="img_select('5.jpg')"></td>
+			<td style="text-align: center"><input type="button" value="선택"
+				onclick="img_select('6.jpg')"></td>
+			<td style="text-align: center"><input type="button" value="선택"
+				onclick="img_select('7.jpg')"></td>
+		</tr>
+	</table>
+</body>
+</html>

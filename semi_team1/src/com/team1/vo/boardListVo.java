@@ -18,6 +18,7 @@ public class boardListVo {
 	private int blind;
 	private int report;
 	private int top;
+	private int cnt;
 
 	public boardListVo() {
 	}
@@ -140,6 +141,14 @@ public class boardListVo {
 
 	public void setTop(int top) {
 		this.top = top;
+	}
+
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
 
 	public boardListVo(int num, String title_name, int up, int hits, String orgfilename, String savefilename,

@@ -19,12 +19,14 @@ public class JoinDao {
 		PreparedStatement pstmt = null;
 		try {
 			con = DBCPBean.getConn();
-			String sql = "insert into members values(SEQ_members_num.nextval,?,?,?,?,'test.jpg','test.jpg','unrank',sysdate,0,sysdate+7)";
+			String sql = "insert into members values(SEQ_members_num.nextval,?,?,?,?,?,?,'unrank',sysdate,0,sysdate+7)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getId());
 			pstmt.setString(2, vo.getU_pw());
 			pstmt.setString(3, vo.getM_nick());
 			pstmt.setString(4, vo.getM_mail());
+			pstmt.setString(5, vo.getM_orgfilename());
+			pstmt.setString(6, vo.getM_savefilename());
 			int n = pstmt.executeUpdate();
 			return n;
 		} catch (SQLException se) {

@@ -13,9 +13,9 @@
 			alert("아이디는 6~15자리로 입력하세요");
 			return;
 		}
-		for(var i=0;i<id.length;i++){
-			var ch=id.charAt(i);
-			if(!((ch>='A'&&ch<='Z')||(ch>='a'&&ch<='z')||(ch>=0&&ch<=9))){
+		for (var i = 0; i < id.length; i++) {
+			var ch = id.charAt(i);
+			if (!((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || (ch >= 0 && ch <= 9))) {
 				alert("아이디는 영문자나 숫자로만 입력하세요!!");
 				return;
 			}
@@ -51,7 +51,8 @@
 		}
 		xhr1 = new XMLHttpRequest();
 		xhr1.onreadystatechange = callnick;
-		xhr1.open('get', '/semi_team1/join/nickcheck.jsp?m_nick=' + m_nick, true);
+		xhr1.open('get', '/semi_team1/join/nickcheck.jsp?m_nick=' + m_nick,
+				true);
 		xhr1.send();
 	}
 	function callnick() {
@@ -65,7 +66,7 @@
 				alert("사용할 수 있는 닉네임입니다");
 				nickcheckbtn.disabled = true;
 				f.m_nick.readOnly = true;
-				
+
 			}
 		}
 	}
@@ -83,9 +84,10 @@
 				e2 += 1;
 			}
 		}
-		for(var i=0;i<m_mail.length;i++){
-			var ch=m_mail.charAt(i);
-			if(!((ch>='A'&&ch<='Z')||(ch>='a'&&ch<='z')||(ch>=0&&ch<=9)||ch=='@'||ch=='.')){
+		for (var i = 0; i < m_mail.length; i++) {
+			var ch = m_mail.charAt(i);
+			if (!((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')
+					|| (ch >= 0 && ch <= 9) || ch == '@' || ch == '.')) {
 				alert("올바른 이메일 주소가 아닙니다");
 				return;
 			}
@@ -96,7 +98,8 @@
 		}
 		xhr2 = new XMLHttpRequest();
 		xhr2.onreadystatechange = callemail;
-		xhr2.open('get', '/semi_team1/join/emailcheck.jsp?m_mail=' + m_mail, true);
+		xhr2.open('get', '/semi_team1/join/emailcheck.jsp?m_mail=' + m_mail,
+				true);
 		xhr2.send();
 	}
 	function callemail() {
@@ -121,9 +124,10 @@
 			alert("비밀번호는 4자에서 20자 사이이어야 합니다");
 			return false;
 		}
-		for(var i=0;i<u_pw.length;i++){
-			var ch=u_pw.charAt(i);
-			if(!((ch>='A'&&ch<='Z')||(ch>='a'&&ch<='z')||(ch>=0&&ch<=9)||ch=='!'||ch=='@')){
+		for (var i = 0; i < u_pw.length; i++) {
+			var ch = u_pw.charAt(i);
+			if (!((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')
+					|| (ch >= 0 && ch <= 9) || ch == '!' || ch == '@')) {
 				alert("비밀번호는 영문자, 숫자, !, @로만 입력하세요!!");
 				return;
 			}
@@ -134,22 +138,21 @@
 			alert("비밀번호를 확인하세요");
 			return false;
 		}
-		
+
 		////////////////////빈 칸이 입력되면////////////////////////////////////////
-		var m_mail=document.getElementById("m_mail").value;
-		var id=document.getElementById("id").value;
-		var m_nick=document.getElementById("m_nick").value;
-		
-		if((m_mail==null)||(id==null)||(m_nick==null)||(u_pw==null)||(checkpw==null)){
+		var m_mail = document.getElementById("m_mail").value;
+		var id = document.getElementById("id").value;
+		var m_nick = document.getElementById("m_nick").value;
+		var m_img = document.getElementById("m_img").value;
+		if ((m_mail == null) || (id == null) || (m_nick == null)
+				|| (u_pw == null) || (checkpw == null) || (m_img == "") ) {
 			alert("미입력된 부분이 있습니다");
 			return false;
 		}
 		var idcheckbtn = document.getElementById("idcheckbtn");
 		var nickcheckbtn = document.getElementById("nickcheckbtn");
 		var emailcheckbtn = document.getElementById("emailcheckbtn");
-		console.log(idcheckbtn.disabled);
-		console.log(nickcheckbtn.disabled);
-		console.log(emailcheckbtn.disabled);
+
 		if ((idcheckbtn.disabled != true || nickcheckbtn.disabled != true || emailcheckbtn.disabled != true)) {
 			alert("중복확인을 해주세요");
 			return false;
@@ -157,23 +160,39 @@
 		alert("회원가입이 완료되었습니다!!");
 		return true;
 	}
+
+	function selectimg() {
+		window.open("/semi_team1/join/popup.html", "_blank",
+				"width=900,height=520");
+	}
 </script>
 </head>
 <body>
 	<div class="container">
-		<div style="width:500px;height:500px;margin:auto;">
-		<h1>회원 가입 하기</h1>
-		<form action="/semi_team1/join/insert" method="post" class="navbar-form" name="f">
-			<label>아이디</label><br> <input type="text" placeholder="아이디" name="id" id="id" class="form-control"> 
-			<input type="button" id="idcheckbtn" value="중복확인" onclick="idcheck()"><br> <label>닉네임</label><br>
-			<input type="text" placeholder="닉네임" name="m_nick" id="m_nick"	class="form-control"> 
-			<input type="button" id="nickcheckbtn"	value="중복확인" onclick="nickcheck()"><br> <label>비밀번호</label><br>
-			<input type="password" placeholder="비밀번호" name="u_pw" id="u_pw"	class="form-control"><br> <label>비밀번호 확인</label><br>
-			<input type="password" placeholder="비밀번호 확인" name="checkpw" id="checkpw" class="form-control"><br> <label>이메일</label><br>
-			<input type="text" placeholder="이메일" name="m_mail" id="m_mail"	class="form-control"> 
-			<input type="button" id="emailcheckbtn" value="중복확인" onclick="return emailcheck()"><br>
-			<input type="submit" value="가입" onclick="return validate()">
-		</form>
+		<div style="width: 500px; height: 500px; margin: auto;">
+			<h1>회원 가입 하기</h1>
+			<form action="/semi_team1/join/insert" method="post"
+				class="navbar-form" name="f">
+				<label>아이디</label><br> <input type="text" placeholder="아이디"
+					name="id" id="id" class="form-control"> <input
+					type="button" id="idcheckbtn" value="중복확인" onclick="idcheck()"><br>
+				<label>닉네임</label><br> <input type="text" placeholder="닉네임"
+					name="m_nick" id="m_nick" class="form-control"> <input
+					type="button" id="nickcheckbtn" value="중복확인" onclick="nickcheck()"><br>
+				<label>비밀번호</label><br> <input type="password"
+					placeholder="비밀번호" name="u_pw" id="u_pw" class="form-control"><br>
+				<label>비밀번호 확인</label><br> <input type="password"
+					placeholder="비밀번호 확인" name="checkpw" id="checkpw"
+					class="form-control"><br> <label>이메일</label><br>
+				<input type="text" placeholder="이메일" name="m_mail" id="m_mail"
+					class="form-control"> <input type="button"
+					id="emailcheckbtn" value="중복확인" onclick="return emailcheck()"><br>
+				<label>기본이미지설정</label><br>
+				<input type="text" name="m_img" id="m_img" readonly="readonly"
+					class="form-control"> <input type="button" value="기본이미지"
+					onclick="selectimg()"><br> <input type="submit"
+					value="가입" onclick="return validate()">
+			</form>
 		</div>
 	</div>
 </body>
