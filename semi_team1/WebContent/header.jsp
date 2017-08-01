@@ -7,14 +7,16 @@
 <script type="text/javascript">
 	//var test="location.href='/semi_team1/index.jsp?page=profile/userinfo.jsp'";
 
-	//setInterval(msgrefresh, 1000)
-
 	var msgxhr = null;
 	function msgrefresh() {
-		msgxhr = new XMLHttpRequest();
-		msgxhr.onreadystatechange = callback;
-		msgxhr.open('get', '/semi_team1/message2/msgrefresh.jsp', true);
-		msgxhr.send();
+
+		var nick = ${empty sessionScope.m_nick};
+		if(nick != true){
+			msgxhr = new XMLHttpRequest();
+			msgxhr.onreadystatechange = callback;
+			msgxhr.open('get', '/semi_team1/message2/msgrefresh.jsp', true);
+			msgxhr.send();
+		}
 	}
 	function callback() {
 		if (msgxhr.readyState == 4 && msgxhr.status == 200) {
