@@ -21,7 +21,7 @@
 			var data = msgxhr.responseText;
 			var json = eval('(' + data + ')');
 			var div = document.getElementById("cnt");
-			div.innerHTML = json.cnt;
+			div.innerHTML = "쪽지 " + json.cnt;
 		}
 	}
 </script>
