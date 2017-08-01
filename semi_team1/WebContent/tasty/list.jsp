@@ -99,6 +99,7 @@
 					selected3 = "selected=selected";
 				}
 			%>
+
 			<form action="/semi_team1/list">
 				<select name="search">
 					<option value="writer" <%=selected1%>>글쓴이</option>
@@ -152,5 +153,6 @@
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

@@ -234,7 +234,7 @@ public class BoardDao {
 		ResultSet rs = null;
 		try {
 			con = DBCPBean.getConn();
-			String sql = "SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM (select b.num boardnum,s.title_name s_title,b.title_name b_title,b.regdate,b.writer,b.report from board b, s_category s where b.s_num=s.num and b.REPORT=1 ORDER BY REGDATE desc) AA)WHERE RNUM>=? AND RNUM<=?";
+			String sql = "SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM (select b.num boardnum,s.title_name s_title,b.title_name b_title,b.regdate,b.writer,b.report from board b, s_category s where b.s_num=s.num and b.REPORT=1 and b.blind=0 ORDER BY REGDATE desc) AA)WHERE RNUM>=? AND RNUM<=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
@@ -267,7 +267,7 @@ public class BoardDao {
 		ResultSet rs = null;
 		try {
 			con = DBCPBean.getConn();
-			String sql = "select count(*) from board where report=1";
+			String sql = "select count(*) from board where report=1 and blind=0";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			rs.next();
@@ -340,7 +340,7 @@ public class BoardDao {
 		ResultSet rs = null;
 		try {
 			con = DBCPBean.getConn();
-			String sql = "select * from (select a.*, rownum rnum from(select * from board where writer=? and blind=0 order by num desc )a) where rnum>=? and rnum <=?";
+			String sql = "select * from (select a.*, rownum rnum from(select * from board where writer=? order by num desc )a) where rnum>=? and rnum <=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, writer);
 			pstmt.setInt(2, startRow);
@@ -372,7 +372,30 @@ public class BoardDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
-
+	//작성자당 쓴 글의 개수
+	public int getWriteCount(String writer) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select count(*) cnt from board where writer=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, writer);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				int cnt = rs.getInt("cnt");
+				return cnt;
+			}
+			return pstmt.executeUpdate();
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+	
 	// 게시글 신고하기
 	public int reportUpdate(int boardnum) {
 		Connection con = null;
@@ -391,28 +414,7 @@ public class BoardDao {
 		}
 	}
 
-	public int getWriteCount(String m_nick) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			con = DBCPBean.getConn();
-			String sql = "select count(*) cnt from board where writer=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, m_nick);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				int cnt = rs.getInt("cnt");
-				return cnt;
-			}
-			return pstmt.executeUpdate();
-		} catch (SQLException se) {
-			System.out.println(se.getMessage());
-			return -1;
-		} finally {
-			DBCPBean.close(con, pstmt, rs);
-		}
-	}
+	
 
 	////// 내 추천수 조회 (총합계)
 	public int gethitsCount(String writer) {

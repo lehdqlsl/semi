@@ -62,9 +62,9 @@
 			
 			<div>
 				<c:choose>
-					<c:when test="${startPageNum>10 }">
+					<c:when test="${startPageNum>5 }">
 						<a
-							href="">
+							href="/semi_team1/sendlist2?pageNum=${startPageNum-1 }">
 							<input class="btn btn-xs btn-danger" type="submit" value="◁">
 						</a>
 					</c:when>
@@ -76,13 +76,13 @@
 					<c:choose>
 						<c:when test="${i==pageNum }">
 							<a	style="text-decoration: none"
-								href="">
+								href="/semi_team1/sendlist2?pageNum=${i }">
 								<input class="btn btn-xs btn-link" type="submit" value="${i}">
 							</a>
 						</c:when>
 						<c:otherwise>
 							<a 	style="text-decoration: none"
-								href="">
+								href="/semi_team1/sendlist2?pageNum=${i }">
 								<input class="btn btn-xs btn-link" type="submit" value="${i}">
 							</a>
 						</c:otherwise>
@@ -91,7 +91,7 @@
 				<c:choose>
 					<c:when test="${endPageNum<pageCount }">
 						<a
-							href="">
+							href="/semi_team1/sendlist2?pageNum=${endPageNum+1 }">
 							<input class="btn btn-xs btn-danger" type="submit" value="▷">
 						</a>
 					</c:when>

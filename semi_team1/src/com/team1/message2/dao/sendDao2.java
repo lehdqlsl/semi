@@ -11,6 +11,7 @@ import com.team1.vo.Message2Vo;
 import com.team1.vo.ProfileVo;
 
 public class sendDao2 {
+	//전체 보낸 메시지 출력(페이징)
 	public ArrayList<Message2Vo> list(String send, int startRow, int endRow) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -49,15 +50,16 @@ public class sendDao2 {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
-
-	public int getCount() {
+	//보낸 사람당 보낸 메시지 총개수
+	public int getCount(String sender) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = DBCPBean.getConn();
-			String sql = "select NVL(count(num),0) cnt from message";
+			String sql = "select NVL(count(num),0) cnt from message where sender=? and SEND_DEL=1";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, sender);
 			rs = pstmt.executeQuery();
 			rs.next();
 			int cnt = rs.getInt(1);

@@ -25,6 +25,7 @@ public class SelectController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("Å×½ºÆ®1");
 		String spageNum = request.getParameter("pageNum");
 		int b_num = Integer.parseInt(request.getParameter("num"));
 		String nick = request.getParameter("writer");

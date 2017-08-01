@@ -23,8 +23,8 @@ public class RecvListContorller2 extends HttpServlet{
 			pageNum = Integer.parseInt(spageNum);
 		}
 
-		int startRow = (pageNum * 20) - 19;// 시작행 번호
-		int endRow = (pageNum * 20);// 끝행 번호
+		int startRow = (pageNum * 10) - 9;// 시작행 번호
+		int endRow = (pageNum * 10);// 끝행 번호
 
 		recvDao2 dao = new recvDao2();
 		
@@ -33,9 +33,9 @@ public class RecvListContorller2 extends HttpServlet{
 		ArrayList<Message2Vo> list = dao.list(m_nick, startRow, endRow);
 
 		if (list != null) {
-			int pageCount = (int) (Math.ceil(dao.getCount() / 20.0));
-			int startPageNum = (int) (Math.ceil(pageNum / 10.0) * 10 - 9);
-			int endPageNum = (int) (Math.ceil(pageNum / 10.0) * 10);
+			int pageCount = (int) (Math.ceil(dao.getCount(m_nick) / 10.0));
+			int startPageNum = (int) (Math.ceil(pageNum / 5.0) * 5 - 4);
+			int endPageNum = (int) (Math.ceil(pageNum / 5.0) * 5);
 			if (endPageNum > pageCount) {
 				endPageNum = pageCount;
 			}

@@ -22,7 +22,7 @@ public class MyWriteListController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String spageNum = request.getParameter("pageNum");
 		String writer = request.getParameter("writer");
-		String m_nick= request.getParameter("m_nick");
+
 		// int s_num=Integer.parseInt(request.getParameter("s_num"));
 
 		int pageNum = 1;
@@ -36,12 +36,16 @@ public class MyWriteListController extends HttpServlet {
 		ArrayList<boardVo> list = dao.MyWriteList(writer, startRow, endRow);
 
 		if (list != null) {
-			int pageCount = (int) (Math.ceil(dao.getWriteCount(m_nick) / 20.0));
-			int startPageNum = (int) (Math.ceil(pageNum / 10.0) * 10 - 19);
-			int endPageNum = (int) (Math.ceil(pageNum / 10.0) * 10);
+			int pageCount = (int) (Math.ceil(dao.getWriteCount(writer) / 20.0));
+			int startPageNum = (int) (Math.ceil(pageNum / 5.0) * 5 - 4);
+			int endPageNum = (int) (Math.ceil(pageNum / 5.0) * 5);
 			if (endPageNum > pageCount) {
 				endPageNum = pageCount;
 			}
+
+			System.out.println(pageCount);
+			System.out.println(startPageNum);
+			System.out.println(endPageNum);
 
 			request.setAttribute("pageCount", pageCount);
 			request.setAttribute("startPageNum", startPageNum);

@@ -9,29 +9,30 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	var xhr = null;
+	
 	// 로그인 체크 / 제재체크
+	var loginxhr = null;
 	function login(nick) {
 		if (nick == 'null') {
 			alert("먼저 로그인을 하셔야합니다.\n로그인페이지로 이동 하시겠습니까?");
 			document.location.href = "index.jsp?page=login/signin.jsp";
 		}
 		//로그인 된 후
-		xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = callback;
-		xhr
+		loginxhr = new XMLHttpRequest();
+		loginxhr.onreadystatechange = callback;
+		loginxhr
 				.open(
 						'get',
 						"/semi_team1/board/replylimitpage.jsp?writer=${sessionScope.m_nick }",
 						true);
-		xhr.send();
+		loginxhr.send();
 
 	}
 	function callback() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
+		if (loginxhr.readyState == 4 && loginxhr.status == 200) {
 			var submitbtn = document.getElementById("submitbtn");
 			var content = document.getElementById("content");
-			var data = xhr.responseXML;
+			var data = loginxhr.responseXML;
 			var limitchk = data.getElementsByTagName("limitChk")[0].firstChild.nodeValue;
 			var limitdate = data.getElementsByTagName("limit_date")[0].firstChild.nodeValue;
 			if (limitchk == 1) {
@@ -162,7 +163,6 @@
 	// 게시글 신고
 	function boardreport(num, writer){
 		var flag=confirm("해당 글을 신고하시겠습니까?");
-		
 		if(flag){
 			location.href="/semi_team1/board/report/update?num="+num+"&writer="+writer;
 			alert("신고되었습니다!");
@@ -171,7 +171,7 @@
 	//댓글 신고
 	function replyreport(r_num,writer,b_num){
 		var flag=confirm("해당 댓글을 신고하시겠습니까?");
-		console.log(writer);
+		
 		if(flag){
 			location.href="/semi_team1/reply/report/update?r_num="+r_num+"&writer="+writer+"&b_num="+b_num;
 			alert("신고되었습니다!");

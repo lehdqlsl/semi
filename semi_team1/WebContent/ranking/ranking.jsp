@@ -21,14 +21,56 @@
 					<td></td>
 				</tr>
 				<c:forEach var="vo" items="${requestScope.list }" varStatus="status">
-					<tr style="text-align: center;">
-						<td style="padding: 20px;">${status.index+1}</td>
-						<td style="padding: 20px; font-weight: bold;">${vo.id }</td>
-						<td style="padding: 20px;">${vo.m_nick }</td>
-						<td style="padding: 20px;">${vo.exp }</td>
-						<td style="padding: 20px;">${vo.grade }</td>
-						<td><img src="/semi_team1/rs/img/${vo.grade }.png"
-							style="width: 50px; height: 50px;"></td>
+					<c:choose>
+						<c:when test="${status.index+1 == 1}">
+							<tr
+								style="text-align: center; background-color: #FFD700; font-size: 18px;">
+								<td><img src="/semi_team1/rs/img/gold.png"></td>
+								<td style="padding: 36px; font-weight: bold;">${vo.id }</td>
+								<td style="padding: 36px;">${vo.m_nick }</td>
+								<td style="padding: 36px;">${vo.exp }</td>
+								<td style="padding: 36px;">${vo.grade }</td>
+								<td><img src="/semi_team1/rs/img/${vo.grade }.png"
+									style="width: 90px; height: 90px;"></td>
+						</c:when>
+						<c:when test="${status.index+1 == 2}">
+							<tr
+								style="text-align: center; background-color: #C0C0C0; font-size: 17px;">
+								<td><img src="/semi_team1/rs/img/silver.png"></td>
+								<td style="padding: 35px; font-weight: bold;">${vo.id }</td>
+								<td style="padding: 35px;">${vo.m_nick }</td>
+								<td style="padding: 35px;">${vo.exp }</td>
+								<td style="padding: 35px;">${vo.grade }</td>
+								<td><img src="/semi_team1/rs/img/${vo.grade }.png"
+									style="width: 70px; height: 70px;"></td>
+						</c:when>
+						<c:when test="${status.index+1 == 3}">
+							<tr
+								style="text-align: center; background-color: #CD7F32; font-size: 16px;">
+								<td><img src="/semi_team1/rs/img/bronze.png"></td>
+								<td style="padding: 35px; font-weight: bold;">${vo.id }</td>
+								<td style="padding: 35px;">${vo.m_nick }</td>
+								<td style="padding: 35px;">${vo.exp }</td>
+								<td style="padding: 35px;">${vo.grade }</td>
+								<td><img src="/semi_team1/rs/img/${vo.grade }.png"
+									style="width: 70px; height: 70px;"></td>
+						</c:when>
+
+						<c:otherwise>
+							<tr style="text-align: center; font-size: 15px;">
+								<td style="padding: 24px; font-weight: bold;">${status.index+1}</td>
+								<td style="padding: 24px; font-weight: bold;">${vo.id }</td>
+								<td style="padding: 24px;">${vo.m_nick }</td>
+								<td style="padding: 24px;">${vo.exp }</td>
+								<td style="padding: 24px;">${vo.grade }</td>
+								<td><img src="/semi_team1/rs/img/${vo.grade }.png"
+									style="width: 65px; height: 65px;"></td>
+						</c:otherwise>
+
+					</c:choose>
+
+
+
 				</c:forEach>
 			</table>
 		</div>

@@ -8,31 +8,29 @@
 <title>Insert title here</title>
 
 <script type="text/javascript">
-	var xhr = null;
+	var listxhr = null;
 	function limitCheck() {
-		xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = callback;
-		xhr
+		listxhr = new XMLHttpRequest();
+		listxhr.onreadystatechange = callback;
+		listxhr
 				.open(
 						'get',
 						"/semi_team1/board/limitpage.jsp?writer=${sessionScope.m_nick }",
 						true);
-		xhr.send();
-		console.log("${sessionScope.m_nick }");
+		listxhr.send();
 	}
 	function callback() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-			var data = xhr.responseXML;
+		if (listxhr.readyState == 4 && listxhr.status == 200) {
+			var data = listxhr.responseXML;
 			var limitchk = data.getElementsByTagName("limitChk")[0].firstChild.nodeValue;
 			var limitdays = data.getElementsByTagName("cnt")[0].firstChild.nodeValue;
 			var limitdate = data.getElementsByTagName("limit_date")[0].firstChild.nodeValue;
-			console.log("callback" + limitchk + "/" + limitdays);
+
 			if (limitchk == 1) {
 				alert("제재처리로 글을 작성할 수 없습니다. [ " + limitdate + " ] 이후부터 작성가능");
 			} else if (limitchk == 2) {
 				alert("신규회원 글작성 제한기간입니다. [ " + limitdate + " ] 이후부터 작성가능");
 			} else if (limitchk == 3) {
-				console.log("확인");
 				location.href = "/semi_team1/write?s_num=${s_num}";
 			}
 		}
@@ -64,8 +62,9 @@
 				-->
 						<td style="text-align: center">${vo.num }</td>
 
-						<td><a href="/semi_team1/select?num=${vo.num }&writer=${vo.writer}">${vo.title_name }</a></td>
-						<td >${vo.writer }</td>
+						<td><a
+							href="/semi_team1/select?num=${vo.num }&writer=${vo.writer}">${vo.title_name }</a></td>
+						<td>${vo.writer }</td>
 
 						<td style="text-align: center">${vo.up }</td>
 						<td style="text-align: center">${vo.hits }</td>

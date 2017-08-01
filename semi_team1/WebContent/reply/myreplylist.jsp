@@ -38,8 +38,8 @@
 			
 			<div align="center">
 <c:choose>
-	<c:when test="${startPage>20}">
-		<a href="/board/myreplylist?pageNum=${startPage-1 }"><input class="btn btn-xs btn-primary" type="submit" value="◁"></a>	
+	<c:when test="${startPage>5}">
+		<a href="/semi_team1/myreplylist?pageNum=${startPage-1 }&nick=${requestScope.nick}"><input class="btn btn-xs btn-primary" type="submit" value="◁"></a>	
 	</c:when>
 	<c:otherwise>
 		<input class="btn btn-xs btn-primary" type="submit" value="◁">
@@ -49,17 +49,17 @@
 <c:forEach var="i" begin="${startPage }" end="${endPage }" >
 	<c:choose>
 		<c:when test="${i==pageNum }">
-			<a href="/board/myreplylist?pageNum=${i }"><input class="btn btn-xs btn-link" type="submit" value="${i}"></a>	
+			<a href="/semi_team1/myreplylist?pageNum=${i }&nick=${requestScope.nick}"><input class="btn btn-xs btn-link" type="submit" value="${i}"></a>	
 		</c:when>
 		<c:otherwise>
-			<a href="/board/myreplylist?pageNum=${i }"><input class="btn btn-xs btn-link" type="submit" value="${i}"></a>
+			<a href="/semi_team1/myreplylist?pageNum=${i }&nick=${requestScope.nick}"><input class="btn btn-xs btn-link" type="submit" value="${i}"></a>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
 
 <c:choose>
 	<c:when test="${endPage<pageCount }">
-		<a href="/board/myreplylist?pageNum=${endPage+1 }"><input class="btn btn-xs btn-primary" type="submit" value="▷">	</a>
+		<a href="/semi_team1/myreplylist?pageNum=${endPage+1 }&nick=${requestScope.nick}"><input class="btn btn-xs btn-primary" type="submit" value="▷">	</a>
 	</c:when>
 	<c:otherwise>
 		<input class="btn btn-xs btn-primary" type="submit" value="▷">	
