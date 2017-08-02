@@ -10,7 +10,7 @@
 	<%
 		String s_page = request.getParameter("s_page");
 		if (s_page == null) {
-			s_page = "content.jsp";
+			s_page = "main.jsp";
 		}
 	%>
 
