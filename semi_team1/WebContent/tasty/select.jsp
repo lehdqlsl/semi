@@ -222,7 +222,7 @@
 				<tr style="text-align: center">
 					<td colspan="2"><button type="button" class="btn btn-success"
 							onclick="boardup('${vo.num}')">
-							평점 <strong id="bo_up">${vo.rating }</strong>
+							추천 <strong id="bo_up">${vo.up }</strong>
 						</button></td>
 				</tr>
 			</table>
@@ -272,7 +272,7 @@
 
 							<td><button type="button" class="btn btn-xs btn-success"
 									onclick="replyup('${vo.r_num}','${status.index}')">
-									추천 <strong id="re_up${status.index}">${vo.up }</strong>
+									<span class="glyphicon glyphicon-thumbs-up"></span> <strong id="re_up${status.index}">${vo.up }</strong>
 								</button></td>
 
 
