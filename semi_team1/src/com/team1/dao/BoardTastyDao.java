@@ -49,7 +49,7 @@ public class BoardTastyDao {
 			while (rs.next()) {
 				int num = rs.getInt("num");
 				String title = rs.getString("title");
-				float rating = rs.getFloat("rating");
+				float up = rs.getInt("up");
 				int hits = rs.getInt("hits");
 				String content = rs.getString("content");
 				Date regdate = rs.getDate("regdate");
@@ -60,7 +60,7 @@ public class BoardTastyDao {
 				int top = rs.getInt("top");
 				String addr = rs.getString("addr");
 				String map = rs.getString("map");
-				list.add(new BoardTastyVo(num, title, rating, hits, content, regdate, writer, s_num, blind, report, top,
+				list.add(new BoardTastyVo(num, title, up, hits, content, regdate, writer, s_num, blind, report, top,
 						addr, map));
 			}
 			return list;
@@ -142,7 +142,7 @@ public class BoardTastyDao {
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				BoardTastyVo vo = new BoardTastyVo(rs.getInt("num"), rs.getString("title"), rs.getFloat("rating"),
+				BoardTastyVo vo = new BoardTastyVo(rs.getInt("num"), rs.getString("title"), rs.getFloat("up"),
 						rs.getInt("hits"), rs.getString("content"), rs.getDate("regdate"), rs.getString("writer"),
 						rs.getInt("s_num"), rs.getInt("blind"), rs.getInt("report"), rs.getInt("top"),
 						rs.getString("addr"), rs.getString("map"));
