@@ -5,7 +5,7 @@ import java.util.Date;
 public class BoardTastyVo {
 	private int num;
 	private String title;
-	private int up;
+	private float up;
 	private int hits;
 	private String content;
 	private Date regdate;
@@ -17,7 +17,7 @@ public class BoardTastyVo {
 	private String addr;
 	private String map;
 
-	public BoardTastyVo(int num, String title, int up, int hits, String content, Date regdate, String writer,
+	public BoardTastyVo(int num, String title, float up, int hits, String content, Date regdate, String writer,
 			int s_num, int blind, int report, int top, String addr, String map) {
 		super();
 		this.num = num;
@@ -55,7 +55,7 @@ public class BoardTastyVo {
 		return up;
 	}
 
-	public void setUp(int up) {
+	public void setUp(float up) {
 		this.up = up;
 	}
 

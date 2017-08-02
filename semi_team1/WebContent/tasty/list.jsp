@@ -51,7 +51,7 @@
 						<th style="width: 100px">게시글번호</th>
 						<th style="text-align: center">제목</th>
 						<th style="width: 140px">글쓴이</th>
-						<th style="width: 50px; text-align: center">추천</th>
+						<th style="width: 75px; text-align: center">평점</th>
 						<th style="width: 75px; text-align: center">조회</th>
 						<th style="width: 100px; text-align: center">날짜</th>
 					</tr>
@@ -66,7 +66,7 @@
 						<td><a
 							href="/semi_team1/tasty/select?num=${vo.num }&writer=${vo.writer}">${vo.title }</a></td>
 						<td>${vo.writer }</td>
-						<td style="text-align: center">${vo.up }</td>
+						<td style="text-align: center">${vo.up } / 10</td>
 						<td style="text-align: center">${vo.hits }</td>
 						<td style="text-align: center">${vo.regdate }</td>
 					</tr>
