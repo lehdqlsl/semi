@@ -26,30 +26,35 @@ public class insertController extends HttpServlet {
 
 		request.setAttribute("s_num", s_num);
 		String url = "";
-		
+
 		switch (f_num) {
 		case 1: // °ÔÀÓ
 			url = "/index.jsp?page=/game/gameIndex.jsp&s_page=/board/insert.jsp";
 			break;
 
 		case 2: // ¿µÈ­
-
+			url = "/index.jsp?page=/movie/movieIndex.jsp&s_page=/board/insert.jsp";
 			break;
 
 		case 3: // ½ºÆ÷Ã÷
-
+			url = "/index.jsp?page=/sport/sportIndex.jsp&s_page=/board/insert.jsp";
 			break;
 
 		case 4: // ¸ÀÁı
-			url = "/index.jsp?page=/game/gameIndex.jsp&s_page=/tasty/insert.jsp";
+			if (s_num == 30 || s_num == 31) {
+				url = "/index.jsp?page=/tasty/tastyIndex.jsp&s_page=/board/insert.jsp";
+			} else {
+				url = "/index.jsp?page=/tasty/tastyIndex.jsp&s_page=/tasty/insert.jsp";
+			}
+
 			break;
 
 		case 5: // À½¾Ç
-
+			url = "/index.jsp?page=/music/musicIndex.jsp&s_page=/board/insert.jsp";
 			break;
 
 		}
-		
+
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 }

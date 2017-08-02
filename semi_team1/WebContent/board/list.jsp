@@ -41,7 +41,10 @@
 
 
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-
+		<div
+			style="margin: auto; width: 990px; word-break: break-all; word-wrap: break-word; height: 35px; background-color: #428bca; margin-bottom: 50px; padding: 1px;">
+			<h5 style="margin-left: 10px; font-weight: bold; color: white;">${requestScope.title }</h5>
+		</div>
 		<!-- 베스트 게시글 -->
 		<div
 			style="width: 500px; word-break: break-all; word-wrap: break-word; margin-left: 200px;">
@@ -163,8 +166,8 @@
 				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
 					<c:choose>
 						<c:when test="${i==pageNum }">
-						<input type="hidden" value="${param.pageNum }" name="pageNum">
-				
+							<input type="hidden" value="${param.pageNum }" name="pageNum">
+
 							<a style="text-decoration: none"
 								href="/semi_team1/list?s_num=${s_num }&pageNum=${i }&search=${param.search}&keyword=${param.keyword}">
 								<input class="btn btn-xs btn-link" type="submit" value="${i}">
@@ -192,8 +195,5 @@
 			</div>
 		</div>
 	</div>
-
-
-
 </body>
 </html>

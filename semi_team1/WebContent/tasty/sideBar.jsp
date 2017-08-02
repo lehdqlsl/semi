@@ -13,16 +13,19 @@
 			<li class="active"><a href="#">맛집게시판<span class="sr-only">(current)</span></a></li>
 		</ul>
 		<ul class="nav nav-sidebar">
-			<li><a href="/semi_team1/tasty/list?s_num=30">맛집 게시판1</a></li>
-			<li><a href="">맛집 게시판2</a></li>
-			<li><a href="">맛집 게시판3</a></li>
-			<li><a href="">맛집 게시판4</a></li>
-			<li><a href="">맛집 게시판5</a></li>
+			<li><a href="/semi_team1/list?s_num=30">자유게시판</a></li>
+			<li><a href="/semi_team1/list?s_num=31">질문게시판</a></li>
 		</ul>
 		<ul class="nav nav-sidebar">
-			<li><a href="">맛집 게시판6</a></li>
-			<li><a href="">맛집 게시판7</a></li>
-			<li><a href="">맛집 게시판8</a></li>
+			<li class="active"><a href="#">지역별 맛집<span class="sr-only">(current)</span></a></li>
+		</ul>
+		<ul class="nav nav-sidebar">
+			<li><a href="/semi_team1/tasty/list?s_num=32">서울 맛집</a></li>
+			<li><a href="/semi_team1/tasty/list?s_num=33">경기도 맛집</a></li>
+			<li><a href="/semi_team1/tasty/list?s_num=34">강원도 맛집</a></li>
+			<li><a href="/semi_team1/tasty/list?s_num=35">경상도 맛집</a></li>
+			<li><a href="/semi_team1/tasty/list?s_num=36">전라도 맛집</a></li>
+			<li><a href="/semi_team1/tasty/list?s_num=37">제주도 맛집</a></li>
 		</ul>
 	</div>
 </body>

@@ -13,17 +13,11 @@
 			<li class="active"><a href="#">게임게시판<span class="sr-only">(current)</span></a></li>
 		</ul>
 		<ul class="nav nav-sidebar">
-			<li><a href="/semi_team1/list?s_num=1">게임 게시판1<span
-					class="sr-only">(current)</span></a></li>
-			<li><a href="/semi_team1/list?s_num=2">게임 게시판2</a></li>
-			<li><a href="/semi_team1/list?s_num=3">게임 게시판3</a></li>
-			<li><a href="/semi_team1/list?s_num=4">게임 게시판4</a></li>
-			<li><a href="">게임 게시판5</a></li>
-		</ul>
-		<ul class="nav nav-sidebar">
-			<li><a href="">게임 게시판6</a></li>
-			<li><a href="">게임 게시판7</a></li>
-			<li><a href="">게임 게시판8</a></li>
+			<li><a href="/semi_team1/index.jsp?page=game/gameIndex.jsp&s_page=gameInfo.jsp">게임 정보</a></li>
+			<li><a href="/semi_team1/list?s_num=1">자유게시판</a></li>
+			<li><a href="/semi_team1/list?s_num=2">공략게시판</a></li>
+			<li><a href="/semi_team1/list?s_num=3">질문게시판</a></li>
+			<li><a href="/semi_team1/list?s_num=4">게임이야기</a></li>
 		</ul>
 	</div>
 </body>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.team1.dao.BoardDao;
+import com.team1.dao.CategoryDao;
 import com.team1.dao.JoinDao;
 import com.team1.dao.ReplyDao;
 import com.team1.vo.JoinVo;
@@ -24,6 +25,8 @@ public class SelectController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		BoardDao dao = new BoardDao();
+		CategoryDao c_dao = new CategoryDao();
+
 		boolean flag = true;
 
 		String spageNum = request.getParameter("pageNum");
@@ -88,12 +91,34 @@ public class SelectController extends HttpServlet {
 		request.setAttribute("cntTot", cntTot);
 		request.setAttribute("b_num", request.getParameter("num"));
 		///////////////////
-
+		int f_num = c_dao.f_num(b_num);
 		if (vo != null) {
 			request.setAttribute("vo", vo);
 			request.setAttribute("mvo", mvo);
-			request.getRequestDispatcher("/index.jsp?page=/game/gameIndex.jsp&s_page=/board/select.jsp")
-					.forward(request, response);
+
+			switch (f_num) {
+			case 1:
+				request.getRequestDispatcher("/index.jsp?page=/game/gameIndex.jsp&s_page=/board/select.jsp")
+						.forward(request, response);
+				break;
+			case 2:
+				request.getRequestDispatcher("/index.jsp?page=/movie/movieIndex.jsp&s_page=/board/select.jsp")
+						.forward(request, response);
+				break;
+			case 3:
+				request.getRequestDispatcher("/index.jsp?page=/sport/sportIndex.jsp&s_page=/board/select.jsp")
+						.forward(request, response);
+				break;
+			case 4:
+				request.getRequestDispatcher("/index.jsp?page=/tasty/tastyIndex.jsp&s_page=/board/select.jsp")
+						.forward(request, response);
+				break;
+			case 5:
+				request.getRequestDispatcher("/index.jsp?page=/music/musicIndex.jsp&s_page=/board/select.jsp")
+						.forward(request, response);
+				break;
+			}
+
 		} else {
 			request.setAttribute("result", "fail");
 			RequestDispatcher rd = request.getRequestDispatcher("/join/result.jsp");
