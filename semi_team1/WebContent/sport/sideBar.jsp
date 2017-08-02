@@ -14,17 +14,12 @@
 					class="sr-only">(current)</span></a></li>
 		</ul>
 		<ul class="nav nav-sidebar">
-			<li><a href="">스포츠 게시판1</a></li>
-			<li><a href="">스포츠 게시판2</a></li>
-			<li><a href="">스포츠 게시판3</a></li>
-			<li><a href="">스포츠 게시판4</a></li>
-			<li><a href="">스포츠 게시판5</a></li>
+			<li><a href="/semi_team1/index.jsp?page=sport/sportIndex.jsp&s_page=rankInfo.jsp">기록 순위</a></li>
+			<li><a href="/semi_team1/list?s_num=20">뉴스게시판</a></li>
+			<li><a href="/semi_team1/list?s_num=21">자유게시판</a></li>
+			<li><a href="/semi_team1/list?s_num=22">질문게시판</a></li>
+			<li><a href="/semi_team1/list?s_num=23">경기일정</a></li>
 		</ul>
-		<ul class="nav nav-sidebar">
-			<li><a href="">스포츠 게시판6</a></li>
-			<li><a href="">스포츠 게시판7</a></li>
-			<li><a href="">스포츠 게시판8</a></li>
-		</ul>
-	</div>	</div>
+	</div>	
 </body>
 </html>

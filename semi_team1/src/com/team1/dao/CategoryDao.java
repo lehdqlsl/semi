@@ -30,7 +30,7 @@ public class CategoryDao {
 		}
 		return 0;
 	}
-	
+
 	public int f_num(int b_num) {
 
 		Connection con = null;
@@ -53,4 +53,28 @@ public class CategoryDao {
 		}
 		return 0;
 	}
+
+	public String getTitle(int s_num) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select title_name from s_category where num = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, s_num);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return rs.getString("title_name");
+			}
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+		return null;
+	}
+
 }
