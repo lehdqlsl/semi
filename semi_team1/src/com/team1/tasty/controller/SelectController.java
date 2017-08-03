@@ -27,10 +27,11 @@ public class SelectController extends HttpServlet {
 			throws ServletException, IOException {
 		String spageNum = request.getParameter("pageNum");
 		int b_num = Integer.parseInt(request.getParameter("num"));
-		String nick = request.getParameter("writer");
+
 		BoardTastyDao dao = new BoardTastyDao();
+		String writer = dao.getWriter(b_num);
 		JoinDao memdao = new JoinDao();
-		JoinVo mvo = memdao.memSelect(nick);
+		JoinVo mvo = memdao.memSelect(writer);
 		BoardTastyVo vo = dao.select(b_num);
 		dao.hitupdate(b_num);
 

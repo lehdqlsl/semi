@@ -7,30 +7,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript"
-src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
+	src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <body>
+
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-		<%
-			request.setCharacterEncoding("utf-8");
-			String scnt = request.getParameter("cnt");
-			String writer = request.getParameter("writer");
-			String title_name = request.getParameter("title_name");
-			String content = request.getParameter("content");
 
-			//카테고리 번호
-			String s_num = request.getParameter("s_num");
-			int cnt = 0;
-
-			if (writer == null) {
-				writer = "";
-				title_name = "";
-				content = "";
-			}
-		%>
 		<div style="margin: auto; width: 1000px">
-			<form action="/semi_team1/insert" method="post">
-				<input type="hidden" value="<%=s_num%>" name="s_num">
+			<form action="/semi_team1/notice/insert" method="post">
+				<input type="hidden" id="s_num" name="s_num">
 				<table class="table table-bordered">
 					<tr>
 						<td>작성자</td>
@@ -39,7 +24,21 @@ src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 					</tr>
 					<tr>
 						<td>제목</td>
-						<td><input type="text" name="title_name" id="title_name" size="50"></td>
+						<td><input type="text" name="title_name" id="title_name"
+							size="50"></td>
+					</tr>
+					<tr>
+						<td>카테고리 설정</td>
+						<td><select onChange="javascript:selectEvent()" id="first">
+								<option value="0" selected="selected">선택</option>
+								<option value="1">게임</option>
+								<option value="2">영화</option>
+								<option value="3">스포츠</option>
+								<option value="4">맛집</option>
+								<option value="5">음악</option>
+						</select> <select onChange="javascript:selectEvent1()" id="second">
+
+						</select></td>
 					</tr>
 					<tr>
 						<td>내용</td>
@@ -58,7 +57,7 @@ src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 		</div>
 
 	</div>
-<script type="text/javascript">
+	<script type="text/javascript">
 		var oEditors = [];
 
 		// 추가 글꼴 목록
@@ -98,16 +97,16 @@ src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 			oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
 
 			// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
-			var content=document.getElementById("ir1").value;
-			var title=document.getElementById("title_name").value;
-			console.log("내용 : "+content);
-			if(content==null || content=="<p>&nbsp;</p>"){
+			var content = document.getElementById("ir1").value;
+			var title = document.getElementById("title_name").value;
+			console.log("내용 : " + content);
+			if (content == null || content == "<p>&nbsp;</p>") {
 				alert("내용을 입력하세요!");
 				return;
-			}else if(title==null || title==""){
+			} else if (title == null || title == "") {
 				alert("제목을 입력하세요!");
 				return;
-			}else{
+			} else {
 				try {
 					elClickedObj.form.submit();
 				} catch (e) {
@@ -119,6 +118,49 @@ src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 			var sDefaultFont = '궁서';
 			var nFontSize = 24;
 			oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
+		}
+
+		var catexhr = null;
+		function selectEvent() {
+			var first = document.getElementById("first");
+			var f_num = first.value;
+			catexhr = new XMLHttpRequest();
+			if (f_num != '0') {
+				catexhr.onreadystatechange = callback;
+				catexhr.open("get", "/semi_team1/manager/getsnum.jsp?f_num="
+						+ f_num, true);
+				catexhr.send();
+			}
+		}
+
+		function callback() {
+			if (catexhr.status == 200 && catexhr.readyState == 4) {
+				var json = catexhr.responseText;
+				var data = eval('(' + json + ')');
+
+				var text = "";
+				var x = document.getElementById("second");
+				var length = x.options.length;
+
+				for (i = 0; i < length; i++) {
+					x.remove(0);
+				}
+				for (var i = 0; i < data.length; i++) {
+					var option = document.createElement("option");
+					option.text = data[i].title;
+					option.value = data[i].s_num;
+					x.add(option);
+				}
+				var val = document.getElementById("s_num");
+				val.value=data[0].s_num;
+			}
+		}
+
+		function selectEvent1() {
+			var second = document.getElementById("second");
+			var s_num = second.value;
+			var val = document.getElementById("s_num");
+			val.value = s_num;
 		}
 	</script>
 </body>

@@ -72,6 +72,30 @@ public class BoardTastyDao {
 		}
 	}
 
+	public String getWriter(int b_num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBCPBean.getConn();
+			String sql = "select writer from board_tasty where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, b_num);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return rs.getString("writer");
+			} else {
+				return null;
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+			return null;
+		} finally {
+			DBCPBean.close(conn, pstmt, rs);
+		}
+	}
+
 	public int getCount(int s_num, String search, String keyword) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -166,6 +190,38 @@ public class BoardTastyDao {
 			String sql = "update board_tasty set hits=hits+1 where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, boardnum);
+			return pstmt.executeUpdate();
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			DBCPBean.close(con, pstmt, null);
+		}
+	}
+
+	public int update(String title, String content, String addr, String map, int num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DBCPBean.getConn();
+
+			if (map == "") {
+				String sql = "update board_tasty set title=?,content=?,addr=? where num=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, title);
+				pstmt.setString(2, content);
+				pstmt.setString(3, addr);
+				pstmt.setInt(4, num);
+			} else {
+				String sql = "update board_tasty set title=?,content=?,addr=?,map=? where num=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, title);
+				pstmt.setString(2, content);
+				pstmt.setString(3, addr);
+				pstmt.setString(4, map);
+				pstmt.setInt(5, num);
+			}
+
 			return pstmt.executeUpdate();
 		} catch (SQLException se) {
 			System.out.println(se.getMessage());

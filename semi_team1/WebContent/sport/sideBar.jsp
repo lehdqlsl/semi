@@ -18,7 +18,7 @@
 			<li><a href="/semi_team1/list?s_num=20">뉴스게시판</a></li>
 			<li><a href="/semi_team1/list?s_num=21">자유게시판</a></li>
 			<li><a href="/semi_team1/list?s_num=22">질문게시판</a></li>
-			<li><a href="/semi_team1/list?s_num=23">경기일정</a></li>
+			<li><a href="/semi_team1/list?s_num=23">중계일정</a></li>
 		</ul>
 	</div>	
 </body>
