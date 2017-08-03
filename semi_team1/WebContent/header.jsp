@@ -48,7 +48,7 @@
 				<li id="c1"><a
 					href="/semi_team1/index.jsp?page=game/gameIndex.jsp">게임</a></li>
 				<li id="c2"><a
-					href="/semi_team1/index.jsp?page=movie/movieIndex.jsp">영화</a></li>
+					href="/semi_team1/movielist">영화</a></li>
 				<li id="c3"><a
 					href="/semi_team1/index.jsp?page=sport/sportIndex.jsp">스포츠</a></li>
 				<li id="c4"><a

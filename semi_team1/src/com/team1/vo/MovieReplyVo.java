@@ -1,14 +1,12 @@
 package com.team1.vo;
 
-import java.util.Date;
-
 public class MovieReplyVo {
 	private int r_num;
 	private int m_num;
 	private String m_nick;
 	private double r_gpa; 
 	private String r_comm;
-	private Date reg_date;
+	private String reg_date;
 	private int up;
 	private int report;
 	private int del;
@@ -55,11 +53,11 @@ public class MovieReplyVo {
 		this.r_comm = r_comm;
 	}
 
-	public Date getReg_date() {
+	public String getReg_date() {
 		return reg_date;
 	}
 
-	public void setReg_date(Date reg_date) {
+	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
 
@@ -87,7 +85,7 @@ public class MovieReplyVo {
 		this.del = del;
 	}
 
-	public MovieReplyVo(int r_num, int m_num, String m_nick, double r_gpa, String r_comm, Date reg_date, int up,
+	public MovieReplyVo(int r_num, int m_num, String m_nick, double r_gpa, String r_comm, String reg_date, int up,
 			int report, int del) {
 		super();
 		this.r_num = r_num;

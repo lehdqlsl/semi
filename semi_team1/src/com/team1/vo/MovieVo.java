@@ -1,14 +1,12 @@
 package com.team1.vo;
 
-import java.util.Date;
-
 public class MovieVo {
 	private int m_num;
 	private String m_name;
 	private String m_genre;
 	private String m_country;
 	private String m_rt;
-	private Date m_release;
+	private String m_release;
 	private String m_rate;
 	private String m_director;
 	private String m_actor;
@@ -16,9 +14,13 @@ public class MovieVo {
 	private String saveimg;
 	private int del;
 	private String story;
-	
-	public MovieVo(int m_num, String m_name, String m_genre, String m_country, String m_rt, Date m_release,
-			String m_rate, String m_director, String m_actor, String orgimg, String saveimg, int del, String story) {
+	private String link;
+
+	public MovieVo(){}
+
+	public MovieVo(int m_num, String m_name, String m_genre, String m_country, String m_rt, String m_release,
+			String m_rate, String m_director, String m_actor, String orgimg, String saveimg, int del, String story,
+			String link) {
 		super();
 		this.m_num = m_num;
 		this.m_name = m_name;
@@ -33,6 +35,7 @@ public class MovieVo {
 		this.saveimg = saveimg;
 		this.del = del;
 		this.story = story;
+		this.link = link;
 	}
 
 	public int getM_num() {
@@ -75,11 +78,11 @@ public class MovieVo {
 		this.m_rt = m_rt;
 	}
 
-	public Date getM_release() {
+	public String getM_release() {
 		return m_release;
 	}
 
-	public void setM_release(Date m_release) {
+	public void setM_release(String m_release) {
 		this.m_release = m_release;
 	}
 
@@ -139,7 +142,13 @@ public class MovieVo {
 		this.story = story;
 	}
 
-	public MovieVo(){}
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
 	
 	
 	
