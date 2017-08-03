@@ -15,6 +15,7 @@
 			<li><a href="/semi_team1/member/limit/list">제재회원 목록</a></li>
 			<li><a href="/semi_team1/report/list">신고된 게시글</a></li>
 			<li><a href="/semi_team1/report/reply">신고된 댓글</a></li>
+			<li><a href="/semi_team1/index.jsp?page=/manager/managerIndex.jsp&s_page=insert.jsp">공지사항 글쓰기</a></li>
 		</ul>
 	</div>
 </body>

@@ -1,3 +1,6 @@
+<%@page import="com.team1.vo.BoardTastyVo"%>
+<%@page import="com.sun.webkit.BackForwardList"%>
+<%@page import="com.team1.dao.BoardTastyDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -51,31 +54,24 @@
 </script>
 </head>
 <body>
+
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<%
 			request.setCharacterEncoding("utf-8");
-			String scnt = request.getParameter("cnt");
-			String writer = request.getParameter("writer");
-			String title_name = request.getParameter("title_name");
-			String content = request.getParameter("content");
+
+			int num = Integer.parseInt(request.getParameter("num"));
+			BoardTastyDao dao = new BoardTastyDao();
+			BoardTastyVo vo = dao.select(num);
 
 			//카테고리 번호
 			String s_num = request.getParameter("s_num");
-			int cnt = 0;
-			if (scnt != null) {
-				cnt = Integer.parseInt(scnt);
-			}
-			if (writer == null) {
-				writer = "";
-				title_name = "";
-				content = "";
-			}
 		%>
 		<div style="margin: auto; width: 1000px">
-			<form action="/semi_team1/tasty/insert" method="post">
+			<form action="/semi_team1/tasty/update" method="post">
 				<input type="hidden" value="<%=s_num%>" name="s_num"> <input
-					type="hidden" name="addr" id="i_addr"> <input type="hidden"
-					name="map" id="i_map">
+					type="hidden" name="addr" id="i_addr" value="<%=vo.getAddr()%>">
+				<input type="hidden" name="map" id="i_map"> <input
+					type="hidden" value="<%=num%>" name="num">
 				<table class="table table-bordered">
 					<tr>
 						<td width="75">작성자</td>
@@ -85,29 +81,30 @@
 					<tr>
 						<td>제목</td>
 						<td colspan="2"><input type="text" name="title_name"
-							id="title_name" size="50"></td>
+							id="title_name" size="50" value="<%=vo.getTitle()%>"></td>
 					</tr>
 					<tr>
 						<td>내용</td>
 						<td colspan="2"><textarea name="content" id="ir1" rows="10"
-								cols="100" style="width: 766px; height: 412px; display: none;"></textarea>
-							<!--textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:412px; min-width:610px; display:none;"></textarea-->
-						
+								cols="100" style="width: 766px; height: 412px; display: none;"><%=vo.getContent()%></textarea>
+							<!--textarea name="ir1" id="ir1" rows="10" cols="100" style="width :100%; height:412px; min-width:610px; display:none;"></textarea-->
 					</tr>
 
 					<tr>
 						<td rowspan="2">지도</td>
 						<td width="150" style="text-align: center"><input
 							type="button" value="지도 첨부" onclick="checkid()"></td>
-						<td id="addr"></td>
+						<td id="addr"><%=vo.getAddr()%></td>
 					</tr>
 					<tr>
-						<td colspan="2"><div id="staticMap"
-								style="width: 600px; height: 350px; margin: auto"></div></td>
+						<td colspan="2">
+							<div id="staticMap"
+								style="width: 600px; height: 350px; margin: auto"><%=vo.getMap()%></div>
+						</td>
 					</tr>
 					<tr>
 						<td colspan="3" align="center"><input class="btn btn-success"
-							type="button" value="확인" onclick="submitContents(this);">
+							type="button" value="수정" onclick="submitContents(this);">
 							<input class="btn btn-success" type="button" value="목록"
 							onclick="location.href = '/semi_team1/list';"></td>
 					</tr>
