@@ -50,7 +50,7 @@
 				<li id="c2"><a
 					href="/semi_team1/movielist">영화</a></li>
 				<li id="c3"><a
-					href="/semi_team1/index.jsp?page=sport/sportIndex.jsp">스포츠</a></li>
+					href="/semi_team1/sportsmain">스포츠</a></li>
 				<li id="c4"><a
 					href="/semi_team1/index.jsp?page=tasty/tastyIndex.jsp">맛집</a></li>
 				<li id="c5"><a

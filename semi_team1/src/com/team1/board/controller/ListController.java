@@ -99,7 +99,7 @@ public class ListController extends HttpServlet {
 
 			// 베스트게시글
 			ArrayList<boardListVo> bestlist = dao.bestlist(s_num);
-
+			
 			// 카테고리 타이틀
 			String title = c_dao.getTitle(s_num);
 
