@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.team1.db.DBCPBean;
+import com.team1.vo.M_ReviewVo;
 import com.team1.vo.MovieVo;
 
 public class MovieDao {
@@ -140,5 +141,50 @@ public class MovieDao {
 			DBCPBean.close(con, pstmt, null);
 		}
 	}
+	
+	//메인 랭킹
+	public ArrayList<M_ReviewVo> getRanking() {
+
+		ArrayList<M_ReviewVo> list = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = DBCPBean.getConn();
+
+			String sql = "SELECT * FROM(SELECT M_NAME, R.M_NUM, AVG(r_gpa) AVGSC FROM m_REVIEW R, movie m WHERE R.m_NUM=m.m_NUM GROUP BY m.m_NAME, R.m_num ORDER BY AVGSC DESC)WHERE ROWNUM<6";
+
+			pstmt = con.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				M_ReviewVo vo = new M_ReviewVo( // vo의 생성자 파라미터에 얻어온 값 넣기
+
+						rs.getInt("m_num"),rs.getFloat("avgsc"),rs.getString("m_name"));
+
+				list.add(vo);
+
+			}
+
+			return list;
+
+		} catch (SQLException se) {
+
+			System.out.println(se.getMessage());
+
+			return null;
+
+		} finally {
+
+			DBCPBean.close(con, pstmt, rs);
+
+		}
+
+	} 
+	
 	
 }

@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.team1.dao.M_ReviewDao;
 import com.team1.dao.MovieDao;
+import com.team1.vo.M_ReviewVo;
 import com.team1.vo.MovieVo;
 
 @WebServlet("/movielist")
@@ -29,6 +31,11 @@ public class MovieListController extends HttpServlet{
 		MovieDao dao = new MovieDao();
 		ArrayList<MovieVo> list = dao.list(startRow, endRow);
 
+		
+		//영화평점랭킹
+		ArrayList<M_ReviewVo> list2=dao.getRanking();
+		
+		
 		if (list != null) {
 			int pageCount = (int) (Math.ceil(dao.movieCount() / 5.0));
 			int startPageNum = pageNum;
@@ -46,6 +53,7 @@ public class MovieListController extends HttpServlet{
 			request.setAttribute("endPageNum", endPageNum);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("list", list);
+			request.setAttribute("list2", list2);
 			request.getRequestDispatcher("/index.jsp?page=movie/main.jsp").forward(request, response);
 		} else {
 			response.sendRedirect("/fail.jsp");

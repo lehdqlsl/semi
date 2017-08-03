@@ -49,7 +49,7 @@ function checkBlank(object) {
 		alert("평점을 입력하세요!");
 		return;
 	}else{
-		if(!(val >0  && val < 10)){
+		if(!(val >= 0  && val <= 10)){
 			alert("1~10사이의 평점을 입력해주세요.");
 			return;
 		}
