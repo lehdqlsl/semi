@@ -85,14 +85,13 @@
 					<tr>
 						<td>제목</td>
 						<td colspan="2"><input type="text" name="title_name"
-							id="title_name" size="50"></td>
+							id="title_name" size="100"></td>
 					</tr>
 					<tr>
 						<td>내용</td>
 						<td colspan="2"><textarea name="content" id="ir1" rows="10"
 								cols="100" style="width: 766px; height: 412px; display: none;"></textarea>
 							<!--textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:412px; min-width:610px; display:none;"></textarea-->
-						
 					</tr>
 
 					<tr>

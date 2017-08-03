@@ -13,7 +13,7 @@
 	function login(nick) {
 		if (nick == 'null') {
 			alert("먼저 로그인을 하셔야합니다.\n로그인페이지로 이동 하시겠습니까?");
-			document.location.href = "index.jsp?page=login/signin.jsp";
+			document.location.href = "/semi_team1/index.jsp?page=login/signin.jsp";
 		}
 		//로그인 된 후
 		xhr = new XMLHttpRequest();
@@ -43,7 +43,17 @@
 	// 댓글 공백 체크
 	function checkBlank(object) {
 		var content = document.getElementById("content").value;
-		console.log("내용 : " + content);
+		var rating = document.getElementById("rating").value;
+		var val = parseFloat(rating);
+		if (rating == null || rating == "") {
+			alert("평점을 입력하세요!");
+			return;
+		} else {
+			if (!(val > 0 && val < 10)) {
+				alert("1~10사이의 평점을 입력해주세요.");
+				return;
+			}
+		}
 		if (content == null || content == "") {
 			alert("내용을 입력하세요!");
 			return;
@@ -162,6 +172,11 @@
 </script>
 </head>
 <body>
+	<c:if test="${!empty requestScope.error }">
+		<script type="text/javascript">
+			alert('${requestScope.error}');
+		</script>
+	</c:if>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
@@ -205,7 +220,7 @@
 
 
 				<tr>
-					<td>추천 xx / 조회 xx</td>
+					<td>평점 ${requestScope.avg}</td>
 				</tr>
 
 				<tr>
@@ -218,7 +233,11 @@
 				<tr>
 					<td colspan="2" style="text-align: center">${vo.map }</td>
 				</tr>
-
+				<tr>
+					<td colspan="2" style="text-align: center">
+						<button class="btn btn btn-success">평점 ${requestScope.avg }</button>
+					</td>
+				</tr>
 
 			</table>
 
@@ -232,7 +251,8 @@
 							<input class="btn btn-success" type="button" value="삭제"
 								onclick="">
 						</c:if> <input class="btn btn-success" type="button" value="목록"
-						onclick="javascript:history.back()"></td>
+						onclick="javascript:location.href='/semi_team1/tasty/list?s_num=${requestScope.s_num }' "></td>
+
 				</tr>
 			</table>
 
@@ -252,19 +272,20 @@
 					<c:forEach var="vo" items="${requestScope.list }"
 						varStatus="status">
 						<tr>
-							<!--  <td>${vo.r_num }</td>-->
+							<td>${vo.rating }/10.0</td>
 							<td id="user">
 								<div>
-									<a href="회원정보조회페이지">${vo.nick }</a>
+
+									<a href="회원정보조회페이지">${vo.m_nick }</a>
 								</div>
 							</td>
 							<td width="600"
-								style="word-break: break-all; word-wrap: break-word;">${vo.content }</td>
-							<td>${vo.reg_date }</td>
+								style="word-break: break-all; word-wrap: break-word;">${vo.comments }</td>
+							<td>${vo.r_date }</td>
 
 
 							<td><button type="button" class="btn btn-xs btn-success"
-									onclick="replyup('${vo.r_num}','${status.index}')">
+									onclick="replyup('${vo.num}','${status.index}')">
 									<span class="glyphicon glyphicon-thumbs-up"></span> <strong
 										id="re_up${status.index}">${vo.up }</strong>
 								</button></td>
@@ -272,10 +293,10 @@
 
 
 							<td><c:choose>
-									<c:when test="${vo.nick==sessionScope.m_nick }">
+									<c:when test="${vo.m_nick==sessionScope.m_nick }">
 										<div id="delete">
 											<button type="button" class="btn btn-xs btn-warning"
-												onclick="nickCheck('${vo.r_num }','${vo.b_num}','${vo.nick}','${sessionScope.m_nick}')">삭제</button>
+												onclick="nickCheck('${vo.num }','${vo.b_num}','${vo.m_nick}','${sessionScope.m_nick}')">삭제</button>
 										</div>
 									</c:when>
 									<c:otherwise>
@@ -331,11 +352,15 @@
 				</c:choose>
 
 				<!-- 글쓰기 -->
-
 				<br> <br>
-				<form method="post" action="/semi_team1/reply/insert">
-					<div id="input" style="margin: auto; width: 1000px; height: 100px;">
-						<input type="hidden" name="b_num" value="${requestScope.b_num }">
+				<form method="post" action="/semi_team1/tasty/review/insert">
+					<input type="hidden" name="m_nick" value="${sessionScope.m_nick }">
+					<div id="input" style="margin: auto; width: 1000px; height: 130px;">
+						<div style="margin-bottom: 10px;">
+							평점 <input type="text" name="rating" id="rating" size=1> /
+							10
+						</div>
+						<input type="hidden" name="num" value="${vo.num }">
 						<div>
 							<textarea rows="4" cols="80" name="content" id="content"
 								placeholder="댓글 작성 시 타인에 대한 배려와 책임을 담아주세요." style="width: 90%"
@@ -347,7 +372,7 @@
 								onclick="checkBlank(this)">등록</button>
 						</div>
 					</div>
-					<div id="len">0/500 byte</div>
+					<div id="len">0/100 byte</div>
 				</form>
 			</div>
 		</div>

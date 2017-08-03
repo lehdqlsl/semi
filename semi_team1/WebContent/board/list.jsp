@@ -50,15 +50,15 @@
 			style="width: 1000px; word-break: break-all; word-wrap: break-word; margin: auto;">
 			<div style="float: left;">
 				<table class="table">
-					<tr class="active">
+					<tr class="">
 						<th style="text-align: center; font-size: 18px;" colspan="2">게시판
-							<span style="font-weight: bold; color: red"></span>BEST
+							<span style="font-weight: bold; color: red">BEST</span>
 						</th>
 					</tr>
 
 					<c:forEach var="vo" items="${requestScope.bestlist }"
 						varStatus="status" begin="0" end="6" step="2">
-						<tr class="active">
+						<tr class="">
 							<td
 								style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 425px;"><a
 								href="/semi_team1/select?num=${bestlist[status.index].num}">${bestlist[status.index].title_name}

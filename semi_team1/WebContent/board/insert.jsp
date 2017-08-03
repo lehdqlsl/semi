@@ -39,7 +39,7 @@ src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 					</tr>
 					<tr>
 						<td>제목</td>
-						<td><input type="text" name="title_name" id="title_name" size="50"></td>
+						<td><input type="text" name="title_name" id="title_name" size="100"></td>
 					</tr>
 					<tr>
 						<td>내용</td>

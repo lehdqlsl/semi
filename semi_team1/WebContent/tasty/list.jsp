@@ -40,10 +40,50 @@
 </script>
 </head>
 <body>
+
+
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
+
+		<div
+			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word; height: 35px; background-color: #428bca; margin-bottom: 0px; padding: 1px;">
+			<h5 style="margin-left: 10px; font-weight: bold; color: white;">${requestScope.title }</h5>
+		</div>
+
+		<!-- 베스트 게시글 -->
+		<div
+			style="width: 1000px; word-break: break-all; word-wrap: break-word; margin: auto;">
+			<div style="float: left;">
+				<table class="table">
+					<tr class="">
+						<th style="text-align: center; font-size: 18px;" colspan="2">게시판
+							<span style="font-weight: bold; color: red">BEST</span>
+						</th>
+					</tr>
+
+					<c:forEach var="vo" items="${requestScope.bestlist }"
+						varStatus="status" begin="0" end="6" step="2">
+						<tr class="">
+							<td
+								style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 425px;"><a
+								href="/semi_team1/select?num=${bestlist[status.index].num}">${bestlist[status.index].title}
+							</a></td>
+							<td
+								style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 425px;"><a
+								href="/semi_team1/select?num=${bestlist[status.index+1].num}">${bestlist[status.index+1].title}</a></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+			<!-- 유리사진 -->
+
+			<div
+				style="width: 150px; height: 150px; background-color: red; float: right;">
+
+			</div>
+		</div>
+
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
-
 
 			<table class="table table-bordered">
 				<thead>
@@ -63,10 +103,10 @@
 						/semi_team1/select?num=${vo.num }
 				-->
 						<td style="text-align: center">${vo.num }</td>
-						<td><a
-							href="/semi_team1/tasty/select?num=${vo.num }&writer=${vo.writer}">${vo.title }</a></td>
+						<td><a href="/semi_team1/tasty/select?num=${vo.num }">${vo.title }
+								[${vo.cnt }]</a></td>
 						<td>${vo.writer }</td>
-						<td style="text-align: center">${vo.up } / 10</td>
+						<td style="text-align: center">${vo.up }/10</td>
 						<td style="text-align: center">${vo.hits }</td>
 						<td style="text-align: center">${vo.regdate }</td>
 					</tr>
