@@ -51,6 +51,16 @@
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
 
+			<c:choose>
+				<c:when test="${sessionScope.m_nick=='admin' }">
+					<input type="button" value="영화정보 등록" class="btn btn-default"
+						onclick="location.href='/semi_team1/index.jsp?page=movie/insert.jsp'">
+					<br>
+					<br>
+				</c:when>
+			</c:choose>
+
+
 			<table class="table table-bordered" width="875px" height="250px">
 
 				<td><c:choose>
@@ -89,35 +99,40 @@
 
 			</table>
 
+			<div style="float: left">
 			<table class="table table-bordered">
 				<tr>
-					<td><h4>평점&리뷰</h4></td>
-					<td width="210px"><h4>스포트라이트</h4></td>
+					<td><h4>평점 & 리뷰</h4></td>
+				</tr>
+				<c:forEach var="vo" items="${requestScope.list2 }"
+					varStatus="status">
+					<tr>
+						<td height="60px" width="750px">
+							<button type="button" class="btn btn-xs btn-default">${status.count}</button>
+
+							<a href="/semi_team1/movieselect?m_num=${vo.m_num }">${vo.m_name}</a><br> <b style="color: #FF7171">${vo.rating }
+								점</b>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+			</div>
+			
+			<div style="float: left">
+			<table class="table table-bordered">
+				<tr>
+					<td><h4>스포트라이트</h4></td>
 				</tr>
 				<tr>
-					<td>3</td>
-					<td rowspan="5">
-
+					<td rowspan="5" height="300px">
 						<div id="mainImage">
 							<img src="movie/1.jpg" id="changeMain"
 								onclick="location.href = 'http://www.vlive.tv/video/36398'">
 						</div>
-
 					</td>
 				</tr>
-				<tr>
-					<td>4</td>
-				</tr>
-				<tr>
-					<td>5</td>
-				</tr>
-				<tr>
-					<td>6</td>
-				</tr>
-				<tr>
-					<td>7</td>
-				</tr>
 			</table>
+			</div>
 
 
 			<table class="table table-bordered">

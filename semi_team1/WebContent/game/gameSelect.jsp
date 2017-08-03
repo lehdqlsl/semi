@@ -49,6 +49,7 @@ function checkBlank(object) {
 		alert("평점을 입력하세요!");
 		return;
 	}else{
+
 		if(!(val >=1 && val <=10 )){
 			alert("1~10사이의 평점을 입력해주세요.");
 			return;
@@ -129,36 +130,41 @@ function callback1() {
 			alert('${requestScope.error}');
 		</script>
 	</c:if>
-	
+
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-	<div style="margin: auto; width: 800px; word-break: break-all; word-wrap: break-word;">
-		<table class="table table-bordered" width="600px" border="1">
-			<tr>
-				<td rowspan="6" width="210px" height="300px">
-				<img src="/semi_team1/rs/img/gameImg/${vo.saveImg }" 
-				style="width: 210px; height: 300px;  margin: auto;">
-				</td>
-				<td colspan="2" width="300px" height="50px"><h3>${vo.g_name }</h3></td>
-			</tr>
-			<tr>
-				<td>장르</td><td height="15px">${vo.g_jenre }</td>
-			</tr>
-			<tr>
-				<td>플랫폼</td><td height="15px">${vo.flatform}</td>
-			</tr>
-			<tr>
-				<td>회사</td><td height="15px">${vo.company }</td>
-			</tr>
-			<tr>
-				<td>출시일</td><td height="15px">${vo.l_date }</td>
-			</tr>
-			<tr>
-				<td>평점</td><td height="15px">${requestScope.cntAvg}</td>
-			</tr>
-		</table>
+		<div
+			style="margin: auto; width: 800px; word-break: break-all; word-wrap: break-word;">
+			<table class="table table-bordered" width="600px" border="1">
+				<tr>
+					<td rowspan="6" width="210px" height="300px"><img
+						src="/semi_team1/rs/img/gameImg/${vo.saveImg }"
+						style="width: 210px; height: 300px; margin: auto;"></td>
+					<td colspan="2" width="300px" height="50px"><h3>${vo.g_name }</h3></td>
+				</tr>
+				<tr>
+					<td>장르</td>
+					<td height="15px">${vo.g_jenre }</td>
+				</tr>
+				<tr>
+					<td>플랫폼</td>
+					<td height="15px">${vo.flatform}</td>
+				</tr>
+				<tr>
+					<td>회사</td>
+					<td height="15px">${vo.company }</td>
+				</tr>
+				<tr>
+					<td>출시일</td>
+					<td height="15px">${vo.l_date }</td>
+				</tr>
+				<tr>
+					<td>평점</td>
+					<td height="15px">${requestScope.cntAvg}</td>
+				</tr>
+			</table>
+		</div>
 	</div>
-</div>	
-	
+
 	<br>
 	<!-- 댓글 -->
 	<div style="margin: auto; width: 1000px">
@@ -168,7 +174,7 @@ function callback1() {
 				style="font-weight: bold; color: #5795dd;">${requestScope.cntTot}</strong>개
 			</span>
 		</div>
-		
+
 		<%-- 
 		<div class="col-xs-2 col-sm-4">
 			<span style="font-size: 14px; color: #333; font-weight: bold">평점</span>
@@ -177,17 +183,13 @@ function callback1() {
 			</span>
 		</div>
 		--%>
-		
+
 		<br> <br>
 		<table class="table table-striped" style="padding: 50px;">
 			<c:forEach var="vo" items="${requestScope.list }" varStatus="status">
 				<tr>
-					<td>
-					${vo.score } / 10.0
-					</td>
-					<td id="user">
-							<a href="회원정보조회페이지">${vo.m_nick }</a>
-					</td>
+					<td>${vo.score }/ 10.0</td>
+					<td id="user"><a href="회원정보조회페이지">${vo.m_nick }</a></td>
 					<td width="600"
 						style="word-break: break-all; word-wrap: break-word;">${vo.comments}</td>
 					<td>${vo.r_date }</td>

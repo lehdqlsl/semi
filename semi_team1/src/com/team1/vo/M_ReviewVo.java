@@ -1,17 +1,45 @@
 package com.team1.vo;
 
-public class MovieReplyVo {
+import java.util.Date;
+
+public class M_ReviewVo {
 	private int r_num;
 	private int m_num;
 	private String m_nick;
-	private double r_gpa; 
+	private float r_gpa;
 	private String r_comm;
-	private String reg_date;
+	private Date reg_date;
 	private int up;
 	private int report;
 	private int del;
+	private String m_name;//
+	private float rating;//
+		
 	
-	public MovieReplyVo(){}
+	public String getM_name() {
+		return m_name;
+	}
+
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
+	}
+
+	public float getRating() {
+		return rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
+
+	public M_ReviewVo(int m_num, float rating, String m_name) {
+		super();
+		this.m_num = m_num;
+		this.m_name = m_name;
+		this.rating = rating;
+	}
+
+	public M_ReviewVo(){}
 
 	public int getR_num() {
 		return r_num;
@@ -37,11 +65,11 @@ public class MovieReplyVo {
 		this.m_nick = m_nick;
 	}
 
-	public double getR_gpa() {
+	public float getR_gpa() {
 		return r_gpa;
 	}
 
-	public void setR_gpa(double r_gpa) {
+	public void setR_gpa(float r_gpa) {
 		this.r_gpa = r_gpa;
 	}
 
@@ -53,11 +81,11 @@ public class MovieReplyVo {
 		this.r_comm = r_comm;
 	}
 
-	public String getReg_date() {
+	public Date getReg_date() {
 		return reg_date;
 	}
 
-	public void setReg_date(String reg_date) {
+	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
 	}
 
@@ -85,7 +113,7 @@ public class MovieReplyVo {
 		this.del = del;
 	}
 
-	public MovieReplyVo(int r_num, int m_num, String m_nick, double r_gpa, String r_comm, String reg_date, int up,
+	public M_ReviewVo(int r_num, int m_num, String m_nick, float r_gpa, String r_comm, Date reg_date, int up,
 			int report, int del) {
 		super();
 		this.r_num = r_num;
@@ -98,7 +126,6 @@ public class MovieReplyVo {
 		this.report = report;
 		this.del = del;
 	}
-	
 	
 	
 }

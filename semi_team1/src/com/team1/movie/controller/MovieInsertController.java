@@ -3,6 +3,7 @@ package com.team1.movie.controller;
 import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,8 +51,13 @@ public class MovieInsertController extends HttpServlet{
 		int n=dao.insert(vo);
 		if(n>0){
 			System.out.println("db저장성공!<br>");
+			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?page=movielist");
+			rd.forward(request, response);
+			
 		}else{
 			System.out.println("db저장실패!<br>");
+			RequestDispatcher rd = request.getRequestDispatcher("join/result.jsp");
+			rd.forward(request, response);
 		}
 		
 		
