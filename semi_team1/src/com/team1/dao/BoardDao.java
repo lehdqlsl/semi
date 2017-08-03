@@ -526,6 +526,47 @@ public class BoardDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
+	
+	// 스포츠 게시판 메인 가져오기
+		public ArrayList<boardListVo> sportsMain(int s_num, int cnt) {
+			ArrayList<boardListVo> list = new ArrayList<>();
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				con = DBCPBean.getConn();
+				String sql = "select * from (select t.*,rownum as rnum from (select * from board where s_num=? and blind=0 order by regdate desc) t)a where a.rnum <=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, s_num);
+				pstmt.setInt(2, cnt);
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					int num = rs.getInt("num");
+					String title_name = rs.getString("title_name");
+					int up = rs.getInt("up");
+					int hits = rs.getInt("hits");
+					String orgfilename = rs.getString("orgfilename");
+					String savefilename = rs.getString("savefilename");
+					String content = rs.getString("content");
+					Date regdate = rs.getDate("regdate");
+					String writer = rs.getString("writer");
+					s_num = rs.getInt("s_num");
+					int blind = rs.getInt("blind");
+					int report = rs.getInt("report");
+					int top = rs.getInt("top");
+					list.add(new boardListVo(num, title_name, up, hits, orgfilename, savefilename, content, regdate, writer,
+							1, s_num, blind, report, top));
+				}
+				return list;
+			} catch (SQLException se) {
+				se.printStackTrace();
+				return null;
+			} finally {
+				DBCPBean.close(con, pstmt, rs);
+			}
+		}
+	
 
 	// 공지사항 리스트 가져오기
 

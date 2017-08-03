@@ -13,7 +13,10 @@
 			s_page = "content.jsp";
 		}
 	%>
-
+	
+	
+	
+	
 	<!-- 사이드바 -->
 	<jsp:include page="sideBar.jsp"></jsp:include>
 	<jsp:include page="<%=s_page%>"></jsp:include>
