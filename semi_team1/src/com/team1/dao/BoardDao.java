@@ -607,4 +607,41 @@ public class BoardDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
+	//음악게시판 갤러리 사진 출력
+	public ArrayList<boardVo> galleryList(){
+		ArrayList<boardVo> list=new ArrayList<>();
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try{
+			con=DBCPBean.getConn();
+			String sql="select * from(select * from board where s_num=42 and blind=0 and report=0 order by regdate desc) where rownum<6";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()){
+				int num = rs.getInt("num");
+				String title_name = rs.getString("title_name");
+				int up = rs.getInt("up");
+				int hits = rs.getInt("hits");
+				String orgfilename = rs.getString("orgfilename");
+				String savefilename = rs.getString("savefilename");
+				String content = rs.getString("content");
+				Date regdate = rs.getDate("regdate");
+				String writer = rs.getString("writer");
+				int f_num=rs.getInt("f_num");
+				int s_num = rs.getInt("s_num");
+				int blind = rs.getInt("blind");
+				int report = rs.getInt("report");
+				int top = rs.getInt("top");
+				list.add(new boardVo(num, title_name, up, hits, orgfilename, savefilename, content, regdate, writer,
+						f_num, s_num, blind, report, top));
+			}
+			return list;
+		}catch(SQLException se){
+			System.out.println(se.getMessage());
+			return null;
+		}finally{
+			DBCPBean.close(con,pstmt,rs);
+		}
+	}
 }
