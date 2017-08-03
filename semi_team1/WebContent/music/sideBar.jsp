@@ -10,10 +10,10 @@
 	<!-- 사이드바 -->
 	<div class="col-sm-3 col-md-2 sidebar">
 		<ul class="nav nav-sidebar">
-			<li class="active"><a href="#">음악게시판<span class="sr-only">(current)</span></a></li>
+			<li class="active"><a href="index.jsp?page=gallerylist">음악게시판<span class="sr-only">(current)</span></a></li>
 		</ul>
 		<ul class="nav nav-sidebar">
-			<li><a href="/semi_team1/index.jsp?page=music/musicIndex.jsp&s_page=musicInfo.jsp">음악 정보</a></li>
+			<li><a href="/semi_team1/index.jsp?page=musiclist">음악 정보</a></li>
 			<li><a href="/semi_team1/list?s_num=40">자유게시판</a></li>
 			<li><a href="/semi_team1/list?s_num=41">질문게시판</a></li>
 			<li><a href="/semi_team1/list?s_num=42">갤러리</a></li>
