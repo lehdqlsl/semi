@@ -16,6 +16,7 @@ public class BoardTastyVo {
 	private int top;
 	private String addr;
 	private String map;
+	private int cnt;
 
 	public BoardTastyVo(int num, String title, float up, int hits, String content, Date regdate, String writer,
 			int s_num, int blind, int report, int top, String addr, String map) {
@@ -33,6 +34,14 @@ public class BoardTastyVo {
 		this.top = top;
 		this.addr = addr;
 		this.map = map;
+	}
+
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
 
 	public int getNum() {

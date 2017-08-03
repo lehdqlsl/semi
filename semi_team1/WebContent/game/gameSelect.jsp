@@ -139,25 +139,21 @@ function callback1() {
 				style="font-weight: bold; color: #5795dd;">${requestScope.cntTot}</strong>개
 			</span>
 		</div>
-		
-		
+
+
 		<div class="col-xs-2 col-sm-4">
 			<span style="font-size: 14px; color: #333; font-weight: bold">평점</span>
 			<span style="font-size: 11px; color: #999;">총 <strong
 				style="font-weight: bold; color: #5795dd;">${requestScope.cntAvg}</strong>
 			</span>
 		</div>
-		
+
 		<br> <br>
 		<table class="table table-striped" style="padding: 50px;">
 			<c:forEach var="vo" items="${requestScope.list }" varStatus="status">
 				<tr>
-					<td>
-					${vo.score } / 10.0
-					</td>
-					<td id="user">
-							<a href="회원정보조회페이지">${vo.m_nick }</a>
-					</td>
+					<td>${vo.score }/ 10.0</td>
+					<td id="user"><a href="회원정보조회페이지">${vo.m_nick }</a></td>
 					<td width="600"
 						style="word-break: break-all; word-wrap: break-word;">${vo.comments}</td>
 					<td>${vo.r_date }</td>
@@ -255,7 +251,6 @@ function callback1() {
 			<div id="len">0/100 byte</div>
 		</form>
 	</div>
-	</div>
-	</div>
+
 </body>
 </html>

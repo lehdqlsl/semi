@@ -13,6 +13,7 @@ import com.team1.dao.BoardDao;
 import com.team1.dao.BoardTastyDao;
 import com.team1.dao.CategoryDao;
 import com.team1.dao.ReplyDao;
+import com.team1.dao.TastyDao;
 import com.team1.dao.UserInfoDao;
 import com.team1.vo.BoardTastyVo;
 import com.team1.vo.ReplyVo;
@@ -52,7 +53,20 @@ public class ListController extends HttpServlet {
 
 		BoardTastyDao dao = new BoardTastyDao();
 		ArrayList<BoardTastyVo> list = dao.list(s_num, startRow, endRow, search, keyword);
+		ArrayList<BoardTastyVo> bestlist = dao.bestlist(s_num);
+		System.out.println(bestlist.size());
+		CategoryDao cdao = new CategoryDao();
+		String title = cdao.getTitle(s_num);
+		TastyDao tdao = new TastyDao();
+		for (BoardTastyVo vo : list) {
+			int num = vo.getNum();
+			vo.setUp(tdao.getReviewAvg(num));
+		}
 
+		for (BoardTastyVo vo : list) {
+			int rcnt = tdao.getCount(vo.getNum());
+			vo.setCnt(rcnt);
+		}
 		if (list != null) {
 
 			// 페이지 갯수 구하기 (전체글의 갯수/한 페이지 행의 총 갯수) Math.ceil로 소수 무조건 올림처리
@@ -86,7 +100,9 @@ public class ListController extends HttpServlet {
 			request.setAttribute("search", search);
 			request.setAttribute("keyword", keyword);
 			request.setAttribute("list", list);
+			request.setAttribute("bestlist", bestlist);
 			request.setAttribute("s_num", s_num);
+			request.setAttribute("title", title);
 			request.getRequestDispatcher("/index.jsp?page=/tasty/tastyIndex.jsp&s_page=/tasty/list.jsp")
 					.forward(request, response);
 

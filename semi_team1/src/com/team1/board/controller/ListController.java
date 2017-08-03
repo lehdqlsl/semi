@@ -45,6 +45,10 @@ public class ListController extends HttpServlet {
 		// 공지사항 가져오기
 		ArrayList<boardListVo> noticelist = dao.noticelist(s_num);
 		int notice_length = noticelist.size();
+		for (boardListVo vo : noticelist) {
+			int rcnt = rdao.getCount(vo.getNum());
+			vo.setCnt(rcnt);
+		}
 		/*
 		 * 시작 행 자신의 페이지 * 5 - 4 끝 행 : 자신의 페이지 * 5
 		 * 

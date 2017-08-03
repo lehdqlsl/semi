@@ -9,16 +9,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.DefaultEditorKit.DefaultKeyTypedAction;
 
-import com.sun.xml.internal.ws.wsdl.parser.MemberSubmissionAddressingWSDLParserExtension;
-import com.team1.dao.BoardDao;
 import com.team1.dao.BoardTastyDao;
 import com.team1.dao.JoinDao;
-import com.team1.dao.ReplyDao;
+import com.team1.dao.TastyDao;
 import com.team1.vo.BoardTastyVo;
 import com.team1.vo.JoinVo;
-import com.team1.vo.ReplyVo;
-import com.team1.vo.boardVo;
+import com.team1.vo.TastyVo;
 
 @WebServlet("/tasty/select")
 public class SelectController extends HttpServlet {
@@ -42,24 +40,30 @@ public class SelectController extends HttpServlet {
 		int startRow = (pageNum - 1) * 10 + 1;
 		int endRow = startRow + 9;
 
-		ReplyDao rdao = ReplyDao.getInstance();
-		ArrayList<ReplyVo> list = rdao.replyList(b_num, startRow, endRow);
-		int cntTot = rdao.getCount(b_num);
-
-		int pageCount = (int) Math.ceil(rdao.getCount(b_num) / 10.0);
+		TastyDao tdao = new TastyDao();
+		ArrayList<TastyVo> list = tdao.gReviewList(b_num, startRow, endRow);
+		int cntTot = tdao.getCnt(b_num);
+		float avg = tdao.getReviewAvg(b_num);
+		tdao.updateRating(avg, b_num);
+		int pageCount = (int) Math.ceil(cntTot / 10.0);
 		int startPageNum = ((pageNum - 1) / 10) * 10 + 1;
 
 		int endPageNum = startPageNum + 9;
 		if (endPageNum > pageCount) {
 			endPageNum = pageCount;
 		}
+
+		int s_num = dao.getS_num(b_num);
+
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("startPage", startPageNum);
 		request.setAttribute("endPage", endPageNum);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("list", list);
 		request.setAttribute("cntTot", cntTot);
+		request.setAttribute("avg", avg);
 		request.setAttribute("b_num", request.getParameter("num"));
+		request.setAttribute("s_num", s_num);
 		///////////////////
 
 		if (vo != null) {
