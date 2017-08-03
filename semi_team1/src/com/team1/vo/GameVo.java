@@ -1,6 +1,5 @@
 package com.team1.vo;
 
-import java.sql.Date;
 
 public class GameVo {
 	private int g_num;
@@ -8,15 +7,15 @@ public class GameVo {
 	private String g_jenre;
 	private String flatform;
 	private String company;
-	private Date l_date;
+	private String l_date;
 	private String orgImg;
 	private String saveImg;
 	
 	public GameVo(){}
 
-	public GameVo(int g_num, String g_name, String g_jenre, String flatform, String company, Date l_date, String orgImg,
-			String saveImg) {
-		super();
+	public GameVo(int g_num, String g_name, String g_jenre, String flatform, String company, String l_date,
+			String orgImg, String saveImg) {
+		
 		this.g_num = g_num;
 		this.g_name = g_name;
 		this.g_jenre = g_jenre;
@@ -26,7 +25,17 @@ public class GameVo {
 		this.orgImg = orgImg;
 		this.saveImg = saveImg;
 	}
-
+	public GameVo(int g_num, String g_name, String g_jenre, String flatform, String company, String l_date) {
+		
+		this.g_num = g_num;
+		this.g_name = g_name;
+		this.g_jenre = g_jenre;
+		this.flatform = flatform;
+		this.company = company;
+		this.l_date = l_date;
+	
+	}
+	
 	public int getG_num() {
 		return g_num;
 	}
@@ -67,11 +76,11 @@ public class GameVo {
 		this.company = company;
 	}
 
-	public Date getL_date() {
+	public String getL_date() {
 		return l_date;
 	}
 
-	public void setL_date(Date l_date) {
+	public void setL_date(String l_date) {
 		this.l_date = l_date;
 	}
 
@@ -89,5 +98,5 @@ public class GameVo {
 
 	public void setSaveImg(String saveImg) {
 		this.saveImg = saveImg;
-	}	
+	}
 }
