@@ -17,7 +17,6 @@ public class JoinController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.print("°á°ú");
 		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("id");
 		String u_pw = request.getParameter("u_pw");

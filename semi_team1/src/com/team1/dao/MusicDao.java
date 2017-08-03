@@ -18,16 +18,15 @@ public class MusicDao {
 		PreparedStatement pstmt = null;
 		try{
 			con=DBCPBean.getConn();
-			String sql="insert into music values(seq_music_num.nextval,?,?,?,?,?,?,?,?)";
+			String sql="insert into music values(seq_music_num.nextval,?,'admin',?,?,?,?,?,?)";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle());
-			pstmt.setString(2, vo.getM_nick());
-			pstmt.setString(3, vo.getSinger());
-			pstmt.setString(4, vo.getLyrics());
-			pstmt.setString(5, vo.getSongwriter());
-			pstmt.setString(6, vo.getLyricist());
-			pstmt.setString(7, vo.getOrgmimg());
-			pstmt.setString(8, vo.getSavemimg());
+			pstmt.setString(2, vo.getSinger());
+			pstmt.setString(3, vo.getLyrics());
+			pstmt.setString(4, vo.getSongwriter());
+			pstmt.setString(5, vo.getLyricist());
+			pstmt.setString(6, vo.getOrgmimg());
+			pstmt.setString(7, vo.getSavemimg());
 			int n=pstmt.executeUpdate();
 			return n;
 		}catch(SQLException se){
@@ -86,6 +85,7 @@ public class MusicDao {
 			DBCPBean.close(con,pstmt,rs);
 		}
 	}
+	//음악 전체 개수
 	public int getMusicCount(){
 		Connection con=null;
 		PreparedStatement pstmt=null;

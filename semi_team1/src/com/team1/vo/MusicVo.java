@@ -13,7 +13,6 @@ public class MusicVo {
 	public MusicVo(){}
 	public MusicVo(int num, String title, String m_nick, String singer, String lyrics, String songwriter,
 			String lyricist, String orgmimg, String savemimg) {
-		super();
 		this.num = num;
 		this.title = title;
 		this.m_nick = m_nick;
@@ -23,6 +22,17 @@ public class MusicVo {
 		this.lyricist = lyricist;
 		this.orgmimg = orgmimg;
 		this.savemimg = savemimg;
+	}
+	public MusicVo(int num, String title, String m_nick, String singer, String lyrics, String songwriter,
+			String lyricist) {
+		this.num = num;
+		this.title = title;
+		this.m_nick = m_nick;
+		this.singer = singer;
+		this.lyrics = lyrics;
+		this.songwriter = songwriter;
+		this.lyricist = lyricist;
+		
 	}
 	public int getNum() {
 		return num;
