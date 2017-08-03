@@ -42,35 +42,45 @@
 
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div
-			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word; height: 35px; background-color: #428bca; margin-bottom: 50px; padding: 1px;">
+			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word; height: 35px; background-color: #428bca; margin-bottom: 0px; padding: 1px;">
 			<h5 style="margin-left: 10px; font-weight: bold; color: white;">${requestScope.title }</h5>
 		</div>
 		<!-- 베스트 게시글 -->
 		<div
-			style="width: 700px; word-break: break-all; word-wrap: break-word; margin-left: 100px;">
-			<table class="table">
-				<tr>
-					<th style="text-align: center; font-size: 18px;" colspan="2">게시판
-						<span style="font-weight: bold; color: red">BEST</span>
-					</th>
-				</tr>
-
-				<c:forEach var="vo" items="${requestScope.bestlist }"
-					varStatus="status" begin="0" end="6" step="2">
+			style="width: 1000px; word-break: break-all; word-wrap: break-word; margin: auto;">
+			<div style="float: left;">
+				<table class="table">
 					<tr class="active">
-						<td
-							style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 350px;"><a
-							href="/semi_team1/select?num=${bestlist[status.index].num}">${bestlist[status.index].title_name}
-						</a></td>
-						<td
-							style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 350px;"><a
-							href="/semi_team1/select?num=${bestlist[status.index+1].num}">${bestlist[status.index+1].title_name}</a></td>
+						<th style="text-align: center; font-size: 18px;" colspan="2">게시판
+							<span style="font-weight: bold; color: red"></span>BEST
+						</th>
 					</tr>
-				</c:forEach>
 
+					<c:forEach var="vo" items="${requestScope.bestlist }"
+						varStatus="status" begin="0" end="6" step="2">
+						<tr class="active">
+							<td
+								style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 425px;"><a
+								href="/semi_team1/select?num=${bestlist[status.index].num}">${bestlist[status.index].title_name}
+							</a></td>
+							<td
+								style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 425px;"><a
+								href="/semi_team1/select?num=${bestlist[status.index+1].num}">${bestlist[status.index+1].title_name}</a></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+			<!-- 유리사진 -->
 
-			</table>
+			<div
+				style="width: 150px; height: 150px; background-color: red; float: right;">
+
+			</div>
 		</div>
+
+
+
+
 
 		<!-- 일반 게시글 -->
 		<div
