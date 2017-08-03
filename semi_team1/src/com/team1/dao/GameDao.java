@@ -1,13 +1,15 @@
 package com.team1.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+
 import com.team1.db.DBCPBean;
 import com.team1.vo.GameVo;
+import com.team1.vo.ProfileVo;
 
 public class GameDao {
 	public int insert(GameVo vo) {
@@ -21,7 +23,7 @@ public class GameDao {
 			pstmt.setString(2, vo.getG_jenre());
 			pstmt.setString(3, vo.getFlatform());
 			pstmt.setString(4, vo.getCompany());
-			pstmt.setDate(5, vo.getL_date());
+			pstmt.setString(5, vo.getL_date());
 			pstmt.setString(6, vo.getOrgImg());
 			pstmt.setString(7, vo.getSaveImg());
 			int n = pstmt.executeUpdate();
@@ -33,6 +35,7 @@ public class GameDao {
 			DBCPBean.close(con, pstmt);
 		}
 	}
+
 	public GameVo select(int g_num) {
 		GameVo vo = null;
 
@@ -46,9 +49,9 @@ public class GameDao {
 			pstmt.setInt(1, g_num);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				vo = new GameVo(rs.getInt("g_num"), rs.getString("g_name"), rs.getString("g_jenre"), rs.getString("flatform"),
-						rs.getString("company"), rs.getDate("l_date"), rs.getString("orgImg"),
-						rs.getString("saveImg"));
+				vo = new GameVo(rs.getInt("g_num"), rs.getString("g_name"), rs.getString("g_jenre"),
+						rs.getString("flatform"), rs.getString("company"), rs.getString("l_date"),
+						rs.getString("orgImg"), rs.getString("saveImg"));
 			}
 			return vo;
 		} catch (SQLException se) {
@@ -58,6 +61,7 @@ public class GameDao {
 			DBCPBean.close(con, pstmt, rs);
 		}
 	}
+
 	public ArrayList<GameVo> gameList(int startRow, int endRow) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -70,7 +74,7 @@ public class GameDao {
 			pstmt.setInt(2, endRow);
 			rs = pstmt.executeQuery();
 			ArrayList<GameVo> list = new ArrayList<>();
-			
+
 			while (rs.next()) {
 
 				int g_num = rs.getInt("g_num");
@@ -78,7 +82,7 @@ public class GameDao {
 				String g_jenre = rs.getString("g_jenre");
 				String flatform = rs.getString("flatform");
 				String company = rs.getString("company");
-				Date l_date = rs.getDate("l_date");
+				String l_date = rs.getString("l_date");
 				String orgImg = rs.getString("orgImg");
 				String saveImg = rs.getString("saveImg");
 				GameVo vo = new GameVo(g_num, g_name, g_jenre, flatform, company, l_date, orgImg, saveImg);
@@ -88,6 +92,27 @@ public class GameDao {
 		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return null;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+	public int gameCount() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select count(*) cnt from game";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				int cnt = rs.getInt("cnt");
+				return cnt;
+			}
+			return pstmt.executeUpdate();
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
 		} finally {
 			DBCPBean.close(con, pstmt, rs);
 		}

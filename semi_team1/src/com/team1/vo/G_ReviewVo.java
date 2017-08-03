@@ -1,27 +1,32 @@
 package com.team1.vo;
 
-import java.sql.Date;
+import java.util.Date;;
 
 public class G_ReviewVo {
 	private int gr_num;
 	private int g_num;
 	private String m_nick;
-	private double score;
+	private float score;
+	private String comments;
 	private Date r_date;
 	private int up;
 	private int report;
-	
-	public G_ReviewVo(){}
+	private int del;
 
-	public G_ReviewVo(int gr_num, int g_num, String m_nick, double score, Date r_date, int up, int report) {
-		super();
+	public G_ReviewVo() {
+	}
+
+	public G_ReviewVo(int gr_num, int g_num, String m_nick, float score, Date r_date, String comments, int up,
+			int report, int del) {
 		this.gr_num = gr_num;
 		this.g_num = g_num;
 		this.m_nick = m_nick;
 		this.score = score;
+		this.comments = comments;
 		this.r_date = r_date;
 		this.up = up;
 		this.report = report;
+		this.del = del;
 	}
 
 	public int getGr_num() {
@@ -48,12 +53,20 @@ public class G_ReviewVo {
 		this.m_nick = m_nick;
 	}
 
-	public double getScore() {
+	public float getScore() {
 		return score;
 	}
 
-	public void setScore(double score) {
+	public void setScore(float score) {
 		this.score = score;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 
 	public Date getR_date() {
@@ -78,5 +91,13 @@ public class G_ReviewVo {
 
 	public void setReport(int report) {
 		this.report = report;
+	}
+
+	public int getDel() {
+		return del;
+	}
+
+	public void setDel(int del) {
+		this.del = del;
 	}
 }

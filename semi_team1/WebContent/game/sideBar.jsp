@@ -13,7 +13,7 @@
 			<li class="active"><a href="#">게임게시판<span class="sr-only">(current)</span></a></li>
 		</ul>
 		<ul class="nav nav-sidebar">
-			<li><a href="/semi_team1/index.jsp?page=game/gameIndex.jsp&s_page=gameInfo.jsp">게임 정보</a></li>
+			<li><a href="/semi_team1/index.jsp?page=gameList">게임 정보</a></li>
 			<li><a href="/semi_team1/list?s_num=1">자유게시판</a></li>
 			<li><a href="/semi_team1/list?s_num=2">공략게시판</a></li>
 			<li><a href="/semi_team1/list?s_num=3">질문게시판</a></li>
