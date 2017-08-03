@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body onload="location.href='/semi_team1/index.jsp?page=game/content.jsp'">
 	<%
 		String s_page = request.getParameter("s_page");
 		if (s_page == null) {

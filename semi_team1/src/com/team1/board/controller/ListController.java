@@ -95,7 +95,7 @@ public class ListController extends HttpServlet {
 
 			// 베스트게시글
 			ArrayList<boardListVo> bestlist = dao.bestlist(s_num);
-
+			
 			// 카테고리 타이틀
 			String title = c_dao.getTitle(s_num);
 
@@ -107,6 +107,7 @@ public class ListController extends HttpServlet {
 			request.setAttribute("keyword", keyword);
 			request.setAttribute("list", list);
 			request.setAttribute("bestlist", bestlist);
+			
 			request.setAttribute("noticelist", noticelist);
 			request.setAttribute("s_num", s_num);
 			request.setAttribute("title", title);

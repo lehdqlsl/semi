@@ -10,7 +10,7 @@
 	<!-- 사이드바 -->
 	<div class="col-sm-3 col-md-2 sidebar">
 		<ul class="nav nav-sidebar">
-			<li class="active"><a href="#">게임게시판<span class="sr-only">(current)</span></a></li>
+			<li class="active"><a href="/semi_team1/index.jsp?page=game/ranking">게임게시판<span class="sr-only">(current)</span></a></li>
 		</ul>
 		<ul class="nav nav-sidebar">
 			<li><a href="/semi_team1/index.jsp?page=gameList">게임 정보</a></li>

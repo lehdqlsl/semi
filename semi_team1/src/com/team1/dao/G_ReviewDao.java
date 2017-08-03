@@ -4,13 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.sql.Date;
 
 import com.team1.db.DBCPBean;
 import com.team1.vo.G_ReviewVo;
-
-import oracle.net.aso.p;
 
 public class G_ReviewDao {
 	//댓글 입력
@@ -182,6 +181,31 @@ public class G_ReviewDao {
 		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return false;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
+	// 게임 랭킹
+	public ArrayList<G_ReviewVo> getRanking() {
+		ArrayList<G_ReviewVo> list = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			//String sql = "SELECT * FROM(SELECT G_NAME, AVG(SCORE) AVGSC FROM G_REVIEW R, GAME G WHERE R.G_NUM=G.G_NUM GROUP BY G.G_NAME ORDER BY AVGSC DESC)WHERE ROWNUM<6";
+			String sql="SELECT * FROM(SELECT G_NAME,SAVEIMG,R.G_NUM gnum, round(AVG(SCORE),1) AVGSC FROM G_REVIEW R, GAME G WHERE R.G_NUM=G.G_NUM GROUP BY G.G_NAME,SAVEIMG,R.G_NUM ORDER BY AVGSC DESC, G.SAVEIMG DESC )WHERE ROWNUM<6";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				G_ReviewVo vo = new G_ReviewVo( // vo의 생성자 파라미터에 얻어온 값 넣기
+						rs.getInt("gnum"),rs.getFloat("avgsc"),rs.getString("g_name"),rs.getString("saveimg"));
+				list.add(vo);
+			}
+			return list;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
 		} finally {
 			DBCPBean.close(con, pstmt, rs);
 		}

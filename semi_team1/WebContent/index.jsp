@@ -25,11 +25,11 @@
 		}
 	%>
 
-	<div id="wrap">
+	 <div id="wrap">
 		<jsp:include page="header.jsp"></jsp:include>
 		<jsp:include page="<%=spage%>"></jsp:include>
 		<jsp:include page="footer.jsp"></jsp:include>
-	</div>
+	</div> -
 
 </body>
 </html>
