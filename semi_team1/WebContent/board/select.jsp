@@ -271,8 +271,6 @@
 								onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}&s_num=${vo.s_num }';">
 							<input class="btn btn-success" type="button" value="삭제"
 								onclick="boarddelete('${vo.num}')">
-							<input class="btn btn-success" type="button" value="글쓰기"
-								onclick="location.href = 'index.jsp?page=board/insert.jsp';">
 						</c:if> 
 					
 								<input class="btn btn-danger" type="button" value="신고"

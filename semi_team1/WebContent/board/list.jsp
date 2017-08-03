@@ -42,12 +42,12 @@
 
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div
-			style="margin: auto; width: 990px; word-break: break-all; word-wrap: break-word; height: 35px; background-color: #428bca; margin-bottom: 50px; padding: 1px;">
+			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word; height: 35px; background-color: #428bca; margin-bottom: 50px; padding: 1px;">
 			<h5 style="margin-left: 10px; font-weight: bold; color: white;">${requestScope.title }</h5>
 		</div>
 		<!-- 베스트 게시글 -->
 		<div
-			style="width: 500px; word-break: break-all; word-wrap: break-word; margin-left: 200px;">
+			style="width: 700px; word-break: break-all; word-wrap: break-word; margin-left: 100px;">
 			<table class="table">
 				<tr>
 					<th style="text-align: center; font-size: 18px;" colspan="2">게시판
@@ -58,10 +58,12 @@
 				<c:forEach var="vo" items="${requestScope.bestlist }"
 					varStatus="status" begin="0" end="6" step="2">
 					<tr class="active">
-						<td><a
+						<td
+							style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 350px;"><a
 							href="/semi_team1/select?num=${bestlist[status.index].num}">${bestlist[status.index].title_name}
 						</a></td>
-						<td><a
+						<td
+							style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 350px;"><a
 							href="/semi_team1/select?num=${bestlist[status.index+1].num}">${bestlist[status.index+1].title_name}</a></td>
 					</tr>
 				</c:forEach>
@@ -141,7 +143,8 @@
 				}
 			%>
 			<form action="/semi_team1/list">
-				<select name="search">
+				<input type="hidden" value="${s_num }" name="s_num"> <select
+					name="search">
 					<option value="writer" <%=selected1%>>글쓴이</option>
 					<option value="title_name" <%=selected2%>>제목</option>
 					<option value="content" <%=selected3%>>내용</option>

@@ -21,10 +21,8 @@ src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 		%>
 		
 		<%
-			request.setCharacterEncoding("utf-8");
 			String scnt = request.getParameter("cnt");
 			String writer = request.getParameter("writer");
-			String title_name = request.getParameter("title_name");
 			String content = request.getParameter("content");
 
 			//카테고리 번호
@@ -34,7 +32,6 @@ src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 
 			if (writer == null) {
 				writer = "";
-				title_name = "";
 				content = "";
 			}
 		%>
@@ -50,7 +47,7 @@ src="/semi_team1/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 					</tr>
 					<tr>
 						<td>제목</td>
-						<td><input type="text" name="title_name" id="title_name" value="<%=vo.getTitle_name() %>"></td>
+						<td><input type="text" name="title_name" id="title_name" value='<%=vo.getTitle_name() %>'></td>
 					</tr>
 					<tr>
 						<td>내용</td>

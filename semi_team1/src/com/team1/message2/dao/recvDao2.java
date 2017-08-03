@@ -146,7 +146,7 @@ public class recvDao2 {
 		ResultSet rs = null;
 		try {
 			con = DBCPBean.getConn();
-			String sql = "select count(*) cnt from message where chk=1 and send_cxl=1 and receiver=?";
+			String sql = "select count(*) cnt from message where recv_del=1 and chk=1 and send_cxl=1 and receiver=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m_nick);
 			rs=pstmt.executeQuery();
