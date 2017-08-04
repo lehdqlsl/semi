@@ -22,7 +22,7 @@
 	<%
 		String spage = request.getParameter("page");
 		if (spage == null) {
-			spage = "content.jsp";
+			spage = "/mainlist";
 		}
 	%>
 

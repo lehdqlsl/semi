@@ -53,7 +53,7 @@ public class GalleryListController extends HttpServlet {
 		}
 		int startRow = (pageNum * 5) - 4;
 		int endRow = (pageNum * 5);
-
+		
 		MusicDao mdao = new MusicDao();
 		ArrayList<MusicVo> mlist = mdao.musiclist(startRow, endRow);
 		
