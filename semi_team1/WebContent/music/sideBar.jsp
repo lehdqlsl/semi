@@ -13,7 +13,7 @@
 			<li class="active"><a href="index.jsp?page=gallerylist">음악게시판<span class="sr-only">(current)</span></a></li>
 		</ul>
 		<ul class="nav nav-sidebar">
-			<li><a href="/semi_team1/index.jsp?page=musiclist">음악 정보</a></li>
+			<li><a href="/semi_team1/list?s_num=43">연예 뉴스</a></li>
 			<li><a href="/semi_team1/list?s_num=40">자유게시판</a></li>
 			<li><a href="/semi_team1/list?s_num=41">질문게시판</a></li>
 			<li><a href="/semi_team1/list?s_num=42">갤러리</a></li>
