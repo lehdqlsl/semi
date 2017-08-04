@@ -28,24 +28,37 @@
 			<table class="table">
 				<tr>
 					<th style="font-size: 18px;" colspan="2"><a
-						href="/semi_team1/index.jsp?page=game/gameIndex.jsp">게임</a></th>
+						href="/semi_team1/game/ranking">게임</a></th>
 				</tr>
-
-				<c:forEach var="vo" items="${requestScope.sportsmain1 }"
-					varStatus="status" begin="0" end="10" step="2">
-					<tr>
-						<td
-							style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 500px;"><a
-							href="/semi_team1/select?num=${sportsmain1[status.index].num}">${sportsmain1[status.index].title_name}
-						</a></td>
-						<td
-							style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 500px;"><a
-							href="/semi_team1/select?num=${sportsmain1[status.index+1].num}">${sportsmain1[status.index+1].title_name}</a></td>
-					</tr>
-				</c:forEach>
 			</table>
-		</div>
+			<c:forEach var="vo" items="${requestScope.main1 }">
+				<div id="imgArea" style="display: inline-block">
+					<a href="/semi_team1/gameinfo?g_num=${vo.g_num}"> <img
+						src="/semi_team1/rs/img/gameImg/${vo.saveImg}"
+						onmouseover="showImg(event)" onmouseout="noshowImg(event)"
+						style="height: 180px; width: 120px; opacity: 0.7; margin: auto">
+						<p>
+							<span
+								style="font-size: 13px; text-decoration: none; color: black; font-weight: bold; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 100px;">${vo.g_name }</span>
+						</p>
+						<p>
+							<span style="font-size: 9px; text-decoration: none;"><span
+								style="color: #666">평점:</span> <span style="color: #f3614c">${vo.avg }</span></span>
+						</p>
+						<p>
+							<span style="font-size: 9px; text-decoration: none;"><span
+								style="color: #666">장르:</span> <span style="color: #000">${vo.g_jenre }</span></span>
+						</p>
+						<p>
+							<span style="font-size: 9px; text-decoration: none;"><span
+								style="color: #666">발매일:</span> <span style="color: #000">${vo.l_date }</span></span>
+						</p>
+					</a>
+				</div>
+			</c:forEach>
+			<hr>
 
+		</div>
 
 
 		<div
