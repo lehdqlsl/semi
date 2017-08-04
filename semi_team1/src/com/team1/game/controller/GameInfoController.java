@@ -24,7 +24,7 @@ public class GameInfoController extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		GameDao dao = new GameDao();
 		G_ReviewDao grdao=new G_ReviewDao();
-		JoinDao memdao = new JoinDao();
+		//JoinDao memdao = new JoinDao();
 
 		int g_num=Integer.parseInt(request.getParameter("g_num"));
 		GameVo vo=dao.select(g_num);

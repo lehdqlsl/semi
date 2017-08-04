@@ -26,13 +26,13 @@ public class GameBestListController extends HttpServlet{
 		JSONArray jarr=new JSONArray();
 		
 		if(snum==1){
-			bestList= boardDao.bestlist(1);
+			bestList= boardDao.bestlist(1,10);
 		}else if(snum==2){
-			bestList= boardDao.bestlist(2);
+			bestList= boardDao.bestlist(2,10);
 		}else if(snum==3){
-			bestList= boardDao.bestlist(3);
+			bestList= boardDao.bestlist(3,10);
 		}else if(snum==4){
-			bestList= boardDao.bestlist(4);
+			bestList= boardDao.bestlist(4,10);
 		}
 		
 		for(int i=0;i<bestList.size();i++){

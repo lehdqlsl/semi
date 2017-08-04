@@ -1,6 +1,5 @@
 package com.team1.vo;
 
-
 public class GameVo {
 	private int g_num;
 	private String g_name;
@@ -10,12 +9,14 @@ public class GameVo {
 	private String l_date;
 	private String orgImg;
 	private String saveImg;
-	
-	public GameVo(){}
+	private double avg;
+
+	public GameVo() {
+	}
 
 	public GameVo(int g_num, String g_name, String g_jenre, String flatform, String company, String l_date,
 			String orgImg, String saveImg) {
-		
+
 		this.g_num = g_num;
 		this.g_name = g_name;
 		this.g_jenre = g_jenre;
@@ -25,17 +26,26 @@ public class GameVo {
 		this.orgImg = orgImg;
 		this.saveImg = saveImg;
 	}
+
 	public GameVo(int g_num, String g_name, String g_jenre, String flatform, String company, String l_date) {
-		
+
 		this.g_num = g_num;
 		this.g_name = g_name;
 		this.g_jenre = g_jenre;
 		this.flatform = flatform;
 		this.company = company;
 		this.l_date = l_date;
-	
+
 	}
-	
+
+	public double getAvg() {
+		return avg;
+	}
+
+	public void setAvg(double d) {
+		this.avg = d;
+	}
+
 	public int getG_num() {
 		return g_num;
 	}
