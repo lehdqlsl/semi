@@ -154,7 +154,7 @@ public class MovieDao {
 
 			con = DBCPBean.getConn();
 
-			String sql = "SELECT * FROM(SELECT M_NAME, R.M_NUM, AVG(r_gpa) AVGSC FROM m_REVIEW R, movie m WHERE R.m_NUM=m.m_NUM GROUP BY m.m_NAME, R.m_num ORDER BY AVGSC DESC)WHERE ROWNUM<6";
+			String sql = "SELECT * FROM(SELECT M_NAME, R.M_NUM, round(AVG(r_gpa),1) AVGSC FROM m_REVIEW R, movie m WHERE R.m_NUM=m.m_NUM GROUP BY m.m_NAME, R.m_num ORDER BY AVGSC DESC)WHERE ROWNUM<6";
 
 			pstmt = con.prepareStatement(sql);
 

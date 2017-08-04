@@ -34,6 +34,7 @@
 	
 	<div
 		style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
+		<div style="font-size: 20px;font-weight: bold;">신곡 정보</div><br>
 		<table class="table table-bordered" width="875px" height="200px">
 			<td><c:choose>
 					<c:when test="${startPageNum>1 }">

@@ -25,7 +25,7 @@ public class SelectController extends HttpServlet {
 			throws ServletException, IOException {
 		String spageNum = request.getParameter("pageNum");
 		int b_num = Integer.parseInt(request.getParameter("num"));
-
+		System.out.println(b_num);
 		BoardTastyDao dao = new BoardTastyDao();
 		String writer = dao.getWriter(b_num);
 		JoinDao memdao = new JoinDao();

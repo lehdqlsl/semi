@@ -456,7 +456,7 @@ public class BoardDao {
 		ResultSet rs = null;
 		try {
 			con = DBCPBean.getConn();
-			String sql = "select * from (select t.*,rownum as rnum from (select * from board where s_num = ? and up > 0 order by up desc) t)a where a.rnum <=6";
+			String sql = "select * from (select t.*,rownum as rnum from (select * from board where s_num = ? and up > 0 and blind = 0 order by up desc) t)a where a.rnum <=6";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, s_num);
 			rs = pstmt.executeQuery();
@@ -495,7 +495,7 @@ public class BoardDao {
 		ResultSet rs = null;
 		try {
 			con = DBCPBean.getConn();
-			String sql = "select * from (select t.*,rownum as rnum from (select * from board where s_num = ? and up > 0 order by up desc) t)a where a.rnum <=?";
+			String sql = "select * from (select t.*,rownum as rnum from (select * from board where s_num = ? and up > 0 and blind = 0 order by up desc) t)a where a.rnum <=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, s_num);
 			pstmt.setInt(2, cnt);
@@ -578,7 +578,7 @@ public class BoardDao {
 		ResultSet rs = null;
 		try {
 			con = DBCPBean.getConn();
-			String sql = "select * from board where s_num=? and top=1";
+			String sql = "select * from board where s_num=? and top=1 and blind = 0 ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, s_num);
 			rs = pstmt.executeQuery();

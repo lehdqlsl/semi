@@ -45,7 +45,7 @@
 	// 댓글 공백 체크
 	function checkBlank(object) {
 		var content = document.getElementById("content").value;
-		console.log("내용 : " + content);
+
 		if (content == null || content == "") {
 			alert("내용을 입력하세요!");
 			return;
@@ -184,6 +184,14 @@
 			location.href = "/semi_team1/boarddelete?b_num="+${requestScope.b_num }+"&s_num="+${vo.s_num};
 		}
 	}
+	
+	function copy(index){
+		var a_nick = document.getElementById("a_nick"+index);
+		var content = document.getElementById("content");
+		content.value = a_nick.innerHTML+" //";	
+		document.getElementById("content").focus();
+		document.body.scrollTop = document.body.scrollHeight;
+	}
 	/*//로그인 여부에 따른 쪽지 보내기
 	function sendmsg(nick) {
 		console.log(nick);
@@ -220,11 +228,11 @@
 						onclick="location.href='/semi_team1/index.jsp?page=mywritelist?writer=${vo.writer }'">
 						<c:choose>
 							<c:when test="${sessionScope.m_nick != null }">
-								<input type="button" value="쪽지보내기" class="btn btn-xs btn-default" onclick="location.href='/semi_team1/index.jsp?page=message2/insert2.jsp?&sender=${vo.writer}'">
+								<input type="button" value="쪽지보내기"
+									class="btn btn-xs btn-default"
+									onclick="location.href='/semi_team1/index.jsp?page=message2/insert2.jsp?&sender=${vo.writer}'">
 							</c:when>
-						</c:choose>
-				
-					</td>
+						</c:choose></td>
 
 				</tr>
 
@@ -271,12 +279,8 @@
 								onclick="location.href = 'index.jsp?page=board/update.jsp?num=${requestScope.vo.num}&s_num=${vo.s_num }';">
 							<input class="btn btn-success" type="button" value="삭제"
 								onclick="boarddelete('${vo.num}')">
-						</c:if> 
-					
-								<input class="btn btn-danger" type="button" value="신고"
-						onclick="boardreport(${vo.num},'${vo.writer }')">
-						
-						 <input
+						</c:if> <input class="btn btn-danger" type="button" value="신고"
+						onclick="boardreport(${vo.num},'${vo.writer }')"> <input
 						class="btn btn-success" type="button" value="목록"
 						onclick="location.href = 'index.jsp?page=list?s_num=${vo.s_num }&pageNum=${pageNum }';"></td>
 				</tr>
@@ -301,7 +305,7 @@
 							<!--  <td>${vo.r_num }</td>-->
 							<td id="user">
 								<div>
-									<a href="회원정보조회페이지">${vo.nick }</a>
+									<a onclick="copy('${status.index}')" id="a_nick${status.index}">${vo.nick }</a>
 								</div>
 							</td>
 							<td width="600"

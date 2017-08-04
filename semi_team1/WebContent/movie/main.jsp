@@ -1,3 +1,8 @@
+<%@page import="org.jsoup.nodes.Element"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="org.jsoup.select.Elements"%>
+<%@page import="org.jsoup.Jsoup"%>
+<%@page import="org.jsoup.nodes.Document"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -41,6 +46,59 @@
 			index = 0;
 		setTimeout(change, 3000);
 	}
+<%Document doc = Jsoup.connect("http://movie.naver.com/movie/bi/mi/basic.nhn?code=146469").get();
+			Elements title = doc.select(".rank_keyword li");
+			Elements date = doc.select(".tx_info");
+			String today = date.text();
+			
+			ArrayList<String> list[] = new ArrayList[3];
+			for (int i = 0; i < 3; i++) {
+				list[i] = new ArrayList<>();
+			}
+			int i = 0;
+			int j = 0;
+			for (Element node : title) {
+				if (i == 10) {
+					j++;
+					i = 0;
+				}
+				list[j].add(node.text());
+				i++;
+			}
+			
+			ArrayList<String> p = new ArrayList<>();
+			ArrayList<String> pp = new ArrayList<>();
+			String str = "";
+
+			for (String s : list[1]) {
+				for (int z = s.length() - 5; z < s.length(); z++) {
+					char c = s.charAt(z);
+					if (c >= '0' && c <= '9') {
+						str += c;
+					}
+				}
+				p.add(str);
+				str = "";
+
+				for (int z = s.length() - 1; z > 0; z--) {
+					char c = s.charAt(z);
+					if (c == '승') {
+						pp.add("상승");
+						break;
+					} else if (c == '합') {
+						pp.add("보합");
+						break;
+					} else if (c == '락') {
+						pp.add("하락");
+						break;
+					}
+				}
+			}
+
+			for (i = 0; i < p.size(); i++) {
+				System.out.println(pp.get(i) + " " + p.get(i));
+			}%>
+	
 </script>
 <body>
 	<!-- 사이드바 -->
@@ -61,7 +119,7 @@
 			</c:choose>
 
 
-			<table class="table table-bordered" width="875px" height="250px">
+			<table class="table table-bordered" width="800px" height="225px">
 
 				<td><c:choose>
 						<c:when test="${startPageNum>1 }">
@@ -81,7 +139,7 @@
 						href="/semi_team1/movieselect?m_num=${vo.m_num }"> <img
 							src="/semi_team1/upload/${vo.saveimg}"
 							onmouseover="showImg(event)" onmouseout="noshowImg(event)"
-							style="height: 250px; width: 175px; opacity: 0.7">
+							style="height: 215px; width: 150px; opacity: 0.7">
 					</a></td>
 				</c:forEach>
 
@@ -100,50 +158,126 @@
 			</table>
 
 			<div style="float: left">
-			<table class="table table-bordered">
-				<tr>
-					<td><h4>평점 & 리뷰</h4></td>
-				</tr>
-				<c:forEach var="vo" items="${requestScope.list2 }"
-					varStatus="status">
+				<table class="table table-bordered">
 					<tr>
-						<td height="60px" width="750px">
-							<button type="button" class="btn btn-xs btn-default">${status.count}</button>
+						<td><span style="font-size: 20px; font-weight: bold;">평점 & 리뷰</span></td>
+					</tr>
+					<c:forEach var="vo" items="${requestScope.list2 }"
+						varStatus="status">
+						<tr>
+							<td height="60px" width="750px">
+								<button type="button" class="btn btn-xs btn-default">${status.count}</button>
 
-							<a href="/semi_team1/movieselect?m_num=${vo.m_num }">${vo.m_name}</a><br> <b style="color: #FF7171">${vo.rating }
-								점</b>
+								<a href="/semi_team1/movieselect?m_num=${vo.m_num }">${vo.m_name}</a><br>
+								<b style="color: #FF7171">${vo.rating } 점</b>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+
+			<div style="float: left">
+				<table class="table table-bordered">
+					<tr>
+						<td><span style="font-size: 20px; font-weight: bold;">스포트라이트</span></td>
+					</tr>
+					<tr>
+						<td rowspan="5" height="300px">
+							<div id="mainImage">
+								<img src="movie/1.jpg" id="changeMain"
+									onclick="location.href = 'http://www.vlive.tv/video/36398'">
+							</div>
 						</td>
 					</tr>
-				</c:forEach>
-			</table>
+				</table>
+			</div>
+
+			<div style="float: left; width: 999px; margin-bottom: 0px;">
+				<table class="table table-bordered"
+					style="font-size: 12px; font-weight: bold;">
+					<tr>
+						<td width="333px"><span style="font-size: 20px;">Movie
+								Ranking </span><span><%=today%></span></td>
+					</tr>
+				</table>
+			</div>
+
+			<div
+				style="float: left; width: 333px; height: 400px; margin-top: 0px;">
+
+				<table class="table table-striped"
+					style="font-size: 11px; font-weight: bold;">
+					<tr>
+						<td colspan="3"><span>영화 인기검색어</span></td>
+					</tr>
+						
+					<%
+						int a=1;
+						for (String s : list[0]) {
+							
+					%>
+					<tr>
+						<td><%=a %></td>
+						<td><%=s.substring(0, s.length() - 5)%></td>
+						<td><%=s.substring(s.length() - 5, s.length())%></td>
+					</tr>
+					<%
+						a++;
+						}
+					%>
+				</table>
+			</div>
+
+			<div
+				style="float: left; width: 333px; height: 400px; margin-top: 0px;">
+				<table class="table table-striped"
+					style="font-size: 11px; font-weight: bold;">
+					<tr>
+						<td colspan="3"><span>영화인 인기검색어</span></td>
+					</tr>
+					
+					<%
+						int b = 1;
+						int k = 0;
+						for (String s : list[1]) {
+					%>
+					<tr>
+						<td><%=b %></td>
+						<td><%=s.substring(0, s.length() - 5)%></td>
+						<td><%=pp.get(k)%> <%=p.get(k)%>
+						</td>
+					</tr>
+					<%
+						b++;
+						k++;
+						}
+					%>
+				</table>
+			</div>
+
+			<div
+				style="float: left; width: 333px; height: 400px; margin-top: 0px;">
+				<table class="table table-striped"
+					style="font-size: 11px; font-weight: bold;">
+					<tr>
+						<td colspan="3"><span>티켓 예매순</span></td>
+					</tr>
+					<%
+						int c=1;
+						for (String s : list[2]) {
+					%>
+					<tr>
+						<td><%=c %></td>
+						<td><%=s.substring(0, s.length() - 6)%></td>
+						<td><%=s.substring(s.length() - 6, s.length())%></td>
+					</tr>
+					<%
+						c++;
+						}
+					%>
+				</table>
 			</div>
 			
-			<div style="float: left">
-			<table class="table table-bordered">
-				<tr>
-					<td><h4>스포트라이트</h4></td>
-				</tr>
-				<tr>
-					<td rowspan="5" height="300px">
-						<div id="mainImage">
-							<img src="movie/1.jpg" id="changeMain"
-								onclick="location.href = 'http://www.vlive.tv/video/36398'">
-						</div>
-					</td>
-				</tr>
-			</table>
-			</div>
-
-
-			<table class="table table-bordered">
-				<tr>
-					<td>
-						<h1>Movie Ranking</h1>
-					</td>
-				</tr>
-			</table>
-
-
 		</div>
 	</div>
 

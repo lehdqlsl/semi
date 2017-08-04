@@ -287,7 +287,8 @@ function callback1() {
 				<div style="margin-bottom: 10px;">
 					평점 <input type="text" name="rating" id="rating" size=1> /
 					10
-				</div>
+				</div>			
+							
 				<input type="hidden" name="m_num" value="${vo.m_num }">
 				<div>
 					<textarea rows="4" cols="80" name="content" id="content"
@@ -300,6 +301,10 @@ function callback1() {
 				</div>
 			</div>
 			<div id="len">0/100 byte</div>
+	
+			<div style="float: right;"><input class="btn btn-default" type="button" value="이전"
+							onclick="javascript:history.back()"></td></div>
+	
 		</form>
 	</div>
 		
