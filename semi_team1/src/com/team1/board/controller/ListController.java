@@ -111,6 +111,7 @@ public class ListController extends HttpServlet {
 			request.setAttribute("keyword", keyword);
 			request.setAttribute("list", list);
 			request.setAttribute("bestlist", bestlist);
+			
 			request.setAttribute("noticelist", noticelist);
 			request.setAttribute("s_num", s_num);
 			request.setAttribute("title", title);

@@ -14,7 +14,6 @@
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
-
 			<table class="table">
 				<tr class="danger">
 					<th style="font-size: 18px;" colspan="2"><a
@@ -86,9 +85,5 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
 </body>
 </html>

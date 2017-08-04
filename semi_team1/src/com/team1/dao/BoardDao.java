@@ -568,6 +568,7 @@ public class BoardDao {
 		}
 	
 
+
 	// 공지사항 리스트 가져오기
 
 	public ArrayList<boardListVo> noticelist(int s_num) {

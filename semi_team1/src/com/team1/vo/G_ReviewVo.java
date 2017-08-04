@@ -12,8 +12,18 @@ public class G_ReviewVo {
 	private int up;
 	private int report;
 	private int del;
-
+	private String g_name;
+	private float rating;
+	private String saveImg;
+	
 	public G_ReviewVo() {
+	}
+			
+	public G_ReviewVo(int g_num,float rating, String g_name, String saveImg) {
+		this.g_num=g_num;
+		this.rating = rating;
+		this.g_name = g_name;
+		this.saveImg = saveImg;
 	}
 
 	public G_ReviewVo(int gr_num, int g_num, String m_nick, float score, Date r_date, String comments, int up,
@@ -100,4 +110,29 @@ public class G_ReviewVo {
 	public void setDel(int del) {
 		this.del = del;
 	}
+
+	public String getG_name() {
+		return g_name;
+	}
+
+	public void setG_name(String g_name) {
+		this.g_name = g_name;
+	}
+
+	public float getRating() {
+		return rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
+
+	public String getSaveImg() {
+		return saveImg;
+	}
+
+	public void setSaveImg(String saveImg) {
+		this.saveImg = saveImg;
+	}
+	
 }

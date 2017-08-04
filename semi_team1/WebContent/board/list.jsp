@@ -114,11 +114,9 @@
 				<c:forEach var="vo" items="${requestScope.list }">
 					<tr>
 						<td style="text-align: center">${vo.num }</td>
-
 						<td><a href="/semi_team1/select?num=${vo.num }">${vo.title_name }
 								[${vo.cnt }]</a></td>
 						<td>${vo.writer }</td>
-
 						<td style="text-align: center">${vo.up }</td>
 						<td style="text-align: center">${vo.hits }</td>
 						<td style="text-align: center">${vo.regdate }</td>
