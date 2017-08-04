@@ -33,7 +33,7 @@ public class MusicInsertController extends HttpServlet{
 		int n=dao.insert(vo);
 		
 		if(n>0){
-			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?page=music/musicInfo.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/gallerylist");
 			rd.forward(request, response);
 		}else{
 			RequestDispatcher rd = request.getRequestDispatcher("join/result.jsp");

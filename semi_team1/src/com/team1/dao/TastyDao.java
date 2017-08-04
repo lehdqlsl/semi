@@ -113,6 +113,7 @@ public class TastyDao {
 			}
 			return list;
 		} catch (SQLException se) {
+			System.out.println("4");
 			System.out.println(se.getMessage());
 			return null;
 		} finally {
@@ -131,15 +132,17 @@ public class TastyDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, b_num);
 			rs = pstmt.executeQuery();
-			rs.next();
-			int cntTot = rs.getInt(1);
-			return cntTot;
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
 		} catch (SQLException se) {
+			System.out.println("5");
 			System.out.println(se.getMessage());
 			return -1;
 		} finally {
 			DBCPBean.close(con, pstmt, rs);
 		}
+		return 0;
 	}
 
 	// 게임 별 평점
@@ -153,15 +156,17 @@ public class TastyDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, b_num);
 			rs = pstmt.executeQuery();
-			rs.next();
-			float cntAvg = rs.getFloat(1);
-			return cntAvg;
+			if (rs.next()) {
+				return rs.getFloat(1);
+			}
 		} catch (SQLException se) {
+			System.out.println("6");
 			System.out.println(se.getMessage());
 			return -1;
 		} finally {
 			DBCPBean.close(con, pstmt, rs);
 		}
+		return 0;
 	}
 
 	// 중복 리뷰 작성 제한

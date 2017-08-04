@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
+
 <link href="/semi_team1/rs/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="/semi_team1/dashboard.css" rel="stylesheet">
 <link href="/semi_team1/rs/assets/css/ie10-viewport-bug-workaround.css"
