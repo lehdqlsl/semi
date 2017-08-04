@@ -199,6 +199,7 @@ public class JoinDao {
 			}
 			return vo;
 		} catch (SQLException se) {
+			System.out.println("2");
 			System.out.println(se.getMessage());
 			return null;
 		} finally {

@@ -89,6 +89,7 @@ public class BoardTastyDao {
 			}
 
 		} catch (SQLException se) {
+			System.out.println("1");
 			se.printStackTrace();
 			return null;
 		} finally {
@@ -175,6 +176,7 @@ public class BoardTastyDao {
 				return null;
 			}
 		} catch (SQLException se) {
+			System.out.println("3");
 			System.out.println(se.getMessage());
 			return null;
 		} finally {
@@ -241,15 +243,18 @@ public class BoardTastyDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, b_num);
 			rs = pstmt.executeQuery();
-			rs.next();
-			int cnt = rs.getInt(1);
-			return cnt;
+			if (rs.next()) {
+				int cnt = rs.getInt(1);
+				return cnt;
+			}
 		} catch (SQLException se) {
+			System.out.println("7");
 			System.out.println(se.getMessage());
 			return -1;
 		} finally {
 			DBCPBean.close(con, pstmt, rs);
 		}
+		return 0;
 	}
 
 	// 베스트 게시글 리스트 가져오기
@@ -332,4 +337,42 @@ public class BoardTastyDao {
 		}
 	}
 
+	// 베스트 오브 베스트 게시글 리스트 가져오기
+	public ArrayList<BoardTastyVo> boblist() {
+		ArrayList<BoardTastyVo> list = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBCPBean.getConn();
+			String sql = "select * from (select t.*,rownum as rnum from (select * from board_tasty where up > 0 order by up desc) t)a where a.rnum <=5";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int num = rs.getInt("num");
+				String title = rs.getString("title");
+				float up = rs.getInt("up");
+				int hits = rs.getInt("hits");
+				String content = rs.getString("content");
+				Date regdate = rs.getDate("regdate");
+				String writer = rs.getString("writer");
+				int s_num = rs.getInt("s_num");
+				int blind = rs.getInt("blind");
+				int report = rs.getInt("report");
+				int top = rs.getInt("top");
+				String addr = rs.getString("addr");
+				String map = rs.getString("map");
+				list.add(new BoardTastyVo(num, title, up, hits, content, regdate, writer, s_num, blind, report, top,
+						addr, map));
+			}
+
+			return list;
+		} catch (SQLException se) {
+			se.printStackTrace();
+			return null;
+		} finally {
+			DBCPBean.close(con, pstmt, rs);
+		}
+	}
 }
