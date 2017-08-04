@@ -65,11 +65,11 @@
 						<tr class="">
 							<td
 								style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 425px;"><a
-								href="/semi_team1/select?num=${bestlist[status.index].num}">${bestlist[status.index].title}
+								href="/semi_team1/tasty/select?num=${bestlist[status.index].num}">${bestlist[status.index].title}
 							</a></td>
 							<td
 								style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 425px;"><a
-								href="/semi_team1/select?num=${bestlist[status.index+1].num}">${bestlist[status.index+1].title}</a></td>
+								href="/semi_team1/tasty/select?num=${bestlist[status.index+1].num}">${bestlist[status.index+1].title}</a></td>
 						</tr>
 					</c:forEach>
 				</table>

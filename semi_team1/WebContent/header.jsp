@@ -52,7 +52,7 @@
 				<li id="c3"><a
 					href="/semi_team1/sportsmain">스포츠</a></li>
 				<li id="c4"><a
-					href="/semi_team1/index.jsp?page=tasty/tastyIndex.jsp">맛집</a></li>
+					href="/semi_team1/tasty/main">맛집</a></li>
 				<li id="c5"><a
 					href="/semi_team1/gallerylist">음악</a></li>
 				<li id="c6"><a href="/semi_team1/index.jsp?page=ranking/list">랭킹</a></li>
