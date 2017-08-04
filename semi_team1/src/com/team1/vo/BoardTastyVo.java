@@ -17,6 +17,7 @@ public class BoardTastyVo {
 	private String addr;
 	private String map;
 	private int cnt;
+	private String tag;
 
 	public BoardTastyVo(int num, String title, float up, int hits, String content, Date regdate, String writer,
 			int s_num, int blind, int report, int top, String addr, String map) {
@@ -34,6 +35,14 @@ public class BoardTastyVo {
 		this.top = top;
 		this.addr = addr;
 		this.map = map;
+	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 
 	public int getCnt() {
