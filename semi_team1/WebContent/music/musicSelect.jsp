@@ -34,6 +34,8 @@
 			</td>
 		</tr>
 		</table>
+		<div style="text-align:center;"><input class="btn btn-default" type="button" value="이전"
+							onclick="javascript:history.back()"></div>
 	</div>
 </div>	
 </body>

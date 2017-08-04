@@ -8,6 +8,26 @@
 <title>Insert title here</title>
 
 <script type="text/javascript">
+var imgs=[
+			'/semi_team1/rs/img/22.jpg','/semi_team1/rs/img/33.jpg','/semi_team1/rs/img/44.jpg','/semi_team1/rs/img/55.jpg','/semi_team1/rs/img/66.jpg','/semi_team1/rs/img/77.jpg','/semi_team1/rs/img/11.jpg'];
+
+var index=0;
+
+setTimeout(change,3000);
+
+function change(){
+
+	var changeMain=document.getElementById("changeMain");
+
+	changeMain.src=imgs[index++];
+
+	if(index==imgs.length) index=0;
+
+	setTimeout(change,3000);
+
+} 
+
+
 	var listxhr = null;
 	function limitCheck() {
 		listxhr = new XMLHttpRequest();
@@ -72,10 +92,9 @@
 			</div>
 			<!-- 유리사진 -->
 
-			<div
-				style="width: 150px; height: 150px; background-color: red; float: right;">
-
-			</div>
+			<div id="mainImage">
+				<img src="/semi_team1/rs/img/11.jpg" id="changeMain" class="img-thumbnail" style="width: 150px; height: 150px; float: right;">
+			</div> 
 		</div>
 
 
