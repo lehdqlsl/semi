@@ -70,7 +70,7 @@ public class MusicDao {
 		ResultSet rs=null;
 		try{
 			con=DBCPBean.getConn();
-			String sql="SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM(SELECT * FROM MUSIC) AA) WHERE RNUM>=? AND RNUM<=?";
+			String sql="SELECT * FROM (SELECT AA.* ,ROWNUM RNUM FROM(SELECT * FROM MUSIC ORDER BY NUM DESC) AA) WHERE RNUM>=? AND RNUM<=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
