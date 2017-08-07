@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.team1.dao.BoardDao;
 import com.team1.dao.BoardTastyDao;
+import com.team1.dao.G_ReviewDao;
 import com.team1.dao.GameDao;
 import com.team1.dao.MovieDao;
 import com.team1.dao.MusicDao;
@@ -28,6 +29,7 @@ public class MainController extends HttpServlet {
 			throws ServletException, IOException {
 
 		GameDao dao1 = new GameDao();
+		G_ReviewDao g_dao1 = new G_ReviewDao();
 		MovieDao dao2 = new MovieDao();
 		BoardDao dao3 = new BoardDao();
 		BoardTastyDao dao4 = new BoardTastyDao();
@@ -42,6 +44,10 @@ public class MainController extends HttpServlet {
 		int endRow = (pageNum * 5);
 
 		ArrayList<GameVo> main1 = dao1.gameList(1, 8);
+
+		for (GameVo vo : main1) {
+			vo.setAvg(g_dao1.getReviewAvg(vo.getG_num()));
+		}
 		ArrayList<M_ReviewVo> main2 = dao2.getRanking();
 		ArrayList<boardListVo> main3 = dao3.sportsMain(20, 10);
 		ArrayList<BoardTastyVo> main4 = dao4.boblist();

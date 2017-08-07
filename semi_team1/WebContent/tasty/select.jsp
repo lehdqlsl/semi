@@ -196,7 +196,7 @@
 
 				<tr>
 					<td colspan="2"><input type="button" value="작성글보기"
-						class="btn btn-xs btn-default"> <input type="button"
+						class="btn btn-xs btn-default" onclick="location.href='/semi_team1/index.jsp?page=mywritelist?writer=${vo.writer }'"> <input type="button"
 						value="쪽지보내기" class="btn btn-xs btn-default"
 						onclick="location.href='/semi_team1/index.jsp?page=message2/insert2.jsp?&sender=${vo.writer }'">
 					</td>
@@ -276,7 +276,7 @@
 							<td id="user">
 								<div>
 
-									<a href="회원정보조회페이지">${vo.m_nick }</a>
+									<a href="">${vo.m_nick }</a>
 								</div>
 							</td>
 							<td width="600"

@@ -204,7 +204,7 @@ function callback1() {
 					${vo.r_gpa } / 10.0
 					</td>
 					<td id="user">
-							<a href="회원정보조회페이지">${vo.m_nick }</a>
+							<a href="">${vo.m_nick }</a>
 					</td>
 					<td width="600"
 						style="word-break: break-all; word-wrap: break-word;">${vo.r_comm}</td>

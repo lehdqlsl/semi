@@ -29,7 +29,7 @@
 
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word;">
-			<strong style="color: #747474"> 게임정보</strong>
+			<strong style="color: #747474;font-size: 18px">게임정보</strong>
 			<hr>
 			<table class="table table-bordered" width="875px" height="250px">
 				<td><c:choose>
@@ -69,7 +69,7 @@
 			<div id="wrap" style="width: 100%">
 				<div id="gameRanking" style="width: 500px; float: left">
 
-					<strong style="color: #747474"> 게임 평점 랭킹</strong>
+					<strong style="color: #747474;font-size: 18px;"> 게임 평점 랭킹</strong>
 					<hr>
 					<div class="row" style="width: 100%">
 						<div class="col-sm-4" style="width: 100%">

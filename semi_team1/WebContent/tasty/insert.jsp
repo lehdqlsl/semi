@@ -108,7 +108,7 @@
 						<td colspan="3" align="center"><input class="btn btn-success"
 							type="button" value="확인" onclick="submitContents(this);">
 							<input class="btn btn-success" type="button" value="목록"
-							onclick="location.href = '/semi_team1/list';"></td>
+							onclick="location.href = history.back(-1);"></td>
 					</tr>
 				</table>
 			</form>

@@ -215,9 +215,9 @@
 					</tr>
 				</thead>
 				<tr>
-					<td rowspan="6" width="250px"><img
+					<td rowspan="6" width="250px" style="text-align: center;"><img
 						src="/semi_team1/upload/${requestScope.mvo.m_savefilename }"
-						style="width: 150px; height: 150px"></td>
+						style="width: 175px; height: 175px;margin-top: 10px;"></td>
 					<td width="400px" colspan="2">${requestScope.mvo.m_nick }(${requestScope.mvo.id })</td>
 
 				</tr>

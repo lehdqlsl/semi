@@ -189,7 +189,7 @@ function callback1() {
 			<c:forEach var="vo" items="${requestScope.list }" varStatus="status">
 				<tr>
 					<td>${vo.score }/ 10.0</td>
-					<td id="user"><a href="회원정보조회페이지">${vo.m_nick }</a></td>
+					<td id="user"><a href="">${vo.m_nick }</a></td>
 					<td width="600"
 						style="word-break: break-all; word-wrap: break-word;">${vo.comments}</td>
 					<td>${vo.r_date }</td>
