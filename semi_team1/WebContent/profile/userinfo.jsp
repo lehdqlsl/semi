@@ -62,11 +62,6 @@
 		}
 		alert("수정이 완료되었습니다!!");
 	}
-	
-
-	
-
-	
 </script>
 </head>
 <body>
@@ -83,26 +78,22 @@
 			ExpDao expdao = new ExpDao();
 			int exp = expdao.select(nick);
 			String src = vo.getGrade() + ".png";
-			
-			
-			
+
 			recvDao2 dao1 = new recvDao2();
 			int recvm = dao1.getMsgCount(nick);
-			
+
 			BoardDao dao2 = new BoardDao();
 			int mywrite = dao2.getWriteCount(nick);
 			//작성댓글 
 			ReplyDao dao3 = ReplyDao.getInstance();
 			int myreply = dao3.getReplyCount(nick);
-			
+
 			//추천수
-			int n1=dao.getUpCount1(nick);
-			System.out.println("n1:"+n1);
-			int n2=dao.getUpCount2(nick);
-			System.out.println("n2:"+n2);
-			int n3=n1+n2;
-			
-			
+			int n1 = dao.getUpCount1(nick);
+
+			int n2 = dao.getUpCount2(nick);
+
+			int n3 = n1 + n2;
 		%>
 		<table class="table table-bordered" width="300px">
 			<tr>
@@ -156,9 +147,11 @@
 			</tr>
 
 			<tr>
-				<td><a href="/semi_team1/mywritelist?writer=${sessionScope.m_nick }"><%=mywrite %>개</a></td>
-				<td><a href="/semi_team1/myreplylist?nick=${sessionScope.m_nick }"><%=myreply %>개</a></td>
-				<td><%=n3 %>개</td>
+				<td><a
+					href="/semi_team1/mywritelist?writer=${sessionScope.m_nick }"><%=mywrite%>개</a></td>
+				<td><a
+					href="/semi_team1/myreplylist?nick=${sessionScope.m_nick }"><%=myreply%>개</a></td>
+				<td><%=n3%>개</td>
 			</tr>
 		</table>
 		<ul class="nav nav-sidebar">
@@ -179,8 +172,10 @@
 	<form method="post" action="/semi_team1/imgupdate"
 		enctype="multipart/form-data">
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h2><span class="label label-success">프로필 수정</span></h2><br>
-			<input type="hidden" name="num" value="<%=num%>"> <input
+			<h2>
+				<span class="label label-success">프로필 수정</span>
+			</h2>
+			<br> <input type="hidden" name="num" value="<%=num%>"> <input
 				type="hidden" name="savefilename"
 				value="<%=vo.getM_savefilename()%>">
 			<table class="table table-bordered">

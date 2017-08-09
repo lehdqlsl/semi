@@ -4,29 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script type="text/javascript">
-	//var test="location.href='/semi_team1/index.jsp?page=profile/userinfo.jsp'";
 
-	var msgxhr = null;
-	function msgrefresh() {
-
-		var nick = ${empty sessionScope.m_nick};
-		if(nick != true){
-			msgxhr = new XMLHttpRequest();
-			msgxhr.onreadystatechange = callback;
-			msgxhr.open('get', '/semi_team1/message2/msgrefresh.jsp', true);
-			msgxhr.send();
-		}
-	}
-	function callback() {
-		if (msgxhr.readyState == 4 && msgxhr.status == 200) {
-			var data = msgxhr.responseText;
-			var json = eval('(' + data + ')');
-			var div = document.getElementById("cnt");
-			div.innerHTML = "쪽지 " + json.cnt;
-		}
-	}
-</script>
 </head>
 <body onload="msgrefresh()">
 	<nav class="navbar navbar-fixed-top navbar-inverse">
@@ -45,17 +23,12 @@
 		<div id="navbar" class="collapse navbar-collapse">
 
 			<ul class="nav navbar-nav">
-				<li id="c1"><a
-					href="/semi_team1/index.jsp?page=game/ranking">게임</a></li>
-				<li id="c2"><a
-					href="/semi_team1/movielist">영화</a></li>
-				<li id="c3"><a
-					href="/semi_team1/sportsmain">스포츠</a></li>
-				<li id="c4"><a
-					href="/semi_team1/tasty/main">맛집</a></li>
-				<li id="c5"><a
-					href="/semi_team1/gallerylist">음악</a></li>
-				<li id="c6"><a href="/semi_team1/index.jsp?page=ranking/list">랭킹</a></li>
+				<li id="c1"><a href="/semi_team1/game/ranking">게임</a></li>
+				<li id="c2"><a href="/semi_team1/movielist">영화</a></li>
+				<li id="c3"><a href="/semi_team1/sportsmain">스포츠</a></li>
+				<li id="c4"><a href="/semi_team1/tasty/main">맛집</a></li>
+				<li id="c5"><a href="/semi_team1/gallerylist">음악</a></li>
+				<li id="c6"><a href="/semi_team1/ranking/list">랭킹</a></li>
 
 				<c:if test="${sessionScope.m_nick == 'admin'}">
 					<li id="c7"><a
@@ -91,4 +64,28 @@
 	</nav>
 
 </body>
+<script type="text/javascript">
+	//var test="location.href='/semi_team1/index.jsp?page=profile/userinfo.jsp'";
+
+	var msgxhr = null;
+	setInterval(msgrefresh, 1000);
+	
+	function msgrefresh() {
+		var nick = ${empty sessionScope.m_nick};
+		if(nick != true){
+			msgxhr = new XMLHttpRequest();
+			msgxhr.onreadystatechange = refresh;
+			msgxhr.open('get', '/semi_team1/message2/msgrefresh.jsp', true);
+			msgxhr.send();
+		}
+	}
+	function refresh() {
+		if (msgxhr.readyState == 4 && msgxhr.status == 200) {
+			var data = msgxhr.responseText;
+			var json = eval('(' + data + ')');
+			var div = document.getElementById("cnt");
+			div.innerHTML = "쪽지 " + json.cnt;
+		}
+	}
+</script>
 </html>

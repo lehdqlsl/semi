@@ -30,8 +30,6 @@ public class InsertController extends HttpServlet {
 			request.setAttribute("num", b_num);
 			response.sendRedirect(str);
 
-		} else {
-			System.out.println("댓글등록 실패");
 		}
 	}
 }

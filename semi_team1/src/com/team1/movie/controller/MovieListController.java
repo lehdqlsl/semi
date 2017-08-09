@@ -15,9 +15,10 @@ import com.team1.vo.M_ReviewVo;
 import com.team1.vo.MovieVo;
 
 @WebServlet("/movielist")
-public class MovieListController extends HttpServlet{
+public class MovieListController extends HttpServlet {
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String spageNum = request.getParameter("pageNum");
 
@@ -31,11 +32,9 @@ public class MovieListController extends HttpServlet{
 		MovieDao dao = new MovieDao();
 		ArrayList<MovieVo> list = dao.list(startRow, endRow);
 
-		
-		//영화평점랭킹
-		ArrayList<M_ReviewVo> list2=dao.getRanking();
-		
-		
+		// 영화평점랭킹
+		ArrayList<M_ReviewVo> list2 = dao.getRanking();
+
 		if (list != null) {
 			int pageCount = (int) (Math.ceil(dao.movieCount() / 5.0));
 			int startPageNum = pageNum;
@@ -43,10 +42,6 @@ public class MovieListController extends HttpServlet{
 			if (endPageNum > pageCount) {
 				endPageNum = pageCount;
 			}
-
-			System.out.println(pageCount);
-			System.out.println(startPageNum);
-			System.out.println(endPageNum);
 
 			request.setAttribute("pageCount", pageCount);
 			request.setAttribute("startPageNum", startPageNum);
@@ -59,6 +54,5 @@ public class MovieListController extends HttpServlet{
 			response.sendRedirect("/fail.jsp");
 		}
 	}
-	
-	
+
 }

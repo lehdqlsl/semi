@@ -6,56 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<script type="text/javascript">
-var imgs=[
-			'/semi_team1/rs/img/22.jpg','/semi_team1/rs/img/33.jpg','/semi_team1/rs/img/44.jpg','/semi_team1/rs/img/55.jpg','/semi_team1/rs/img/66.jpg','/semi_team1/rs/img/77.jpg','/semi_team1/rs/img/11.jpg'];
-
-var index=0;
-
-setTimeout(change,3000);
-
-function change(){
-
-	var changeMain=document.getElementById("changeMain");
-
-	changeMain.src=imgs[index++];
-
-	if(index==imgs.length) index=0;
-
-	setTimeout(change,3000);
-
-} 
-
-
-	var listxhr = null;
-	function limitCheck() {
-		listxhr = new XMLHttpRequest();
-		listxhr.onreadystatechange = callback;
-		listxhr
-				.open(
-						'get',
-						"/semi_team1/board/limitpage.jsp?writer=${sessionScope.m_nick }",
-						true);
-		listxhr.send();
-	}
-	function callback() {
-		if (listxhr.readyState == 4 && listxhr.status == 200) {
-			var data = listxhr.responseXML;
-			var limitchk = data.getElementsByTagName("limitChk")[0].firstChild.nodeValue;
-			var limitdays = data.getElementsByTagName("cnt")[0].firstChild.nodeValue;
-			var limitdate = data.getElementsByTagName("limit_date")[0].firstChild.nodeValue;
-
-			if (limitchk == 1) {
-				alert("제재처리로 글을 작성할 수 없습니다. [ " + limitdate + " ] 이후부터 작성가능");
-			} else if (limitchk == 2) {
-				alert("신규회원 글작성 제한기간입니다. [ " + limitdate + " ] 이후부터 작성가능");
-			} else if (limitchk == 3) {
-				location.href = "/semi_team1/write?s_num=${s_num}";
-			}
-		}
-	}
-</script>
 </head>
 <body>
 
@@ -226,4 +176,53 @@ function change(){
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+var imgs=[
+			'/semi_team1/rs/img/22.jpg','/semi_team1/rs/img/33.jpg','/semi_team1/rs/img/44.jpg','/semi_team1/rs/img/55.jpg','/semi_team1/rs/img/66.jpg','/semi_team1/rs/img/77.jpg','/semi_team1/rs/img/11.jpg'];
+
+var index=0;
+
+setTimeout(change,3000);
+
+function change(){
+
+	var changeMain=document.getElementById("changeMain");
+
+	changeMain.src=imgs[index++];
+
+	if(index==imgs.length) index=0;
+
+	setTimeout(change,3000);
+
+} 
+
+
+	var listxhr = null;
+	function limitCheck() {
+		listxhr = new XMLHttpRequest();
+		listxhr.onreadystatechange = callback;
+		listxhr
+				.open(
+						'get',
+						"/semi_team1/board/limitpage.jsp?writer=${sessionScope.m_nick }",
+						true);
+		listxhr.send();
+	}
+	function callback() {
+		if (listxhr.readyState == 4 && listxhr.status == 200) {
+			var data = listxhr.responseXML;
+			var limitchk = data.getElementsByTagName("limitChk")[0].firstChild.nodeValue;
+			var limitdays = data.getElementsByTagName("cnt")[0].firstChild.nodeValue;
+			var limitdate = data.getElementsByTagName("limit_date")[0].firstChild.nodeValue;
+
+			if (limitchk == 1) {
+				alert("제재처리로 글을 작성할 수 없습니다. [ " + limitdate + " ] 이후부터 작성가능");
+			} else if (limitchk == 2) {
+				alert("신규회원 글작성 제한기간입니다. [ " + limitdate + " ] 이후부터 작성가능");
+			} else if (limitchk == 3) {
+				location.href = "/semi_team1/write?s_num=${s_num}";
+			}
+		}
+	}
+</script>
 </html>

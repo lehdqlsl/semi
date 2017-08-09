@@ -36,9 +36,6 @@
 		//파일 기본경로 _ 상세경로
 		String filePath = dftFilePath + File.separator + "multiupload" + File.separator;
 
-		System.out.println("파일기본경로:" + dftFilePath);
-		System.out.println("파일상세경로:" + filePath);
-
 		File file = new File(filePath);
 		if (!file.exists()) {
 			file.mkdirs();

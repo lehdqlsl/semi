@@ -62,8 +62,6 @@ public class LoginController extends HttpServlet {
 				cook2.setMaxAge(60 * 60 * 24 * 30);
 				response.addCookie(cook2);
 
-				System.out.println(id);
-				System.out.println(u_pw);
 			} else {
 				Cookie cook1 = new Cookie("id", map.get("id"));
 				cook1.setMaxAge(0);

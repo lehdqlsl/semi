@@ -50,7 +50,7 @@
 			Elements title = doc.select(".rank_keyword li");
 			Elements date = doc.select(".tx_info");
 			String today = date.text();
-			
+
 			ArrayList<String> list[] = new ArrayList[3];
 			for (int i = 0; i < 3; i++) {
 				list[i] = new ArrayList<>();
@@ -65,7 +65,7 @@
 				list[j].add(node.text());
 				i++;
 			}
-			
+
 			ArrayList<String> p = new ArrayList<>();
 			ArrayList<String> pp = new ArrayList<>();
 			String str = "";
@@ -93,10 +93,6 @@
 						break;
 					}
 				}
-			}
-
-			for (i = 0; i < p.size(); i++) {
-				System.out.println(pp.get(i) + " " + p.get(i));
 			}%>
 	
 </script>
@@ -160,7 +156,8 @@
 			<div style="float: left">
 				<table class="table table-bordered">
 					<tr>
-						<td><span style="font-size: 20px; font-weight: bold;">평점 & 리뷰</span></td>
+						<td><span style="font-size: 20px; font-weight: bold;">평점
+								& 리뷰</span></td>
 					</tr>
 					<c:forEach var="vo" items="${requestScope.list2 }"
 						varStatus="status">
@@ -210,14 +207,13 @@
 					<tr>
 						<td colspan="3"><span>영화 인기검색어</span></td>
 					</tr>
-						
+
 					<%
-						int a=1;
+						int a = 1;
 						for (String s : list[0]) {
-							
 					%>
 					<tr>
-						<td><%=a %></td>
+						<td><%=a%></td>
 						<td><%=s.substring(0, s.length() - 5)%></td>
 						<td><%=s.substring(s.length() - 5, s.length())%></td>
 					</tr>
@@ -235,21 +231,20 @@
 					<tr>
 						<td colspan="3"><span>영화인 인기검색어</span></td>
 					</tr>
-					
+
 					<%
 						int b = 1;
 						int k = 0;
 						for (String s : list[1]) {
 					%>
 					<tr>
-						<td><%=b %></td>
+						<td><%=b%></td>
 						<td><%=s.substring(0, s.length() - 5)%></td>
-						<td><%=pp.get(k)%> <%=p.get(k)%>
-						</td>
+						<td><%=pp.get(k)%> <%=p.get(k)%></td>
 					</tr>
 					<%
 						b++;
-						k++;
+							k++;
 						}
 					%>
 				</table>
@@ -263,11 +258,11 @@
 						<td colspan="3"><span>티켓 예매순</span></td>
 					</tr>
 					<%
-						int c=1;
+						int c = 1;
 						for (String s : list[2]) {
 					%>
 					<tr>
-						<td><%=c %></td>
+						<td><%=c%></td>
 						<td><%=s.substring(0, s.length() - 6)%></td>
 						<td><%=s.substring(s.length() - 6, s.length())%></td>
 					</tr>
@@ -277,7 +272,7 @@
 					%>
 				</table>
 			</div>
-			
+
 		</div>
 	</div>
 

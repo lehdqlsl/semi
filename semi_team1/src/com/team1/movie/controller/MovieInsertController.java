@@ -50,12 +50,10 @@ public class MovieInsertController extends HttpServlet{
 		MovieDao dao=new MovieDao();
 		int n=dao.insert(vo);
 		if(n>0){
-			System.out.println("db저장성공!<br>");
 			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?page=movielist");
 			rd.forward(request, response);
 			
 		}else{
-			System.out.println("db저장실패!<br>");
 			RequestDispatcher rd = request.getRequestDispatcher("join/result.jsp");
 			rd.forward(request, response);
 		}

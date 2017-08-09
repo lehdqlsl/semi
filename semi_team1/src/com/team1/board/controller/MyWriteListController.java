@@ -43,16 +43,11 @@ public class MyWriteListController extends HttpServlet {
 				endPageNum = pageCount;
 			}
 
-			System.out.println(pageCount);
-			System.out.println(startPageNum);
-			System.out.println(endPageNum);
-
 			request.setAttribute("pageCount", pageCount);
 			request.setAttribute("startPageNum", startPageNum);
 			request.setAttribute("endPageNum", endPageNum);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("list", list);
-			// request.setAttribute("s_num", s_num);
 			request.setAttribute("writer", writer);
 			request.getRequestDispatcher("/index.jsp?page=/board/mywritelist.jsp").forward(request, response);
 		} else {

@@ -27,7 +27,7 @@ public class InsertOkController extends HttpServlet {
 		String writer = request.getParameter("writer");
 		String title_name = request.getParameter("title_name");
 		String content = request.getParameter("content");
-		System.out.println(content);
+
 		int f_num = 1;
 		int s_num = Integer.parseInt(request.getParameter("s_num"));
 		String orgFileName = "text.jpg";
@@ -45,27 +45,4 @@ public class InsertOkController extends HttpServlet {
 			rd.forward(request, response);
 		}
 	}
-	/*
-	 * request.setCharacterEncoding("utf-8");
-	 * 
-	 * 
-	 * String uploadPath=getServletContext().getRealPath("/upload");
-	 * MultipartRequest mr=new MultipartRequest( request, uploadPath,
-	 * 1024*1024*5, "utf-8", new DefaultFileRenamePolicy() ); //String
-	 * snum=request.getParameter("num"); String
-	 * writer=request.getParameter("writer"); String
-	 * title_name=request.getParameter("title_name"); String
-	 * content=request.getParameter("content");
-	 * 
-	 * Enumeration<String> em=mr.getFileNames(); BoardDao dao=new BoardDao(); //
-	 * while(em.hasMoreElements()){ String fname=em.nextElement(); String
-	 * orgFileName=mr.getOriginalFileName(fname); String
-	 * saveFileName=mr.getFilesystemName(fname);
-	 * 
-	 * File f=new File(uploadPath + "\\" + saveFileName); boardVo vo=new
-	 * boardVo(0, title_name, 0, 0, orgFileName, saveFileName, content, null,
-	 * writer, 0, 0, 0, 0, 0); int n=dao.insert(vo); // System.out.println("°á°ú:"
-	 * + n); } }
-	 * 
-	 */
 }

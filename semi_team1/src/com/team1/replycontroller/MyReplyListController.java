@@ -38,10 +38,7 @@ public class MyReplyListController extends HttpServlet {
 			if (endPageNum > pageCount) {
 				endPageNum = pageCount;
 			}
-			System.out.println(pageCount);
-			System.out.println(startPageNum);
-			System.out.println(endPageNum);
-			
+
 			request.setAttribute("pageCount", pageCount);
 			request.setAttribute("startPage", startPageNum);
 			request.setAttribute("endPage", endPageNum);

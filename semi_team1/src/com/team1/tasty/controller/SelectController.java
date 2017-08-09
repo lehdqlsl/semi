@@ -25,7 +25,6 @@ public class SelectController extends HttpServlet {
 			throws ServletException, IOException {
 		String spageNum = request.getParameter("pageNum");
 		int b_num = Integer.parseInt(request.getParameter("num"));
-		System.out.println(b_num);
 		BoardTastyDao dao = new BoardTastyDao();
 		String writer = dao.getWriter(b_num);
 		JoinDao memdao = new JoinDao();
@@ -68,7 +67,6 @@ public class SelectController extends HttpServlet {
 
 		if (vo != null) {
 			request.setAttribute("vo", vo);
-			System.out.println(vo.toString());
 			request.setAttribute("mvo", mvo);
 			request.getRequestDispatcher("/index.jsp?page=/tasty/tastyIndex.jsp&s_page=/tasty/select.jsp")
 					.forward(request, response);
