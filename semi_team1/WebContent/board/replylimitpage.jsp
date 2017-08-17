@@ -35,7 +35,7 @@
 	} finally {
 		DBCPBean.close(con, pstmt, rs);
 	}
-
+	System.out.println(limitChk);
 	response.setContentType("text/xml;charset=utf-8");
 	PrintWriter pw = response.getWriter();
 	pw.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");

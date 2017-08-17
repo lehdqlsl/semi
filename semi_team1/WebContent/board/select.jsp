@@ -8,201 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-	
-	// 로그인 체크 / 제재체크
-	var loginxhr = null;
-	function login(nick) {
-		if (nick == 'null') {
-			alert("먼저 로그인을 하셔야합니다.\n로그인페이지로 이동 하시겠습니까?");
-			document.location.href = "index.jsp?page=login/signin.jsp";
-		}
-		//로그인 된 후
-		loginxhr = new XMLHttpRequest();
-		loginxhr.onreadystatechange = callback;
-		loginxhr
-				.open(
-						'get',
-						"/semi_team1/board/replylimitpage.jsp?writer=${sessionScope.m_nick }",
-						true);
-		loginxhr.send();
 
-	}
-	function callback() {
-		if (loginxhr.readyState == 4 && loginxhr.status == 200) {
-			var submitbtn = document.getElementById("submitbtn");
-			var content = document.getElementById("content");
-			var data = loginxhr.responseXML;
-			var limitchk = data.getElementsByTagName("limitChk")[0].firstChild.nodeValue;
-			var limitdate = data.getElementsByTagName("limit_date")[0].firstChild.nodeValue;
-			if (limitchk == 1) {
-				alert("제재처리로 댓글을 작성할 수 없습니다. [ " + limitdate + " ] 이후부터 작성가능");
-				submitbtn.disabled = true;
-				content.disabled = true;
-			}
-		}
-	}
-	// 댓글 공백 체크
-	function checkBlank(object) {
-		var content = document.getElementById("content").value;
-
-		if (content == null || content == "") {
-			alert("내용을 입력하세요!");
-			return;
-		} else {
-			object.form.submit();
-		}
-	}
-
-	// 댓글 삭제 체크
-	var xhr1 = null;
-	var bNum = 0;
-	function nickCheck(r_num, b_num, nick, sessionNick) {
-		xhr1 = new XMLHttpRequest();
-		xhr1.onreadystatechange = callback1;
-		xhr1
-				.open('get', "/semi_team1/reply/delete?r_num=" + r_num
-						+ "&b_num=" + b_num + "&nick=" + nick + "&sessionNick="
-						+ sessionNick, true);
-		if (nick != sessionNick) {
-			alert("댓글 삭제는 작성자만 할 수 있습니다.");
-			return;
-		} else {
-			if (confirm("댓글을 삭제하시겠습니까?")) {
-				bNum = b_num;
-				xhr1.send();
-			}
-		}
-	}
-	function callback1() {
-		if (xhr1.readyState == 4 && xhr1.status == 200) {
-			var data = xhr1.responseXML;
-			var flag = data.getElementsByTagName("flag")[0].firstChild.nodeValue;
-			if (flag == 0) {
-				alert("댓글이 삭제되었습니다.");
-				location.href = "/semi_team1/select?num=" + bNum;
-			}
-		}
-	}
-
-	// 댓글 글자수 표시
-	function textlen() {
-		var div = document.getElementById("len");
-		var text = document.getElementById("content").value;
-		if (text.byteLength() >= 500) {
-			alert("더 이상 글을 작성할 수 없습니다.");
-		} else {
-			var html = text.byteLength() + "/500";
-			div.innerHTML = html;
-		}
-	}
-
-	String.prototype.byteLength = function() {
-		var l = 0;
-
-		for (var idx = 0; idx < this.length; idx++) {
-			var c = escape(this.charAt(idx));
-
-			if (c.length == 1)
-				l++;
-			else if (c.indexOf("%u") != -1)
-				l += 3;
-			else if (c.indexOf("%") != -1)
-				l += c.length / 3;
-		}
-
-		return l;
-	};
-
-	var b_xhr = null;
-	function boardup(b_num) {
-
-		b_xhr = new XMLHttpRequest();
-		b_xhr.onreadystatechange = cb_boardup;
-		b_xhr.open('get', "/semi_team1/board/up?b_num=" + b_num, true);
-		b_xhr.send();
-
-	}
-
-	function cb_boardup() {
-		if (b_xhr.status == 200 && b_xhr.readyState == 4) {
-			var json = b_xhr.responseText;
-			var data = eval('(' + json + ')');
-
-			if (!data.up_ok) {
-				alert("이미 추천 한 게시글 입니다.");
-			} else {
-				var bo_up = document.getElementById("bo_up");
-				bo_up.innerHTML = data.cnt;
-			}
-		}
-	}
-
-	var r_xhr = null;
-	var index = null;
-	function replyup(r_num, num) {
-		index = num;
-		r_xhr = new XMLHttpRequest();
-		r_xhr.onreadystatechange = cb_replyup;
-		r_xhr.open('get', "/semi_team1/reply/up?r_num=" + r_num, true);
-		r_xhr.send();
-	}
-
-	function cb_replyup() {
-		if (r_xhr.status == 200 && r_xhr.readyState == 4) {
-			var json = r_xhr.responseText;
-			var data = eval('(' + json + ')');
-			if (!data.up_ok) {
-				alert("이미 추천 한 댓글 입니다.");
-			} else {
-				var re_up = document.getElementById("re_up" + index);
-				re_up.innerHTML = data.cnt;
-			}
-		}
-	}
-	// 게시글 신고
-	function boardreport(num, writer){
-		var flag=confirm("해당 글을 신고하시겠습니까?");
-		if(flag){
-			location.href="/semi_team1/board/report/update?num="+num+"&writer="+writer;
-			alert("신고되었습니다!");
-		}
-	}
-	//댓글 신고
-	function replyreport(r_num,writer,b_num){
-		var flag=confirm("해당 댓글을 신고하시겠습니까?");
-		
-		if(flag){
-			location.href="/semi_team1/reply/report/update?r_num="+r_num+"&writer="+writer+"&b_num="+b_num;
-			alert("신고되었습니다!");
-		}
-	}
-	//게시글 삭제
-	function boarddelete(boardnum){
-		var flag=confirm("정말 삭제하시겠습니까?");
-		if(flag){
-			location.href = "/semi_team1/boarddelete?b_num="+${requestScope.b_num }+"&s_num="+${vo.s_num};
-		}
-	}
-	
-	function copy(index){
-		var a_nick = document.getElementById("a_nick"+index);
-		var content = document.getElementById("content");
-		content.value = a_nick.innerHTML+" //";	
-		document.getElementById("content").focus();
-		document.body.scrollTop = document.body.scrollHeight;
-	}
-	/*//로그인 여부에 따른 쪽지 보내기
-	function sendmsg(nick) {
-		console.log(nick);
-		if (nick == null) {
-			alert("먼저 로그인을 하셔야합니다.\n로그인페이지로 이동 하시겠습니까?");
-			document.location.href = "index.jsp?page=login/signin.jsp";
-		}else{
-			location.href="/semi_team1/index.jsp?page=message2/insert2.jsp?&sender="+nick;
-		}
-	}*/
-</script>
 </head>
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
@@ -403,4 +209,199 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	
+	// 로그인 체크 / 제재체크
+	var loginxhr = null;
+	function login(nick) {
+		if (nick == 'null') {
+			alert("먼저 로그인을 하셔야합니다.\n로그인페이지로 이동 하시겠습니까?");
+			document.location.href = "index.jsp?page=login/signin.jsp";
+		}
+		//로그인 된 후
+		loginxhr = new XMLHttpRequest();
+		loginxhr.onreadystatechange = limitchk;
+		loginxhr
+				.open(
+						'get',
+						"/semi_team1/board/replylimitpage.jsp?writer=${sessionScope.m_nick }",
+						true);
+		loginxhr.send();
+
+	}
+	function limitchk() {
+		if (loginxhr.readyState == 4 && loginxhr.status == 200) {
+			var submitbtn = document.getElementById("submitbtn");
+			var content = document.getElementById("content");
+			var data = loginxhr.responseXML;
+			var limitchk = data.getElementsByTagName("limitChk")[0].firstChild.nodeValue;
+			var limitdate = data.getElementsByTagName("limit_date")[0].firstChild.nodeValue;
+			if (limitchk == 1) {
+				alert("제재처리로 댓글을 작성할 수 없습니다. [ " + limitdate + " ] 이후부터 작성가능");
+				submitbtn.disabled = true;
+				content.disabled = true;
+			}
+		}
+	}
+	// 댓글 공백 체크
+	function checkBlank(object) {
+		var content = document.getElementById("content").value;
+
+		if (content == null || content == "") {
+			alert("내용을 입력하세요!");
+			return;
+		} else {
+			object.form.submit();
+		}
+	}
+
+	// 댓글 삭제 체크
+	var xhr1 = null;
+	var bNum = 0;
+	function nickCheck(r_num, b_num, nick, sessionNick) {
+		xhr1 = new XMLHttpRequest();
+		xhr1.onreadystatechange = callback1;
+		xhr1
+				.open('get', "/semi_team1/reply/delete?r_num=" + r_num
+						+ "&b_num=" + b_num + "&nick=" + nick + "&sessionNick="
+						+ sessionNick, true);
+		if (nick != sessionNick) {
+			alert("댓글 삭제는 작성자만 할 수 있습니다.");
+			return;
+		} else {
+			if (confirm("댓글을 삭제하시겠습니까?")) {
+				bNum = b_num;
+				xhr1.send();
+			}
+		}
+	}
+	function callback1() {
+		if (xhr1.readyState == 4 && xhr1.status == 200) {
+			var data = xhr1.responseXML;
+			var flag = data.getElementsByTagName("flag")[0].firstChild.nodeValue;
+			if (flag == 0) {
+				alert("댓글이 삭제되었습니다.");
+				location.href = "/semi_team1/select?num=" + bNum;
+			}
+		}
+	}
+
+	// 댓글 글자수 표시
+	function textlen() {
+		var div = document.getElementById("len");
+		var text = document.getElementById("content").value;
+		if (text.byteLength() >= 500) {
+			alert("더 이상 글을 작성할 수 없습니다.");
+		} else {
+			var html = text.byteLength() + "/500";
+			div.innerHTML = html;
+		}
+	}
+
+	String.prototype.byteLength = function() {
+		var l = 0;
+
+		for (var idx = 0; idx < this.length; idx++) {
+			var c = escape(this.charAt(idx));
+
+			if (c.length == 1)
+				l++;
+			else if (c.indexOf("%u") != -1)
+				l += 3;
+			else if (c.indexOf("%") != -1)
+				l += c.length / 3;
+		}
+
+		return l;
+	};
+
+	var b_xhr = null;
+	function boardup(b_num) {
+
+		b_xhr = new XMLHttpRequest();
+		b_xhr.onreadystatechange = cb_boardup;
+		b_xhr.open('get', "/semi_team1/board/up?b_num=" + b_num, true);
+		b_xhr.send();
+
+	}
+
+	function cb_boardup() {
+		if (b_xhr.status == 200 && b_xhr.readyState == 4) {
+			var json = b_xhr.responseText;
+			var data = eval('(' + json + ')');
+
+			if (!data.up_ok) {
+				alert("이미 추천 한 게시글 입니다.");
+			} else {
+				var bo_up = document.getElementById("bo_up");
+				bo_up.innerHTML = data.cnt;
+			}
+		}
+	}
+
+	var r_xhr = null;
+	var index = null;
+	function replyup(r_num, num) {
+		index = num;
+		r_xhr = new XMLHttpRequest();
+		r_xhr.onreadystatechange = cb_replyup;
+		r_xhr.open('get', "/semi_team1/reply/up?r_num=" + r_num, true);
+		r_xhr.send();
+	}
+
+	function cb_replyup() {
+		if (r_xhr.status == 200 && r_xhr.readyState == 4) {
+			var json = r_xhr.responseText;
+			var data = eval('(' + json + ')');
+			if (!data.up_ok) {
+				alert("이미 추천 한 댓글 입니다.");
+			} else {
+				var re_up = document.getElementById("re_up" + index);
+				re_up.innerHTML = data.cnt;
+			}
+		}
+	}
+	// 게시글 신고
+	function boardreport(num, writer){
+		var flag=confirm("해당 글을 신고하시겠습니까?");
+		if(flag){
+			location.href="/semi_team1/board/report/update?num="+num+"&writer="+writer;
+			alert("신고되었습니다!");
+		}
+	}
+	//댓글 신고
+	function replyreport(r_num,writer,b_num){
+		var flag=confirm("해당 댓글을 신고하시겠습니까?");
+		
+		if(flag){
+			location.href="/semi_team1/reply/report/update?r_num="+r_num+"&writer="+writer+"&b_num="+b_num;
+			alert("신고되었습니다!");
+		}
+	}
+	//게시글 삭제
+	function boarddelete(boardnum){
+		var flag=confirm("정말 삭제하시겠습니까?");
+		if(flag){
+			location.href = "/semi_team1/boarddelete?b_num="+${requestScope.b_num }+"&s_num="+${vo.s_num};
+		}
+	}
+	
+	function copy(index){
+		var a_nick = document.getElementById("a_nick"+index);
+		var content = document.getElementById("content");
+		content.value = a_nick.innerHTML+" //";	
+		document.getElementById("content").focus();
+		document.body.scrollTop = document.body.scrollHeight;
+	}
+	/*//로그인 여부에 따른 쪽지 보내기
+	function sendmsg(nick) {
+		console.log(nick);
+		if (nick == null) {
+			alert("먼저 로그인을 하셔야합니다.\n로그인페이지로 이동 하시겠습니까?");
+			document.location.href = "index.jsp?page=login/signin.jsp";
+		}else{
+			location.href="/semi_team1/index.jsp?page=message2/insert2.jsp?&sender="+nick;
+		}
+	}*/
+</script>
 </html>

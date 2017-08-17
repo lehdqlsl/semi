@@ -68,7 +68,7 @@
 	//var test="location.href='/semi_team1/index.jsp?page=profile/userinfo.jsp'";
 
 	var msgxhr = null;
-	setInterval(msgrefresh, 1000);
+	//setInterval(msgrefresh, 1000);
 	
 	function msgrefresh() {
 		var nick = ${empty sessionScope.m_nick};

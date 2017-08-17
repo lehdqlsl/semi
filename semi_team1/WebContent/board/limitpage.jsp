@@ -5,11 +5,10 @@
 <%@page import="com.team1.db.DBCPBean"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	String m_nick = request.getParameter("writer");
-
+	System.out.println(m_nick);
 	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -39,14 +38,13 @@
 	} finally {
 		DBCPBean.close(con, pstmt, rs);
 	}
-
 	response.setContentType("text/xml;charset=utf-8");
-
-	out.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-	out.println("<data>");
-	out.println("<limitChk>" + limitChk + "</limitChk>");
-	out.println("<cnt>" + cnt + "</cnt>");
-	out.println("<limit_date>" + limit_date + "</limit_date>");
-	out.println("</data>");
-	out.close();
+	PrintWriter pw = response.getWriter();
+	pw.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+	pw.println("<data>");
+	pw.println("<limitChk>" + limitChk + "</limitChk>");
+	pw.println("<cnt>" + cnt + "</cnt>");
+	pw.println("<limit_date>" + limit_date + "</limit_date>");
+	pw.println("</data>");
+	pw.close();
 %>

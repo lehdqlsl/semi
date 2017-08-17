@@ -8,8 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-
 	<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 		<div
 			style="margin: auto; width: 1000px; word-break: break-all; word-wrap: break-word; height: 35px; background-color: #428bca; margin-bottom: 0px; padding: 1px;">
@@ -93,15 +91,12 @@
 				</c:forEach>
 			</table>
 			<c:if test="${!empty sessionScope.m_nick}">
-
 				<input class="btn btn-sm btn-success" type="button" value="글쓰기"
 					onclick="limitCheck()">
 				<%-- <input class="btn btn-sm btn-success" type="button" value="글쓰기" onclick="location.href = '/semi_team1/write?s_num=${s_num}';">--%>
 				<br>
 				<br>
 			</c:if>
-
-
 			<%
 				String search = request.getParameter("search");
 				if (search == null) {
@@ -197,20 +192,16 @@ function change(){
 } 
 
 
-	var listxhr = null;
+	var listxhr1 = null;
 	function limitCheck() {
-		listxhr = new XMLHttpRequest();
-		listxhr.onreadystatechange = callback;
-		listxhr
-				.open(
-						'get',
-						"/semi_team1/board/limitpage.jsp?writer=${sessionScope.m_nick }",
-						true);
-		listxhr.send();
+		listxhr1 = new XMLHttpRequest();
+		listxhr1.onreadystatechange = limitcallback;
+		listxhr1.open('get',"/semi_team1/board/limitpage.jsp?writer=${sessionScope.m_nick }",true);
+		listxhr1.send();
 	}
-	function callback() {
-		if (listxhr.readyState == 4 && listxhr.status == 200) {
-			var data = listxhr.responseXML;
+	function limitcallback() {
+		if (listxhr1.readyState == 4 && listxhr1.status == 200) {
+			var data = listxhr1.responseXML;
 			var limitchk = data.getElementsByTagName("limitChk")[0].firstChild.nodeValue;
 			var limitdays = data.getElementsByTagName("cnt")[0].firstChild.nodeValue;
 			var limitdate = data.getElementsByTagName("limit_date")[0].firstChild.nodeValue;
